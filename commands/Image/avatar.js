@@ -19,7 +19,7 @@ module.exports = class extends Command {
         });
     }
 
-    async run(msg, [...params]) {
+    async run(msg, [...args]) {
         const user = args[0] || msg.author;
         if (!user.avatar) return msg.send(msg.language.get('NO_AVATAR'));
         const avatar = user.avatarURL({
