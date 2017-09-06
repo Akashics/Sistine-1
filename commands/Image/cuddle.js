@@ -38,9 +38,6 @@ module.exports = class extends Command {
 			.setImage(imageRequest.data.url)
 			.setDescription(self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'cuddle'))
 			.setFooter(msg.language.get('WEEB_SERVICES'));
-        console.log(msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle'));
-        console.log(msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'cuddle'))
-        console.log(msg.language.get('WEEB_SERVICES'))
 		return msg.send('', {embed: image});
 
 	}
