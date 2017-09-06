@@ -1,0 +1,29 @@
+{
+  "name": "sistine",
+  "version": "0.3.0",
+  "description": "Klasa-based bot transfered from Chiyo",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "common-tags": "^1.4.0",
+    "discord.js": "github:hydrabolt/discord.js#b7c55f02c20bee5dab107ff453a6d3ea1a4a776a",
+    "eslint": "^4.6.1",
+    "fast-html-parser": "^1.0.1",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "flipacoin": "^1.0.0",
+    "fs-nextra": "github:bdistin/fs-nextra",
+    "klasa": "github:dirigeants/klasa",
+    "libsodium-wrappers": "^0.5.4",
+    "node-opus": "^0.2.6",
+    "ytdl-core": "^0.14.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": ">help"
+  },
+  "keywords": [
+    "sistine"
+  ],
+  "author": "Kashall#1307",
+  "license": "ISC"
+}

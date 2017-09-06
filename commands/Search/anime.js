@@ -1,0 +1,42 @@
+const { Command } = require('klasa');
+const anilist = require('../../util/anilist');
+const axios = require('axios');
+
+module.exports = class extends Command {
+
+    constructor(...args) {
+        super(...args, {
+            name: 'anime',
+            enabled: true,
+            runIn: ['text', 'dm', 'group'],
+            cooldown: 0,
+            aliases: [],
+            permLevel: 0,
+            botPerms: ['SEND_MESSAGES'],
+            requiredSettings: [],
+            description: 'Get information on your an anime.',
+            usage: '<Anime:string>',
+            usageDelim: undefined,
+            extendedHelp: 'Use this command with the addition of an anime to give you information on it.'
+        });
+    }
+
+    async run(msg, [...args]) {
+        console.log(args)
+
+        const animeRequest = await anilist.search(args, 'anime');
+        if (animeRequest.data.error) {
+            if (animeRequest.data.error.messages[0] === 'No Results.') {
+                return msg.send(msg.language.get('ANILIST_NO_RESULT', searchQuery));
+            }
+        }
+        if (animeRequest.data.length >= 1) {
+            let characters = await anilist.loadCharacters(animeRequest.data[0].id, 'anime');
+            let embed = await anilist.buildResponse(msg, animeRequest.data[0], characters, 'Anime');
+            return msg.send(embed);
+        } else {
+            return msg.send(msg.language.get('ANILIST_NO_RESULT', searchQuery));
+        }
+    }
+
+};
