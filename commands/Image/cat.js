@@ -21,7 +21,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-        /* eslint-disable no-console */
+		/* eslint-disable no-console */
 		try {
 			const finalMsg = await msg.channel.send('`Fetching random cat...`');
 			const {body} = await snek.get('http://random.cat/meow');
