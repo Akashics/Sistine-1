@@ -4,7 +4,7 @@ const { URL } = require('url');
 module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
-			name: 'exec',
+			name: 'update',
 			enabled: true,
 			runIn: ['text', 'dm', 'group'],
 			cooldown: 2,
@@ -12,8 +12,8 @@ module.exports = class extends Command {
 			permLevel: 10,
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
-			description: 'Executes console cmds',
-			usage: '<expression:str>',
+			description: 'Updates the bot',
+			usage: '',
 			extendedHelp: 'No extended help available.'
 		});
 	}
