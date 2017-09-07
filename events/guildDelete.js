@@ -18,7 +18,7 @@ module.exports = class extends Event {
         # Guild Count: ${guild.memberCount}
 
         # Guild Owner: ${guild.owner}
-        # Guild Owner ID: ${guild.owner.id}```;
+        # Guild Owner ID: ${guild.ownerID}```;
 		this.client.channels.get(guildLog).send(guildDeleteMsg);
 	}
 
