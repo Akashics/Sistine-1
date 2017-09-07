@@ -25,7 +25,7 @@ module.exports = class extends Command {
 		try {
 			const finalMsg = await msg.channel.send('`Fetching random cat...`');
 			const {body} = await snek.get('http://random.cat/meow');
-			await msg.send({files: [{attachment: body.file, name: `cat.${body.file.split('.')[2]}`}]});
+			await msg.channel.send({files: [{attachment: body.file, name: `cat.${body.file.split('.')[2]}`}]});
 			await finalMsg.delete();
 		} catch (e) {
 			console.log(e);
