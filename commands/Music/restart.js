@@ -4,7 +4,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			permLevel: 6,
+			permLevel: 10,
 			runIn: ['text'],
 
 			description: 'Restarts the music handler.'

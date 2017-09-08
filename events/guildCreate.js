@@ -7,7 +7,6 @@ module.exports = class extends Event {
 	}
 
 	run(guild) {
-		console.log(guild);
 		this.client.emit('log', `New Guild: ${guild.name} - ${guild.memberCount}`, 'log');
 
 		let guildLog = '341768632545705986';
@@ -17,7 +16,7 @@ module.exports = class extends Event {
 # Guild ID: ${guild.id}
 # Guild Count: ${guild.memberCount}
 
-# Guild Owner: ${guild.owner}`;
+# Guild Owner: ${guild.owner.user.tag}`;
 		this.client.channels.get(guildLog).send(guildCreateMsg, { code: 'md'});
 	}
 

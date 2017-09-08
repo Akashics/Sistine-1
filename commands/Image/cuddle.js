@@ -16,7 +16,6 @@ module.exports = class extends Command {
 			requiredSettings: [],
 			description: 'Allows you to cuddle with another member.',
 			usage: '<SomeoneToCuddle:member>',
-			usageDelim: undefined,
 			extendedHelp: 'No Extended Help.'
 		});
 	}

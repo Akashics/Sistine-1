@@ -16,7 +16,6 @@ module.exports = class extends Command {
 			requiredSettings: [],
 			description: 'Allows you to pat another member.',
 			usage: '<SomeoneToPat:member>',
-			usageDelim: undefined,
 			extendedHelp: 'No Extended Help.'
 		});
 	}

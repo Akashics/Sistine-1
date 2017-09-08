@@ -4,27 +4,45 @@ const snekfetch = require('snekfetch');
 const keys = require('../keys.json');
 
 class Util {
-
+	/* eslint-disable no-console */
 	static dBots(count, id) {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${id}/stats`)
-			.set({ Authorization: keys.apiKey.dBotsPW })
-			.send({ server_count: count })
-			.then(() => console.log('[DBOTS] Successfully posted to Discord Bots.'))
-			.catch(err => console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`));
+			.set({
+				Authorization: keys.apiKey.dBotsPW
+			})
+			.send({
+				server_count: count
+			})
+			.then(() => {
+				console.log('[DBOTS] Successfully posted to Discord Bots.')
+			})
+			.catch((err) => {
+				console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`)
+			});
 	}
 
 	static dBotsOrg(count, id) {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${id}/stats`)
-			.set({ Authorization: keys.apiKey.dBotsOrg })
-			.send({ server_count: count })
-			.then(() => console.log('[DBOTSORG] Successfully posted to Discord Bots Org.'))
-			.catch(err => console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`));
+			.set({
+				Authorization: keys.apiKey.dBotsOrg
+			})
+			.send({
+				server_count: count
+			})
+			.then(() => {
+				console.log('[DBOTSORG] Successfully posted to Discord Bots Org.')
+			})
+			.catch((err) => {
+				console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`)
+			});
 	}
 
 	static list(arr, conj = 'and') {
-		const { length } = arr;
+		const {
+			length
+		} = arr;
 		return `${arr.slice(0, -1).join(', ')}${length > 1 ? `${length > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
 	}
 
@@ -47,7 +65,9 @@ class Util {
 	 * @returns {string}
 	 */
 	static showSeconds(duration) {
-		return moment.duration(duration).format('h:mm:ss', { trim: false });
+		return moment.duration(duration).format('h:mm:ss', {
+			trim: false
+		});
 	}
 
 }

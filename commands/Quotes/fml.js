@@ -16,7 +16,6 @@ module.exports = class extends Command {
 			requiredSettings: [],
 			description: 'Gets a random FML story.',
 			usage: '',
-			usageDelim: undefined,
 			extendedHelp: 'No Extended Help.'
 		});
 	}

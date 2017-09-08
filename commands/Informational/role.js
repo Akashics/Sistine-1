@@ -14,7 +14,6 @@ module.exports = class extends Command {
 			requiredSettings: [],
 			description: '',
 			usage: '[Role:role]',
-			usageDelim: undefined,
 			extendedHelp: 'No extended help available.'
 		});
 	}
