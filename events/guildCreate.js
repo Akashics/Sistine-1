@@ -10,16 +10,16 @@ module.exports = class extends Event {
 		this.client.emit('log', `New Guild: ${guild.name} - ${guild.membercount}`, 'log');
 
 		let guildLog = '341768632545705986';
-		let guildCreateMsg = `\`\`md
-        # NEW GUILD
+		let guildCreateMsg = `
+# NEW GUILD
 
-        # Guild Name: ${guild.name}
-        # Guild ID: ${guild.id}
-        # Guild Count: ${guild.memberCount}
+# Guild Name: ${guild.name}
+# Guild ID: ${guild.id}
+# Guild Count: ${guild.memberCount}
 
-        # Guild Owner: ${guild.owner}
-        # Guild Owner ID: ${guild.ownerID}```;
-		this.client.channels.get(guildLog).send(guildCreateMsg);
+# Guild Owner: ${guild.owner}
+# Guild Owner ID: ${guild.ownerID}`;
+		this.client.channels.get(guildLog).send(guildCreateMsg, { code: 'md'});
 	}
 
 };

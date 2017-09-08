@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
 	async run(msg, [...args]) {
 
-		const user = args.user || msg.author;
+		const user = args[0].user || msg.author;
 		return msg.send(`${user.username}, ${roasts[Math.floor(Math.random() * roasts.length)]}`);
 	}
 
