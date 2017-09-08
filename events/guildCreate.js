@@ -7,6 +7,7 @@ module.exports = class extends Event {
 	}
 
 	run(guild) {
+		console.log(guild);
 		this.client.emit('log', `New Guild: ${guild.name} - ${guild.membercount}`, 'log');
 
 		let guildLog = '341768632545705986';
