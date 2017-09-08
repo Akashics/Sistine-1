@@ -27,6 +27,7 @@ module.exports = class extends Command {
 		const images = new this.client.methods.Embed();
 		let image = args[0];
 		if (image == 'types') {
+			
 			images
 				.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
 				.setTitle(':book:  **Moe Command - Valid Image Types**')
