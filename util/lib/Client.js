@@ -19,8 +19,7 @@ class Sistine extends Client {
 
 	constructor(options) {
 		super(Object.assign(options, { permissionLevels }));
-		//Object.defineProperty(this, 'keys', { value: keys });
-		this.keys = Object.assign(this.keys, require("../../keys.json"));
+		this.keys = Object.defineProperty(this, 'keys', { value: keys });
 		this.queue = new Music();
 	}
 
