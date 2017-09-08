@@ -36,7 +36,7 @@ module.exports = class extends Command {
 			`• Node.js      :: ${process.version}`,
 			'',
 			'= HOST USAGE =',
-			`• CPU Load     :: ${Math.round(require('os').loadavg()[0]*10000)/100}%`,
+			`• CPU Load     :: ${Math.round(require('os').loadavg()[0] * 10000) / 100}%`,
 			`• RAM +Node    :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
 			`• RAM Usage    :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
 			`• Uptime       :: ${duration}`,

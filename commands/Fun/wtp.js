@@ -25,7 +25,7 @@ module.exports = class extends Command {
 			const filtered = arr.filter(entry => entry.language.name === 'en');
 			return filtered[Math.floor(Math.random() * filtered.length)];
 		}
-        
+
 		const pokemon = Math.floor(Math.random() * 721) + 1;
 		const { body } = await snekfetch
 			.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);

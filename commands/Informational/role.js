@@ -54,26 +54,16 @@ module.exports = class extends Command {
 			'MOVE_MEMBERS': 'Move Members',
 			'USE_VAD': 'Use Voice Activity'
 		};
-        
+
 		embed
 			.setColor(role.hexColor)
-			.addField('❯ Name',
-				role.name, true)
-			.addField('❯ ID',
-				role.id, true)
-			.addField('❯ Color',
-				role.hexColor.toUpperCase(), true)
-			.addField('❯ Creation Date',
-				moment(role.createdAt).format('MMMM Do YYYY'), true)
-			.addField('❯ Hoisted',
-				role.hoist ? 'Yes' : 'No', true)
-			.addField('❯ Mentionable',
-				role.mentionable ? 'Yes' : 'No', true)
-			.addField('❯ Permissions',
-				Object.keys(perms)
-					.filter(perm => role.serialize()[perm])
-					.map(perm => perms[perm])
-					.join(', '));
+			.addField('❯ Name', role.name, true)
+			.addField('❯ ID', role.id, true)
+			.addField('❯ Color', role.hexColor.toUpperCase(), true)
+			.addField('❯ Creation Date', moment(role.createdAt).format('MMMM Do YYYY'), true)
+			.addField('❯ Hoisted', role.hoist ? 'Yes' : 'No', true)
+			.addField('❯ Mentionable', role.mentionable ? 'Yes' : 'No', true)
+			.addField('❯ Permissions', Object.keys(perms).filter(perm => role.serialize()[perm]).map(perm => perms[perm]).join(', '));
 		return msg.embed(embed);
 
 	}

@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const slots = [':grapes:', ':tangerine:', ':pear:', ':cherries:', ':lemon:'];
-    
+
 		const slotOne = slots[Math.floor(Math.random() * slots.length)];
 		const slotTwo = slots[Math.floor(Math.random() * slots.length)];
 		const slotThree = slots[Math.floor(Math.random() * slots.length)];

@@ -30,6 +30,5 @@ module.exports = class extends Command {
 		} catch (err) {
 			return msg.send(msg.language.get('ERROR_OCCURED', err.message));
 		}
-
 	}
 };
