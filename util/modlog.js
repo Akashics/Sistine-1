@@ -42,8 +42,8 @@ module.exports = class ModLog {
 
 	async send() {
 		const channel = this.guild.channels.get(this.guild.settings.modlog);
-		if (!channel) throw msg.language.get('MODLOG_NOT_FOUND');
-        this.case = await this.getCase();
+		if (!channel) throw 'Modlog was not found.';
+		this.case = await this.getCase();
 		return channel.send({ embed: this.embed });
 	}
 
@@ -52,9 +52,9 @@ module.exports = class ModLog {
 			.setAuthor(this.moderator.tag, this.moderator.avatar)
 			.setColor(ModLog.colour(this.type))
 			.setDescription([
-				`**${msg.language.get('TYPE')}**: ${this.type}`,
-				`**${msg.language.get('USER')}**: ${this.user.tag} (${this.user.id})`,
-				`**${msg.language.get('REASON')}**: ${this.reason || `Use \`${this.guild.settings.prefix}reason ${this.case} to claim this log.\``}`
+				`**Type**: ${this.type}`,
+				`**User**: ${this.user.tag} (${this.user.id})`,
+				`**Reason**: ${this.reason || `Use \`${this.guild.settings.prefix}reason ${this.case} to claim this log.\``}`
 			])
 			.setFooter(`Case ${this.case}`)
 			.setTimestamp();
