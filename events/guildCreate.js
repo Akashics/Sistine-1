@@ -8,18 +8,16 @@ module.exports = class extends Event {
 
 	run(guild) {
 		console.log(guild);
-		this.client.emit('log', `New Guild: ${guild.name} - ${guild.membercount}`, 'log');
+		this.client.emit('log', `New Guild: ${guild.name} - ${guild.memberCount}`, 'log');
 
 		let guildLog = '341768632545705986';
 		let guildCreateMsg = `
-# NEW GUILD
+# Added Guild: ${guild.name}
 
-# Guild Name: ${guild.name}
 # Guild ID: ${guild.id}
 # Guild Count: ${guild.memberCount}
 
-# Guild Owner: ${guild.owner}
-# Guild Owner ID: ${guild.ownerID}`;
+# Guild Owner: ${guild.owner}`;
 		this.client.channels.get(guildLog).send(guildCreateMsg, { code: 'md'});
 	}
 
