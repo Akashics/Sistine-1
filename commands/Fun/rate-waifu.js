@@ -22,7 +22,7 @@ module.exports = class extends Command {
 	async run(msg, args) {
 
 		const { waifu } = args;
-		    return msg.send(msg.language.get('RATE_WAIFU', waifu, Math.floor(Math.random() * 10) + 1));
+		return msg.send(msg.language.get('RATE_WAIFU', waifu, Math.floor(Math.random() * 10) + 1));
 	}
 
 };
