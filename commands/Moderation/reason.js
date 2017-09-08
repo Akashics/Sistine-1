@@ -30,9 +30,9 @@ module.exports = class extends Command {
 
 		const messages = await channel.fetchMessages({ limit: 100 });
 		const message = messages.find(mes => mes.author.id === this.client.user.id &&
-												mes.embeds.length > 0 &&
-												mes.embeds[0].type === 'rich' &&
-												mes.embeds[0].footer && mes.embeds[0].footer.text === `${msg.language.get('CASE')} ${selected}`
+			mes.embeds.length > 0 &&
+			mes.embeds[0].type === 'rich' &&
+			mes.embeds[0].footer && mes.embeds[0].footer.text === `${msg.language.get('CASE')} ${selected}`
 		);
 
 		if (message) {
@@ -63,7 +63,7 @@ module.exports = class extends Command {
 		modlogs[selected].reason = reason;
 		await this.provider.replace('modlogs', msg.guild.id, modlogs);
 
-		return msg.send(`${msg.language.get(MODLOG_UPDATE_SUCCESS, selected)}.${util.codeBlock('http', [
+		return msg.send(`${msg.language.get('MODLOG_UPDATE_SUCCESS', selected)}.${util.codeBlock('http', [
 			`- ${msg.language.get('REASON')} : ${oldReason || msg.language.get('NOT_SET')}`,
 			`+ ${msg.language.get('REASON')} : ${reason}`
 		].join('\n'))}`);

@@ -65,7 +65,7 @@ module.exports = class extends Language {
 				'Generați un raport pe <https://github.com/dirigeants/klasa> dacă găsiți orice bug.'
 			],
 			COMMAND_INFO: [
-				"Klasa este un framework 'plug-and-play' construit deasupra librăriei Discord.js.",
+				'Klasa este un framework \'plug-and-play\' construit deasupra librăriei Discord.js.',
 				'Majoritatea codului este modularizat, ceea ce permite dezvoltatorilor să editeze Klasa după necesitățile lor.',
 				'',
 				'Unele din caracteristici Klasa sunt:',

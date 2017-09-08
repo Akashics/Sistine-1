@@ -66,7 +66,7 @@ module.exports = class extends Language {
 				'Please file an issue at <https://github.com/dirigeants/klasa> if you find any bugs.'
 			],
 			COMMAND_INFO: [
-				"Sistine uses Klasa as a 'plug-and-play' framework built on top of the Discord.js library.",
+				'Sistine uses Klasa as a \'plug-and-play\' framework built on top of the Discord.js library.',
 				'Most of the code is modularized, which allows developers to edit Klasa to suit their needs.',
 				'',
 				'Some features of Klasa include:',
@@ -81,7 +81,7 @@ module.exports = class extends Language {
 				'• "Languages", which allow you to localize your bot.',
 				'',
 				'We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.',
-				"If you're interested in us, check us out at https://klasa.js.org"
+				'If you\'re interested in us, check us out at https://klasa.js.org'
 			],
 			COMMAND_HELP_DM: '📥 | The list of commands you have access to has been sent to your DMs.',
 			COMMAND_HELP_NODM: '❌ | You have DMs disabled, I couldn\'t send you the commands in DMs.',
