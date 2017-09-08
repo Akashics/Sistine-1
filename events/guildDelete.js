@@ -6,7 +6,7 @@ module.exports = class extends Event {
 		super(...args, { name:'guildDelete', enabled: true });
 	}
 
-	run(...guild) {
+	run(guild) {
 		this.client.emit('log', `Deleted Guild: ${guild.name} - ${guild.membercount}`, 'log');
         
 		let guildLog = '341768632545705986';
