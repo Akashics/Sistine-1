@@ -3,42 +3,42 @@ const ModLog = require('../../util/modlog');
 
 module.exports = class extends Command {
 
-    constructor(...args) {
-        super(...args, {
-            name: 'softban',
-            permLevel: 2,
-            botPerms: ['BAN_MEMBERS'],
-            runIn: ['text'],
+	constructor(...args) {
+		super(...args, {
+			name: 'softban',
+			permLevel: 2,
+			botPerms: ['BAN_MEMBERS'],
+			runIn: ['text'],
 
-            description: 'Softbans the mentioned member.',
-            usage: '<user:user> [reason:string] [...]',
-            usageDelim: ' '
-        });
-    }
+			description: 'Softbans the mentioned member.',
+			usage: '<user:user> [reason:string] [...]',
+			usageDelim: ' '
+		});
+	}
 
-    async run(msg, [user, ...reason]) {
-        reason = reason.length > 0 ? reason.join(' ') : null;
+	async run(msg, [user, ...reason]) {
+		reason = reason.length > 0 ? reason.join(' ') : null;
 
-        const member = await msg.guild.fetchMember(user).catch(() => null);
+		const member = await msg.guild.fetchMember(user).catch(() => null);
 
-        if (!member);
-        else if (!member.bannable) {
-            return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
-        }
+		if (!member);
+		else if (!member.bannable) {
+			return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
+		}
 
-        await msg.guild.ban(user, { reason, days: 1 });
-        await msg.guild.unban(user, msg.language.get('SOFTBAN_PROCESS'));
+		await msg.guild.ban(user, { reason, days: 1 });
+		await msg.guild.unban(user, msg.language.get('SOFTBAN_PROCESS'));
 
-        if (msg.guild.settings.modlog) {
-            new ModLog(msg.guild)
-                .setType('softban')
-                .setModerator(msg.author)
-                .setUser(user)
-                .setReason(reason)
-                .send();
-        }
+		if (msg.guild.settings.modlog) {
+			new ModLog(msg.guild)
+				.setType('softban')
+				.setModerator(msg.author)
+				.setUser(user)
+				.setReason(reason)
+				.send();
+		}
 
-        return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'softbanned', user.tag, reason));
-    }
+		return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'softbanned', user.tag, reason));
+	}
 
 };

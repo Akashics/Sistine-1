@@ -20,7 +20,7 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [...args]) {
+	async run(msg, args) {
 		const { body } = await snekfetch
 			.get('https://www.minecraftskinstealer.com/achievement/a.php')
 			.query({

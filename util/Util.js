@@ -1,12 +1,14 @@
 const moment = require('moment');
 require('moment-duration-format');
+const snekfetch = require('snekfetch');
+const keys = require('../keys.json');
 
 class Util {
 
 	static dBots(count, id) {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${id}/stats`)
-			.set({ Authorization: DBOTS_KEY })
+			.set({ Authorization: keys.apiKey.dBotsPW })
 			.send({ server_count: count })
 			.then(() => console.log('[DBOTS] Successfully posted to Discord Bots.'))
 			.catch(err => console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`));
@@ -15,7 +17,7 @@ class Util {
 	static dBotsOrg(count, id) {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${id}/stats`)
-			.set({ Authorization: DBOTSORG_KEY })
+			.set({ Authorization: keys.apiKey.dBotsOrg })
 			.send({ server_count: count })
 			.then(() => console.log('[DBOTSORG] Successfully posted to Discord Bots Org.'))
 			.catch(err => console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`));

@@ -21,18 +21,9 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		try {
-			const finalmsg = await msg.channel.send('`Fetching random dog...`');
-			const {body} = await snek.get('https://api.thedogapi.co.uk/v2/dog.php?limit=1');
-			await msg.channel.send({files: [{attachment: body.data[0].url, name: `${body.data[0].id}.jpg`}]});
-			await finalmsg.delete();
-		} catch (e) {
-			console.log(e);
-		}
-	}
 
-	async init() {
-		// You can optionally define this method which will be run when the bot starts (after login, so discord data is available via this.client)
+		const {body} = await snek.get('https://api.thedogapi.co.uk/v2/dog.php?limit=1');
+		return msg.send({files: [{attachment: body.data[0].url, name: `${body.data[0].id}.jpg`}]});
 	}
 
 };

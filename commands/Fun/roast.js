@@ -3,27 +3,27 @@ const roasts = require('../../util/roast');
 
 module.exports = class extends Command {
 
-    constructor(...args) {
-        super(...args, {
-            name: 'roast',
-            enabled: false,
-            runIn: ['text'],
-            cooldown: 0,
-            aliases: ['roastme'],
-            permLevel: 0,
-            botPerms: ['SEND_MESSAGES'],
-            requiredSettings: [],
-            description: 'Roasts a user.',
-            usage: '[User:member]',
-            usageDelim: undefined,
-            extendedHelp: 'No Extended Help.'
-        });
-    }
+	constructor(...args) {
+		super(...args, {
+			name: 'roast',
+			enabled: false,
+			runIn: ['text'],
+			cooldown: 0,
+			aliases: ['roastme'],
+			permLevel: 0,
+			botPerms: ['SEND_MESSAGES'],
+			requiredSettings: [],
+			description: 'Roasts a user.',
+			usage: '[User:member]',
+			usageDelim: undefined,
+			extendedHelp: 'No Extended Help.'
+		});
+	}
 
-    async run(msg, [...params]) {
+	async run(msg, [...args]) {
 
 		const user = args.user || msg.author;
 		return msg.send(`${user.username}, ${roasts[Math.floor(Math.random() * roasts.length)]}`);
-        }
+	}
 
 };

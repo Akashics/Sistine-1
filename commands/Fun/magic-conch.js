@@ -4,29 +4,29 @@ const answers = ['Maybe someday', 'Nothing', 'Neither', 'I don\'t think so', 'Ye
 
 module.exports = class extends Command {
 
-    constructor(...args) {
-        super(...args, {
-            name: 'joke',
-            enabled: true,
-            runIn: ['text'],
-            cooldown: 0,
-            aliases: [],
-            permLevel: 0,
-            botPerms: ['SEND_MESSAGES'],
-            requiredSettings: [],
-            description: 'Asks your question to the Magic Conch.',
-            usage: '',
-            usageDelim: undefined,
-            extendedHelp: 'No extended help available.'
-        });
-    }
+	constructor(...args) {
+		super(...args, {
+			name: 'joke',
+			enabled: true,
+			runIn: ['text'],
+			cooldown: 0,
+			aliases: [],
+			permLevel: 0,
+			botPerms: ['SEND_MESSAGES'],
+			requiredSettings: [],
+			description: 'Asks your question to the Magic Conch.',
+			usage: '<Question:String>',
+			usageDelim: undefined,
+			extendedHelp: 'No extended help available.'
+		});
+	}
 
-    async run(msg, [...args]) {
+	async run(msg, args) {
 
-		const { question } = args;
+		const { question } = args[0];
 		return msg.send(stripIndents`
 			:shell: ${answers[Math.floor(Math.random() * answers.length)]}
 		`);
 
-    }
+	}
 };

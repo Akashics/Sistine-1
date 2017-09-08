@@ -23,7 +23,6 @@ module.exports = class extends Command {
 
 	async run(msg, [...args]) {
 
-		const user = args[0] || msg.author;
 		const image = new this.client.methods.Embed();
 		const AuthStr = 'Bearer ' + keys.apiKey.weebKey;
 

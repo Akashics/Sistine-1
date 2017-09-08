@@ -3,129 +3,129 @@ const getInfoAsync = require('util').promisify(ytdl.getInfo);
 
 module.exports = class InterfaceMusic {
 
-    constructor(guild) {
-        Object.defineProperty(this, 'client', { value: guild.client });
-        Object.defineProperty(this, 'guild', { value: guild });
-        this.recentlyPlayed = new Array(10);
-        this.queue = [];
-        this.channel = null;
+	constructor(guild) {
+		Object.defineProperty(this, 'client', { value: guild.client });
+		Object.defineProperty(this, 'guild', { value: guild });
+		this.recentlyPlayed = new Array(10);
+		this.queue = [];
+		this.channel = null;
 
-        this.dispatcher = null;
+		this.dispatcher = null;
 
-        this.autoplay = false;
-        this.next = null;
+		this.autoplay = false;
+		this.next = null;
 
-        this.status = 'idle';
-    }
+		this.status = 'idle';
+	}
 
-    async add(user, url) {
-        const song = await getInfoAsync(url).catch((err) => {
-            this.client.emit('log', err, 'error');
-            throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
-        });
+	async add(user, url) {
+		const song = await getInfoAsync(url).catch((err) => {
+			this.client.emit('log', err, 'error');
+			throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
+		});
 
-        const metadata = {
-            url: `https://youtu.be/${song.video_id}`,
-            title: song.title,
-            requester: user,
-            loudness: song.loudness,
-            seconds: parseInt(song.length_seconds)
-        };
+		const metadata = {
+			url: `https://youtu.be/${song.video_id}`,
+			title: song.title,
+			requester: user,
+			loudness: song.loudness,
+			seconds: parseInt(song.length_seconds)
+		};
 
-        this.queue.push(metadata);
+		this.queue.push(metadata);
 
-        this.next = this.getLink(song.related_videos);
+		this.next = this.getLink(song.related_videos);
 
-        return metadata;
-    }
+		return metadata;
+	}
 
-    getLink(playlist) {
-        for (const song of playlist) {
-            if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) continue;
-            return `https://youtu.be/${song.id}`;
-        }
-        return null;
-    }
+	getLink(playlist) {
+		for (const song of playlist) {
+			if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) continue;
+			return `https://youtu.be/${song.id}`;
+		}
+		return null;
+	}
 
-    join(voiceChannel) {
-        return voiceChannel.join()
-            .catch((err) => {
-                if (String(err).includes('ECONNRESET')) throw 'There was an issue connecting to the voice channel.';
-                this.client.emit('log', err, 'error');
-                throw err;
-            });
-    }
+	join(voiceChannel) {
+		return voiceChannel.join()
+			.catch((err) => {
+				if (String(err).includes('ECONNRESET')) throw 'There was an issue connecting to the voice channel.';
+				this.client.emit('log', err, 'error');
+				throw err;
+			});
+	}
 
-    async leave() {
-        if (!this.voiceChannel) throw 'I am not in a voice channel.';
-        this.dispatcher = null;
-        this.status = 'idle';
+	async leave() {
+		if (!this.voiceChannel) throw 'I am not in a voice channel.';
+		this.dispatcher = null;
+		this.status = 'idle';
 
-        await this.voiceChannel.leave();
-        return this;
-    }
+		await this.voiceChannel.leave();
+		return this;
+	}
 
-    async play() {
-        if (!this.voiceChannel) throw 'I am not in a voice channel.';
-        else if (!this.connection) throw 'I could not find a connection.';
-        else if (!this.queue[0]) throw 'The queue is empty.';
+	async play() {
+		if (!this.voiceChannel) throw 'I am not in a voice channel.';
+		else if (!this.connection) throw 'I could not find a connection.';
+		else if (!this.queue[0]) throw 'The queue is empty.';
 
-        this.pushPlayed(this.queue[0].url);
+		this.pushPlayed(this.queue[0].url);
 
-        const stream = await ytdl(this.queue[0].url, { filter: (format) => !format.bitrate && format.audioEncoding === 'opus' })
-            .on('error', err => this.client.emit('log', err, 'error'));
+		const stream = await ytdl(this.queue[0].url, { filter: (format) => !format.bitrate && format.audioEncoding === 'opus' })
+			.on('error', err => this.client.emit('log', err, 'error'));
 
-        this.dispatcher = this.connection.playStream(stream, { passes: 5 });
-        return this.dispatcher;
-    }
+		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
+		return this.dispatcher;
+	}
 
-    pushPlayed(url) {
-        this.recentlyPlayed.push(url);
-        this.recentlyPlayed.shift();
-    }
+	pushPlayed(url) {
+		this.recentlyPlayed.push(url);
+		this.recentlyPlayed.shift();
+	}
 
-    pause() {
-        this.dispatcher.pause();
-        this.status = 'paused';
-        return this;
-    }
+	pause() {
+		this.dispatcher.pause();
+		this.status = 'paused';
+		return this;
+	}
 
-    resume() {
-        this.dispatcher.resume();
-        this.status = 'playing';
-        return this;
-    }
+	resume() {
+		this.dispatcher.resume();
+		this.status = 'playing';
+		return this;
+	}
 
-    skip(force = false) {
-        if (force && this.dispatcher) this.dispatcher.end();
-        else this.queue.shift();
-        return this;
-    }
+	skip(force = false) {
+		if (force && this.dispatcher) this.dispatcher.end();
+		else this.queue.shift();
+		return this;
+	}
 
-    prune() {
-        this.queue = [];
-        return this;
-    }
+	prune() {
+		this.queue = [];
+		return this;
+	}
 
-    async destroy() {
-        if (this.voiceChannel) await this.voiceChannel.leave();
+	async destroy() {
+		if (this.voiceChannel) await this.voiceChannel.leave();
 
-        this.recentlyPlayed = null;
-        this.dispatcher = null;
-        this.status = null;
-        this.queue = null;
-        this.autoplay = null;
-        this.next = null;
+		this.recentlyPlayed = null;
+		this.dispatcher = null;
+		this.status = null;
+		this.queue = null;
+		this.autoplay = null;
+		this.next = null;
 
-        this.client.queue.delete(this.guild.id);
-    }
+		this.client.queue.delete(this.guild.id);
+	}
 
-    get voiceChannel() {
-        return this.guild.me.voiceChannel;
-    }
+	get voiceChannel() {
+		return this.guild.me.voiceChannel;
+	}
 
-    get connection() {
-        return this.voiceChannel ? this.voiceChannel.connection : null;
-    }
+	get connection() {
+		return this.voiceChannel ? this.voiceChannel.connection : null;
+	}
 
 };
