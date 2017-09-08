@@ -12,14 +12,12 @@ module.exports = class extends Event {
         
 		let guildLog = '341768632545705986';
 		let guildDeleteMsg = `
-# Lost a Guild :/
+# Removed Guild : ${guild.name}
 
-# Guild Name: ${guild.name}
 # Guild ID: ${guild.id}
 # Guild Count: ${guild.memberCount}
 
-# Guild Owner: ${guild.owner}
-# Guild Owner ID: ${guild.ownerID}`;
+# Guild Owner: ${guild.owner.user.tag}`;
 		this.client.channels.get(guildLog).send(guildDeleteMsg, { code: 'md'});
 	}
 
