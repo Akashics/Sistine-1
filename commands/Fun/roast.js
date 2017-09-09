@@ -6,7 +6,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			name: 'roast',
-			enabled: false,
+			enabled: true,
 			runIn: ['text'],
 			cooldown: 0,
 			aliases: ['roastme'],
