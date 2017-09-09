@@ -18,10 +18,9 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [args]) {
+	async run(msg, [member]) {
 
-		const user = args[0].user;
-		return msg.send(`${user.username}, ${roasts[Math.floor(Math.random() * roasts.length)]}`);
+		return msg.send(`${member.user.username}, ${roasts[Math.floor(Math.random() * roasts.length)]}`);
 	
 	}
 
