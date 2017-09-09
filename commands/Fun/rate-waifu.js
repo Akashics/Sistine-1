@@ -5,7 +5,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			name: 'rate-waifu',
-			enabled: false,
+			enabled: true,
 			runIn: ['text'],
 			cooldown: 0,
 			aliases: ['waifu'],
@@ -13,16 +13,13 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Rates your Waifu!',
-			usage: '<Waifu:Str>',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<Waifu:Str>'
 		});
 	}
 
 	async run(msg, args) {
 
-		const { waifu } = args;
-		return msg.send(msg.language.get('RATE_WAIFU', waifu, Math.floor(Math.random() * 10) + 1));
+		return msg.send(msg.language.get('RATE_WAIFU', args[0], Math.floor(Math.random() * 10) + 1));
 	}
 
 };

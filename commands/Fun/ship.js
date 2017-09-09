@@ -15,7 +15,7 @@ module.exports = class extends Command {
 			requiredSettings: [],
 			description: 'Ships two people together.',
 			usage: '<PersonOne:member> <PersonTwo:member>',
-			usageDelim: undefined,
+			usageDelim: ' ',
 			extendedHelp: 'No extended help available.'
 		});
 	}

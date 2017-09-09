@@ -30,7 +30,7 @@ module.exports = class extends Command {
 		const embed = new this.client.methods.Embed()
 			.setTitle(`Requested by ${msg.author.tag}`)
 			.setAuthor('FML Stories')
-			.setColor(msg.guild.member(client.user.id).highestRole.color || 0)
+			.setColor(msg.member.highestRole.color || 0)
 			.setTimestamp()
 			.setDescription(`_${article.childNodes[0].text}\n\n_`)
 			.addField('I agree, your life sucks', updoot.childNodes[0].text, true)
