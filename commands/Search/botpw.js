@@ -34,6 +34,7 @@ module.exports = class extends Command {
 					.set({
 						Authorization: keys.apiKey.dBotsPW
 					});
+			console.log(body)
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')
