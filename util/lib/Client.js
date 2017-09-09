@@ -1,6 +1,8 @@
 const { Client, PermissionLevels } = require('klasa');
 const Music = require('./Music');
 const keys = require('../../keys.json');
+const StatsD = require('node-dogstatsd').StatsD;
+const dogstatsd = new StatsD();
 
 const permissionLevels = new PermissionLevels()
 	.addLevel(0, false, () => true)
@@ -15,6 +17,7 @@ class Sistine extends Client {
 	constructor(options) {
 		super(Object.assign(options, { permissionLevels }));
 		Object.defineProperty(this, 'keys', { value: keys });
+		this.dogstatsd = dogstatsd;
 		this.queue = new Music();
 	}
 

@@ -15,10 +15,10 @@ class Util {
 				server_count: count
 			})
 			.then(() => {
-				console.log('[DBOTS] Successfully posted to Discord Bots.')
+				console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
 			.catch((err) => {
-				console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`)
+				console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
 			});
 	}
 
@@ -32,10 +32,10 @@ class Util {
 				server_count: count
 			})
 			.then(() => {
-				console.log('[DBOTSORG] Successfully posted to Discord Bots Org.')
+				console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
 			})
 			.catch((err) => {
-				console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`)
+				console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
 	}
 
