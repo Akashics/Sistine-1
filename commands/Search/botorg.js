@@ -30,8 +30,7 @@ module.exports = class extends Command {
 			const {
 				body
 			} = await snekfetch
-					.get(`https://discordbots.org/api/bots/${bot.id}`)
-			console.log(body)
+					.get(`https://discordbots.org/api/bots/${bot.id}`);
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('discordbots.org', 'https://discordbots.org/')
@@ -40,10 +39,15 @@ module.exports = class extends Command {
 				.setDescription(body.shortdesc)
 				.addField('❯ Library',
 					body.lib, true)
+				.addField('❯ Prefix',
+					body.prefix, true)
 				.addField('❯ Invite',
 					`[Here](${body.invite})`, true)
-				.addField('❯ Prefix',
-					body.prefix, true);
+				.addField('❯ Website', body.website || 'No Website', true)
+				.addField('❯ Updoots',
+					body.points, true)
+				.addField('❯ Server Count',
+					body.server_count, true);
 			return msg.send('', {
 				embed: build
 			});

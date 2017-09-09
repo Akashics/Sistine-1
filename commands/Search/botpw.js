@@ -34,7 +34,6 @@ module.exports = class extends Command {
 					.set({
 						Authorization: keys.apiKey.dBotsPW
 					});
-			console.log(body)
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')
@@ -46,7 +45,8 @@ module.exports = class extends Command {
 				.addField('❯ Invite',
 					`[Here](${body.invite_url})`, true)
 				.addField('❯ Prefix',
-					body.prefix, true);
+					body.prefix, true)
+				.addField('❯ Website', body.website || 'No Website :C', true;
 			return msg.send('', {
 				embed: build
 			});
