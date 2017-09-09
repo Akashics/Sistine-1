@@ -26,23 +26,21 @@ module.exports = class extends Command {
 	async run(msg, args) {
 
 		const bot = args[0];
-		console.log(bot);
 		try {
 			const {
 				body
 			} = await snekfetch
 					.get(`https://discordbots.org/api/bots/${bot.id}`)\
-			console.log(body)
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
-				.setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')
-				.setTitle(body.name)
-				.setURL(`https://bots.discord.pw/bots/${bot.id}`)
-				.setDescription(body.description)
+				.setAuthor('discordbots.org', 'https://discordbots.org/')
+				.setTitle(body.username)
+				.setURL(`https://discordbots.org/bots/${bot.id}`)
+				.setDescription(body.shortdesc)
 				.addField('❯ Library',
-					body.library, true)
+					body.lib, true)
 				.addField('❯ Invite',
-					`[Here](${body.invite_url})`, true)
+					`[Here](${body.invite})`, true)
 				.addField('❯ Prefix',
 					body.prefix, true);
 			return msg.send('', {

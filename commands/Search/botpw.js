@@ -26,7 +26,6 @@ module.exports = class extends Command {
 	async run(msg, args) {
 
 		const bot = args[0];
-		console.log(bot);
 		try {
 			const {
 				body
