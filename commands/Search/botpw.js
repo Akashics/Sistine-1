@@ -32,9 +32,9 @@ module.exports = class extends Command {
 				body
 			} = await snekfetch
 					.get(`https://bots.discord.pw/api/bots/${bot.id}`)
-					//.set({
-					//	Authorization: keys.apiKey.dBotsORG
-					//});
+					.set({
+						Authorization: keys.apiKey.dBotsPW
+					});
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')
