@@ -24,6 +24,7 @@ module.exports = class extends Command {
 	async run(msg, [...args]) {
 
 		const { bot } = args;
+		console.log(bot)
 		try {
 			const { body } = await snekfetch
 				.get(`https://bots.discord.pw/api/bots/${bot.id}`)
