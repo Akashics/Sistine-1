@@ -15,7 +15,7 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			requiredSettings: [],
 			description: 'Searches Discord Bots for information on a bot.',
-			usage: '<Bot:member>',
+			usage: '<Bot:user>',
 			usageDelim: undefined,
 			extendedHelp: 'Use this command with the addition of an anime to give you information on it.'
 		});
@@ -23,7 +23,7 @@ module.exports = class extends Command {
 
 	async run(msg, [...args]) {
 
-		const { bot } = args;
+		const bot = args[0];
 		console.log(bot)
 		try {
 			const { body } = await snekfetch
