@@ -46,7 +46,7 @@ module.exports = class extends Command {
 					`[Here](${body.invite_url})`, true)
 				.addField('❯ Prefix',
 					body.prefix, true)
-				.addField('❯ Website', body.website || 'No Website :C', true;
+				.addField('❯ Website', body.website || 'No Website :C', true);
 			return msg.send('', {
 				embed: build
 			});
