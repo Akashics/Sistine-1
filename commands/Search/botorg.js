@@ -31,7 +31,8 @@ module.exports = class extends Command {
 			const {
 				body
 			} = await snekfetch
-					.get(`https://discordbots.org/api/bots/${bot.id}`)
+					.get(`https://discordbots.org/api/bots/${bot.id}`)\
+			console.log(body)
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')
@@ -48,7 +49,7 @@ module.exports = class extends Command {
 				embed: build
 			});
 		} catch (err) {
-			if (err.status === 404) return msg.say('Could not find any results.');
+			if (err.status === 404) return msg.send('Could not find any results.');
 			return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
 		}
 	}
