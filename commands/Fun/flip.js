@@ -13,10 +13,7 @@ module.exports = class extends Command {
 			permLevel: 0,
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
-			description: '',
-			usage: '',
-			usageDelim: undefined,
-			extendedHelp: 'No extended help available.'
+			description: ''
 		});
 	}
 

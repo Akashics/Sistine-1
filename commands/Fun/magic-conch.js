@@ -6,11 +6,11 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'joke',
+			name: 'magic-conch',
 			enabled: true,
 			runIn: ['text'],
 			cooldown: 0,
-			aliases: [],
+			aliases: ['conch'],
 			permLevel: 0,
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
