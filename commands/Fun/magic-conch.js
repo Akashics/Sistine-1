@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { stripIndents } = require('common-tags');
-const answers = ['Maybe someday', 'Nothing', 'Neither', 'I don\'t think so', 'Yes', 'Try asking again'];
+const answers = ['Maybe someday', 'Nothing', 'Neither', 'I don\'t think so', 'Yes', 'Try asking again later'];
 
 module.exports = class extends Command {
 
@@ -15,9 +15,7 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Asks your question to the Magic Conch.',
-			usage: '<Question:String>',
-			usageDelim: undefined,
-			extendedHelp: 'No extended help available.'
+			usage: '<Question:String>'
 		});
 	}
 
