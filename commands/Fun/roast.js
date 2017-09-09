@@ -6,7 +6,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			name: 'roast',
-			enabled: false,
+			enabled: true,
 			runIn: ['text'],
 			cooldown: 0,
 			aliases: ['roastme'],
@@ -14,16 +14,15 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Roasts a user.',
-			usage: '[User:member]',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<UserToRoast:member>',
 		});
 	}
 
-	async run(msg, [...args]) {
+	async run(msg, [args]) {
 
-		const user = args[0].user || msg.author;
+		const user = args[0].user;
 		return msg.send(`${user.username}, ${roasts[Math.floor(Math.random() * roasts.length)]}`);
+	
 	}
 
 };

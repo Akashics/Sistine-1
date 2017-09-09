@@ -14,14 +14,12 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Compliments a user.',
-			usage: '[User:member]',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<UserToCompliment:member>'
 		});
 	}
 
-	async run(msg, [...args]) {
-		const user = args[0].user || msg.author;
+	async run(msg, args) {
+		const user = args[0].user;
 		return msg.send(`${user.username}, ${compliments[Math.floor(Math.random() * compliments.length)]}`);
 	}
 
