@@ -5,13 +5,14 @@ module.exports = class extends Event {
 
 	run() {
 		sendStats();
-		createInterval() {
+		async function createInterval() {
 			this.interval = setInterval(() => {
-				sendStats().then().catch(e => {
-					console.error(e);
+				sendStats().then().catch((e) => {
+					this.client.emit('log', e, 'error');
 				});
 			}, 1000 * 30);
 		}
+		createInterval();
 		return this.client.user.setActivity(`s>help — ${this.client.guilds.size} guilds`).catch((err) => {
 			this.client.emit('log', err, 'error');
 		});
