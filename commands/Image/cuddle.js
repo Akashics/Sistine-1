@@ -34,7 +34,7 @@ module.exports = class extends Command {
 		image
 			.setColor(msg.member.highestRole.color || 0)
 			.setImage(imageRequest.data.url)
-			.setDescription(self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'cuddle'))
+			.setDescription(self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddled') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'cuddled'))
 			.setFooter(msg.language.get('WEEB_SERVICES'));
 		return msg.send('', {embed: image});
 

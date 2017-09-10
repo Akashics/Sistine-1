@@ -30,7 +30,7 @@ module.exports = class extends Command {
 			const {
 				body
 			} = await snekfetch
-					.get(`https://discordbots.org/api/bots/${bot.id}`);
+				.get(`https://discordbots.org/api/bots/${bot.id}`);
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('discordbots.org', 'https://discordbots.org/')

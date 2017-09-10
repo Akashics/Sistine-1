@@ -40,9 +40,7 @@ class Util {
 	}
 
 	static list(arr, conj = 'and') {
-		const {
-			length
-		} = arr;
+		const { length } = arr;
 		return `${arr.slice(0, -1).join(', ')}${length > 1 ? `${length > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
 	}
 
