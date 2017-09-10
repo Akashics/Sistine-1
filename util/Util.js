@@ -40,7 +40,7 @@ class Util {
 	}
 	
 	static sendStats() {
-		this.client.emit('log', 'Sending Stats','log');
+		console.log('Testing');
 	}
 
 	static list(arr, conj = 'and') {
