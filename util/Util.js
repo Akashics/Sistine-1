@@ -15,10 +15,10 @@ class Util {
 				server_count: count
 			})
 			.then(() => {
-				this.client.emit('log', '[DBOTS] Successfully posted to Discord Bots.', 'log');
+				console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
 			.catch((err) => {
-				this.client.emit('log', `[DBOTS] Failed to post to Discord Bots. ${err}`, 'error');
+				console.log(`[DBOTS] Failed to post to Discord Bots. ${err}`);
 			});
 	}
 
@@ -26,16 +26,16 @@ class Util {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${id}/stats`)
 			.set({
-				Authorization: keys.apiKey.dBotsOrg
+				Authorization: keys.apiKey.dBotsORG
 			})
 			.send({
 				server_count: count
 			})
 			.then(() => {
-				this.client.emit('log', '[DBOTSORG] Successfully posted to Discord Bots Org.', 'log');
+				console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
 			})
 			.catch((err) => {
-				this.client.emit('log', `[DBOTSORG] Failed to post to Discord Bots Org. ${err}`, 'error');
+				console.log(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
 	}
 	

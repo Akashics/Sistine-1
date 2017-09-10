@@ -1,4 +1,6 @@
-const { Command } = require('klasa');
+const {
+	Command
+} = require('klasa');
 const snekfetch = require('snekfetch');
 
 module.exports = class extends Command {
@@ -15,7 +17,6 @@ module.exports = class extends Command {
 			requiredSettings: [],
 			description: 'Guess that Pokemon!',
 			usage: '',
-			usageDelim: undefined,
 			extendedHelp: 'No Additional Arguments, just use the command.'
 		});
 	}
@@ -27,12 +28,13 @@ module.exports = class extends Command {
 		}
 
 		const pokemon = Math.floor(Math.random() * 721) + 1;
-		const { body } = await snekfetch
-			.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
+		const {
+			body
+		} = await snekfetch
+				.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
 		const name = filterPkmn(body.names).name.toLowerCase();
 		const id = `${'000'.slice(body.id.toString().length)}${body.id}`;
-		const embed = new this.client.methods.Embed();
-		embed
+		const embed = new this.client.methods.Embed()
 			.setTitle(msg.language.get('WTP_EMBED_TITLE'))
 			.setColor(0xED1C24)
 			.setImage(`https://www.serebii.net/sunmoon/pokemon/${id}.png`);
