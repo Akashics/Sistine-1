@@ -1,7 +1,7 @@
 const moment = require('moment');
 require('moment-duration-format');
 const snekfetch = require('snekfetch');
-const keys = require('../keys.json');
+const { dBotsPW, dBotsORG } = require('../keys.json');
 
 class Util {
 	/* eslint-disable no-console */
@@ -9,7 +9,7 @@ class Util {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${id}/stats`)
 			.set({
-				Authorization: keys.apiKey.dBotsPW
+				Authorization: dBotsPW
 			})
 			.send({
 				server_count: count
@@ -26,7 +26,7 @@ class Util {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${id}/stats`)
 			.set({
-				Authorization: keys.apiKey.dBotsORG
+				Authorization: dBotsORG
 			})
 			.send({
 				server_count: count

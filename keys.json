@@ -1,11 +1,9 @@
 {
     "botToken": "MzUzOTI5NDg3MDE4MjI5NzYy.DJUGUQ.B15N3Og98IM7XkRWU83CwcZ3Eeo",
-    "apiKey" : {
-        "anilistClient": "kashall-9uvwy",
-        "anilistSecret": "aWlfqEODahllDsjpFati",
-        "googleSearch": "AIzaSyBG9bzgvqRY2nHzoB6gOAy8PW2Sx2uw8M4",
-        "dBotsORG": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTA3NzczOTU4OTk5MjQ0OCIsImlhdCI6MTUwNDgzMzAwMH0.e8uyYMcU00t190iwMIZGyuOoCNX6jyUhtFLrwo_JIkY",
-        "dBotsPW": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyMDEwNzc3Mzk1ODk5OTI0NDgiLCJyYW5kIjo0MjUsImlhdCI6MTUwNDgzMzAzOH0.S-HFeIs5BcTKnpFgm3ovFIQdThiEIYCMHHIiyqWXTKw",
-        "weebKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJya1BPMkRYdloiLCJ0b2tlbklkIjoiSGt4SzN3bVBiIiwiaWF0IjoxNTAxOTQ5MDQ3fQ.Q32-uKz5P5gVwpGhrn0uOliRvvqXLUClve5sE550DeXApMKW4JtZl-rBQVGiiOX2ZWdvy-by2YLa0_hIpQlUScjq2RriJccX1mUNDXs5f7ALvzkPyM6GWHo18hkiLaMpoAP6sPyibcRs13AxGH8md9O5CjcDw3BXJik57llUsUsNnFA_p3HaSNBK7IR0yakvEnjLkCc6ucdEXfKnHJtJitOFTv5eOBWQOJyeA926NTkx23VgKUI1L9I5z4BGfWLhT5c3qZiGdfxcEIQtYCPiD6wOIs1lr3fs0aQNrVearXie8NFWPwuK-gO1I3gJrAZQvF-CMUO3fOp2ztCaUcks9w"
-    }
+    "anilistClient": "kashall-9uvwy",
+    "anilistSecret": "aWlfqEODahllDsjpFati",
+    "googleSearch": "AIzaSyBG9bzgvqRY2nHzoB6gOAy8PW2Sx2uw8M4",
+    "dBotsORG": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTA3NzczOTU4OTk5MjQ0OCIsImlhdCI6MTUwNDgzMzAwMH0.e8uyYMcU00t190iwMIZGyuOoCNX6jyUhtFLrwo_JIkY",
+    "dBotsPW": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyMDEwNzc3Mzk1ODk5OTI0NDgiLCJyYW5kIjo0MjUsImlhdCI6MTUwNDgzMzAzOH0.S-HFeIs5BcTKnpFgm3ovFIQdThiEIYCMHHIiyqWXTKw",
+    "weebKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJya1BPMkRYdloiLCJ0b2tlbklkIjoiSGt4SzN3bVBiIiwiaWF0IjoxNTAxOTQ5MDQ3fQ.Q32-uKz5P5gVwpGhrn0uOliRvvqXLUClve5sE550DeXApMKW4JtZl-rBQVGiiOX2ZWdvy-by2YLa0_hIpQlUScjq2RriJccX1mUNDXs5f7ALvzkPyM6GWHo18hkiLaMpoAP6sPyibcRs13AxGH8md9O5CjcDw3BXJik57llUsUsNnFA_p3HaSNBK7IR0yakvEnjLkCc6ucdEXfKnHJtJitOFTv5eOBWQOJyeA926NTkx23VgKUI1L9I5z4BGfWLhT5c3qZiGdfxcEIQtYCPiD6wOIs1lr3fs0aQNrVearXie8NFWPwuK-gO1I3gJrAZQvF-CMUO3fOp2ztCaUcks9w"
 }
