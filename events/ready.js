@@ -11,6 +11,7 @@ module.exports = class extends Event {
 			}, 1000 * 30);
 		}
 		createInterval();
+		
 		return this.client.user.setActivity(`s>help — ${this.client.guilds.size} guilds`).catch((err) => {
 			this.client.emit('log', err, 'error');
 		});
