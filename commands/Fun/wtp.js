@@ -23,7 +23,7 @@ module.exports = class extends Command {
 	async run(msg) {
 		function filterPkmn(arr) {
 			const filtered = arr.filter(entry => entry.language.name === 'en');
-            return filtered[Math.floor(Math.random() * filtered.length)];
+			return filtered[Math.floor(Math.random() * filtered.length)];
 		}
 
 		const pokemon = Math.floor(Math.random() * 721) + 1;

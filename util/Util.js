@@ -49,6 +49,7 @@ class Util {
 		dd.gauge('client.channels', client.channels.size);
 		dd.gauge('node.memory', (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
 		dd.gauge('client.voice', client.voiceConnections.size);
+		
 	}
 
 	static list(arr, conj = 'and') {
