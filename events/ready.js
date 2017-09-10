@@ -7,9 +7,7 @@ module.exports = class extends Event {
 		sendStats();
 		async function createInterval() {
 			setInterval(() => {
-				sendStats().catch((e) => {
-					this.client.emit('log', e, 'error');
-				});
+				sendStats();
 			}, 1000 * 30);
 		}
 		createInterval();
