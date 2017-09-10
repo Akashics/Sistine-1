@@ -21,8 +21,8 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const { body } = await snek.get('https://api.thedogapi.co.uk/v2/dog.php?limit=1');
-		return msg.send({ files: [{ attachment: body.data[0].url, name: `${body.data[0].id}.jpg` }] });
+		const res = await snek.get('https://api.thedogapi.co.uk/v2/dog.php?limit=1');
+		return msg.channel.send({ files: [{ attachment: res.body.data[0].url , name: `${res.body.data[0].id}.jpg` }] });
 	}
 
 };

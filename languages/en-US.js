@@ -127,8 +127,8 @@ module.exports = class extends Language {
 			ACHIEVEMENT_GET: 'Achievement Get',
 			NO_AVATAR: 'This user has no avatar.',
 			USER_REACTION_SOLO: (user, thing) => `**${user} wants to ${thing}.**`,
-			USER_REACTION: (author, user, thing) => `**${author} has ${thing} with you ${user}!**`,
-			WEEB_SERVICES: 'Images and other services are provided by weeb.sh'
+			USER_REACTION: (author, user, thing) => `**${author} has ${thing} you ${user}!**`,
+			WEEB_SERVICES: 'Images provided by weeb.sh'
 			
 		};
 	}

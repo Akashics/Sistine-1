@@ -31,8 +31,8 @@ module.exports = class extends Command {
 		}
 		if (animeRequest.data.length >= 1) {
 			let characters = await anilist.loadCharacters(animeRequest.data[0].id, 'manga');
-			let embed = await anilist.buildResponse(msg, animeRequest.data[0], characters, 'Manga');
-			return msg.send(embed);
+			let final = await anilist.buildResponse(msg, animeRequest.data[0], characters, 'Manga');
+			return msg.send('', {embed: final});
 		} else {
 			return msg.send(msg.language.get('ANILIST_NO_RESULT', args[0]));
 		}

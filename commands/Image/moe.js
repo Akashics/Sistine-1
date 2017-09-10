@@ -17,7 +17,7 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Allows you to cuddle with another member.',
-			usage: '<ImageType:string>',
+			usage: '[ImageType:string]',
 			usageDelim: undefined,
 			extendedHelp: 'No Extended Help.'
 		});
@@ -26,23 +26,23 @@ module.exports = class extends Command {
 	async run(msg, [...args]) {
 		const images = new this.client.methods.Embed();
 		let image = args[0];
-		if (image == 'types') {
-			
+		if (!types.includes(image)) {
 			images
-				.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
+				.setColor(msg.member.highestRole.color || 0)
 				.setTitle(':book:  **Moe Command - Valid Image Types**')
 				.setDescription('awoo, bang, blush, clagwimoth, cry, dance, insult, jojo, lewd, lick, megumin, neko, nom, owo, pout, rem, shrug, sleepy, smile, teehee, smug, stare, thumbsup, triggered, wag, waifu_insult, wasted')
 				.setFooter(`Example CMD: ${msg.guild.settings.prefix}moe dance`);
 			return msg.send('', { embed: image });
-		} else {
-			if (!types.includes(image)) return msg.send('Use `' + msg.guild.settings.prefix + 'moe types` to see available image types.');
-			var imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${image}`, { headers: { Authorization: AuthStr } });
-			images
-				.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
-				.setImage(imageRequest.data.url)
-				.setFooter(msg.language.get('WEEB_SERVICES'));
-			return msg.send('', { embed: image });
 		}
+
+		if (!types.includes(image)) return msg.send('Use `' + msg.guild.settings.prefix + 'moe types` to see available image types.');
+		var imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${image}`, { headers: { Authorization: AuthStr } });
+		images
+			.setColor(msg.member.highestRole.color || 0)
+			.setImage(imageRequest.data.url)
+			.setFooter(msg.language.get('WEEB_SERVICES'));
+		return msg.send('', { embed: image });
+		
 
 	}
 

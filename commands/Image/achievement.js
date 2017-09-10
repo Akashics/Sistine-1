@@ -11,7 +11,7 @@ module.exports = class extends Command {
 			cooldown: 0,
 			aliases: ['achieve'],
 			permLevel: 0,
-			botPerms: ['SEND_MESSAGES', 'SEND_FILES'],
+			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Achievement GET!',
 			usage: '<Text:string{1,25}>',
