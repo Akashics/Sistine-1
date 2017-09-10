@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const { body } = await snek.get('http://random.cat/meow');
-		return msg.send('', {files: [{attachment: body.file, name: `cat.${body.file.split('.')[2]}`}]});
+		return msg.send('<:plusheenblob:356253615448391680> I found this cat image. Here you go!', {files: [{attachment: body.file, name: `cat.${body.file.split('.')[2]}`}]});
 	}
 
 };
