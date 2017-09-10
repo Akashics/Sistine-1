@@ -31,7 +31,7 @@ module.exports = class extends Command {
 			'offline': '<:offline:313956277237710868> Offline'
 		};
 		embed
-			.setColor(member.displayHexColor)
+			.setColor(member.displayHexColor || 0)
 			.setThumbnail(member.user.displayAvatarURL())
 			.addField('❯ Name', member.user.tag, true)
 			.addField('❯ ID', member.id, true)
@@ -41,7 +41,7 @@ module.exports = class extends Command {
 			.addField('❯ Playing', member.user.presence.game ? member.user.presence.game.name : 'N/A', true)
 			.addField('❯ Highest Role', member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None', true)
 			.addField('❯ Hoist Role', member.hoistRole ? member.hoistRole.name : 'None', true);
-		return msg.send(embed);
+		return msg.channel.send(embed);
 	}
 
 };

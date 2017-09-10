@@ -22,7 +22,6 @@ module.exports = class extends Command {
 	async run(msg) {
 
 		const moment = require('moment');
-		const embed = new this.client.methods.Embed();
 		const filterLevels = [
 			'Off',
 			'No Role',
@@ -35,7 +34,7 @@ module.exports = class extends Command {
 			'(╯°□°）╯︵ ┻━┻',
 			'┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻'
 		];
-		embed
+		const send = new this.client.methods.Embed()
 			.setColor(0x00AE86)
 			.setThumbnail(msg.guild.iconURL())
 			.addField('❯ Name', msg.guild.name, true)
@@ -46,7 +45,7 @@ module.exports = class extends Command {
 			.addField('❯ Verification Level', verificationLevels[msg.guild.verificationLevel], true)
 			.addField('❯ Owner', msg.guild.owner ? msg.guild.owner.user.username : 'None', true)
 			.addField('❯ Members', msg.guild.memberCount, true);
-		return msg.send(embed);
+		return msg.channel.send('', { embed: send };
 
 	}
 

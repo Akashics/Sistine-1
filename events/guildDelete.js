@@ -8,8 +8,8 @@ module.exports = class extends Event {
 	}
 
 	run(guild) {
-		dBots(this.client.guilds.size, this.client.id);
-		dBotsOrg(this.client.guilds.size, this.client.id);
+		dBots(this.client.guilds.size);
+		dBotsOrg(this.client.guilds.size);
 		this.client.user.setActivity(`s>help — ${this.client.guilds.size} guilds`).catch((err) => {
 			this.client.emit('log', err, 'error');
 		});

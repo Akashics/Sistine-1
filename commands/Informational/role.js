@@ -22,7 +22,6 @@ module.exports = class extends Command {
 
 		const { role } = args[0];
 		const moment = require('moment');
-		const embed = new this.client.methods.Embed();
 		const perms = {
 			'ADMINISTRATOR': 'Administrator',
 			'VIEW_AUDIT_LOG': 'View Audit Log',
@@ -54,16 +53,16 @@ module.exports = class extends Command {
 			'USE_VAD': 'Use Voice Activity'
 		};
 
-		embed
-			.setColor(role.hexColor)
+		const send = new this.client.methods.Embed()
+			.setColor(role.hexColor || 0)
 			.addField('❯ Name', role.name, true)
 			.addField('❯ ID', role.id, true)
-			.addField('❯ Color', role.hexColor.toUpperCase(), true)
+			.addField('❯ Color', role.hexColor.toUpperCase() || 'None', true)
 			.addField('❯ Creation Date', moment(role.createdAt).format('MMMM Do YYYY'), true)
 			.addField('❯ Hoisted', role.hoist ? 'Yes' : 'No', true)
 			.addField('❯ Mentionable', role.mentionable ? 'Yes' : 'No', true)
 			.addField('❯ Permissions', Object.keys(perms).filter(perm => role.serialize()[perm]).map(perm => perms[perm]).join(', '));
-		return msg.embed(embed);
+		return msg.channel.send('', { embed: send });
 
 	}
 
