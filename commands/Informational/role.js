@@ -13,7 +13,7 @@ module.exports = class extends Command {
 			botPerms: [],
 			requiredSettings: [],
 			description: '',
-			usage: '[Role:role]',
+			usage: '<Role:role>',
 			extendedHelp: 'No extended help available.'
 		});
 	}
@@ -54,7 +54,7 @@ module.exports = class extends Command {
 		};
 
 		const send = new this.client.methods.Embed()
-			.setColor(role.hexColor || 0)
+			.setColor(role.hexColor ? role.hexColor : 0x00000)
 			.addField('❯ Name', role.name, true)
 			.addField('❯ ID', role.id, true)
 			.addField('❯ Color', role.hexColor.toUpperCase() || 'None', true)
