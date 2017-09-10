@@ -114,7 +114,7 @@ module.exports = class extends Language {
 			PRUNE_SUCCESS: (length, limit) => `Successfully deleted ${length} messages from ${limit}.`,
 			SOFTBAN_PROCESS: 'Softban process, removed one day worth of messages.',
 			EIGHTBALL_OUTLOOK: (answer) => `:8ball: I think \`${answer}\`.`,
-			WTP_EMBED_TITLE: 'You have 15 seconds. Guess this Pokemon.',
+			WTP_EMBED_TITLE: '<:pikablob:356256509929324545> You have 15 seconds. Guess this Pokemon.',
 			WTP_OUT_TIME: (name) => `You ran out of time, the answer was ${name}.`,
 			WTP_INCORRECT: (name) => `That is incorrect. Its name is ${name}.`,
 			WTP_CORRECT: 'That is correct. One point has been added to your account.',
