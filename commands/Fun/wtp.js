@@ -28,12 +28,11 @@ module.exports = class extends Command {
 		}
 
 		const pokemon = Math.floor(Math.random() * 721) + 1;
-		const {
-			body
-		} = await snekfetch
+		const { text } = await snekfetch
 				.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
-		const name = filterPkmn(body.names).name.toLowerCase();
-		const id = `${'000'.slice(body.id.toString().length)}${body.id}`;
+		const pokeData = JSON.parse(text);
+		const name = filterPkmn(pokeData.names).name.toLowerCase();
+		const id = `${'000'.slice(pokeData.id.toString().length)}${pokeData.id}`;
 		const embed = new this.client.methods.Embed()
 			.setTitle(msg.language.get('WTP_EMBED_TITLE'))
 			.setColor(0xED1C24)

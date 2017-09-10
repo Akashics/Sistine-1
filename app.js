@@ -1,5 +1,5 @@
 const Client = require('./util/lib/Client');
-const keys = require('./keys.json');
+const { botToken } = require('./keys.json');
 
 const Sistine = new Client({
 	clientOptions: {
@@ -11,4 +11,4 @@ const Sistine = new Client({
 	typing: true
 });
 
-Sistine.login(keys.botToken);
+Sistine.login(botToken);
