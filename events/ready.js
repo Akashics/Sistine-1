@@ -4,10 +4,10 @@ const { sendStats } = require('../util/Util');
 module.exports = class extends Event {
 
 	run() {
-		sendStats();
+		sendStats(this.client);
 		async function createInterval() {
 			setInterval(() => {
-				sendStats();
+				sendStats(this.client);
 			}, 1000 * 30);
 		}
 		createInterval();

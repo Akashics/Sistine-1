@@ -39,16 +39,16 @@ class Util {
 			});
 	}
 	
-	static sendStats() {
+	static sendStats(client) {
 		console.log('Testing');
 		const dd = this.client.datadogd;
 
-		dd.gauge('client.ping', this.client.ping);
-		dd.gauge('client.guilds', this.client.guilds.size);
-		dd.gauge('client.users', this.client.guilds.reduce((a, b) => a + b.memberCount, 0));
-		dd.gauge('client.channels', this.client.channels.size);
+		dd.gauge('client.ping', client.ping);
+		dd.gauge('client.guilds', client.guilds.size);
+		dd.gauge('client.users', client.guilds.reduce((a, b) => a + b.memberCount, 0));
+		dd.gauge('client.channels', client.channels.size);
 		dd.gauge('node.memory', (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
-		dd.gauge('client.voice', this.client.voiceConnections.size);
+		dd.gauge('client.voice', client.voiceConnections.size);
 	}
 
 	static list(arr, conj = 'and') {
