@@ -19,6 +19,7 @@ class Sistine extends Client {
 		Object.defineProperty(this, 'keys', { value: keys });
 		this.dogstatsd = dogstatsd;
 		this.queue = new Music();
+		this.interval = null;
 	}
 
 }

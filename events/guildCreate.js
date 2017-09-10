@@ -10,6 +10,9 @@ module.exports = class extends Event {
 	run(guild) {
 		dBots(this.client.guilds.size, this.client.id);
 		dBotsOrg(this.client.guilds.size, this.client.id);
+		this.client.user.setActivity(`s>help — ${this.client.guilds.size} guilds`).catch((err) => {
+			this.client.emit('log', err, 'error');
+		});
 		this.client.emit('log', `New Guild: ${guild.name} - ${guild.memberCount}`, 'log');
 
 		let guildLog = '341768632545705986';
