@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const axios = require('axios');
-const keys = require('../../keys.json');
+const { weebKey } = require('../../keys.json');
 
 module.exports = class extends Command {
 
@@ -23,7 +23,7 @@ module.exports = class extends Command {
 	async run(msg, [...args]) {
 
 		const image = new this.client.methods.Embed();
-		const AuthStr = 'Bearer ' + keys.apiKey.weebKey;
+		const AuthStr = 'Bearer ' + weebKey;
 
 		var self = false;
 		var imageRequest = await axios.get('https://staging.weeb.sh/images/random?type=pat', { headers: { Authorization: AuthStr } });

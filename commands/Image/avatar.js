@@ -19,8 +19,8 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [...args]) {
-		const user = args[0].user || msg.author;
+	async run(msg, [args]) {
+		const user = args.user || msg.author;
 		if (!user.avatar) return msg.send(msg.language.get('NO_AVATAR'));
 		const avatar = user.avatarURL({
 			format: user.avatar.startsWith('a_') ? 'gif' : 'png',

@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const axios = require('axios');
-const keys = require('../../keys.json');
-const AuthStr = 'Bearer ' + keys.weebAPIKey;
+const { weebKey } = require('../../keys.json');
+const AuthStr = 'Bearer ' + weebKey;
 const types = ['awoo', 'bang', 'blush', 'clagwimoth', 'cry', 'dance', 'insult', 'jojo', 'lewd', 'lick', 'megumin', 'neko', 'nom', 'owo', 'pout', 'rem', 'shrug', 'sleepy', 'smile', 'teehee', 'smug', 'stare', 'thumbsup', 'triggered', 'wag', 'waifu_insult', 'wasted'];
 
 module.exports = class extends Command {

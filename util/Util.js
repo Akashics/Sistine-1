@@ -12,7 +12,8 @@ class Util {
 				Authorization: dBotsPW
 			})
 			.send({
-				server_count: count
+				server_count: count,
+				shard_count: 1
 			})
 			.then(() => {
 				console.log('[DBOTS] Successfully posted to Discord Bots.');
@@ -29,7 +30,8 @@ class Util {
 				Authorization: dBotsORG
 			})
 			.send({
-				server_count: count
+				server_count: count,
+				shard_count: 1
 			})
 			.then(() => {
 				console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
