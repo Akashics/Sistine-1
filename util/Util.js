@@ -15,10 +15,10 @@ class Util {
 				server_count: count
 			})
 			.then(() => {
-				console.log('[DBOTS] Successfully posted to Discord Bots.');
+				this.client.emit('log', '[DBOTS] Successfully posted to Discord Bots.', 'log');
 			})
 			.catch((err) => {
-				console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
+				this.client.emit('log', `[DBOTS] Failed to post to Discord Bots. ${err}`, 'error');
 			});
 	}
 
@@ -32,11 +32,15 @@ class Util {
 				server_count: count
 			})
 			.then(() => {
-				console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
+				this.client.emit('log', '[DBOTSORG] Successfully posted to Discord Bots Org.', 'log');
 			})
 			.catch((err) => {
-				console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
+				this.client.emit('log', `[DBOTSORG] Failed to post to Discord Bots Org. ${err}`, 'error');
 			});
+	}
+	
+	static sendStats() {
+		this.client.emit('log', 'Sending Stats','log');
 	}
 
 	static list(arr, conj = 'and') {
