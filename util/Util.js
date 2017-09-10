@@ -41,7 +41,7 @@ class Util {
 	
 	static sendStats(client) {
 		console.log('Testing');
-		const dd = this.client.datadogd;
+		const dd = client.dogstatsd;
 
 		dd.gauge('client.ping', client.ping);
 		dd.gauge('client.guilds', client.guilds.size);
