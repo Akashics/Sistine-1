@@ -32,7 +32,7 @@ module.exports = class extends Command {
 				.setTitle(':book:  **Moe Command - Valid Image Types**')
 				.setDescription('awoo, bang, blush, clagwimoth, cry, dance, insult, jojo, lewd, lick, megumin, neko, nom, owo, pout, rem, shrug, sleepy, smile, teehee, smug, stare, thumbsup, triggered, wag, waifu_insult, wasted')
 				.setFooter(`Example CMD: ${msg.guild.settings.prefix}moe dance`);
-			return msg.send('', { embed: image });
+			return msg.send('', { embed: images });
 		}
 
 		if (!types.includes(image)) return msg.send('Use `' + msg.guild.settings.prefix + 'moe types` to see available image types.');
@@ -41,7 +41,7 @@ module.exports = class extends Command {
 			.setColor(msg.member.highestRole.color || 0)
 			.setImage(imageRequest.data.url)
 			.setFooter(msg.language.get('WEEB_SERVICES'));
-		return msg.send('', { embed: image });
+		return msg.send('', { embed: images });
 		
 
 	}

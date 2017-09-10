@@ -13,16 +13,14 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Fetches your or mentioned user\'s avatar',
-			usage: '[GuildMember:member]',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<GuildMember:member>'
 		});
 	}
 
 	async run(msg, [args]) {
-		const user = args.user || msg.author;
+		const user = args.user;
 		if (!user.avatar) return msg.send(msg.language.get('NO_AVATAR'));
-		const avatar = user.avatarURL({
+		const avatar = user.displayAvatarURL({
 			format: user.avatar.startsWith('a_') ? 'gif' : 'png',
 			size: 2048
 		});

@@ -5,9 +5,9 @@ const { dBotsPW, dBotsORG } = require('../keys.json');
 
 class Util {
 	/* eslint-disable no-console */
-	static dBots(count, id) {
+	static dBots(count) {
 		snekfetch
-			.post(`https://bots.discord.pw/api/bots/${id}/stats`)
+			.post('https://bots.discord.pw/api/bots/353929487018229762/stats')
 			.set({
 				Authorization: dBotsPW
 			})
@@ -23,9 +23,9 @@ class Util {
 			});
 	}
 
-	static dBotsOrg(count, id) {
+	static dBotsOrg(count) {
 		snekfetch
-			.post(`https://discordbots.org/api/bots/${id}/stats`)
+			.post('https://discordbots.org/api/bots/353929487018229762/stats')
 			.set({
 				Authorization: dBotsORG
 			})
