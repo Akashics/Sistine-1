@@ -31,16 +31,16 @@ module.exports = class extends Command {
 					limit: 1,
 					includeRelated: false,
 					useCanonical: false,
-					api_key: keys.apiKey.wordNik
+					api_key: keys.wordNik
 				});
 			if (!body.length) return msg.say('Could not find any results.');
-			const embed = new this.client.methods.Embed()
+			const tuna = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setTitle(body[0].word)
 				.setDescription(body[0].text);
-			return msg.embed(embed);
+			return msg.send('', {embed: tuna});
 		} catch (err) {
-			return msg.say(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
+			return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
 		}
 	}
 
