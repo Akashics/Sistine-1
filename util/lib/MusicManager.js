@@ -41,7 +41,9 @@ module.exports = class InterfaceMusic {
 
 	getLink(playlist) {
 		for (const song of playlist) {
-			if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) continue;
+			if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) {
+				continue;
+			}
 			return `https://youtu.be/${song.id}`;
 		}
 		return null;
@@ -50,14 +52,14 @@ module.exports = class InterfaceMusic {
 	join(voiceChannel) {
 		return voiceChannel.join()
 			.catch((err) => {
-				if (String(err).includes('ECONNRESET')) throw 'There was an issue connecting to the voice channel.';
+				if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.'; }
 				this.client.emit('log', err, 'error');
 				throw err;
 			});
 	}
 
 	async leave() {
-		if (!this.voiceChannel) throw 'I am not in a voice channel.';
+		if (!this.voiceChannel) { throw 'I am not in a voice channel.'; }
 		this.dispatcher = null;
 		this.status = 'idle';
 
@@ -66,14 +68,14 @@ module.exports = class InterfaceMusic {
 	}
 
 	async play() {
-		if (!this.voiceChannel) throw 'I am not in a voice channel.';
-		else if (!this.connection) throw 'I could not find a connection.';
-		else if (!this.queue[0]) throw 'The queue is empty.';
+		if (!this.voiceChannel) { throw 'I am not in a voice channel.'; }
+		else if (!this.connection) { throw 'I could not find a connection.'; }
+		else if (!this.queue[0]) { throw 'The queue is empty.'; }
 
 		this.pushPlayed(this.queue[0].url);
 
 		const stream = await ytdl(this.queue[0].url, { filter: (format) => !format.bitrate && format.audioEncoding === 'opus' })
-			.on('error', err => this.client.emit('log', err, 'error'));
+			.on('error', (err) => { this.client.emit('log', err, 'error'); });
 
 		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
 		return this.dispatcher;
@@ -97,8 +99,9 @@ module.exports = class InterfaceMusic {
 	}
 
 	skip(force = false) {
-		if (force && this.dispatcher) this.dispatcher.end();
-		else this.queue.shift();
+		if (force && this.dispatcher) {
+			this.dispatcher.end();
+		} else { this.queue.shift(); }
 		return this;
 	}
 
@@ -108,7 +111,7 @@ module.exports = class InterfaceMusic {
 	}
 
 	async destroy() {
-		if (this.voiceChannel) await this.voiceChannel.leave();
+		if (this.voiceChannel) { await this.voiceChannel.leave(); }
 
 		this.recentlyPlayed = null;
 		this.dispatcher = null;

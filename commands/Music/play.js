@@ -9,7 +9,7 @@ module.exports = class extends Command {
 			description: 'Let\'s start the queue!'
 		});
 
-		this.delayer = time => new Promise(res => setTimeout(() => res(), time));
+		this.delayer = (time) => { new Promise(res => setTimeout(() => res(), time)); }
 	}
 
 	async run(msg) {
@@ -19,8 +19,8 @@ module.exports = class extends Command {
 			return msg.send(`Add some songs to the queue first with ${msg.guild.settings.prefix}add`);
 		}
 		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) await this.client.commands.get('join').run(msg);
-		if (musicInterface.status === 'paused') await this.client.commands.get('resume').run(msg);
-		if (musicInterface.status === 'playing') return msg.send('Already Playing');
+		if (musicInterface.status === 'paused') {await this.client.commands.get('resume').run(msg);}
+		if (musicInterface.status === 'playing') {return msg.send('Already Playing');}
 		musicInterface.status = 'playing';
 		musicInterface.channel = msg.channel;
 		return this.play(musicInterface);
@@ -41,21 +41,21 @@ module.exports = class extends Command {
 
 		return musicInterface.play()
 			.then(
-				(dispatcher) => dispatcher
-					.on('end', () => {
-						musicInterface.skip();
-						this.play(musicInterface);
-					})
-					.on('error', (err) => {
-						musicInterface.channel.send('Something very weird happened! Sorry for the incovenience :(');
-						musicInterface.client.emit('log', err, 'error');
-						musicInterface.skip();
-						this.play(musicInterface);
-					}),
-				(message) => {
-					musicInterface.channel.send(message);
-					musicInterface.destroy();
-				}
+			(dispatcher) => dispatcher
+				.on('end', () => {
+					musicInterface.skip();
+					this.play(musicInterface);
+				})
+				.on('error', (err) => {
+					musicInterface.channel.send('Something very weird happened! Sorry for the incovenience :(');
+					musicInterface.client.emit('log', err, 'error');
+					musicInterface.skip();
+					this.play(musicInterface);
+				}),
+			(message) => {
+				musicInterface.channel.send(message);
+				musicInterface.destroy();
+			}
 			);
 	}
 

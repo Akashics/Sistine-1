@@ -2,6 +2,7 @@ const { Client, PermissionLevels } = require('klasa');
 const Music = require('./Music');
 const keys = require('../../keys.json');
 const StatsD = require('node-dogstatsd').StatsD;
+const bans = require('../../banlist.json');
 const dogstatsd = new StatsD();
 
 const permissionLevels = new PermissionLevels()
@@ -20,6 +21,7 @@ class Sistine extends Client {
 		this.dogstatsd = dogstatsd;
 		this.queue = new Music();
 		this.interval = null;
+		this.banlist = bans;
 	}
 
 }

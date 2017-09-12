@@ -5,8 +5,8 @@ class anilist {
 	static async loadCharacters(id, type) {
 		let authRequest = await axios.post('https://anilist.co/api/auth/access_token', {
 			grant_type: 'client_credentials',
-			client_id: keys.apiKey.anilistClient,
-			client_secret: keys.apiKey.anilistSecret
+			client_id: keys.anilistClient,
+			client_secret: keys.anilistSecret
 		});
 
 		let characterRequest = await axios({
@@ -16,12 +16,12 @@ class anilist {
 		return characterRequest.data.characters;
 	}
 
-    static async search(search, type) {
+	static async search(search, type) {
 
 		let authRequest = await axios.post('https://anilist.co/api/auth/access_token', {
 			grant_type: 'client_credentials',
-			client_id: keys.apiKey.anilistClient,
-			client_secret: keys.apiKey.anilistSecret
+			client_id: keys.anilistClient,
+			client_secret: keys.anilistSecret
 		});
 
 		let request = await axios({

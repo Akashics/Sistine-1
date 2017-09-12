@@ -2,7 +2,7 @@ const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
 const keys = require('../../keys.json');
 
-const fetchURL = url => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${keys.apiKey.googleSearch}`)
+const fetchURL = url => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${keys.googleSearch}`)
 	.then(result => result.body);
 
 module.exports = class extends Command {
