@@ -13,7 +13,7 @@ module.exports = class extends Command {
 			botPerms: ['SEND_MESSAGES'],
 			requiredSettings: [],
 			description: 'Ban a Guild from Bot Usage.',
-			usage: '<someGuild:guild|someID:str> <banreason:string> [...]',
+			usage: '<GuildIdentifier:guild|GuildID:str> <BannableReason:string> [...]',
 			usageDelim: ' ',
 			extendedHelp: 'No extended help available.'
 		});
@@ -25,9 +25,9 @@ module.exports = class extends Command {
 		}
 
 		reason = reason.join(this.usageDelim);
-		
+
 		this.client.banlist[guild] = reason;
 
-		await writeJSONAtomic('../../banlist.json', this.client.banlist);
+		await writeJSONAtomic('./banlist.json', this.client.banlist);
 	}
 };
