@@ -43,5 +43,4 @@ module.exports = class extends Command {
 		}
 		this.client.get(guild.id).leave();
 	}
-}
 };
