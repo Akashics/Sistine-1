@@ -18,16 +18,30 @@ module.exports = class extends Command {
 			extendedHelp: 'No extended help available.'
 		});
 	}
-  
+
 	async run(msg, [guild, ...reason]) {
-		if (guild === '324051061033926666') {
+		if (guild.id === '324051061033926666') {
 			return msg.send('You cannot ban the support guild.');
 		}
 
 		reason = reason.join(this.usageDelim);
-
-		this.client.banlist[guild] = reason;
-
+		this.client.banlist[guild.id] = reason;
 		await writeJSONAtomic('./banlist.json', this.client.banlist);
+
+		let sendMsg = [
+			'This is a public notice from Akashic\'s records.',
+			`__${guild.name}__ was placed on a __'No Serve'__`,
+			'guild list for some odd-ball or stupid reason below.',
+			'You may appeal with _reasoning_ in our support guild: https://sistine.ml/support',
+			'',
+			`Reason for Issued Guild Ban: ${reason}.\nThe bot has been removed from your guild.`
+		];
+		try {
+			this.client.get(guild.id).channels.filter(channel => channel.type === 'text').find(c => c.permissionsFor(guild.me).has(['SEND_MESSAGES'])).send(sendMsg);
+		} catch (e) {
+			console.log(e);
+		}
+		this.client.get(guild.id).leave();
 	}
+}
 };
