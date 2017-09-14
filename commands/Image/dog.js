@@ -7,7 +7,7 @@ module.exports = class extends Command {
 		super(...args, {
 			name: 'dog',
 			enabled: true,
-			runIn: ['text', 'dm', 'group'],
+			runIn: ['text'],
 			cooldown: 0,
 			aliases: ['randomdog', 'doggo'],
 			permLevel: 0,

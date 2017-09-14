@@ -6,7 +6,7 @@ module.exports = class extends Command {
 		super(...args, {
 			name: 'exec',
 			enabled: true,
-			runIn: ['text', 'dm', 'group'],
+			runIn: ['text'],
 			cooldown: 2,
 			aliases: ['sh', 'bash'],
 			permLevel: 10,
