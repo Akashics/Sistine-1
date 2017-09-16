@@ -2,26 +2,27 @@ const { Command } = require('klasa');
 
 module.exports = class extends Command {
 
-	constructor(...args) {
-		super(...args, {
-			runIn: ['text'],
+  constructor(...args) {
+    super(...args, {
+      runIn: ['text'],
 
-			description: 'Prune the queue list.'
-		});
+      description: 'Prune the queue list.',
+    });
 
-		this.requireMusic = true;
-	}
+    this.requireMusic = true;
+  }
 
-	async run(msg) {
-		const { music } = msg.guild;
+  async run(msg) {
+    /* eslint-disable no-throw-literal */
+    const { music } = msg.guild;
 
-		if (music.voiceChannel.members.size > 4) {
-			const hasPermission = await msg.hasLevel(5);
-			if (hasPermission === false) throw 'You can\'t execute this command when there are over 4 members. You must be at least a Dj Member.';
-		}
+    if (music.voiceChannel.members.size > 4) {
+      const hasPermission = await msg.hasLevel(5);
+      if (hasPermission === false) throw 'You can\'t execute this command when there are over 4 members. You must be at least a Dj Member.';
+    }
 
-		music.prune();
-		return msg.send(`🗑 Pruned ${music.queue.length}`);
-	}
+    music.prune();
+    return msg.send(`🗑 Pruned ${music.queue.length}`);
+  }
 
 };

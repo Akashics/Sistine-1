@@ -2,22 +2,23 @@ const { Command } = require('klasa');
 
 module.exports = class extends Command {
 
-	constructor(...args) {
-		super(...args, {
-			runIn: ['text'],
+  constructor(...args) {
+    super(...args, {
+      runIn: ['text'],
 
-			description: 'Resumes the current song.'
-		});
+      description: 'Resumes the current song.',
+    });
 
-		this.requireMusic = true;
-	}
+    this.requireMusic = true;
+  }
 
-	async run(msg) {
-		const { music } = msg.guild;
-		if (music.status === 'playing') throw 'The stream is not paused.';
+  async run(msg) {
+    /* eslint-disable no-throw-literal */
+    const { music } = msg.guild;
+    if (music.status === 'playing') throw 'The stream is not paused.';
 
-		music.pause();
-		return msg.send('▶ Resumed');
-	}
+    music.pause();
+    return msg.send('▶ Resumed');
+  }
 
 };

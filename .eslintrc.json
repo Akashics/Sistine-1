@@ -1,29 +1,10 @@
 {
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 8
-    },
+    "extends": "airbnb-base",
+    "plugins": [
+        "import"
+    ],
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+        "class-methods-use-this": "off",
+        "padded-blocks": "off"
     }
 }
