@@ -12,6 +12,7 @@ module.exports = class extends Command {
       usage: '[limit:integer] [link|invite|bots|you|me|upload|user:user]',
       usageDelim: ' ',
     });
+    
     this.requireMusic = false;
   }
 

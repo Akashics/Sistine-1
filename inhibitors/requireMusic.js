@@ -8,7 +8,7 @@ module.exports = class extends Inhibitor {
 
   async run(msg, cmd) {
     /* eslint-disable no-throw-literal */
-    if (cmd.requireMusic !== true) return;
+    if (!cmd.requireMusic) return;
 
     if (msg.channel.type !== 'text') throw 'This command may be only executed in a server.';
 
