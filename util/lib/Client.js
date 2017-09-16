@@ -1,7 +1,7 @@
 const { Client, PermissionLevels } = require('klasa');
 const Music = require('./Music');
 const keys = require('../../keys.json');
-const StatsD = require('node-dogstatsd');
+const StatsD = require('node-dogstatsd').StatsD;
 const bans = require('../../banlist.json');
 
 const dogstatsd = new StatsD();
@@ -20,7 +20,7 @@ class Sistine extends Client {
   constructor(options) {
     super(Object.assign(options, { permissionLevels }));
     Object.defineProperty(this, 'keys', { value: keys });
-    this.dogstatsd = dogstatsd.StatsD;
+    this.dogstatsd = dogstatsd;
     this.queue = new Music();
     this.interval = null;
     this.banlist = bans;
