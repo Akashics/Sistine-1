@@ -2,22 +2,21 @@ const { Command } = require('klasa');
 
 module.exports = class extends Command {
 
+
   constructor(...args) {
     super(...args, {
-      name: 'prune',
       permLevel: 2,
       botPerms: ['MANAGE_MESSAGES'],
       runIn: ['text'],
+
       description: 'Prunes a certain amount of messages w/o filter.',
       usage: '[limit:integer] [link|invite|bots|you|me|upload|user:user]',
       usageDelim: ' ',
     });
-    
-    this.requireMusic = false;
   }
 
   async run(msg, [limit = 50, filter = null]) {
-    let messages = await msg.channel.fetchMessages({ limit: 100 });
+    let messages = await msg.channel.messages.fetch({ limit: 100 });
     if (filter) {
       const user = typeof filter !== 'string' ? filter : null;
       const type = typeof filter === 'string' ? filter : 'user';
@@ -25,7 +24,7 @@ module.exports = class extends Command {
     }
     messages = messages.array().slice(0, limit);
     await msg.channel.bulkDelete(messages);
-    return msg.send(msg.language.get('PRUNE_SUCCESS', messages.length, limit));
+    return msg.send(`Successfully deleted ${messages.length} messages from ${limit}.`);
   }
 
   getFilter(msg, filter, user) {
