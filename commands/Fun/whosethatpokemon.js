@@ -7,11 +7,11 @@ module.exports = class extends Command {
 
   constructor(...args) {
     super(...args, {
-      name: 'wtp',
+      name: 'whosthatpokemon',
       enabled: true,
       runIn: ['text'],
       cooldown: 0,
-      aliases: ['whosthatpokemon', 'whosethatpokemon'],
+      aliases: ['wtp', 'whosethatpokemon'],
       permLevel: 0,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
@@ -28,16 +28,15 @@ module.exports = class extends Command {
     }
 
     const pokemon = Math.floor(Math.random() * 721) + 1;
-    const { text } = await snekfetch
-      .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
-    const pokeData = JSON.parse(text);
-    const name = filterPkmn(pokeData.names).name.toLowerCase();
-    const id = `${'000'.slice(pokeData.id.toString().length)}${pokeData.id}`;
-    const embed = new this.client.methods.Embed()
+    const results = await snekfetch
+      .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`, { followRedirects: true });
+    const name = filterPkmn(results.body.names).name.toLowerCase();
+    const id = `${'000'.slice(results.body.id.toString().length)}${results.body.id}`;
+    const done = new this.client.methods.Embed()
       .setTitle(msg.language.get('WTP_EMBED_TITLE'))
       .setColor(0xED1C24)
       .setImage(`https://www.serebii.net/sunmoon/pokemon/${id}.png`);
-    await msg.send(embed);
+    await msg.send('', { embed: done });
     const msgs = await msg.channel.awaitMessages(res => res.author.id === msg.author.id, {
       max: 1,
       time: 15000,
