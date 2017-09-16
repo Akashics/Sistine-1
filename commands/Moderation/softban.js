@@ -19,7 +19,7 @@ module.exports = class extends Command {
   async run(msg, [user, ...reason]) {
     const reasonFull = reason.length > 0 ? reason.join(' ') : null;
 
-    const member = await msg.guild.fetchMember(user).catch(() => null);
+    const member = await msg.guild.members.fetch(user).catch(() => null);
 
     if (!member);
     else if (!member.bannable) {

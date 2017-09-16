@@ -28,7 +28,7 @@ module.exports = class extends Command {
     const channel = msg.guild.channels.get(msg.guild.settings.modlog);
     if (!channel) return msg.send(msg.language.get('MODLOG_NOT_FOUND'));
 
-    const messages = await channel.fetchMessages({ limit: 100 });
+    const messages = await channel.messages.fetchMessages({ limit: 100 });
     const message = messages.find(mes => mes.author.id === this.client.user.id &&
    mes.embeds.length > 0 &&
    mes.embeds[0].type === 'rich' &&
