@@ -18,6 +18,8 @@ module.exports = class extends Command {
       usageDelim: undefined,
       extendedHelp: 'No extended help available.',
     });
+
+    this.requireMusic = false;
   }
 
   async run(msg) {

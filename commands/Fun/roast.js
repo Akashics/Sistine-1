@@ -16,6 +16,7 @@ module.exports = class extends Command {
       description: 'Roasts a user.',
       usage: '<UserToRoast:member>',
     });
+    this.requireMusic = false;
   }
 
   async run(msg, [member]) {

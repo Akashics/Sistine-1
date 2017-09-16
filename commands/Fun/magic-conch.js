@@ -18,6 +18,7 @@ module.exports = class extends Command {
       description: 'Asks your question to the Magic Conch.',
       usage: '<Question:String>',
     });
+    this.requireMusic = false;
   }
 
   async run(msg) {

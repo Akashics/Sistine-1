@@ -15,6 +15,7 @@ module.exports = class extends Command {
       description: 'Rates your Waifu!',
       usage: '<Waifu:Str>',
     });
+    this.requireMusic = false;
   }
 
   async run(msg, args) {

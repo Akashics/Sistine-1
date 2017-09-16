@@ -15,6 +15,7 @@ module.exports = class extends Command {
       requiredSettings: [],
       description: '',
     });
+    this.requireMusic = false;
   }
 
   async run(msg) {

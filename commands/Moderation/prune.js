@@ -8,11 +8,11 @@ module.exports = class extends Command {
       permLevel: 2,
       botPerms: ['MANAGE_MESSAGES'],
       runIn: ['text'],
-
       description: 'Prunes a certain amount of messages w/o filter.',
       usage: '[limit:integer] [link|invite|bots|you|me|upload|user:user]',
       usageDelim: ' ',
     });
+    this.requireMusic = false;
   }
 
   async run(msg, [limit = 50, filter = null]) {

@@ -19,6 +19,7 @@ module.exports = class extends Command {
       usage: '',
       extendedHelp: 'No Additional Arguments, just use the command.',
     });
+    this.requireMusic = false;
   }
 
   async run(msg) {

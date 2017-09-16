@@ -16,6 +16,7 @@ module.exports = class extends Command {
       description: 'Compliments a user.',
       usage: '<UserToCompliment:member>',
     });
+    this.requireMusic = false;
   }
 
   async run(msg, [...args]) {
