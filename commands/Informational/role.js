@@ -1,5 +1,6 @@
 const { Command } = require('klasa');
 const moment = require('moment');
+const randomColor = require('randomcolor');
 
 module.exports = class extends Command {
 
@@ -54,7 +55,7 @@ module.exports = class extends Command {
     };
 
     const send = new this.client.methods.Embed()
-      .setColor(role.hexColor ? role.hexColor : 0x00000)
+      .setColor(randomColor())
       .addField('❯ Name', role.name, true)
       .addField('❯ ID', role.id, true)
       .addField('❯ Color', role.hexColor.toUpperCase() || 'None', true)
