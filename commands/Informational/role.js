@@ -20,7 +20,8 @@ module.exports = class extends Command {
     });
   }
 
-  async run(msg, [...role]) {
+  async run(msg, [role]) {
+    console.log(role)
     const perms = {
       ADMINISTRATOR: 'Administrator',
       VIEW_AUDIT_LOG: 'View Audit Log',
@@ -51,6 +52,7 @@ module.exports = class extends Command {
       MOVE_MEMBERS: 'Move Members',
       USE_VAD: 'Use Voice Activity',
     };
+    const allowed = Object.entries(role.serialize()).filter(([perm, allowed]) => allowed).map(([perm]) => perms[perm]).join(', ');
 
     const send = new this.client.methods.Embed()
       .setColor(role.hexColor || '#FFF')
@@ -60,7 +62,7 @@ module.exports = class extends Command {
       .addField('❯ Creation Date', moment(role.createdAt).format('MMMM Do YYYY'), true)
       .addField('❯ Hoisted', role.hoist ? 'Yes' : 'No', true)
       .addField('❯ Mentionable', role.mentionable ? 'Yes' : 'No', true)
-      .addField('❯ Permissions', Object.keys(perms).filter(perm => role.serialize()[perm]).map(perm => perms[perm]).join(', '));
+      .addField('❯ Permissions', allowed);
     return msg.channel.send('', { embed: send });
 
   }
