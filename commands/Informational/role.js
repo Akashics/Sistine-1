@@ -20,9 +20,7 @@ module.exports = class extends Command {
     });
   }
 
-  async run(msg, [...args]) {
-
-    const { role } = args[0];
+  async run(msg, [...role]) {
     const perms = {
       ADMINISTRATOR: 'Administrator',
       VIEW_AUDIT_LOG: 'View Audit Log',
