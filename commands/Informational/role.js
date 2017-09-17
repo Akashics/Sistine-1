@@ -53,10 +53,10 @@ module.exports = class extends Command {
     };
 
     const send = new this.client.methods.Embed()
-      .setColor(randomColor())
+      .setColor(role.hexColor || '#FFF')
       .addField('❯ Name', role.name, true)
       .addField('❯ ID', role.id, true)
-      .addField('❯ Color', role.hexColor.toUpperCase() || 'None', true)
+      .addField('❯ Color', role.hexColor || 'None', true)
       .addField('❯ Creation Date', moment(role.createdAt).format('MMMM Do YYYY'), true)
       .addField('❯ Hoisted', role.hoist ? 'Yes' : 'No', true)
       .addField('❯ Mentionable', role.mentionable ? 'Yes' : 'No', true)
