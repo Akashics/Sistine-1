@@ -13,7 +13,7 @@ class Util {
       })
       .send({
         server_count: count,
-        shard_count: 1,
+        shard_count: 2,
       })
       .then(() => {
         console.log('[DBOTS] Successfully posted to Discord Bots.');
@@ -31,7 +31,7 @@ class Util {
       })
       .send({
         server_count: count,
-        shard_count: 1,
+        shard_count: 2,
       })
       .then(() => {
         console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
@@ -41,15 +41,19 @@ class Util {
       });
   }
 
-  static sendStats(client) {
+  static async sendStats(client) {
     const dd = client.dogstatsd;
+    const manager = client.shard;
 
-    dd.gauge('client.ping', client.ping);
-    dd.gauge('client.guilds', client.guilds.size);
-    dd.gauge('client.users', client.guilds.reduce((a, b) => a + b.memberCount, 0));
-    dd.gauge('client.channels', client.channels.size);
+    manager.fetchClientValues('guilds.size')
+      .then((results) => { dd.gauge('client.guilds', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
+
+    dd.gauge('client.ping', this.client.ping);
+    manager.fetchClientValues('guilds.reduce((a, b) => a + b.memberCount, 0)')
+      .then((results) => { dd.gauge('client.users', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
+    manager.fetchClientValues('guilds.size')
+      .then((results) => { dd.gauge('client.channels', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
     dd.gauge('node.memory', (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
-    dd.gauge('client.voice', client.voiceConnections.size);
 
   }
 

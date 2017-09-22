@@ -117,7 +117,7 @@ module.exports = class extends Language {
       WTP_EMBED_TITLE: '<:pikablob:356256509929324545> You have 15 seconds. Guess this Pokemon.',
       WTP_OUT_TIME: name => `You ran out of time, the answer was ${name}.`,
       WTP_INCORRECT: name => `That is incorrect. Its name is ${name}.`,
-      WTP_CORRECT: 'That is correct. One point has been added to your account.',
+      WTP_CORRECT: author => `You are correct ${author}. One point has been added to your account.`,
       COINFLIP: result => `<:coin:338772726712107008> A coin was flipped and it landed on ${result}s.`,
       SLOTS_WIN: 'Wow! You won! Great job... er... luck!',
       SLOTS_LOSE: 'Aww... You lost... Guess it\'s just bad luck, huh?',

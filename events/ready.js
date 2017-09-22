@@ -6,7 +6,6 @@ module.exports = class extends Event {
   run() {
     const clientObj = this.client;
 
-    sendStats(clientObj);
     async function createInterval() {
       setInterval(() => {
         sendStats(clientObj);
