@@ -42,7 +42,7 @@ class Util {
   }
 
   static sendStats(client) {
-    const dd = client.dogstatsd;
+    const dd = client.datadog;
     const manager = client.shard;
 
     manager.fetchClientValues('guilds.size')

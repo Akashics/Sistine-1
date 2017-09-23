@@ -20,7 +20,7 @@ class Sistine extends Client {
   constructor(options) {
     super(Object.assign(options, { permissionLevels }));
     Object.defineProperty(this, 'keys', { value: keys });
-    this.dogstatsd = dogstatsd;
+    this.datadog = dogstatsd;
     this.queue = new Music();
     this.interval = null;
     this.banlist = bans;

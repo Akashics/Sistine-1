@@ -10,7 +10,7 @@ module.exports = class extends Event {
   run(guild) {
     if (this.client.banlist.hasOwnProperty(guild.id)) { return; }
 
-    this.client.datadogd.increment('client.guildLeaves');
+    this.client.datadog.increment('client.guildLeaves');
 
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);

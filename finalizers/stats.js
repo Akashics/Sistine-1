@@ -12,8 +12,8 @@ module.exports = class extends Finalizer {
 
   run(msg, mes, start) {
     const time = now() - start;
-    this.client.dogstatsd.gauge('prod.queryTime', time);
-    this.client.dogstatsd.increment('client.totalFinishedCommands');
+    this.client.datadog.gauge('prod.queryTime', time);
+    this.client.datadog.increment('client.totalFinishedCommands');
 
   }
 

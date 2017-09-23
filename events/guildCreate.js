@@ -12,7 +12,7 @@ module.exports = class extends Event {
       await guild.leave();
     }
 
-    this.client.datadogd.increment('client.guildJoin');
+    this.client.datadog.increment('client.guildJoin');
 
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
