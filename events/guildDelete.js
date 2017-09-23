@@ -15,6 +15,6 @@ module.exports = class extends Event {
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
 
-    this.client.channels.get('341769632545705986').send(`<:tickNo:315009174163685377> Left ${guild.name} (${guild.id}) with ${guild.memberCount} members owned by ${guild.owner.user.tag}.`);
+    this.client.channels.get('341768632545705986').send(`<:tickNo:315009174163685377> Left ${guild.name} (${guild.id}) with ${guild.memberCount} members owned by ${guild.owner.user.tag}.`);
   }
 };

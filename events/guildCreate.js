@@ -21,7 +21,7 @@ module.exports = class extends Event {
       this.client.emit('log', err, 'error');
     });
 
-    this.client.channels.get('341769632545705986').send(`<:tickYes:315009125694177281> Joined ${guild.name} (${guild.id}) with ${guild.memberCount} members owned by ${guild.owner.user.tag}`);
+    this.client.channels.get('341768632545705986').send(`<:tickYes:315009125694177281> Joined ${guild.name} (${guild.id}) with ${guild.memberCount} members owned by ${guild.owner.user.tag}`);
   }
 
 };

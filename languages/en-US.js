@@ -146,16 +146,12 @@ module.exports = class extends Language {
 	  MUSIC_PRUNEQ: (music) => `🗑 Pruned ${music}`,
 	  MUSIC_REMOVEDSONG: (song) => `🗑 Removed the song **${song.title}** requested by **${song.requester}**.`,
 	  MUSIC_OUTRANGE: (music) => `You went out of range, the queue has ${music} songs.`,
-	  
+	  MUSIC_RESUMED: (author) => `🔊 Music was resumed by ${author}.`,
+	  MUSIC_NOTPAUSED: 'Music is already playing.',
+	  MUSIC_ALREADYVOTED: 'You have already voted to skip this song.',
 	  DURATION: 'Duration',
 	  DESCRIPTION: 'Description',
 	  TIME_REMAIN: 'Time Remaining',
-	  
-	  
-	  
-	  
-	  
-
     };
   }
 
