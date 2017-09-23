@@ -41,7 +41,7 @@ class Util {
       });
   }
 
-  static async sendStats(client) {
+  static sendStats(client) {
     const dd = client.dogstatsd;
     const manager = client.shard;
 
