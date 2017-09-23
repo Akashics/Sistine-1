@@ -48,8 +48,8 @@ class Util {
     manager.fetchClientValues('guilds.size')
       .then((results) => { dd.gauge('client.guilds', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
 
-    dd.gauge('client.ping', this.client.ping);
-    manager.fetchClientValues('guilds.reduce((a, b) => a + b.memberCount, 0)')
+    dd.gauge('client.ping', client.ping);
+    manager.fetchClientValues('users.size')
       .then((results) => { dd.gauge('client.users', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
     manager.fetchClientValues('guilds.size')
       .then((results) => { dd.gauge('client.channels', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
