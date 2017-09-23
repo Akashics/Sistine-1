@@ -21,12 +21,12 @@ module.exports = class extends Command {
     this.client.datadog.increment('client.musicTracksAdded');
 
     const youtubeURL = await this.getURL(url);
-    if (!youtubeURL) throw 'Not found.';
+    if (!youtubeURL) throw msg.language.get('MUSIC_URL_NOTFOUND');
 
     const { music } = msg.guild;
     const song = await music.add(msg.author, youtubeURL);
 
-    return msg.send(`🎵 Added **${song.title}** to the queue 🎶`);
+    return msg.send(msg.language.get('MUSIC_ADDED_QUEUE', song));
   }
 
   async getURL(url) {

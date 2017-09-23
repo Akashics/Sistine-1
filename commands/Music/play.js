@@ -23,10 +23,10 @@ module.exports = class extends Command {
     if (musicInterface.status === 'playing') { return msg.send('Already Playing'); }
     musicInterface.status = 'playing';
     musicInterface.channel = msg.channel;
-    return this.play(musicInterface);
+    return this.play(musicInterface, msg);
   }
 
-  async play(musicInterface) {
+  async play(musicInterface, msg) {
     if (musicInterface.status !== 'playing') return null;
 
     const song = musicInterface.queue[0];
@@ -38,7 +38,7 @@ module.exports = class extends Command {
       return musicInterface.channel.send('⏹ Queue is empty').then(() => musicInterface.destroy());
     }
 
-    await musicInterface.channel.send(`🎧 Playing: **${song.title}** as requested by: **${song.requester}**`);
+    await musicInterface.channel.send(msg.language.get('MUSIC_PLAY', song));
     await this.delayer(300);
 
     return musicInterface.play()
@@ -49,7 +49,7 @@ module.exports = class extends Command {
             this.play(musicInterface);
           })
           .on('error', (err) => {
-            musicInterface.channel.send('Something very weird happened! Sorry for the incovenience :(');
+            musicInterface.channel.send(msg.language.get('MUSIC_ERR', song)); //'🔊Something very weird happened! Sorry for the incovenience :(');
             musicInterface.client.emit('log', err, 'error');
             musicInterface.skip();
             this.play(musicInterface);
@@ -62,7 +62,7 @@ module.exports = class extends Command {
   }
 
   autoPlayer(musicInterface) {
-    return musicInterface.add('YouTube AutoPlay', musicInterface.next);
+    return musicInterface.add('Autoplay', musicInterface.next);
   }
 
 };

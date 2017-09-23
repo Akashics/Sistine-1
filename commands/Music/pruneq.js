@@ -18,11 +18,11 @@ module.exports = class extends Command {
 
     if (music.voiceChannel.members.size > 4) {
       const hasPermission = await msg.hasLevel(1);
-      if (hasPermission === false) throw 'You can\'t execute this command when there are over 4 members. You must be at least a Dj Member.';
+      if (hasPermission === false) throw msg.language.get('MUSIC_NOTDJ');
     }
 
     music.prune();
-    return msg.send(`🗑 Pruned ${music.queue.length}`);
+    return msg.send(msg.language.get('MUSIC_PRUNEQ', music.queue.length))`🗑 Pruned ${music.queue.length}`);
   }
 
 };

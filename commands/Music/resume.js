@@ -15,10 +15,10 @@ module.exports = class extends Command {
   async run(msg) {
     /* eslint-disable no-throw-literal */
     const { music } = msg.guild;
-    if (music.status === 'playing') throw 'The stream is not paused.';
+    if (music.status === 'playing') throw msg.language.get('MUSIC_NOTPAUSED');
 
     music.pause();
-    return msg.send('▶ Resumed');
+    return msg.send(msg.language.get('MUSIC_RESUMED', msg.author.tag));
   }
 
 };

@@ -20,7 +20,7 @@ module.exports = class extends Command {
 
     if (music.voiceChannel.members.size > 4) {
       if (force) {
-        const hasPermission = await msg.hasLevel(5);
+        const hasPermission = await msg.hasLevel(1);
         if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a Moderator Member.';
       } else {
         const response = this.handleSkips(music, msg.author.id);
@@ -37,7 +37,7 @@ module.exports = class extends Command {
     if (!musicInterface.queue[0].skips) {
       musicInterface.queue[0].skips = new Set();
     }
-    if (musicInterface.queue[0].skips.has(user)) return 'You have already voted to skip this song.';
+    if (musicInterface.queue[0].skips.has(user)) return msg.language.get('MUSIC_ALREADYVOTED');
     musicInterface.queue[0].skips.add(user);
     const members = musicInterface.voiceChannel.members.size - 1;
     return this.shouldInhibit(members, musicInterface.queue[0].skips.size);

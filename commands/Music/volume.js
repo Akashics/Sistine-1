@@ -26,7 +26,7 @@ module.exports = class extends Command {
   async run(msg, [vol]) {
     /* eslint-disable no-throw-literal */
     const { dispatcher, status } = msg.guild.music;
-    if (status !== 'playing') throw `I am not playing a song. Current status: \`${status}\``;
+    if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status);
 
     if (!vol) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`);
     if (/^[+]+$/.test(vol)) {

@@ -15,22 +15,22 @@ module.exports = class extends Command {
   async run(msg) {
     /* eslint-disable no-throw-literal */
     const { dispatcher, queue, status } = msg.guild.music;
-    if (status !== 'playing') throw `I am not playing a song. Current status: \`${status}\``;
+    if (status !== 'playing') throw msg.lanugage.get('MUSIC_NOTPLAYING', status);
     const song = queue[0];
     const info = await getInfo(song.url).catch((err) => { throw err; });
     if (!info.author) info.author = {};
-    const embed = new this.client.methods.Embed()
+    const playing = new this.client.methods.Embed()
       .setColor(12916736)
       .setTitle(info.title)
       .setURL(`https://youtu.be/${info.vid}`)
       .setAuthor(info.author.name || 'Unknown', info.author.avatar || null, info.author.channel_url || null)
       .setDescription([
-        `**Duration**: ${showSeconds(parseInt(info.length_seconds) * 1000)} [Time remaining: ${showSeconds((parseInt(info.length_seconds) * 1000) - dispatcher.time)}]`,
-        `**Description**: ${splitText(info.description, 500)}`,
+        `**${msg.lanugage.get('DURATION')}**: ${showSeconds(parseInt(info.length_seconds) * 1000)} [${msg.lanugage.get('TIME_REMAIN')}: ${showSeconds((parseInt(info.length_seconds) * 1000) - dispatcher.time)}]`,
+        `**${msg.lanugage.get('DESCRIPTION')}**: ${splitText(info.description, 500)}`,
       ].join('\n\n'))
       .setThumbnail(info.thumbnail_url)
       .setTimestamp();
-    return msg.send({ embed });
+    return msg.send('', { embed: playing });
   }
 
 };

@@ -19,16 +19,16 @@ module.exports = class extends Command {
     number--;
 
     const { music } = msg.guild;
-    if (music.queue.length < number) throw `You went out of range, the queue has ${music.queue.length}.`;
+    if (music.queue.length < number) throw msg.language.get('MUSIC_OUTRANGE', music.queue.length);
 
     const song = music.queue[number];
     if (song.requester.id !== msg.author.id) {
       const hasPermission = await msg.hasAtLeastPermissionLevel(1);
-      if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a Dj Member.';
+      if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a DJ Member.';
     }
 
     music.queue.splice(number, 1);
-    return msg.send(`🗑 Removed the song **${song.title}** requested by **${song.requester}**.`);
+    return msg.send(msg.language.get('MUSIC_REMOVEDSONG', song));
   }
 
 };
