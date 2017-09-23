@@ -18,6 +18,7 @@ module.exports = class extends Command {
 
   async run(msg, [url]) {
     /* eslint-disable no-throw-literal */
+    this.client.datadogd.increment('client.musicTracksAdded');
     const youtubeURL = await this.getURL(url);
     if (!youtubeURL) throw 'Not found.';
 
