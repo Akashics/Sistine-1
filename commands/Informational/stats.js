@@ -27,12 +27,13 @@ module.exports = class extends Command {
     const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
     const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]');
     return msg.sendCode('asciidoc', [
-      '= STATISTICS =',
+      '= SHARD STATISTICS =',
+      `• Shard ID     :: ${this.client.shard.id}`,
       `• Servers      :: ${this.client.guilds.size.toLocaleString()}`,
       `• Channels     :: ${this.client.channels.size.toLocaleString()}`,
       `• Users        :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
       `• Klasa        :: v${klasaVersion}`,
-      '• Discord.js   :: v12.0.0-dev',
+      '• Discord.js   :: v13.0.0-dev',
       `• Node.js      :: ${process.version}`,
       '',
       '= HOST USAGE =',

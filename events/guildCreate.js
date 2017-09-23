@@ -9,42 +9,19 @@ module.exports = class extends Event {
 
   async run(guild) {
     if (this.client.banlist.hasOwnProperty(guild.id)) {
-      const sendMsg = [
-        'This is a public notice from Akashic\'s records.',
-        `__${guild.name}__ was placed on a __'No Serve'__`,
-        'guild list for some odd-ball or stupid reason below.',
-        'You may appeal with _reasoning_ in our support guild: https://sistine.ml/support',
-        '',
-        `Reason for Issued Guild Ban: ${this.client.banlist[guild.id]}`,
-      ];
-
-      try {
-        guild.channels.filter(channel => channel.type === 'text').find(c => c.permissionsFor(guild.me).has(['SEND_MESSAGES'])).send(sendMsg);
-      } catch (e) {
-        console.log(e);
-      }
       await guild.leave();
     }
 
-    this.client.datadog.increment('prod.guildJoin');
+    this.client.datadogd.increment('client.guildJoin');
 
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
 
-    this.client.user.setActivity(`s>help — ${this.client.guilds.size} guilds`).catch((err) => {
+    this.client.user.setActivity(`s>help — Shard #${this.client.shard.id}`).catch((err) => {
       this.client.emit('log', err, 'error');
     });
-    this.client.emit('log', `New Guild: ${guild.name} - ${guild.memberCount}`, 'log');
 
-    const guildLog = '341768632545705986';
-    const guildCreateMsg = `
-# Added Guild: ${guild.name}
-
-# Guild ID: ${guild.id}
-# Guild Count: ${guild.memberCount}
-
-# Guild Owner: ${guild.owner.user.tag}`;
-    this.client.channels.get(guildLog).send(guildCreateMsg, { code: 'md' });
+    this.client.channels.get('341769632545705986').send(`<:tickYes:315009125694177281> Joined ${guild.name} (${guild.id}) with ${guild.memberCount} members owned by ${guild.owner.user.tag}`);
   }
 
 };

@@ -10,24 +10,11 @@ module.exports = class extends Event {
   run(guild) {
     if (this.client.banlist.hasOwnProperty(guild.id)) { return; }
 
-    this.client.datadog.increment('prod.guildLeaves');
+    this.client.datadogd.increment('client.guildLeaves');
 
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
-    this.client.user.setActivity(`s>help — ${this.client.guilds.size} guilds`).catch((err) => {
-      this.client.emit('log', err, 'error');
-    });
-    this.client.emit('log', `Deleted Guild: ${guild.name} - ${guild.memberCount}`, 'log');
 
-    const guildLog = '341768632545705986';
-    const guildDeleteMsg = `
-# Removed Guild : ${guild.name}
-
-# Guild ID: ${guild.id}
-# Guild Count: ${guild.memberCount}
-
-# Guild Owner: ${guild.owner.user.tag}`;
-    this.client.channels.get(guildLog).send(guildDeleteMsg, { code: 'md' });
+    this.client.channels.get('341769632545705986').send(`<:tickNo:315009174163685377> Left ${guild.name} (${guild.id}) with ${guild.memberCount} members owned by ${guild.owner.user.tag}.`);
   }
-
 };

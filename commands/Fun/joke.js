@@ -27,7 +27,7 @@ module.exports = class extends Command {
       const { body } = await snekfetch
         .get('https://icanhazdadjoke.com/')
         .set({ Accept: 'application/json' });
-      return msg.send(body.joke);
+      return msg.send(`≧◡≦ ${body.joke}`);
     } catch (err) {
       return msg.send(msg.language.get('ERROR_OCCURED', err.message));
     }

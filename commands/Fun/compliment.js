@@ -20,7 +20,7 @@ module.exports = class extends Command {
   }
 
   async run(msg, [...args]) {
-    return msg.send(`${args[0].user.username}, ${compliments[Math.floor(Math.random() * compliments.length)]}`);
+    return msg.send(`㋡ To: ${args[0].user.username} – ${compliments[Math.floor(Math.random() * compliments.length)]}`);
   }
 
 };

@@ -19,9 +19,6 @@ module.exports = class extends Command {
   }
 
   async run(msg, [member]) {
-
-    return msg.send(`${member.user.username}, ${roasts[Math.floor(Math.random() * roasts.length)]}`);
-
+    return msg.send(`\:fire: ${member.user.username} – ${roasts[Math.floor(Math.random() * roasts.length)]}`);
   }
-
 };
