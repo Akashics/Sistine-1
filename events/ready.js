@@ -1,18 +1,12 @@
 const { Event } = require('klasa');
-const util = require('../util/Util');
-const sendStats  = util().sendStats;
+const { sendStats } = require('../util/Util');
 
 module.exports = class extends Event {
 
   run() {
-    const clientObj = this.client;
-
-    async function createInterval() {
-      setInterval(() => {
-        sendStats(clientObj);
-      }, 1000 * 30);
-    }
-    createInterval();
+    setInterval(() => {
+      sendStats(this.client);
+    }, 180000);
 
     this.client.raven.config(this.client.keys.raven).install();
 

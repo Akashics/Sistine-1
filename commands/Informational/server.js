@@ -22,7 +22,7 @@ module.exports = class extends Command {
       enabled: true,
       runIn: ['text'],
       cooldown: 0,
-      aliases: [],
+      aliases: ['guild'],
       permLevel: 0,
       botPerms: [],
       requiredSettings: [],
