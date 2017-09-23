@@ -25,6 +25,9 @@ module.exports = class extends Event {
       }
       await guild.leave();
     }
+
+    this.client.datadog.increment('prod.guildJoin');
+
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
 
