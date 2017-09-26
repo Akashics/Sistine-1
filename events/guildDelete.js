@@ -15,7 +15,7 @@ module.exports = class extends Event {
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
 
-    this.client.user.setActivity(`sistine.ml | s>help ${this.client.guilds.size}`).catch((err) => {
+    this.client.user.setActivity(`sistine.ml | s>help | ${this.client.guilds.size} guilds`).catch((err) => {
       this.client.emit('log', err, 'error');
     });
     
