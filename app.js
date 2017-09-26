@@ -8,7 +8,7 @@ const Sistine = new Client({
   prefix: 's>',
   cmdEditing: true,
   cmdLogging: true,
-  typing: true,
+  typing: false,
 });
 
 Sistine.login(botToken);
