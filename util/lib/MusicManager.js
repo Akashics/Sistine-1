@@ -75,7 +75,7 @@ module.exports = class InterfaceMusic {
     this.pushPlayed(this.queue[0].url);
 
     const stream = await ytdl(this.queue[0].url, { filter: format => !format.bitrate && format.audioEncoding === 'opus' })
-      .on('error', (err) => { this.client.emit('log', err, 'error'); });
+      .on('error', (err) => { this.client.emit('log', err, 'error'); throw `An error has occured: ${err} `});
 
     this.dispatcher = this.connection.playStream(stream, { passes: 5 });
     return this.dispatcher;
