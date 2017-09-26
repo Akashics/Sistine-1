@@ -9,6 +9,7 @@ const Sistine = new Client({
   cmdEditing: true,
   cmdLogging: true,
   typing: false,
+  permissionLevels: sistinePermissionLevels
 });
 
 Sistine.login(botToken);
