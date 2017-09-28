@@ -29,7 +29,7 @@ module.exports = class extends Command {
     await msg.guild.ban(user, { reason, days: 1 });
     await msg.guild.unban(user, msg.language.get('SOFTBAN_PROCESS'));
 
-    if (msg.guild.settings.modlog) {
+    if (msg.guild.settings.logChannel) {
       new ModLog(msg.guild)
         .setType('softban')
         .setModerator(msg.author)

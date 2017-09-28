@@ -27,7 +27,7 @@ module.exports = class extends Command {
 
     await msg.guild.unban(user, reasonFull);
 
-    if (msg.guild.settings.modlog) {
+    if (msg.guild.settings.logChannel) {
       new ModLog(msg.guild)
         .setType('unban')
         .setModerator(msg.author)

@@ -1,10 +1,10 @@
 const { Client, PermissionLevels } = require('klasa');
 const Music = require('./util/lib/Music');
-const keys = require('keys.json');
-const bans = require('banlist.json');
-const StatsD = require('node-dogstatsd').StatsD;
-const dogstatsd = new StatsD();
+const keys = require('./keys.json');
+const bans = require('./banlist.json');
+const { StatsD } = require('node-dogstatsd');
 const raven = require('raven');
+const dogstatsd = new StatsD();
 
 const sistinePermissionLevels = new PermissionLevels()
   .addLevel(0, false, () => true)
@@ -35,7 +35,7 @@ const Sistine = new SistineClient({
   cmdEditing: true,
   cmdLogging: true,
   typing: false,
-  permissionLevels: sistinePermissionLevels
+  permissionLevels: sistinePermissionLevels,
 });
 
-Sistine.login(botToken);
+Sistine.login(keys.botToken);

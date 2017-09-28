@@ -22,7 +22,7 @@ module.exports = class extends Command {
     }
 
     music.prune();
-    return msg.send(msg.language.get('MUSIC_PRUNEQ', music.queue.length))`🗑 Pruned ${music.queue.length}`);
+    return msg.send(msg.language.get('MUSIC_PRUNEQ', music.queue.length));// `🗑 Pruned ${music.queue.length}`));
   }
 
 };

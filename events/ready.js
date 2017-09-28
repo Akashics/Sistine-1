@@ -10,7 +10,7 @@ module.exports = class extends Event {
 
     this.client.raven.config(this.client.keys.raven).install();
 
-    this.client.user.setActivity(`s>help — Shard #${this.client.shard.id}`).catch((err) => {
+    this.client.user.setPresence({ activity: { name: `sistine.ml | s>help | ${this.client.guilds.size} guilds`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
       this.client.emit('log', err, 'error');
     });
   }

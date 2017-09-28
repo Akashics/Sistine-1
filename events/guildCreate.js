@@ -17,7 +17,7 @@ module.exports = class extends Event {
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
 
-    this.client.user.setActivity(`sistine.ml | s>help | ${this.client.guilds.size} guilds`).catch((err) => {
+    this.client.user.setPresence({ activity: { name: `sistine.ml | s>help | ${this.client.guilds.size} guilds`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
       this.client.emit('log', err, 'error');
     });
 

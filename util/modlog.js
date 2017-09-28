@@ -42,7 +42,7 @@ module.exports = class ModLog {
   }
 
   async send() {
-    const channel = this.guild.channels.get(this.guild.settings.modlog);
+    const channel = this.guild.channels.get(this.guild.settings.logChannel);
     if (!channel) throw 'Modlog was not found.';
     this.case = await this.getCase();
     return channel.send({ embed: this.embed });

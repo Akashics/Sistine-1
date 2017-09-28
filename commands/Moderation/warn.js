@@ -19,10 +19,10 @@ module.exports = class extends Command {
     const reasonFull = reason.length > 0 ? reason.join(' ') : null;
 
     if (member.highestRole.position >= msg.member.highestRole.position) {
-      return msg.send(msg.language.get('PUNISH_USER_ERROR'));
+      return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
     }
 
-    if (msg.guild.settings.modlog) {
+    if (msg.guild.settings.logChannel) {
       new ModLog(msg.guild)
         .setType('warn')
         .setModerator(msg.author)
