@@ -33,7 +33,7 @@ module.exports = class extends Command {
 
     if (!song) {
       if (musicInterface.autoplay) {
-        return this.autoPlayer(musicInterface).then(() => this.play(musicInterface));
+        return this.autoPlayer(musicInterface).then(() => this.play(musicInterface, msg));
       }
       return musicInterface.channel.send('⏹ Queue is empty').then(() => musicInterface.destroy());
     }
@@ -46,13 +46,13 @@ module.exports = class extends Command {
         dispatcher => dispatcher
           .on('end', () => {
             musicInterface.skip();
-            this.play(musicInterface);
+            this.play(musicInterface, msg);
           })
           .on('error', (err) => {
             musicInterface.channel.send(msg.language.get('MUSIC_ERR', song)); //'🔊Something very weird happened! Sorry for the incovenience :(');
             musicInterface.client.emit('log', err, 'error');
             musicInterface.skip();
-            this.play(musicInterface);
+            this.play(musicInterface, msg);
           }),
         (message) => {
           musicInterface.channel.send(message);

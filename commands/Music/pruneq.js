@@ -17,7 +17,7 @@ module.exports = class extends Command {
     const { music } = msg.guild;
 
     if (music.voiceChannel.members.size > 4) {
-      const hasPermission = await msg.hasLevel(1);
+      const hasPermission = await msg.hasAtLeastPermissionLevel(1);
       if (hasPermission === false) throw msg.language.get('MUSIC_NOTDJ');
     }
 
