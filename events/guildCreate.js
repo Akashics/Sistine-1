@@ -1,5 +1,5 @@
 const { Event } = require('klasa');
-const { dBots, dBotsOrg } = require('../util/Util');
+const { dBots, dBotsOrg, updateStatus } = require('../util/Util');
 
 module.exports = class extends Event {
 
@@ -8,20 +8,14 @@ module.exports = class extends Event {
   }
 
   async run(guild) {
-    if (this.client.banlist.hasOwnProperty(guild.id)) {
-      await guild.leave();
-    }
-
+    if (this.client.banlist[guild.id]) { return guild.leave(); }
     this.client.datadog.increment('client.guildJoin');
 
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
+    updateStatus(this.client);
 
-    this.client.user.setPresence({ activity: { name: `sistine.ml | s>help | ${this.client.guilds.size} guilds`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
-      this.client.emit('log', err, 'error');
-    });
-
-    this.client.channels.get('341768632545705986').send(`<:tickYes:315009125694177281> Joined \`"${guild.name}" (${guild.id})\` with ${guild.memberCount} members owned by \`${guild.owner.user.tag}\``);
+    return this.client.channels.get('341768632545705986').send(`<:tickYes:315009125694177281> Joined \`"${guild.name}" (${guild.id})\` with ${guild.memberCount} members owned by \`${guild.owner.user.tag}\`.`);
   }
 
 };

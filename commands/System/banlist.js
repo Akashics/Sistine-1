@@ -20,16 +20,14 @@ module.exports = class extends Command {
   }
 
   async run(msg, [guild, ...reason]) {
-    if (guild.id === '324051061033926666') {
-      return msg.send('You cannot ban the support guild.');
-    }
+    if (guild.id === '324051061033926666') { return msg.send('You cannot ban the support guild.'); }
 
     const reasonFull = reason.join(this.usageDelim);
     this.client.banlist[guild.id] = reasonFull;
     await writeJSONAtomic('./banlist.json', this.client.banlist);
 
     const sendMsg = [
-      'This is a public notice from Akashic\'s records.',
+      'This is a public notice from Akashic\'s Records.',
       `__${guild.name}__ was placed on a __'No Serve'__`,
       'guild list for some odd-ball or stupid reason below.',
       'You may appeal with _reasoning_ in our support guild: https://sistine.ml/support',
@@ -41,6 +39,6 @@ module.exports = class extends Command {
     } catch (e) {
       console.log(e);
     }
-    return this.client.get(guild.id).leave();
+    return this.client.guilds.get(guild.id).leave();
   }
 };

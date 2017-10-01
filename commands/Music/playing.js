@@ -15,7 +15,7 @@ module.exports = class extends Command {
   async run(msg) {
     /* eslint-disable no-throw-literal */
     const { dispatcher, queue, status } = msg.guild.music;
-    if (status !== 'playing') throw msg.lanugage.get('MUSIC_NOTPLAYING', status);
+    if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status);
     const song = queue[0];
     const info = await getInfo(song.url).catch((err) => { throw err; });
     if (!info.author) info.author = {};
@@ -25,8 +25,8 @@ module.exports = class extends Command {
       .setURL(`https://youtu.be/${info.vid}`)
       .setAuthor(info.author.name || 'Unknown', info.author.avatar || null, info.author.channel_url || null)
       .setDescription([
-        `**${msg.lanugage.get('DURATION')}**: ${showSeconds(parseInt(info.length_seconds) * 1000)} [${msg.lanugage.get('TIME_REMAIN')}: ${showSeconds((parseInt(info.length_seconds) * 1000) - dispatcher.time)}]`,
-        `**${msg.lanugage.get('DESCRIPTION')}**: ${splitText(info.description, 500)}`,
+        `**${msg.language.get('DURATION')}**: ${showSeconds(parseInt(info.length_seconds) * 1000)} [${msg.language.get('TIME_REMAIN')}: ${showSeconds((parseInt(info.length_seconds) * 1000) - dispatcher.time)}]`,
+        `**${msg.language.get('DESCRIPTION')}**: ${splitText(info.description, 500)}`,
       ].join('\n\n'))
       .setThumbnail(info.thumbnail_url)
       .setTimestamp();

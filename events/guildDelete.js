@@ -1,5 +1,5 @@
 const { Event } = require('klasa');
-const { dBots, dBotsOrg } = require('../util/Util');
+const { dBots, dBotsOrg, updateStatus } = require('../util/Util');
 
 module.exports = class extends Event {
 
@@ -7,18 +7,15 @@ module.exports = class extends Event {
     super(...args, { name: 'guildDelete', enabled: true });
   }
 
-  run(guild) {
-    if (this.client.banlist.hasOwnProperty(guild.id)) { return; }
-
+  async run(guild) {
+    if (this.client.banlist[guild.id]) { return; }
     this.client.datadog.increment('client.guildLeaves');
 
     dBots(this.client.guilds.size);
     dBotsOrg(this.client.guilds.size);
-
-    this.client.user.setPresence({ activity: { name: `sistine.ml | s>help | ${this.client.guilds.size} guilds`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
-      this.client.emit('log', err, 'error');
-    });
+    updateStatus(this.client);
 
     this.client.channels.get('341768632545705986').send(`<:tickNo:315009174163685377> Left \`"${guild.name}" (${guild.id})\` with ${guild.memberCount} members owned by \`${guild.owner.user.tag}.\``);
   }
+
 };
