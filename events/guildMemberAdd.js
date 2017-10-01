@@ -7,7 +7,7 @@ Canvas.registerFont(resolve(join(__dirname, '../assets/fonts/Discord.ttf')), 'Di
 
 const MakeWelcomImg = async (person, guildname) => {
   const png = await person.displayAvatarURL({ format: 'png', size: 256 });
-  console.log(png);
+
   const { body } = await snek.get(png);
   const pName = person.tag;
   const WelName = 'WELCOME';
