@@ -49,7 +49,7 @@ module.exports = class extends Command {
             this.play(musicInterface, msg);
           })
           .on('error', (err) => {
-            musicInterface.channel.send(msg.language.get('MUSIC_ERR', song)); //'🔊Something very weird happened! Sorry for the incovenience :(');
+            musicInterface.channel.send(msg.language.get('MUSIC_ERR', song));
             musicInterface.client.emit('log', err, 'error');
             musicInterface.skip();
             this.play(musicInterface, msg);
