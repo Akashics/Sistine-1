@@ -12,7 +12,7 @@ module.exports = class extends Command {
       permLevel: 10,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
-      description: '',
+      description: 'Says what you want to say. Deletes message if permission is available.',
       usage: '<WhatToSay:string>',
       usageDelim: undefined,
       extendedHelp: 'No extended help available.',
