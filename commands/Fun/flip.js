@@ -13,7 +13,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
-      description: '',
+      description: 'Flip a coin. Heads or Tails.',
     });
     this.requireMusic = false;
   }
