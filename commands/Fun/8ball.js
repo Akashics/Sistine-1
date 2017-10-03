@@ -12,7 +12,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
-      description: '',
+      description: 'Ask a question, recieve an answer. 100% Random.',
       usage: '<Question:str>',
       usageDelim: undefined,
       extendedHelp: 'No extended help available.',
