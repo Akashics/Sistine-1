@@ -13,7 +13,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
-      description: 'Posts a random dog image.',
+      description: 'Grabs a random dog image from random.dog.',
       usage: '',
       usageDelim: undefined,
       extendedHelp: 'This command grabs a random dog from "The DogAPI".',
