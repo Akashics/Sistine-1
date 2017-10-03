@@ -12,7 +12,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
-      description: 'Fetches your or mentioned user\'s avatar',
+      description: 'Fetches a mentioned user\'s avatar.',
       usage: '<GuildMember:member>',
     });
   }
