@@ -26,7 +26,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: [],
       requiredSettings: [],
-      description: '',
+      description: 'Get information on the current server.',
       usage: '',
       usageDelim: undefined,
       extendedHelp: 'No extended help available.',
