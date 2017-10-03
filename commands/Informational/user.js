@@ -20,7 +20,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: [],
       requiredSettings: [],
-      description: '',
+      description: 'Get information on a mention user.',
       usage: '[Member:member]',
       usageDelim: undefined,
       extendedHelp: 'No extended help available.',
