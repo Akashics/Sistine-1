@@ -16,7 +16,7 @@ module.exports = class extends Command {
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
       description: '',
-      usage: '',
+      usage: 'Get stats on this guild\'s shards.',
       usageDelim: undefined,
       extendedHelp: 'No extended help available.',
     });
