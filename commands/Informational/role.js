@@ -14,7 +14,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: [],
       requiredSettings: [],
-      description: '',
+      description: 'Get information on a role with an id or a mention.',
       usage: '<Role:role>',
       extendedHelp: 'No extended help available.',
     });
