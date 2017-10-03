@@ -13,7 +13,7 @@ module.exports = class extends Command {
       permLevel: 0,
       botPerms: ['SEND_MESSAGES'],
       requiredSettings: [],
-      description: 'Achievement GET!',
+      description: 'Provide a string from 1 to 25 and form an Minecraft Achievement.',
       usage: '<Text:string{1,25}>',
       usageDelim: undefined,
       extendedHelp: 'No Extended Help.',
