@@ -1,9 +1,8 @@
-const { Command } = require('klasa');
-const ModLog = require('../../util/modlog');
+const { Command } = require('klasa')
+const ModLog = require('../../util/modlog')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       name: 'kick',
       permLevel: 2,
@@ -13,18 +12,18 @@ module.exports = class extends Command {
       description: 'Kicks the mentioned member.',
       usage: '<user:member> [reason:string] [...]',
       usageDelim: ' ',
-    });
+    })
   }
 
-  async run(msg, [member, ...reason]) {
-    const reasonFull = reason.length > 0 ? reason.join(' ') : null;
+  async run (msg, [member, ...reason]) {
+    const reasonFull = reason.length > 0 ? reason.join(' ') : null
 
     if (!member);
     else if (!member.bannable) {
-      return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
+      return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name))
     }
 
-    await member.kick(reason);
+    await member.kick(reason)
 
     if (msg.guild.settings.logChannel) {
       new ModLog(msg.guild)
@@ -32,10 +31,9 @@ module.exports = class extends Command {
         .setModerator(msg.author)
         .setUser(member.user)
         .setReason(reasonFull)
-        .send();
+        .send()
     }
 
-    return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'kicked', member.user.tag, reasonFull));
+    return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'kicked', member.user.tag, reasonFull))
   }
-
-};
+}

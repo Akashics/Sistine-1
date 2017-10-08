@@ -1,61 +1,62 @@
-const axios = require('axios');
-const keys = require('../keys.json');
+const axios = require('axios')
+const keys = require('../keys.json')
 
 class anilist {
-  static async loadCharacters(id, type) {
+  static async loadCharacters (id, type) {
     const authRequest = await axios.post('https://anilist.co/api/auth/access_token', {
       grant_type: 'client_credentials',
       client_id: keys.anilistClient,
       client_secret: keys.anilistSecret,
-    });
+    })
 
     const characterRequest = await axios({
       url: `https://anilist.co/api/${type}/${id}/characters`,
       params: { access_token: authRequest.data.access_token },
-    });
-    return characterRequest.data.characters;
+    })
+    return characterRequest.data.characters
   }
 
-  static async search(search, type) {
-
+  static async search (search, type) {
     const authRequest = await axios.post('https://anilist.co/api/auth/access_token', {
       grant_type: 'client_credentials',
       client_id: keys.anilistClient,
       client_secret: keys.anilistSecret,
-    });
+    })
 
     const request = await axios({
       url: `https://anilist.co/api/${type}/search/${encodeURI(search)}`,
       params: { access_token: authRequest.data.access_token },
-    });
-    return request;
+    })
+    return request
   }
 
-  static async buildResponse(msg, data, characters, type) {
-    let description = data.description.replace(/<br>/g, '');
-    description = description.replace(/\n|\\n/g, '');
-    description = description.replace(/&mdash;/g, '');
-    description = description.replace(/&#039;/g, '');
-    description = description.split('.').join('.\n\n');
+  static async buildResponse (msg, data, characters, type) {
+    let description = data.description.replace(/<br>/g, '')
+    description = description.replace(/\n|\\n/g, '')
+    description = description.replace(/&mdash;/g, '')
+    description = description.replace(/&#039;/g, '')
+    description = description.split('.').join('.\n\n')
     if (description.length > 720) {
-      description = description.substring(0, 716);
-      description += '...';
+      description = description.substring(0, 716)
+      description += '...'
     }
-    const mainCharacters = characters.filter(c => c.role === 'Main');
-    let characterString = mainCharacters.map(c => `[${c.name_first}${c.name_last ? ` ${c.name_last}` : ''}](https://anilist.co/character/${c.id})`);
-    characterString = characterString.join(', ');
-    const titleString = data.title_english !== data.title_romaji ? `${data.title_romaji} | ${data.title_english}` : data.title_romaji;
-    let dataTotal;
-    let mediaType;
+    const mainCharacters = characters.filter(c => c.role === 'Main')
+    let characterString = mainCharacters.map(c => `[${c.name_first}${c.name_last ? ` ${c.name_last}` : ''}](https://anilist.co/character/${c.id})`)
+    characterString = characterString.join(', ')
+    const titleString = data.title_english !== data.title_romaji ? `${data.title_romaji} | ${data.title_english}` : data.title_romaji
+    let dataTotal
+    let mediaType
     switch (type) {
       case 'Manga':
-        dataTotal = data.total_chapters;
-        mediaType = 'Chapters';
-        break;
+        dataTotal = data.total_chapters
+        mediaType = 'Chapters'
+        break
       case 'Anime':
-        dataTotal = data.total_episodes;
-        mediaType = 'Episodes';
-        break;
+        dataTotal = data.total_episodes
+        mediaType = 'Episodes'
+        break
+      default:
+        break
     }
     return {
       embed: {
@@ -86,7 +87,7 @@ class anilist {
           },
         ],
       },
-    };
+    }
   }
 }
-module.exports = anilist;
+module.exports = anilist

@@ -1,9 +1,8 @@
-const { Language, util } = require('klasa');
+const { Language, util } = require('klasa')
 
 module.exports = class extends Language {
-
-  constructor(...args) {
-    super(...args);
+  constructor (...args) {
+    super(...args)
     this.language = {
       DEFAULT: key => `${key} has not been localized for en-US yet.`,
       DEFAULT_LANGUAGE: 'Default Language',
@@ -152,7 +151,6 @@ module.exports = class extends Language {
       DURATION: 'Duration',
       DESCRIPTION: 'Description',
       TIME_REMAIN: 'Time Remaining',
-    };
+    }
   }
-
-};
+}

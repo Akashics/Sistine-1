@@ -1,8 +1,7 @@
-const { Command } = require('klasa');
+const { Command } = require('klasa')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       runIn: ['text'],
 
@@ -15,18 +14,17 @@ module.exports = class extends Command {
         'played recently. This allows two things:\n- 1: Play music unlimitedly without playing the same song twice.\n- 2:',
         'Find new songs from YouTube.',
       ].join(' '),
-    });
+    })
 
-    this.requireMusic = true;
+    this.requireMusic = true
   }
 
-  async run(msg) {
-    const { music } = msg.guild;
-    const enabled = music.autoplay === false;
+  async run (msg) {
+    const { music } = msg.guild
+    const enabled = music.autoplay === false
 
-    music.autoplay = enabled;
+    music.autoplay = enabled
 
-    return msg.send(msg.language.get('MUSIC_AUTOPLAY', msg.author, enabled));
+    return msg.send(msg.language.get('MUSIC_AUTOPLAY', msg.author, enabled))
   }
-
-};
+}

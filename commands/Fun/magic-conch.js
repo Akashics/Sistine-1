@@ -1,29 +1,18 @@
-const { Command } = require('klasa');
-const { stripIndents } = require('common-tags');
-
-const answers = ['Maybe someday', 'Nothing', 'Neither', 'I don\'t think so', 'Yes', 'Try asking again later'];
+const { Command } = require('klasa')
+const { stripIndents } = require('common-tags')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
-      name: 'magic-conch',
-      enabled: true,
       runIn: ['text'],
-      cooldown: 0,
       aliases: ['conch'],
-      permLevel: 0,
-      botPerms: ['SEND_MESSAGES'],
-      requiredSettings: [],
       description: 'Asks your question to the Magic Conch.',
       usage: '<Question:String>',
-    });
-    this.requireMusic = false;
+    })
+    this.answers = ['Maybe someday', 'Nothing', 'Neither', 'I don\'t think so', 'Yes', 'Try asking again later']
   }
 
-  async run(msg) {
-
-    return msg.send(stripIndents`:shell: ${answers[Math.floor(Math.random() * answers.length)]}`);
-
+  async run (msg) {
+    return msg.send(stripIndents`:shell: ${this.answers[Math.floor(Math.random() * this.answers.length)]}`)
   }
-};
+}

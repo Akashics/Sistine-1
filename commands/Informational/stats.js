@@ -1,39 +1,28 @@
-const { Command, version: klasaVersion } = require('klasa');
-const moment = require('moment');
-require('moment-duration-format');
-const os = require('os');
+const { Command, version: klasaVersion } = require('klasa')
+const moment = require('moment')
+require('moment-duration-format')
+const os = require('os')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
-      name: 'stats',
-      enabled: true,
-      runIn: ['text'],
       cooldown: 0,
       aliases: ['info', 'statistics'],
-      permLevel: 0,
-      botPerms: ['SEND_MESSAGES'],
-      requiredSettings: [],
-      description: '',
-      usage: 'Get stats on this guild\'s shards.',
-      usageDelim: undefined,
-      extendedHelp: 'No extended help available.',
-    });
+      description: 'Get stats on this guild\'s shards.',
+    })
   }
 
-  async run(msg) {
-
-    const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
-    const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]');
+  async run (msg) {
+    const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]')
+    const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]')
     return msg.sendCode('asciidoc', [
       '= SHARD STATISTICS =',
-      `• Shard ID     :: ${this.client.shard.id}`,
+      `• Shard ID     :: ${this.client.shard.id || 'N/A'}`,
       `• Servers      :: ${this.client.guilds.size.toLocaleString()}`,
       `• Channels     :: ${this.client.channels.size.toLocaleString()}`,
       `• Users        :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
       `• Klasa        :: v${klasaVersion}`,
-      '• Discord.js   :: v13.0.0-dev',
+      '• Discord.js   :: v13.3.7-dev',
       `• Node.js      :: ${process.version}`,
       '',
       '= HOST USAGE =',
@@ -42,8 +31,6 @@ module.exports = class extends Command {
       `• RAM Usage    :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
       `• Uptime       :: ${duration}`,
       `• Host Uptime  :: ${hostTime}`,
-    ]);
-
+    ])
   }
-
-};
+}

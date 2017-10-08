@@ -1,0 +1,8 @@
+{
+    "points": {
+        "type": "Integer",
+        "default": 0,
+        "array": false,
+        "min": 0
+    }
+}

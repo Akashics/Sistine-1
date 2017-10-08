@@ -1,8 +1,7 @@
-const { Command } = require('klasa');
+const { Command } = require('klasa')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       runIn: ['text'],
       aliases: ['vol'],
@@ -18,30 +17,29 @@ module.exports = class extends Command {
         '',
         '👌',
       ].join('\n'),
-    });
+    })
 
-    this.requireMusic = true;
+    this.requireMusic = true
   }
 
-  async run(msg, [vol]) {
+  async run (msg, [vol]) {
     /* eslint-disable no-throw-literal */
-    const { dispatcher, status } = msg.guild.music;
-    if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status);
+    const { dispatcher, status } = msg.guild.music
+    if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status)
 
-    if (!vol) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`);
+    if (!vol) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`)
     if (/^[+]+$/.test(vol)) {
-      if (Math.round(dispatcher.volume * 50) >= 100) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`);
-      dispatcher.setVolume(Math.min(((dispatcher.volume * 50) + (2 * (vol.split('+').length - 1))) / 50, 2));
-      return msg.send(`${dispatcher.volume === 2 ? '📢' : '🔊'} Volume: ${Math.round(dispatcher.volume * 50)}%`);
+      if (Math.round(dispatcher.volume * 50) >= 100) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`)
+      dispatcher.setVolume(Math.min(((dispatcher.volume * 50) + (2 * (vol.split('+').length - 1))) / 50, 2))
+      return msg.send(`${dispatcher.volume === 2 ? '📢' : '🔊'} Volume: ${Math.round(dispatcher.volume * 50)}%`)
     }
 
     if (/^[-]+$/.test(vol)) {
-      if (Math.round(dispatcher.volume * 50) <= 0) return msg.send(`🔇 Volume: ${Math.round(dispatcher.volume * 50)}%`);
-      dispatcher.setVolume(Math.max(((dispatcher.volume * 50) - (2 * (vol.split('-').length - 1))) / 50, 0));
-      return msg.send(`${dispatcher.volume === 0 ? '🔇' : '🔉'} Volume: ${Math.round(dispatcher.volume * 50)}%`);
+      if (Math.round(dispatcher.volume * 50) <= 0) return msg.send(`🔇 Volume: ${Math.round(dispatcher.volume * 50)}%`)
+      dispatcher.setVolume(Math.max(((dispatcher.volume * 50) - (2 * (vol.split('-').length - 1))) / 50, 0))
+      return msg.send(`${dispatcher.volume === 0 ? '🔇' : '🔉'} Volume: ${Math.round(dispatcher.volume * 50)}%`)
     }
 
-    throw 'this is not how you use the volume command...';
+    throw 'this is not how you use the volume command...'
   }
-
-};
+}

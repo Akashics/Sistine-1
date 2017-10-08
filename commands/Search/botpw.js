@@ -1,12 +1,11 @@
 const {
   Command,
-} = require('klasa');
-const snekfetch = require('snekfetch');
-const keys = require('../../keys.json');
+} = require('klasa')
+const snekfetch = require('snekfetch')
+const keys = require('../../keys.json')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       name: 'botpw',
       enabled: true,
@@ -20,12 +19,11 @@ module.exports = class extends Command {
       usage: '<Bot:user>',
       usageDelim: undefined,
       extendedHelp: '',
-    });
+    })
   }
 
-  async run(msg, args) {
-
-    const bot = args[0];
+  async run (msg, args) {
+    const bot = args[0]
     try {
       const {
         body,
@@ -33,7 +31,7 @@ module.exports = class extends Command {
         .get(`https://bots.discord.pw/api/bots/${bot.id}`)
         .set({
           Authorization: keys.dBotsPW,
-        });
+        })
       const build = new this.client.methods.Embed()
         .setColor(0x9797FF)
         .setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')
@@ -52,14 +50,13 @@ module.exports = class extends Command {
           '❯ Prefix',
           body.prefix, true,
         )
-        .addField('❯ Website', body.website || 'No Website :C', true);
+        .addField('❯ Website', body.website || 'No Website :C', true)
       return msg.send('', {
         embed: build,
-      });
+      })
     } catch (err) {
-      if (err.status === 404) return msg.send('Could not find any results.');
-      return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
+      if (err.status === 404) return msg.send('Could not find any results.')
+      return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`)
     }
   }
-
-};
+}

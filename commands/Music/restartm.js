@@ -1,19 +1,17 @@
-const { Command } = require('klasa');
+const { Command } = require('klasa')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       permLevel: 10,
       runIn: ['text'],
 
       description: 'Restarts the music handler.',
-    });
+    })
   }
 
-  async run(msg) {
-    await msg.guild.music.destroy();
-    return msg.send('Successfully restarted the music module.');
+  async run (msg) {
+    await msg.guild.music.destroy()
+    return msg.send('Successfully restarted the music module.')
   }
-
-};
+}

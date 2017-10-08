@@ -1,9 +1,8 @@
-const { Command } = require('klasa');
-const snekfetch = require('snekfetch');
+const { Command } = require('klasa')
+const snekfetch = require('snekfetch')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       name: 'botorg',
       enabled: true,
@@ -17,17 +16,16 @@ module.exports = class extends Command {
       usage: '<Bot:user>',
       usageDelim: undefined,
       extendedHelp: '',
-    });
+    })
   }
 
-  async run(msg, args) {
-
-    const bot = args[0];
+  async run (msg, args) {
+    const bot = args[0]
     try {
       const {
         body,
       } = await snekfetch
-        .get(`https://discordbots.org/api/bots/${bot.id}`);
+        .get(`https://discordbots.org/api/bots/${bot.id}`)
       const build = new this.client.methods.Embed()
         .setColor(0x9797FF)
         .setAuthor('discordbots.org', 'https://discordbots.org/')
@@ -54,14 +52,13 @@ module.exports = class extends Command {
         .addField(
           '❯ Server Count',
           body.server_count, true,
-        );
+        )
       return msg.send('', {
         embed: build,
-      });
+      })
     } catch (err) {
-      if (err.status === 404) return msg.send('Could not find any results.');
-      return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
+      if (err.status === 404) return msg.send('Could not find any results.')
+      return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`)
     }
   }
-
-};
+}

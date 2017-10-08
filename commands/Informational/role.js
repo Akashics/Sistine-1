@@ -1,28 +1,14 @@
-const { Command } = require('klasa');
-const moment = require('moment');
-const randomColor = require('randomcolor');
+const { Command } = require('klasa')
+const moment = require('moment')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
-      name: 'role',
-      enabled: true,
       runIn: ['text'],
-      cooldown: 0,
-      aliases: [],
-      permLevel: 0,
-      botPerms: [],
-      requiredSettings: [],
       description: 'Get information on a role with an id or a mention.',
       usage: '<Role:role>',
-      extendedHelp: 'No extended help available.',
-    });
-  }
-
-  async run(msg, [role]) {
-    console.log(role)
-    const perms = {
+    })
+    this.perms = {
       ADMINISTRATOR: 'Administrator',
       VIEW_AUDIT_LOG: 'View Audit Log',
       MANAGE_GUILD: 'Manage Server',
@@ -51,10 +37,12 @@ module.exports = class extends Command {
       DEAFEN_MEMBERS: 'Deafen Members',
       MOVE_MEMBERS: 'Move Members',
       USE_VAD: 'Use Voice Activity',
-    };
-    const allowed = Object.entries(role.serialize()).filter(([perm, allowed]) => allowed).map(([perm]) => perms[perm]).join(', ');
+    }
+  }
 
-    const send = new this.client.methods.Embed()
+  async run (msg, [role]) {
+    const allPermissions = Object.entries(role.permissions.serialize()).filter(([allowed]) => allowed).map(([perm]) => this.perms[perm]).join(', ')
+    const roleInfo = new this.client.methods.Embed()
       .setColor(role.hexColor || '#FFF')
       .addField('❯ Name', role.name, true)
       .addField('❯ ID', role.id, true)
@@ -62,9 +50,7 @@ module.exports = class extends Command {
       .addField('❯ Creation Date', moment(role.createdAt).format('MMMM Do YYYY'), true)
       .addField('❯ Hoisted', role.hoist ? 'Yes' : 'No', true)
       .addField('❯ Mentionable', role.mentionable ? 'Yes' : 'No', true)
-      .addField('❯ Permissions', allowed);
-    return msg.channel.send('', { embed: send });
-
+      .addField('❯ Permissions', allPermissions)
+    return msg.sendEmbed(roleInfo)
   }
-
-};
+}

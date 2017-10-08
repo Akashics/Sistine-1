@@ -1,51 +1,49 @@
-const { Command } = require('klasa');
+const { Command } = require('klasa')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       runIn: ['text'],
       aliases: ['vol'],
 
       usage: '[-force]',
       description: 'Skip the current song.',
-    });
+    })
 
-    this.requireMusic = true;
+    this.requireMusic = true
   }
 
-  async run(msg, [force]) {
+  async run (msg, [force]) {
     /* eslint-disable no-throw-literal */
-    const { music } = msg.guild;
+    const { music } = msg.guild
 
     if (music.voiceChannel.members.size > 4) {
       if (force) {
-        const hasPermission = await msg.hasLevel(1);
-        if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a Moderator Member.';
+        const hasPermission = await msg.hasLevel(1)
+        if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a Moderator Member.'
       } else {
-        const response = this.handleSkips(music, msg.author.id);
-        if (response) return msg.send(response);
+        const response = this.handleSkips(music, msg.author.id, msg)
+        if (response) return msg.send(response)
       }
     }
 
-    await msg.send(`⏭ Skipped ${music.queue[0].title}`);
-    music.skip(true);
-    return null;
+    await msg.send(`⏭ Skipped ${music.queue[0].title}`)
+    music.skip(true)
+    return null
   }
 
-  handleSkips(musicInterface, user) {
+  handleSkips (musicInterface, user, msg) {
     if (!musicInterface.queue[0].skips) {
-      musicInterface.queue[0].skips = new Set();
+      musicInterface.queue[0].skips = new Set()
     }
-    if (musicInterface.queue[0].skips.has(user)) return msg.language.get('MUSIC_ALREADYVOTED');
-    musicInterface.queue[0].skips.add(user);
-    const members = musicInterface.voiceChannel.members.size - 1;
-    return this.shouldInhibit(members, musicInterface.queue[0].skips.size);
+    if (musicInterface.queue[0].skips.has(user)) return msg.language.get('MUSIC_ALREADYVOTED')
+    musicInterface.queue[0].skips.add(user)
+    const members = musicInterface.voiceChannel.members.size - 1
+    return this.shouldInhibit(members, musicInterface.queue[0].skips.size)
   }
 
-  shouldInhibit(total, size) {
-    if (total <= 3) return true;
-    return size >= total * 0.4 ? false : `🔸 | Votes: ${size} of ${Math.ceil(total * 0.4)}`;
+  shouldInhibit (total, size) {
+    if (total <= 3) return true
+    return size >= total * 0.4 ? false : `🔸 | Votes: ${size} of ${Math.ceil(total * 0.4)}`
   }
-
-};
+}

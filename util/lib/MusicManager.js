@@ -1,30 +1,29 @@
-const ytdl = require('ytdl-core');
-const getInfoAsync = require('util').promisify(ytdl.getInfo);
+const ytdl = require('ytdl-core')
+const getInfoAsync = require('util').promisify(ytdl.getInfo)
 
 /* eslint-disable no-throw-literal */
 
 module.exports = class InterfaceMusic {
+  constructor (guild) {
+    Object.defineProperty(this, 'client', { value: guild.client })
+    Object.defineProperty(this, 'guild', { value: guild })
+    this.recentlyPlayed = new Array(10)
+    this.queue = []
+    this.channel = null
 
-  constructor(guild) {
-    Object.defineProperty(this, 'client', { value: guild.client });
-    Object.defineProperty(this, 'guild', { value: guild });
-    this.recentlyPlayed = new Array(10);
-    this.queue = [];
-    this.channel = null;
+    this.dispatcher = null
 
-    this.dispatcher = null;
+    this.autoplay = false
+    this.next = null
 
-    this.autoplay = false;
-    this.next = null;
-
-    this.status = 'idle';
+    this.status = 'idle'
   }
 
-  async add(user, url) {
+  async add (user, url) {
     const song = await getInfoAsync(url).catch((err) => {
-      this.client.emit('log', err, 'error');
-      throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
-    });
+      this.client.emit('log', err, 'error')
+      throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`
+    })
 
     const metadata = {
       url: `https://youtu.be/${song.video_id}`,
@@ -32,103 +31,103 @@ module.exports = class InterfaceMusic {
       requester: user,
       loudness: song.loudness,
       seconds: parseInt(song.length_seconds),
-    };
+    }
 
-    this.queue.push(metadata);
+    this.queue.push(metadata)
 
-    this.next = this.getLink(song.related_videos);
+    this.next = this.getLink(song.related_videos)
 
-    return metadata;
+    return metadata
   }
 
-  getLink(playlist) {
+  getLink (playlist) {
     for (const song of playlist) {
       if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) {
-        continue;
+        continue
       }
-      return `https://youtu.be/${song.id}`;
+      return `https://youtu.be/${song.id}`
     }
-    return null;
+    return null
   }
 
-  join(voiceChannel) {
+  join (voiceChannel) {
     return voiceChannel.join()
       .catch((err) => {
-        if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.'; }
-        this.client.emit('log', err, 'error');
-        throw err;
-      });
+        if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.' }
+        if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) { throw 'That channel is full, I cannot join it.' }
+        this.client.emit('log', err, 'error')
+        throw err
+      })
   }
 
-  async leave() {
-    if (!this.voiceChannel) { throw 'I am not in a voice channel.'; }
-    this.dispatcher = null;
-    this.status = 'idle';
+  async leave () {
+    if (!this.voiceChannel) { throw 'I am not in a voice channel.' }
+    this.dispatcher = null
+    this.status = 'idle'
 
-    await this.voiceChannel.leave();
-    return this;
+    await this.voiceChannel.leave()
+    return this
   }
 
-  async play() {
-    if (!this.voiceChannel) { throw 'I am not in a voice channel.'; } else if (!this.connection) { throw 'I could not find a connection.'; } else if (!this.queue[0]) { throw 'The queue is empty.'; }
+  async play () {
+    if (!this.voiceChannel) { throw 'I am not in a voice channel.' } else if (!this.connection) { throw 'I could not find a connection.' } else if (!this.queue[0]) { throw 'The queue is empty.' }
 
-    this.pushPlayed(this.queue[0].url);
+    this.pushPlayed(this.queue[0].url)
 
     const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
-      .on('error', (err) => { this.client.emit('log', err, 'error'); throw `An error has occured: ${err} | Video: ${this.queue[0].url}`; });
+      .on('error', (err) => { this.client.emit('log', err, 'error'); throw `Video: ${this.queue[0].url}` })
 
-    this.dispatcher = this.connection.playStream(stream, { passes: 5 });
-    return this.dispatcher;
+    this.dispatcher = this.connection.playStream(stream, { passes: 5 })
+    return this.dispatcher
   }
 
-  pushPlayed(url) {
-    this.recentlyPlayed.push(url);
-    this.recentlyPlayed.shift();
+  pushPlayed (url) {
+    this.recentlyPlayed.push(url)
+    this.recentlyPlayed.shift()
   }
 
-  pause() {
-    this.dispatcher.pause();
-    this.status = 'paused';
-    return this;
+  pause () {
+    this.dispatcher.pause()
+    this.status = 'paused'
+    return this
   }
 
-  resume() {
-    this.dispatcher.resume();
-    this.status = 'playing';
-    return this;
+  resume () {
+    this.dispatcher.resume()
+    this.status = 'playing'
+    return this
   }
 
-  skip(force = false) {
+  skip (force = false) {
     if (force && this.dispatcher) {
-      this.dispatcher.end();
-    } else { this.queue.shift(); }
-    return this;
+      this.dispatcher.end()
+    } else { this.queue.shift() }
+    return this
   }
 
-  prune() {
-    this.queue = [];
-    return this;
+  prune () {
+    this.queue = []
+    return this
   }
 
-  async destroy() {
-    if (this.voiceChannel) { await this.voiceChannel.leave(); }
+  async destroy () {
+    if (this.voiceChannel) { await this.voiceChannel.leave() }
 
-    this.recentlyPlayed = null;
-    this.dispatcher = null;
-    this.status = null;
-    this.queue = null;
-    this.autoplay = null;
-    this.next = null;
+    this.recentlyPlayed = null
+    this.dispatcher = null
+    this.status = null
+    this.queue = null
+    this.autoplay = null
+    this.next = null
 
-    this.client.queue.delete(this.guild.id);
+    this.client.queue.delete(this.guild.id)
   }
 
-  get voiceChannel() {
-    return this.guild.me.voiceChannel;
+  get voiceChannel () {
+    return this.guild.me.voiceChannel
   }
 
-  get connection() {
-    return this.voiceChannel ? this.voiceChannel.connection : null;
+  get connection () {
+    return this.voiceChannel ? this.voiceChannel.connection : null
   }
-
-};
+}

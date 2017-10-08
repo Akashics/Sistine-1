@@ -1,5 +1,7 @@
 {
+    "dev": "true",
     "botToken": "MzUzOTI5NDg3MDE4MjI5NzYy.DJUGUQ.B15N3Og98IM7XkRWU83CwcZ3Eeo",
+    "betaBotToken": "MzYxNjc3MTgwNDExMDUyMDMy.DLnMrw.tXpyxPq0Z_G2qihWb2I5pZ1G3BQ",
     "anilistClient": "kashall-9uvwy",
     "anilistSecret": "aWlfqEODahllDsjpFati",
     "googleSearch": "AIzaSyBG9bzgvqRY2nHzoB6gOAy8PW2Sx2uw8M4",

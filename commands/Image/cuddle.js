@@ -1,43 +1,29 @@
-const { Command } = require('klasa');
-const axios = require('axios');
-const { weebKey } = require('../../keys.json');
+const { Command } = require('klasa')
+const axios = require('axios')
+const { weebKey } = require('../../keys.json')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
-      name: 'cuddle',
-      enabled: true,
       runIn: ['text'],
-      cooldown: 0,
-      aliases: [],
-      permLevel: 0,
-      botPerms: ['SEND_MESSAGES'],
-      requiredSettings: [],
       description: 'Allows you to cuddle with another member.',
-      usage: '<SomeoneToCuddle:member>',
-      extendedHelp: 'No Extended Help.',
-    });
+      usage: '[SomeoneToCuddle:member]',
+    })
   }
 
-  async run(msg, [...args]) {
+  async run (msg, [mention]) {
+    const users = mention || msg.member
+    let userIsSelf = false
+    const { data } = await axios.get('https://staging.weeb.sh/images/random?type=cuddle', { headers: { Authorization: `Bearer ${weebKey}` } })
 
-    const image = new this.client.methods.Embed();
-    const AuthStr = `Bearer ${weebKey}`;
-
-    let self = false;
-    const imageRequest = await axios.get('https://staging.weeb.sh/images/random?type=cuddle', { headers: { Authorization: AuthStr } });
-
-    if (msg.author.id === args[0].user.id) {
-      self = true;
+    if (msg.author.id === users.user.id) {
+      userIsSelf = true
     }
-    image
+    const image = new this.client.methods.Embed()
       .setColor(msg.member.highestRole.color || 0)
-      .setImage(imageRequest.data.url)
-      .setDescription(self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddled') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'cuddled'))
-      .setFooter(msg.language.get('WEEB_SERVICES'));
-    return msg.send('', { embed: image });
-
+      .setImage(data.url)
+      .setDescription(userIsSelf ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle') : msg.language.get('USER_REACTION', msg.author.toString(), users.user.toString(), 'cuddled'))
+      .setFooter(msg.language.get('WEEB_SERVICES'))
+    return msg.sendEmbed(image)
   }
-
-};
+}

@@ -1,24 +1,18 @@
-const { Command } = require('klasa');
-const roasts = require('../../util/roast');
+const { Command } = require('klasa')
+const roasts = require('../../util/roast')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
-      name: 'roast',
       enabled: true,
       runIn: ['text'],
-      cooldown: 0,
-      aliases: ['roastme'],
-      permLevel: 0,
-      botPerms: ['SEND_MESSAGES'],
-      requiredSettings: [],
       description: 'Roasts a user.',
-      usage: '<UserToRoast:member>',
-    });
+      usage: '[UserToRoast:member]',
+    })
   }
 
-  async run(msg, [member]) {
-    return msg.send(`\:fire: ${member.user.username} – ${roasts[Math.floor(Math.random() * roasts.length)]}`);
+  async run (msg, [memberMention]) {
+    const member = memberMention || msg.member
+    return msg.send(`:fire: ${member.user.username} – ${roasts[Math.floor(Math.random() * roasts.length)]}`)
   }
-};
+}

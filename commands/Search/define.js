@@ -1,10 +1,9 @@
-const { Command } = require('klasa');
-const snekfetch = require('snekfetch');
-const keys = require('../../keys.json');
+const { Command } = require('klasa')
+const snekfetch = require('snekfetch')
+const keys = require('../../keys.json')
 
 module.exports = class extends Command {
-
-  constructor(...args) {
+  constructor (...args) {
     super(...args, {
       name: 'define',
       enabled: true,
@@ -18,12 +17,11 @@ module.exports = class extends Command {
       usage: '<Word:string>',
       usageDelim: undefined,
       extendedHelp: 'Use this command with the addition of an anime to give you information on it.',
-    });
+    })
   }
 
-  async run(msg, args) {
-
-    const { query } = args[0];
+  async run (msg, args) {
+    const { query } = args[0]
     try {
       const { body } = await snekfetch
         .get(`http://api.wordnik.com:80/v4/word.json/${query}/definitions`)
@@ -32,16 +30,15 @@ module.exports = class extends Command {
           includeRelated: false,
           useCanonical: false,
           api_key: keys.wordNik,
-        });
-      if (!body.length) return msg.say('Could not find any results.');
+        })
+      if (!body.length) return msg.say('Could not find any results.')
       const tuna = new this.client.methods.Embed()
         .setColor(0x9797FF)
         .setTitle(body[0].word)
-        .setDescription(body[0].text);
-      return msg.send('', { embed: tuna });
+        .setDescription(body[0].text)
+      return msg.send('', { embed: tuna })
     } catch (err) {
-      return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
+      return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`)
     }
   }
-
-};
+}
