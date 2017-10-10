@@ -37,14 +37,14 @@ class Util {
 		const manager = client.shard;
 
 		manager.fetchClientValues('guilds.size')
-			.then((results) => { dd.gauge('client.guilds', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
+			.then((results) => { dd.gauge('client.guilds', results.reduce((prev, val) => prev + val, 0)); });
 
 		dd.gauge('client.ping', client.ping);
 		manager.fetchClientValues('users.size')
-			.then((results) => { dd.gauge('client.users', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
+			.then((results) => { dd.gauge('client.users', results.reduce((prev, val) => prev + val, 0)); });
 		manager.fetchClientValues('channels.size')
-			.then((results) => { dd.gauge('client.channels', results.reduce((prev, val) => prev + val, 0)); }).catch(console.error);
-		dd.gauge('node.memory', (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
+			.then((results) => { dd.gauge('client.channels', results.reduce((prev, val) => prev + val, 0)); });
+		dd.gauge('node.memory', process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
 	}
 
 	static list(arr, conj = 'and') {
