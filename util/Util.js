@@ -10,9 +10,7 @@ class Util {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.id}/stats`)
 			.set({ Authorization: dBotsPW })
-			.send({ server_count: count,
-				shard_id: client.shard.id,
-			      	shard_count: client.shard.count })
+			.send({ server_count: count })
 			.then(() => {
 				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
