@@ -10,7 +10,9 @@ class Util {
 		snekfetch
 			.post('https://bots.discord.pw/api/bots/353929487018229762/stats')
 			.set({ Authorization: dBotsPW })
-			.send({ server_count: count })
+			.send({ "server_count": count,
+				"shard_id": client.shard.id,
+			      	"shard_count": client.shard.count })
 			.then(() => {
 				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
@@ -19,7 +21,7 @@ class Util {
 			});
 	}
 
-	static dBotsOrg(count) {
+	static dBotsOrg(client, count) {
 		snekfetch
 			.post('https://discordbots.org/api/bots/353929487018229762/stats')
 			.set({ Authorization: dBotsORG })
