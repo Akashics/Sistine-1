@@ -1,1 +1,66 @@
-{"prefix":{"type":"String","default":"s>","array":false,"sql":"TEXT NOT NULL DEFAULT 's>'"},"language":{"type":"String","default":"en-US","array":false,"sql":"TEXT NOT NULL DEFAULT 'en-US'"},"disabledCommands":{"type":"Command","default":[],"array":true,"sql":"TEXT DEFAULT '[]'"},"logChannel":{"type":"TextChannel","default":null,"array":false},"playerLogLevel":{"type":"Integer","default":0,"min":0,"max":3,"array":false}}
+{
+    "type": "Folder",
+    "prefix": {
+        "type": "string",
+        "array": false,
+        "default": "lili",
+        "min": null,
+        "max": null,
+        "sql": "TEXT NOT NULL DEFAULT 's>'",
+        "configurable": true
+    },
+    "language": {
+        "type": "string",
+        "array": false,
+        "default": "en-US",
+        "min": null,
+        "max": null,
+        "sql": "TEXT NOT NULL DEFAULT 'en-US'",
+        "configurable": true
+    },
+    "disabledCommands": {
+        "type": "command",
+        "array": true,
+        "default": [],
+        "min": null,
+        "max": null,
+        "sql": "TEXT DEFAULT '[]'",
+        "configurable": true
+    },
+    "logChannel": {
+        "type": "textchannel",
+        "array": false,
+        "default": null,
+        "min": null,
+        "max": null,
+        "sql": "TEXT",
+        "configurable": true
+    },
+    "playerLogLevel": {
+        "type": "integer",
+        "array": false,
+        "default": 0,
+        "min": 0,
+        "max": 3,
+        "sql": "INTEGER DEFAULT 0",
+        "configurable": true
+    },
+    "DJRole": {
+        "type": "role",
+        "array": false,
+        "default": null,
+        "min": null,
+        "max": null,
+        "sql": "TEXT",
+        "configurable": true
+    },
+    "ModRole": {
+        "type": "role",
+        "array": false,
+        "default": null,
+        "min": null,
+        "max": null,
+        "sql": "TEXT",
+        "configurable": true
+    }
+}

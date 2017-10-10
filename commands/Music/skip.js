@@ -1,49 +1,51 @@
-const { Command } = require('klasa')
+const { Command } = require('klasa');
 
 module.exports = class extends Command {
-  constructor (...args) {
-    super(...args, {
-      runIn: ['text'],
-      aliases: ['vol'],
 
-      usage: '[-force]',
-      description: 'Skip the current song.',
-    })
+	constructor(...args) {
+		super(...args, {
+			runIn: ['text'],
+			aliases: ['vol'],
 
-    this.requireMusic = true
-  }
+			usage: '[-force]',
+			description: 'Skip the current song.'
+		});
 
-  async run (msg, [force]) {
-    /* eslint-disable no-throw-literal */
-    const { music } = msg.guild
+		this.requireMusic = true;
+	}
 
-    if (music.voiceChannel.members.size > 4) {
-      if (force) {
-        const hasPermission = await msg.hasLevel(1)
-        if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a Moderator Member.'
-      } else {
-        const response = this.handleSkips(music, msg.author.id, msg)
-        if (response) return msg.send(response)
-      }
-    }
+	async run(msg, [force]) {
+		/* eslint-disable no-throw-literal */
+		const { music } = msg.guild;
 
-    await msg.send(`⏭ Skipped ${music.queue[0].title}`)
-    music.skip(true)
-    return null
-  }
+		if (music.voiceChannel.members.size > 4) {
+			if (force) {
+				const hasPermission = await msg.hasAtleastPermissionLevel(1);
+				if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a Moderator Member.';
+			} else {
+				const response = this.handleSkips(music, msg.author.id, msg);
+				if (response) return msg.send(response);
+			}
+		}
 
-  handleSkips (musicInterface, user, msg) {
-    if (!musicInterface.queue[0].skips) {
-      musicInterface.queue[0].skips = new Set()
-    }
-    if (musicInterface.queue[0].skips.has(user)) return msg.language.get('MUSIC_ALREADYVOTED')
-    musicInterface.queue[0].skips.add(user)
-    const members = musicInterface.voiceChannel.members.size - 1
-    return this.shouldInhibit(members, musicInterface.queue[0].skips.size)
-  }
+		await msg.send(`⏭ Skipped ${music.queue[0].title}`);
+		music.skip(true);
+		return null;
+	}
 
-  shouldInhibit (total, size) {
-    if (total <= 3) return true
-    return size >= total * 0.4 ? false : `🔸 | Votes: ${size} of ${Math.ceil(total * 0.4)}`
-  }
-}
+	handleSkips(musicInterface, user, msg) {
+		if (!musicInterface.queue[0].skips) {
+			musicInterface.queue[0].skips = new Set();
+		}
+		if (musicInterface.queue[0].skips.has(user)) return msg.language.get('MUSIC_ALREADYVOTED');
+		musicInterface.queue[0].skips.add(user);
+		const members = musicInterface.voiceChannel.members.size - 1;
+		return this.shouldInhibit(members, musicInterface.queue[0].skips.size);
+	}
+
+	shouldInhibit(total, size) {
+		if (total <= 3) return true;
+		return size >= total * 0.4 ? false : `🔸 | Votes: ${size} of ${Math.ceil(total * 0.4)}`;
+	}
+
+};

@@ -1,23 +1,25 @@
-const { Command } = require('klasa')
+const { Command } = require('klasa');
 
 module.exports = class extends Command {
-  constructor (...args) {
-    super(...args, {
-      runIn: ['text'],
 
-      description: 'Pauses the current song.',
-    })
+	constructor(...args) {
+		super(...args, {
+			runIn: ['text'],
 
-    this.requireMusic = true
-  }
+			description: 'Pauses the current song.'
+		});
 
-  async run (msg) {
-    /* eslint-disable no-throw-literal */
+		this.requireMusic = true;
+	}
 
-    const { music } = msg.guild
-    if (music.status === 'paused') throw msg.language.get('MUSIC_ALREADYPAUSED')
+	async run(msg) {
+		/* eslint-disable no-throw-literal */
 
-    music.pause()
-    return msg.send(msg.language.get('MUSIC_PAUSED', msg.author.tag))
-  }
-}
+		const { music } = msg.guild;
+		if (music.status === 'paused') throw msg.language.get('MUSIC_ALREADYPAUSED');
+
+		music.pause();
+		return msg.send(msg.language.get('MUSIC_PAUSED', msg.author.tag));
+	}
+
+};

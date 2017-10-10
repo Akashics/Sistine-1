@@ -1,32 +1,34 @@
-const { Command } = require('klasa')
+const { Command } = require('klasa');
 
 module.exports = class extends Command {
-  constructor (...args) {
-    super(...args, {
-      runIn: ['text'],
-      aliases: ['connect'],
 
-      description: 'Joins the message author\'s voice channel.',
-    })
-  }
+	constructor(...args) {
+		super(...args, {
+			runIn: ['text'],
+			aliases: ['connect'],
 
-  async run (msg) {
-    /* eslint-disable no-throw-literal */
+			description: 'Joins the message author\'s voice channel.'
+		});
+	}
 
-    const { voiceChannel } = msg.member
-    if (!voiceChannel) throw msg.language.get('MUSIC_USER_NOVOICE')
-    this.resolvePermissions(msg, voiceChannel)
+	async run(msg) {
+		/* eslint-disable no-throw-literal */
 
-    const { music } = msg.guild
-    await music.join(voiceChannel)
+		const { voiceChannel } = msg.member;
+		if (!voiceChannel) throw msg.language.get('MUSIC_USER_NOVOICE');
+		this.resolvePermissions(msg, voiceChannel);
 
-    return msg.send(msg.language.get('MUSIC_JOINED', voiceChannel))
-  }
+		const { music } = msg.guild;
+		await music.join(voiceChannel);
 
-  resolvePermissions (msg, voiceChannel) {
-    const permissions = voiceChannel.permissionsFor(msg.guild.me)
+		return msg.send(msg.language.get('MUSIC_JOINED', voiceChannel));
+	}
 
-    if (permissions.has('CONNECT') === false) throw msg.language.get('MUSIC_NOCONNECT')
-    if (permissions.has('SPEAK') === false) throw msg.language.get('MUSIC_NOSPEAK')
-  }
-}
+	resolvePermissions(msg, voiceChannel) {
+		const permissions = voiceChannel.permissionsFor(msg.guild.me);
+
+		if (permissions.has('CONNECT') === false) throw msg.language.get('MUSIC_NOCONNECT');
+		if (permissions.has('SPEAK') === false) throw msg.language.get('MUSIC_NOSPEAK');
+	}
+
+};

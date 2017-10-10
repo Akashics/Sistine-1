@@ -1,40 +1,42 @@
-const { Command } = require('klasa')
-const ModLog = require('../../util/modlog')
+const { Command } = require('klasa');
+const ModLog = require('../../util/modlog');
 
 module.exports = class extends Command {
-  constructor (...args) {
-    super(...args, {
-      name: 'unban',
-      permLevel: 2,
-      botPerms: ['BAN_MEMBERS'],
-      runIn: ['text'],
 
-      description: 'Unbans the mentioned user.',
-      usage: '<user:user> [reason:string] [...]',
-      usageDelim: ' ',
-    })
-  }
+	constructor(...args) {
+		super(...args, {
+			name: 'unban',
+			permLevel: 2,
+			botPerms: ['BAN_MEMBERS'],
+			runIn: ['text'],
 
-  async run (msg, [user, ...reason]) {
-    const reasonFull = reason.length > 0 ? reason.join(' ') : null
+			description: 'Unbans the mentioned user.',
+			usage: '<user:user> [reason:string] [...]',
+			usageDelim: ' '
+		});
+	}
 
-    const bans = await msg.guild.fetchBans()
+	async run(msg, [user, ...reason]) {
+		const reasonFull = reason.length > 0 ? reason.join(' ') : null;
 
-    if (bans.has(user.id) === false) {
-      return msg.send(msg.language.get('PUNISH_UNBAN_ERROR'))
-    }
+		const bans = await msg.guild.fetchBans();
 
-    await msg.guild.unban(user, reasonFull)
+		if (bans.has(user.id) === false) {
+			return msg.send(msg.language.get('PUNISH_UNBAN_ERROR'));
+		}
 
-    if (msg.guild.settings.logChannel) {
-      new ModLog(msg.guild)
-        .setType('unban')
-        .setModerator(msg.author)
-        .setUser(user)
-        .setReason(reasonFull)
-        .send()
-    }
+		await msg.guild.unban(user, reasonFull);
 
-    return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'unbanned', user.tag, reasonFull))
-  }
-}
+		if (msg.guild.settings.logChannel) {
+			new ModLog(msg.guild)
+				.setType('unban')
+				.setModerator(msg.author)
+				.setUser(user)
+				.setReason(reasonFull)
+				.send();
+		}
+
+		return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'unbanned', user.tag, reasonFull));
+	}
+
+};

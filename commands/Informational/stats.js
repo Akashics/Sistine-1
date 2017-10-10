@@ -1,36 +1,38 @@
-const { Command, version: klasaVersion } = require('klasa')
-const moment = require('moment')
-require('moment-duration-format')
-const os = require('os')
+const { Command, version: klasaVersion } = require('klasa');
+const moment = require('moment');
+require('moment-duration-format');
+const os = require('os');
 
 module.exports = class extends Command {
-  constructor (...args) {
-    super(...args, {
-      cooldown: 0,
-      aliases: ['info', 'statistics'],
-      description: 'Get stats on this guild\'s shards.',
-    })
-  }
 
-  async run (msg) {
-    const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]')
-    const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]')
-    return msg.sendCode('asciidoc', [
-      '= SHARD STATISTICS =',
-      `• Shard ID     :: ${this.client.shard.id || 'N/A'}`,
-      `• Servers      :: ${this.client.guilds.size.toLocaleString()}`,
-      `• Channels     :: ${this.client.channels.size.toLocaleString()}`,
-      `• Users        :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
-      `• Klasa        :: v${klasaVersion}`,
-      '• Discord.js   :: v13.3.7-dev',
-      `• Node.js      :: ${process.version}`,
-      '',
-      '= HOST USAGE =',
-      `• CPU Load Avg :: ${Math.round(os.loadavg()[0] * 10000) / 100}%`,
-      `• RAM +Node    :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
-      `• RAM Usage    :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
-      `• Uptime       :: ${duration}`,
-      `• Host Uptime  :: ${hostTime}`,
-    ])
-  }
-}
+	constructor(...args) {
+		super(...args, {
+			cooldown: 0,
+			aliases: ['info', 'statistics'],
+			description: 'Get stats on this guild\'s shards.'
+		});
+	}
+
+	async run(msg) {
+		const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
+		const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]');
+		return msg.sendCode('asciidoc', [
+			'= SHARD STATISTICS =',
+			`• Shard ID     :: ${this.client.shard.id || 'N/A'}`,
+			`• Servers      :: ${this.client.guilds.size.toLocaleString()}`,
+			`• Channels     :: ${this.client.channels.size.toLocaleString()}`,
+			`• Users        :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
+			`• Klasa        :: v${klasaVersion}`,
+			'• Discord.js   :: v13.3.7-dev',
+			`• Node.js      :: ${process.version}`,
+			'',
+			'= HOST USAGE =',
+			`• CPU Load Avg :: ${Math.round(os.loadavg()[0] * 10000) / 100}%`,
+			`• RAM +Node    :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
+			`• RAM Usage    :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
+			`• Uptime       :: ${duration}`,
+			`• Host Uptime  :: ${hostTime}`
+		]);
+	}
+
+};

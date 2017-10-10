@@ -1,133 +1,141 @@
-const ytdl = require('ytdl-core')
-const getInfoAsync = require('util').promisify(ytdl.getInfo)
+const ytdl = require('ytdl-core');
+const getInfoAsync = require('util').promisify(ytdl.getInfo);
 
 /* eslint-disable no-throw-literal */
 
 module.exports = class InterfaceMusic {
-  constructor (guild) {
-    Object.defineProperty(this, 'client', { value: guild.client })
-    Object.defineProperty(this, 'guild', { value: guild })
-    this.recentlyPlayed = new Array(10)
-    this.queue = []
-    this.channel = null
 
-    this.dispatcher = null
+	constructor(guild) {
+		Object.defineProperty(this, 'client', { value: guild.client });
+		Object.defineProperty(this, 'guild', { value: guild });
+		this.recentlyPlayed = new Array(10);
+		this.queue = [];
+		this.channel = null;
 
-    this.autoplay = false
-    this.next = null
+		this.dispatcher = null;
 
-    this.status = 'idle'
-  }
+		this.autoplay = false;
+		this.next = null;
 
-  async add (user, url) {
-    const song = await getInfoAsync(url).catch((err) => {
-      this.client.emit('log', err, 'error')
-      throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`
-    })
+		this.status = 'idle';
+	}
 
-    const metadata = {
-      url: `https://youtu.be/${song.video_id}`,
-      title: song.title,
-      requester: user,
-      loudness: song.loudness,
-      seconds: parseInt(song.length_seconds),
-    }
+	async add(user, url) {
+		const song = await getInfoAsync(url).catch((err) => {
+			this.client.emit('log', err, 'error');
+			throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
+		});
 
-    this.queue.push(metadata)
+		const metadata = {
+			url: `https://youtu.be/${song.video_id}`,
+			title: song.title,
+			requester: user,
+			loudness: song.loudness,
+			seconds: parseInt(song.length_seconds)
+		};
 
-    this.next = this.getLink(song.related_videos)
+		this.queue.push(metadata);
 
-    return metadata
-  }
+		this.next = this.getLink(song.related_videos);
 
-  getLink (playlist) {
-    for (const song of playlist) {
-      if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) {
-        continue
-      }
-      return `https://youtu.be/${song.id}`
-    }
-    return null
-  }
+		return metadata;
+	}
 
-  join (voiceChannel) {
-    return voiceChannel.join()
-      .catch((err) => {
-        if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.' }
-        if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) { throw 'That channel is full, I cannot join it.' }
-        this.client.emit('log', err, 'error')
-        throw err
-      })
-  }
+	getLink(playlist) {
+		for (const song of playlist) {
+			if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) {
+				continue;
+			}
+			return `https://youtu.be/${song.id}`;
+		}
+		return null;
+	}
 
-  async leave () {
-    if (!this.voiceChannel) { throw 'I am not in a voice channel.' }
-    this.dispatcher = null
-    this.status = 'idle'
+	join(voiceChannel) {
+		return voiceChannel.join()
+			.catch((err) => {
+				if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.'; }
+				if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) { throw 'That channel is full, I cannot join it.'; }
+				this.client.emit('log', err, 'error');
+				throw err;
+			});
+	}
 
-    await this.voiceChannel.leave()
-    return this
-  }
+	async leave() {
+		if (!this.voiceChannel) { throw 'I am not in a voice channel.'; }
+		this.dispatcher = null;
+		this.status = 'idle';
 
-  async play () {
-    if (!this.voiceChannel) { throw 'I am not in a voice channel.' } else if (!this.connection) { throw 'I could not find a connection.' } else if (!this.queue[0]) { throw 'The queue is empty.' }
+		await this.voiceChannel.leave();
+		return this;
+	}
 
-    this.pushPlayed(this.queue[0].url)
+	async play() {
+		if (!this.voiceChannel) {
+			throw 'I am not in a voice channel.';
+		} else if (!this.connection) {
+			throw 'I could not find a connection.';
+		} else if (!this.queue[0]) {
+			throw 'The queue is empty.';
+		}
 
-    const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
-      .on('error', (err) => { this.client.emit('log', err, 'error'); throw `Video: ${this.queue[0].url}` })
+		this.pushPlayed(this.queue[0].url);
 
-    this.dispatcher = this.connection.playStream(stream, { passes: 5 })
-    return this.dispatcher
-  }
+		const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
+			.on('error', (err) => { this.client.emit('log', err, 'error'); throw `Video: ${this.queue[0].url}`; });
 
-  pushPlayed (url) {
-    this.recentlyPlayed.push(url)
-    this.recentlyPlayed.shift()
-  }
+		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
+		return this.dispatcher;
+	}
 
-  pause () {
-    this.dispatcher.pause()
-    this.status = 'paused'
-    return this
-  }
+	pushPlayed(url) {
+		this.recentlyPlayed.push(url);
+		this.recentlyPlayed.shift();
+	}
 
-  resume () {
-    this.dispatcher.resume()
-    this.status = 'playing'
-    return this
-  }
+	pause() {
+		this.dispatcher.pause();
+		this.status = 'paused';
+		return this;
+	}
 
-  skip (force = false) {
-    if (force && this.dispatcher) {
-      this.dispatcher.end()
-    } else { this.queue.shift() }
-    return this
-  }
+	resume() {
+		this.dispatcher.resume();
+		this.status = 'playing';
+		return this;
+	}
 
-  prune () {
-    this.queue = []
-    return this
-  }
+	skip(force = false) {
+		if (force && this.dispatcher) {
+			this.dispatcher.end();
+		} else { this.queue.shift(); }
+		return this;
+	}
 
-  async destroy () {
-    if (this.voiceChannel) { await this.voiceChannel.leave() }
+	prune() {
+		this.queue = [];
+		return this;
+	}
 
-    this.recentlyPlayed = null
-    this.dispatcher = null
-    this.status = null
-    this.queue = null
-    this.autoplay = null
-    this.next = null
+	async destroy() {
+		if (this.voiceChannel) { await this.voiceChannel.leave(); }
 
-    this.client.queue.delete(this.guild.id)
-  }
+		this.recentlyPlayed = null;
+		this.dispatcher = null;
+		this.status = null;
+		this.queue = null;
+		this.autoplay = null;
+		this.next = null;
 
-  get voiceChannel () {
-    return this.guild.me.voiceChannel
-  }
+		this.client.queue.delete(this.guild.id);
+	}
 
-  get connection () {
-    return this.voiceChannel ? this.voiceChannel.connection : null
-  }
-}
+	get voiceChannel() {
+		return this.guild.me.voiceChannel;
+	}
+
+	get connection() {
+		return this.voiceChannel ? this.voiceChannel.connection : null;
+	}
+
+};

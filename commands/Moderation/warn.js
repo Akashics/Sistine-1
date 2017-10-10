@@ -1,35 +1,37 @@
-const { Command } = require('klasa')
-const ModLog = require('../../util/modlog')
+const { Command } = require('klasa');
+const ModLog = require('../../util/modlog');
 
 module.exports = class extends Command {
-  constructor (...args) {
-    super(...args, {
-      name: 'warn',
-      permLevel: 2,
-      runIn: ['text'],
 
-      description: 'Warns the mentioned member.',
-      usage: '<user:member> [reason:string] [...]',
-      usageDelim: ' ',
-    })
-  }
+	constructor(...args) {
+		super(...args, {
+			name: 'warn',
+			permLevel: 2,
+			runIn: ['text'],
 
-  async run (msg, [member, ...reason]) {
-    const reasonFull = reason.length > 0 ? reason.join(' ') : null
+			description: 'Warns the mentioned member.',
+			usage: '<user:member> [reason:string] [...]',
+			usageDelim: ' '
+		});
+	}
 
-    if (member.highestRole.position >= msg.member.highestRole.position) {
-      return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name))
-    }
+	async run(msg, [member, ...reason]) {
+		const reasonFull = reason.length > 0 ? reason.join(' ') : null;
 
-    if (msg.guild.settings.logChannel) {
-      new ModLog(msg.guild)
-        .setType('warn')
-        .setModerator(msg.author)
-        .setUser(member.user)
-        .setReason(reasonFull)
-        .send()
-    }
+		if (member.highestRole.position >= msg.member.highestRole.position) {
+			return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
+		}
 
-    return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'warned', member.tag, reasonFull))
-  }
-}
+		if (msg.guild.settings.logChannel) {
+			new ModLog(msg.guild)
+				.setType('warn')
+				.setModerator(msg.author)
+				.setUser(member.user)
+				.setReason(reasonFull)
+				.send();
+		}
+
+		return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'warned', member.tag, reasonFull));
+	}
+
+};
