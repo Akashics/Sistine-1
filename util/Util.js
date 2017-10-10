@@ -8,11 +8,11 @@ class Util {
 	/* eslint-disable camelcase */
 	static dBots(client, count) {
 		snekfetch
-			.post('https://bots.discord.pw/api/bots/353929487018229762/stats')
+			.post(`https://bots.discord.pw/api/bots/${client.id}/stats`)
 			.set({ Authorization: dBotsPW })
-			.send({ "server_count": count,
-				"shard_id": client.shard.id,
-			      	"shard_count": client.shard.count })
+			.send({ server_count: count,
+				shard_id: client.shard.id,
+			      	shard_count: client.shard.count })
 			.then(() => {
 				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
@@ -23,7 +23,7 @@ class Util {
 
 	static dBotsOrg(client, count) {
 		snekfetch
-			.post('https://discordbots.org/api/bots/353929487018229762/stats')
+			.post(`https://discordbots.org/api/bots/${client.id}/stats`)
 			.set({ Authorization: dBotsORG })
 			.send({ server_count: count })
 			.then(() => {
