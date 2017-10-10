@@ -6,16 +6,16 @@ const { dBotsPW, dBotsORG } = require('../keys.json');
 class Util {
 
 	/* eslint-disable camelcase */
-	static dBots(count) {
+	static dBots(client, count) {
 		snekfetch
 			.post('https://bots.discord.pw/api/bots/353929487018229762/stats')
 			.set({ Authorization: dBotsPW })
 			.send({ server_count: count })
 			.then(() => {
-				this.client.console.log('[DBOTS] Successfully posted to Discord Bots.');
+				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
 			.catch((err) => {
-				this.client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
+				client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
 			});
 	}
 
@@ -25,10 +25,10 @@ class Util {
 			.set({ Authorization: dBotsORG })
 			.send({ server_count: count })
 			.then(() => {
-				this.client.console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
+				client.console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
 			})
 			.catch((err) => {
-				this.client.console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
+				client.console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
 	}
 
