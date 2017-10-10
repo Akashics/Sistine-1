@@ -84,7 +84,7 @@ class Util {
 	}
 
 	static updateStatus(client, finalCount) {
-		client.user.setPresence({ activity: { name: `${client.keys.dev ? 'Dev' : client.shard.id + 1 } — ${finalCount} | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
+		client.user.setPresence({ activity: { name: `${client.keys.dev ? 'Dev' : client.shard.id + 1 } — ${client.guilds.size} | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
 			client.emit('log', err, 'error');
 		});
 	}
