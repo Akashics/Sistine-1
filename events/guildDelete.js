@@ -15,10 +15,11 @@ module.exports = class extends Event {
 
 		if (!dev) {
 			const guildCount = await this.client.shard.fetchClientValues('guilds.size');
+			const finalCount = guildCount.reduce((prev, val) => prev + val, 0);
 
-			dBots(this.client, guildCount);
-			dBotsOrg(this.client, guildCount);
-			updateStatus(this.client);
+			dBots(this.client, finalCount);
+			dBotsOrg(this.client, finalCount);
+			updateStatus(this.client, finalCount);
 		}
 	}
 
