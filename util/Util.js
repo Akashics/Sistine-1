@@ -83,8 +83,8 @@ class Util {
 		return role;
 	}
 
-	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.shard.id + 1 || 'Dev'}-${client.guilds.size} | s>help | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
+	static updateStatus(client, finalCount) {
+		client.user.setPresence({ activity: { name: `${client.keys.dev ? 'Dev : client.shard.id + 1 } — ${finalCount} | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
 			client.emit('log', err, 'error');
 		});
 	}
