@@ -1,5 +1,10 @@
 {
-    "points": {
+    "blocked": {
+        "type": "Boolean",
+        "default": false,
+        "array": false
+    },
+    "balance": {
         "type": "Integer",
         "default": 0,
         "array": false,
