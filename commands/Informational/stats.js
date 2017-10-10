@@ -31,7 +31,8 @@ module.exports = class extends Command {
 			`• RAM +Node    :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
 			`• RAM Usage    :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
 			`• Uptime       :: ${duration}`,
-			`• Host Uptime  :: ${hostTime}`
+			`• Host Uptime  :: ${hostTime}`,
+			'• DataDogStats :: https://p.datadoghq.com/sb/82a5d5fef-91a38ff37c'
 		]);
 	}
 
