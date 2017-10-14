@@ -19,7 +19,7 @@ module.exports = class extends Command {
 				h: msg.language.get('ACHIEVEMENT_GET'),
 				t: args
 			});
-		return msg.send('', { files: [{ attachment: body, name: 'achievement.png' }] });
+		return msg.channel.sendFile(body);
 	}
 
 };

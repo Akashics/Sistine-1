@@ -32,7 +32,7 @@ class anilist {
 		return request;
 	}
 
-	static async buildResponse(msg, data, characters, type) {
+	static buildResponse(msg, data, characters, type) {
 		let description = data.description.replace(/<br>/g, '');
 		description = description.replace(/\n|\\n/g, '');
 		description = description.replace(/&mdash;/g, '');
@@ -61,30 +61,28 @@ class anilist {
 				break;
 		}
 		return {
-			embed: {
-				title: titleString,
-				description,
-				url: `https://anilist.co/${type}/${data.id}/`,
-				color: 0x00ADFF,
-				footer: { text: `⭐ ${type} Rating: ${data.average_score}/100` },
-				thumbnail: { url: data.image_url_med },
-				fields: [
-					{
-						name: ':movie_camera: Genre',
-						value: `${data.genres.join(', ')}`,
-						inline: 'true'
-					},
-					{
-						name: `:1234: # of ${mediaType}`,
-						value: `${dataTotal > 0 ? dataTotal : 'Unknown'}`,
-						inline: 'true'
-					},
-					{
-						name: ':man_dancing: Main Characters',
-						value: `**${characterString}**`
-					}
-				]
-			}
+			title: titleString,
+			description: description,
+			url: `https://anilist.co/${type}/${data.id}/`,
+			color: 0x00ADFF,
+			footer: { text: `⭐ ${type} Rating: ${data.average_score}/100` },
+			thumbnail: { url: data.image_url_med },
+			fields: [
+				{
+					name: ':movie_camera: Genre',
+					value: `${data.genres.join(', ')}`,
+					inline: 'true'
+				},
+				{
+					name: `:1234: # of ${mediaType}`,
+					value: `${dataTotal > 0 ? dataTotal : 'Unknown'}`,
+					inline: 'true'
+				},
+				{
+					name: ':man_dancing: Main Characters',
+					value: `**${characterString}**`
+				}
+			]
 		};
 	}
 

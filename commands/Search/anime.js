@@ -5,18 +5,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'anime',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Get information on your an anime.',
-			usage: '<Anime:string>',
-			usageDelim: undefined,
-			extendedHelp: 'Use this command with the addition of an anime to give you information on it.'
+			description: 'Get information on a provided anime name.',
+			usage: '<Anime:string>'
 		});
 	}
 
@@ -29,8 +19,8 @@ module.exports = class extends Command {
 		}
 		if (animeRequest.data.length >= 1) {
 			const characters = await anilist.loadCharacters(animeRequest.data[0].id, 'anime');
-			const final = await anilist.buildResponse(msg, animeRequest.data[0], characters, 'Anime');
-			return msg.send('', { embed: final });
+			const embed = await anilist.buildResponse(msg, animeRequest.data[0], characters, 'Anime');
+			return msg.sendEmbed(embed);
 		}
 		return msg.send(msg.language.get('ANILIST_NO_RESULT', args[0]));
 	}

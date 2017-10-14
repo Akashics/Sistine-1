@@ -7,7 +7,6 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-
 			description: 'Get information from the current song.'
 		});
 	}
@@ -30,7 +29,7 @@ module.exports = class extends Command {
 			].join('\n\n'))
 			.setThumbnail(info.thumbnail_url)
 			.setTimestamp();
-		return msg.send('', { embed: playing });
+		return msg.sendEmbed(playing);
 	}
 
 };

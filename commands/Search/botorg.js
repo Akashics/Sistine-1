@@ -52,7 +52,7 @@ module.exports = class extends Command {
 					'❯ Server Count',
 					body.server_count, true,
 				);
-			return msg.send('', { embed: build });
+				return msg.sendEmbed(build);
 		} catch (err) {
 			if (err.status === 404) return msg.send('Could not find any results.');
 			return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);

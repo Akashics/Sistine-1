@@ -22,11 +22,11 @@ module.exports = class extends Command {
 			.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`, { followRedirects: true });
 		const name = filterPkmn(results.body.names).name.toLowerCase();
 		const id = `${'000'.slice(results.body.id.toString().length)}${results.body.id}`;
-		const done = new this.client.methods.Embed()
+		const embed = new this.client.methods.Embed()
 			.setTitle(msg.language.get('WTP_EMBED_TITLE'))
 			.setColor(0xED1C24)
 			.setImage(`https://www.serebii.net/sunmoon/pokemon/${id}.png`);
-		await msg.send('', { embed: done });
+		await msg.sendEmbed(embed);
 		const msgs = await msg.channel.awaitMessages(res => res.author.id === msg.author.id, {
 			max: 1,
 			time: 15000

@@ -5,7 +5,6 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-
 			description: 'Let\'s start the queue!'
 		});
 		/* eslint-disable no-new, promise/param-names */
@@ -30,14 +29,14 @@ module.exports = class extends Command {
 		if (musicInterface.status !== 'playing') return null;
 
 		const song = musicInterface.queue[0];
-
+		if (musicInterface.voiceChannel.members.size === 1) return msg.send('._. Everyone left, Music has stopped playing.').then(() => musicInterface.destroy());
 		if (!song) {
 			if (musicInterface.autoplay) {
 				return this.autoPlayer(musicInterface).then(() => this.play(musicInterface, msg));
 			}
-			return musicInterface.channel.send('⏹ Queue is empty').then(() => musicInterface.destroy());
+			return musicInterface.channel.send('💿 Queue has been emptied, add more music and play again!').then(() => musicInterface.destroy());
 		}
-
+		if (song.length_seconds < 5600) return musicInterface.channel.send('💢 You cannot play songs over 1.5 hours long!').then(() => musicInterface.destroy());
 		await musicInterface.channel.send(msg.language.get('MUSIC_PLAY', song));
 		await this.delayer(300);
 
@@ -62,7 +61,7 @@ module.exports = class extends Command {
 	}
 
 	autoPlayer(musicInterface) {
-		return musicInterface.add('Autoplay', musicInterface.next);
+		return musicInterface.add('Youtube Autoplay', musicInterface.next);
 	}
 
 };

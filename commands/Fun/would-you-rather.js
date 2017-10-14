@@ -15,12 +15,12 @@ module.exports = class extends Command {
 		try {
 			const { body } = await snekfetch
 				.get('http://www.rrrather.com/botapi');
-			const embedDone = new this.client.methods.Embed()
+			const embed = new this.client.methods.Embed()
 				.setTitle(`${body.title}...`)
 				.setURL(body.link)
 				.setColor(0x9797FF)
 				.setDescription(`${body.choicea} OR ${body.choiceb}?`);
-			return msg.send('', { embed: embedDone });
+			return msg.sendEmbed(embed);
 		} catch (err) {
 			return msg.send(msg.language.get('ERROR_OCCURED', err.message));
 		}

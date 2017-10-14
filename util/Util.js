@@ -44,7 +44,7 @@ class Util {
 			.then((results) => { dd.gauge('client.users', results.reduce((prev, val) => prev + val, 0)); });
 		manager.fetchClientValues('channels.size')
 			.then((results) => { dd.gauge('client.channels', results.reduce((prev, val) => prev + val, 0)); });
-		dd.gauge('node.memory', process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
+		dd.gauge('node.memory', `${process.memoryUsage().heapUsed / 1024 / 1024}`);
 	}
 
 	static list(arr, conj = 'and') {
@@ -83,10 +83,11 @@ class Util {
 		return role;
 	}
 
-	static updateStatus(client, finalCount) {
-		client.user.setPresence({ activity: { name: `${client.keys.dev ? 'Dev' : client.shard.id + 1 } — ${client.guilds.size} | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } }).catch((err) => {
-			client.emit('log', err, 'error');
-		});
+	static updateStatus(client) {
+		client.user.setPresence({ activity: { name: `${client.keys.dev ? 'Dev' : client.shard.id + 1} — ${client.guilds.size} | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } })
+			.catch((err) => {
+				client.emit('log', err, 'error');
+			});
 	}
 
 }

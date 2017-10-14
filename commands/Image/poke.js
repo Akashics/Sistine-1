@@ -36,7 +36,7 @@ module.exports = class extends Command {
 			.setImage(imageRequest.data.url)
 			.setDescription(self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'be poked') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'poked'))
 			.setFooter(msg.language.get('WEEB_SERVICES'));
-		return msg.send('', { embed: image });
+		return msg.sendEmbed(image);
 	}
 
 };
