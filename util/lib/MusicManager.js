@@ -23,7 +23,7 @@ module.exports = class InterfaceMusic {
 	async add(user, url) {
 		const song = await getInfoAsync(url).catch((err) => {
 			this.client.emit('log', err, 'error');
-			throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
+			throw `An error has occured while attempting to add this song. \`\`\`Youtube Video: ${url}\n${err}\`\`\``;
 		});
 
 		const metadata = {

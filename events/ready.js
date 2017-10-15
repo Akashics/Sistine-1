@@ -1,10 +1,18 @@
 const { Event } = require('klasa');
 const { sendStats, updateStatus } = require('../util/Util');
+const { startDashboard } = require('../util/Dashboard');
 const { dev } = require('../keys.json');
 
 module.exports = class extends Event {
 
-	run() {
+	async run() {
+		startDashboard(this.client);
+		this.client.appInfo = await this.client.fetchApplication();
+
+		setInterval(async () => {
+			this.client.appInfo = await this.client.fetchApplication();
+		}, 60000);
+
 		if (dev) return;
 		setInterval(() => {
 			sendStats(this.client);

@@ -17,6 +17,7 @@ class SistineClient extends Client {
 		this.queue = new Music();
 		this.banlist = bans;
 		this.raven = Raven;
+		this.site = null;
 		this.sistinePermissionLevels = new PermissionLevels()
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.settings.DJRole && msg.member.roles.has(msg.guild.settings.DJRole))
