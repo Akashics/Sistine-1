@@ -29,7 +29,7 @@
                       href = "/manage/" + guild.id;
                       text = "Manage";
                     } else {
-                      href = `https://discordapp.com/oauth2/authorize?client_id=${bot.config.dashboard.clientID}&scope=bot&guild_id=${guild.id}`;
+                      href = `https://discordapp.com/oauth2/authorize?client_id=${bot.appInfo.id}&scope=bot&guild_id=${guild.id}`;
                       text = "Invite Bot";
                     }
                     %>
