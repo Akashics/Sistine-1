@@ -30,7 +30,7 @@
 <h1>Settings</h1>
 
 <form method="post">
-  <% const gsettings = bot.client.settings.guilds.fetchEntry(guild.id); %>
+  <% const gsettings = bot.settings.guilds.fetchEntry(guild.id); %>
   <% for (const key in gsettings) { %>
   <div class="form-group">
     <label for="<%= key %>"><%= key %></label>
