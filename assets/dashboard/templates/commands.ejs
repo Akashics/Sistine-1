@@ -2,7 +2,7 @@
 
 <% const help = {};
 bot.commands.forEach((command) => {
-  const cat = command.help.category;
+  const cat = command.category;
   if (!help.hasOwnProperty(cat)) help[cat] = [];
   help[cat].push(command);
 });
