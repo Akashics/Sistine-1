@@ -202,7 +202,7 @@ class Dashboard {
 			} else if (!isManaged) {
 				res.redirect('/');
 			}
-			const gsettings = client.settings.get(guild.id);
+			const gsettings = client.settings.guilds.fetchEntry(guild.id);
 			for (const key in gsettings) {
 				gsettings[key] = req.body[key];
 			}
