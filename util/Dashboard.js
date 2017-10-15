@@ -28,19 +28,11 @@ class Dashboard {
 	/* eslint-disable consistent-return */
 	static async startDashboard(client) {
 		if (client.shard.id !== 0) return;
-		// It's easier to deal with complex paths. 
-		// This resolves to: yourbotdir/dashboard/
 		const dataDir = path.resolve(`${process.cwd()}${path.sep}assets/dashboard`);
-
-		// This resolves to: yourbotdir/dashboard/templates/ 
-		// which is the folder that stores all the internal template files.
 		const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 
-		// The public data directory, which is accessible from the *browser*. 
-		// It contains all css, client javascript, and images needed for the site.
 		app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`)));
 
-		// uhhhh check what these do. 
 		passport.serializeUser((user, done) => {
 			done(null, user);
 		});
@@ -48,22 +40,6 @@ class Dashboard {
 			done(null, obj);
 		});
 
-		/* 
-    This defines the **Passport** oauth2 data. A few things are necessary here.
-  
-    clientID = Your bot's client ID, at the top of your app page. Please note, 
-    older bots have BOTH a client ID and a Bot ID. Use the Client one.
-    clientSecret: The secret code at the top of the app page that you have to 
-    click to reveal. Yes that one we told you you'd never use.
-    callbackURL: The URL that will be called after the login. This URL must be
-    available from your PC for now, but must be available publically if you're
-    ever to use this dashboard in an actual bot. 
-    scope: The data scopes we need for data. identify and guilds are sufficient
-    for most purposes. You might have to add more if you want access to more
-    stuff from the user. See: https://discordapp.com/developers/docs/topics/oauth2 
-
-    See config.js.example to set these up. 
-  */
 		passport.use(new Strategy({
 			clientID: settings.clientID,
 			clientSecret: settings.clientSecret,

@@ -1,6 +1,7 @@
 const { Client, PermissionLevels } = require('klasa');
 const Music = require('./util/lib/Music');
 const keys = require('./keys.json');
+const dashboardKeys = require('./dashboard.json');
 const bans = require('./banlist.json');
 const { StatsD } = require('node-dogstatsd');
 const Raven = require('raven');
@@ -12,6 +13,7 @@ class SistineClient extends Client {
 	constructor(options) {
 		super(Object.assign(options));
 		Object.defineProperty(this, 'keys', { value: keys });
+		Object.defineProperty(this, 'dashKeys', { value: dashboardKeys });
 
 		this.datadog = dogstatsd;
 		this.queue = new Music();
