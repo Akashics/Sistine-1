@@ -6,8 +6,8 @@ const { dev } = require('../keys.json');
 module.exports = class extends Event {
 
 	async run() {
-		startDashboard(this.client);
 		this.client.appInfo = await this.client.fetchApplication();
+		startDashboard(this.client);
 
 		setInterval(async () => {
 			this.client.appInfo = await this.client.fetchApplication();
