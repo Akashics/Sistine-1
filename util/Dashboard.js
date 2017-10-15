@@ -206,7 +206,7 @@ class Dashboard {
 			for (const key in gsettings) {
 				gsettings[key] = req.body[key];
 			}
-			client.settings.set(guild.id, gsettings);
+			client.settings.guilds.updateOne(guild.id, gsettings);
 			res.redirect(`/manage/${req.params.guildID}`);
 		});
 
