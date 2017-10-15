@@ -27,6 +27,7 @@ class Dashboard {
 
 	/* eslint-disable consistent-return */
 	static async startDashboard(client) {
+		if (client.shard.id !== 0) return;
 		// It's easier to deal with complex paths. 
 		// This resolves to: yourbotdir/dashboard/
 		const dataDir = path.resolve(`${process.cwd()}${path.sep}assets/dashboard`);
