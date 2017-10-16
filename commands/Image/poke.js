@@ -6,18 +6,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'poke',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
 			description: 'Allows you to poke another member.',
-			usage: '<SomeoneToPoke:member>',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<SomeoneToPoke:member>'
 		});
 	}
 

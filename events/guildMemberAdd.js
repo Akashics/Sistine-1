@@ -32,7 +32,7 @@ module.exports = class extends Event {
 	}
 
 	async run(member) {
-		if (!member.guild.settings.logChannel) return;
+		if (!member.guild.settings.logChannel) { return; }
 		const welcomemsg =
 				[
 					`**${member.user.tag}**, if our dog doesn't like you, we won't either !`,
@@ -59,7 +59,7 @@ module.exports = class extends Event {
 
 		// trying to send the log detail to log channel
 		const logChannelID = member.guild.settings.logChannel;
-		if (!logChannelID) return;
+		if (!logChannelID) { return; }
 		const logLevel = member.guild.settings.playerLogLevel;
 		try {
 			switch (logLevel) {

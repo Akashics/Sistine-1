@@ -4,9 +4,7 @@ const axios = require('axios');
 module.exports = class extends Command {
 
 	constructor(...args) {
-		super(...args, {
-			description: 'Fetches a famous quote and posts it.'
-		});
+		super(...args, { description: 'Fetches a famous quote and posts it.' });
 	}
 
 	async run(msg) {

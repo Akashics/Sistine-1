@@ -31,7 +31,7 @@ module.exports = class extends Command {
 			max: 1,
 			time: 15000
 		});
-		if (!msgs.size) return msg.send(msg.language.get('WTP_OUT_TIME', name));
+		if (!msgs.size) { return msg.send(msg.language.get('WTP_OUT_TIME', name)); }
 		if (msgs.first().content.toLowerCase() !== name) { return msg.send(msg.language.get('WTP_INCORRECT', name)); }
 		return msg.send(msg.language.get('WTP_CORRECT', msg.author.tag));
 	}

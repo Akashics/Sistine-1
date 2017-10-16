@@ -13,7 +13,6 @@ module.exports = class extends Event {
 			this.client.appInfo = await this.client.fetchApplication();
 		}, 60000);
 
-		if (dev) return;
 		setInterval(() => {
 			sendStats(this.client);
 		}, 180000);

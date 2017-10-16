@@ -5,18 +5,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'botorg',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
-			requiredSettings: [],
 			description: 'Searches Discord Bots for information on a bot.',
-			usage: '<Bot:user>',
-			usageDelim: undefined,
-			extendedHelp: ''
+			usage: '<Bot:user>'
 		});
 	}
 

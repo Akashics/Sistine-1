@@ -23,7 +23,7 @@ module.exports = class extends Command {
 					useCanonical: false,
 					api_key: keys.wordNik
 				});
-			if (!body.length) return msg.say('Could not find any results.');
+			if (!body.length) { return msg.send('Could not find any results.'); }
 			const defineEmbed = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setTitle(body[0].word)

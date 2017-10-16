@@ -15,7 +15,7 @@ module.exports = class extends Command {
 		/* eslint-disable no-throw-literal */
 		const { status, dispatcher, queue } = msg.guild.music;
 
-		if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status);
+		if (status !== 'playing') { throw msg.language.get('MUSIC_NOTPLAYING', status); }
 		return msg.send(`🕰 ${msg.language.get('TIME_REMAIN')}: ${showSeconds((queue[0].seconds * 1000) - dispatcher.time)}`);
 	}
 

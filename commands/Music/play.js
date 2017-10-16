@@ -17,7 +17,7 @@ module.exports = class extends Command {
 		if (musicInterface.queue.length === 0) {
 			return msg.send(`Add some songs to the queue first with ${msg.guild.settings.prefix}add`);
 		}
-		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) await this.client.commands.get('join').run(msg);
+		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) { await this.client.commands.get('join').run(msg); }
 		if (musicInterface.status === 'paused') { await this.client.commands.get('resume').run(msg); }
 		if (musicInterface.status === 'playing') { return msg.send('Already Playing'); }
 		musicInterface.status = 'playing';
