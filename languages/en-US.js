@@ -151,7 +151,8 @@ module.exports = class extends Language {
 			MUSIC_ALREADYVOTED: 'You have already voted to skip this song.',
 			DURATION: 'Duration',
 			DESCRIPTION: 'Description',
-			TIME_REMAIN: 'Time Remaining'
+			TIME_REMAIN: 'Time Remaining',
+			ALREADY_SUBSCRIBE: (active, guild) => `You are already ${active ? 'subscribed' : 'unsubscribed'} to ${guild}.`
 		};
 	}
 

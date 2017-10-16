@@ -27,7 +27,6 @@ class Dashboard {
 
 	/* eslint-disable consistent-return */
 	static async startDashboard(client) {
-		if (client.shard.id !== 0) return;
 		const dataDir = path.resolve(`${process.cwd()}${path.sep}assets/dashboard`);
 		const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 

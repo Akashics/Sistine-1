@@ -6,8 +6,6 @@ const bans = require('./banlist.json');
 const { StatsD } = require('node-dogstatsd');
 const Raven = require('raven');
 
-const dogstatsd = new StatsD();
-
 class SistineClient extends Client {
 
 	constructor(options) {
@@ -15,7 +13,7 @@ class SistineClient extends Client {
 		Object.defineProperty(this, 'keys', { value: keys });
 		Object.defineProperty(this, 'dashKeys', { value: dashboardKeys });
 
-		this.datadog = dogstatsd;
+		this.datadog = new StatsD();
 		this.queue = new Music();
 		this.banlist = bans;
 		this.raven = Raven;
@@ -24,7 +22,7 @@ class SistineClient extends Client {
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.settings.DJRole && msg.member.roles.has(msg.guild.settings.DJRole))
 			.addLevel(2, false, (client, msg) => msg.guild && msg.guild.settings.ModRole && msg.member.roles.has(msg.guild.settings.ModRole))
-			.addLevel(7, false, (client, msg) => msg.guild && msg.member === msg.guild.owner)
+			.addLevel(3, false, (client, msg) => msg.guild && msg.member === msg.guild.owner)
 			.addLevel(9, true, (client, msg) => msg.author === client.owner)
 			.addLevel(10, false, (client, msg) => msg.author === client.owner);
 	}

@@ -6,11 +6,11 @@ const { dBotsPW, dBotsORG } = require('../keys.json');
 class Util {
 
 	/* eslint-disable camelcase */
-	static dBots(client, count) {
+	static dBots(client) {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: dBotsPW })
-			.send({ shard_id: client.shard.id, shard_count: client.shard.count, server_count: count })
+			.send({ server_count: client.guilds.size })
 			.then(() => {
 				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
 			})
@@ -19,11 +19,11 @@ class Util {
 			});
 	}
 
-	static dBotsOrg(client, count) {
+	static dBotsOrg(client) {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: dBotsORG })
-			.send({ shard_id: client.shard.id, shard_count: client.shard.count, server_count: count })
+			.send({ server_count: client.guilds.size })
 			.then(() => {
 				client.console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
 			})
@@ -34,16 +34,11 @@ class Util {
 
 	static sendStats(client) {
 		const dd = client.datadog;
-		const manager = client.shard;
 
-		manager.fetchClientValues('guilds.size')
-			.then((results) => { dd.gauge('client.guilds', results.reduce((prev, val) => prev + val, 0)); });
-
+		dd.guage('client.guilds', client.guilds.size);
+		dd.guage('client.users', client.users.size);
+		dd.guage('client.channels', client.channels.size);
 		dd.gauge('client.ping', client.ping);
-		manager.fetchClientValues('users.size')
-			.then((results) => { dd.gauge('client.users', results.reduce((prev, val) => prev + val, 0)); });
-		manager.fetchClientValues('channels.size')
-			.then((results) => { dd.gauge('client.channels', results.reduce((prev, val) => prev + val, 0)); });
 		dd.gauge('node.memory', `${process.memoryUsage().heapUsed / 1024 / 1024}`);
 	}
 
@@ -75,7 +70,7 @@ class Util {
 	}
 
 	static announcement(msg) {
-		const announcementID = '338768714428186624';
+		const announcementID = msg.guild.settings.subscriberRole;
 		if (announcementID === null) throw msg.language.get('COMMAND_SUBSCRIBE_NO_ROLE');
 		const role = msg.guild.roles.get(announcementID);
 		if (!role) throw msg.language.get('COMMAND_SUBSCRIBE_NO_ROLE');
@@ -84,7 +79,7 @@ class Util {
 	}
 
 	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.keys.dev ? 'Dev' : client.shard.id + 1} — ${client.guilds.size} | sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } })
+		client.user.setPresence({ activity: { name: `${client.guilds.size} — sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});
