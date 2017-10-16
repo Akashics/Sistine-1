@@ -23,10 +23,10 @@ module.exports = class extends Command {
 
 		const modlogs = await this.provider.get('modlogs', msg.guild.id).then(data => data || []);
 		const log = modlogs[selected];
-		if (!log) return msg.send(msg.language.get('MODLOG_CASE_ERROR'));
+		if (!log) { return msg.send(msg.language.get('MODLOG_CASE_ERROR')); }
 
 		const channel = msg.guild.channels.get(msg.guild.settings.logChannel);
-		if (!channel) return msg.send(msg.language.get('MODLOG_NOT_FOUND'));
+		if (!channel) { return msg.send(msg.language.get('MODLOG_NOT_FOUND')); }
 
 		const messages = await channel.messages.fetchMessages({ limit: 100 });
 		const message = messages.find(mes => mes.author.id === this.client.user.id &&

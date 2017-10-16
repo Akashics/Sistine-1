@@ -5,18 +5,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'quote',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Fetches a famous quote and posts it.',
-			usage: '',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			description: 'Fetches a famous quote and posts it.'
 		});
 	}
 

@@ -9,18 +9,8 @@ module.exports = class extends Command {
 	/* eslint-disable max-len */
 	constructor(...args) {
 		super(...args, {
-			name: 'moe',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Allows you to cuddle with another member.',
-			usage: '[ImageType:string]',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			description: 'View random anime images.',
+			usage: '[ImageType:string]'
 		});
 		this.types = ['awoo', 'bang', 'blush', 'clagwimoth', 'cry', 'dance', 'insult', 'jojo', 'lewd', 'lick', 'megumin', 'neko', 'nom', 'owo', 'pout', 'rem', 'shrug', 'sleepy', 'smile', 'teehee', 'smug', 'stare', 'thumbsup', 'triggered', 'wag', 'waifu_insult', 'wasted'];
 	}

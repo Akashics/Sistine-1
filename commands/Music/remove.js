@@ -24,7 +24,7 @@ module.exports = class extends Command {
 		const song = music.queue[number];
 		if (song.requester.id !== msg.author.id) {
 			const hasPermission = await msg.hasAtLeastPermissionLevel(1);
-			if (hasPermission === false) throw 'You can\'t execute this command with the force flag. You must be at least a DJ Member.';
+			if (hasPermission === false) { throw 'You can\'t execute this command with the force flag. You must be at least a DJ Member.'; }
 		}
 
 		music.queue.splice(number, 1);

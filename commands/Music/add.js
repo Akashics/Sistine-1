@@ -21,7 +21,7 @@ module.exports = class extends Command {
 		this.client.datadog.increment('client.musicTracksAdded');
 
 		const youtubeURL = await this.getURL(url);
-		if (!youtubeURL) throw msg.language.get('MUSIC_URL_NOTFOUND');
+		if (!youtubeURL) { throw msg.language.get('MUSIC_URL_NOTFOUND'); }
 
 		const { music } = msg.guild;
 		const song = await music.add(msg.author, youtubeURL);
@@ -31,7 +31,7 @@ module.exports = class extends Command {
 
 	async getURL(url) {
 		const id = this.regExp.exec(url);
-		if (id) return `https://youtu.be/${id[1]}`;
+		if (id) { return `https://youtu.be/${id[1]}`; }
 		const data = await fetchURL(encodeURIComponent(url));
 		const video = data.items.find(item => item.id.kind !== 'youtube#channel');
 

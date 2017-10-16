@@ -62,7 +62,7 @@ class anilist {
 		}
 		return {
 			title: titleString,
-			description: description,
+			description,
 			url: `https://anilist.co/${type}/${data.id}/`,
 			color: 0x00ADFF,
 			footer: { text: `⭐ ${type} Rating: ${data.average_score}/100` },

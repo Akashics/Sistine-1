@@ -20,8 +20,8 @@ module.exports = class extends Command {
 				`   └── <${queue[i].url}> (${showSeconds(queue[i].seconds * 1000)})`
 			].join('\n');
 		}
-		if (queue.length > 10) output.push(`\nShowing 10 songs of ${queue.length}`);
-		else if (autoplay) output.push(`\n**AutoPlay**: <${next}>`);
+		if (queue.length > 10) { output.push(`\nShowing 10 songs of ${queue.length}`); }
+		if (autoplay) { output.push(`\n**AutoPlay**: <${next}>`); }
 
 		return msg.send(output.join('\n'));
 	}

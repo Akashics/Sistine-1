@@ -4,20 +4,7 @@ const axios = require('axios');
 module.exports = class extends Command {
 
 	constructor(...args) {
-		super(...args, {
-			name: 'trump',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Lets trump it up!',
-			usage: '',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
-		});
+		super(...args, { description: 'Fetch one of Trumps famous quotes!' });
 	}
 
 	async run(msg) {

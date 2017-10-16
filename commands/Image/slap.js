@@ -6,18 +6,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'slap',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
 			description: 'Allows you to slap another member.',
-			usage: '<SomeoneToSlap:member>',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<SomeoneToSlap:member>'
 		});
 	}
 

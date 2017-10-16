@@ -6,18 +6,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'kiss',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Allows you to kiss another member. !!! Not Recommened !!!',
-			usage: '<SomeoneToKiss:member>',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			description: 'Allows you to kiss another user.',
+			usage: '<SomeoneToKiss:member>'
 		});
 	}
 
