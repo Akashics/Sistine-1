@@ -11,9 +11,9 @@ module.exports = class extends Event {
 		setInterval(async () => {
 			this.client.appInfo = await this.client.fetchApplication();
 		}, 60000);
-
+		const clientObj = this.client;
 		setInterval(() => {
-			sendStats(this.client);
+			sendStats(clientObj);
 		}, 180000);
 
 		this.client.raven.config(this.client.keys.raven).install();
