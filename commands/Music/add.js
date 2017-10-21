@@ -1,8 +1,7 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
-const keys = require('../../keys.json');
 
-const fetchURL = url => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${keys.googleSearch}`)
+const fetchURL = (url, client) => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${client.keys.googleSearch}`)
 	.then(result => result.body);
 
 module.exports = class extends Command {
@@ -20,7 +19,7 @@ module.exports = class extends Command {
 		/* eslint-disable no-throw-literal */
 		this.client.datadog.increment('client.musicTracksAdded');
 
-		const youtubeURL = await this.getURL(url);
+		const youtubeURL = await this.getURL(url, this.client);
 		if (!youtubeURL) { throw msg.language.get('MUSIC_URL_NOTFOUND'); }
 
 		const { music } = msg.guild;
@@ -29,10 +28,10 @@ module.exports = class extends Command {
 		return msg.send(msg.language.get('MUSIC_ADDED_QUEUE', song));
 	}
 
-	async getURL(url) {
+	async getURL(url, client) {
 		const id = this.regExp.exec(url);
 		if (id) { return `https://youtu.be/${id[1]}`; }
-		const data = await fetchURL(encodeURIComponent(url));
+		const data = await fetchURL(encodeURIComponent(url), client);
 		const video = data.items.find(item => item.id.kind !== 'youtube#channel');
 
 		return video ? `https://youtu.be/${video.id.videoId}` : null;

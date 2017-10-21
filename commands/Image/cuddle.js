@@ -1,6 +1,5 @@
 const { Command } = require('klasa');
 const axios = require('axios');
-const { weebKey } = require('../../keys.json');
 
 module.exports = class extends Command {
 
@@ -15,7 +14,7 @@ module.exports = class extends Command {
 	async run(msg, [mention]) {
 		const users = mention || msg.member;
 		let userIsSelf = false;
-		const { data } = await axios.get('https://staging.weeb.sh/images/random?type=cuddle', { headers: { Authorization: `Bearer ${weebKey}` } });
+		const { data } = await axios.get('https://staging.weeb.sh/images/random?type=cuddle', { headers: { Authorization: `Bearer ${this.client.keys.weebKey}` } });
 
 		if (msg.author.id === users.user.id) {
 			userIsSelf = true;

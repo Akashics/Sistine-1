@@ -1,7 +1,6 @@
 const { Event } = require('klasa');
 const { sendStats, updateStatus } = require('../util/Util');
 const { startDashboard } = require('../util/Dashboard');
-const { dev } = require('../keys.json');
 
 module.exports = class extends Event {
 

@@ -1,8 +1,5 @@
 const { Command } = require('klasa');
 const axios = require('axios');
-const { weebKey } = require('../../keys.json');
-
-const AuthStr = `Bearer ${weebKey}`;
 
 module.exports = class extends Command {
 
@@ -26,7 +23,7 @@ module.exports = class extends Command {
 				.setFooter(`Example CMD: ${msg.guild.settings.prefix}moe dance`);
 			return msg.sendEmbed(images);
 		}
-
+		const AuthStr = `Bearer ${this.client.keys.weebKey}`;
 		const imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${image}`, { headers: { Authorization: AuthStr } });
 		images
 			.setColor(msg.member.highestRole.color || 0)

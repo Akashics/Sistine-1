@@ -1,32 +1,21 @@
 const { Command } = require('klasa');
-const axios = require('axios');
-const { weebKey } = require('../../keys.json');
+const { weebImage } = require('../../Util/Util');
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			description: 'Allows you to poke another member.',
-			usage: '<SomeoneToPoke:member>'
+			usage: '[SomeoneToPoke:user]'
 		});
 	}
 
-	async run(msg, [...args]) {
-		const image = new this.client.methods.Embed();
-		const AuthStr = `Bearer ${weebKey}`;
-
+	async run(msg, [mentioned = msg.author]) {
 		let self = false;
-		const imageRequest = await axios.get('https://staging.weeb.sh/images/random?type=poke', { headers: { Authorization: AuthStr } });
-
-		if (msg.author.id === args[0].user.id) {
-			self = true;
-		}
-		image
-			.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
-			.setImage(imageRequest.data.url)
-			.setDescription(self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'be poked') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'poked'))
-			.setFooter(msg.language.get('WEEB_SERVICES'));
-		return msg.sendEmbed(image);
+		if (mentioned === msg.author) self = true;
+		const action = self ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'be poked') : msg.language.get('USER_REACTION', msg.author.toString(), args[0].user.toString(), 'poked');
+		const embed = await weebImage(msg, this.client, mentioned, self, action);
+		return msg.sendEmbed(embed);
 	}
 
 };

@@ -1,10 +1,9 @@
 const { Client, PermissionLevels } = require('klasa');
 const Music = require('./util/lib/Music');
-const keys = require('./keys.json');
-const dashboardKeys = require('./dashboard.json');
-const bans = require('./banlist.json');
+const keys = require('./keys/keys.json');
+const dashboardKeys = require('./keys/dashboard.json');
 const { StatsD } = require('node-dogstatsd');
-const Raven = require('raven');
+require('./jamesbond');
 
 class SistineClient extends Client {
 
@@ -13,11 +12,18 @@ class SistineClient extends Client {
 		Object.defineProperty(this, 'keys', { value: keys });
 		Object.defineProperty(this, 'dashKeys', { value: dashboardKeys });
 
+		// Stats
 		this.datadog = new StatsD();
+		this.raven = require('raven');
+		// Music 
 		this.queue = new Music();
-		this.banlist = bans;
-		this.raven = Raven;
+		// Block, Blacklist, Whitelist
+		this.whitelist = require('./keys/whitelist.json');
+		this.blocklist = require('./keys/blocklist.json');
+		this.blacklist = require('./keys/blacklist.json');
+		// Dashboard
 		this.site = null;
+		// Permission Levels
 		this.sistinePermissionLevels = new PermissionLevels()
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.settings.DJRole && msg.member.roles.has(msg.guild.settings.DJRole))

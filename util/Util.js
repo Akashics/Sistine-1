@@ -1,7 +1,6 @@
 const moment = require('moment');
 require('moment-duration-format');
 const snekfetch = require('snekfetch');
-const { dBotsPW, dBotsORG } = require('../keys.json');
 
 class Util {
 
@@ -9,7 +8,7 @@ class Util {
 	static dBots(client) {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-			.set({ Authorization: dBotsPW })
+			.set({ Authorization: client.keys.dBotsPW })
 			.send({ server_count: client.guilds.size })
 			.then(() => {
 				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
@@ -22,7 +21,7 @@ class Util {
 	static dBotsOrg(client) {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-			.set({ Authorization: dBotsORG })
+			.set({ Authorization: client.keys.dBotsORG })
 			.send({ server_count: client.guilds.size })
 			.then(() => {
 				client.console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
@@ -83,6 +82,18 @@ class Util {
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});
+	}
+
+	static weebImage(msg, client, user, self, action) {
+		const { body } = snekfetch.get(`https://staging.weeb.sh/images/random?type=${msg.cmd.name}`)
+			.set('Authorization', `Bearer ${client.keys.weebKey}`)
+			.catch(error => client.emit('error', error));
+
+		return new this.client.methods.Embed()
+			.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
+			.setImage(body.url)
+			.setDescription(action)
+			.setFooter(msg.language.get('WEEB_SERVICES'));
 	}
 
 }

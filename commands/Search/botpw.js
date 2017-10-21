@@ -1,6 +1,5 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
-const keys = require('../../keys.json');
 
 module.exports = class extends Command {
 
@@ -16,7 +15,7 @@ module.exports = class extends Command {
 		try {
 			const { body } = await snekfetch
 				.get(`https://bots.discord.pw/api/bots/${bot.id}`)
-				.set({ Authorization: keys.dBotsPW });
+				.set({ Authorization: this.client.keys.dBotsPW });
 			const build = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setAuthor('Discord Bots', 'https://i.imgur.com/lrKYBQi.jpg')

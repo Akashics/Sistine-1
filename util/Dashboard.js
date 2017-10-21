@@ -20,7 +20,7 @@ const { Strategy } = require('passport-discord');
 const md = require('marked');
 
 // Get Dashboard settings file
-const settings = require('../dashboard.json');
+const settings = require('../keys/dashboard.json');
 
 
 class Dashboard {

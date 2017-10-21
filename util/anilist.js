@@ -1,5 +1,5 @@
 const axios = require('axios');
-const keys = require('../keys.json');
+const keys = require('../keys/keys.json');
 
 class anilist {
 
