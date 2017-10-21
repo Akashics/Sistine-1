@@ -33,7 +33,7 @@ class Util {
 
 	static sendStats(client) {
 		const dd = client.datadog;
-
+		return;
 		dd.guage('client.guilds', client.guilds.size);
 		dd.guage('client.users', client.users.size);
 		dd.guage('client.channels', client.channels.size);
