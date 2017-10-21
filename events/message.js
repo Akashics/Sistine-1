@@ -4,7 +4,7 @@ module.exports = class extends Event {
 
 	async run(msg) {
 		if (this.client.ready) {
-			this.client.datadog.increment('prod.messages');
+			this.client.datadog.increment('client.messages');
 			this.client.monitors.run(msg);
 		}
 	}

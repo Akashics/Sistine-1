@@ -39,7 +39,7 @@ module.exports = class extends Event {
 			this.client.emit('log', `Whitelisted Guild Joined: ${guild.name}[${guild.id}]`);
 		}
 
-		this.client.datadog.increment('client.guildJoin');
+		this.client.datadog.increment('client.totalGuildJoins');
 
 		dBots(this.client);
 		dBotsOrg(this.client);

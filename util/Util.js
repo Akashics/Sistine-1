@@ -38,7 +38,7 @@ class Util {
 		dd.guage('client.users', client.users.size);
 		dd.guage('client.channels', client.channels.size);
 		dd.gauge('client.ping', client.ping);
-		dd.gauge('node.memory', `${process.memoryUsage().heapUsed / 1024 / 1024}`);
+		dd.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
 	}
 
 	static list(arr, conj = 'and') {

@@ -9,7 +9,7 @@ module.exports = class extends Event {
 
 	run(guild) {
 		if (this.client.banlist[guild.id]) { return; }
-		this.client.datadog.increment('client.guildLeaves');
+		this.client.datadog.increment('client.totalGuildLeaves');
 
 		dBots(this.client);
 		dBotsOrg(this.client);
