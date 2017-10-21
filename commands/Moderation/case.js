@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	async run(msg, [selected]) {
 		const modlogs = await this.provider.get('modlogs', msg.guild.id).then(data => data || []);
 		const log = modlogs[selected];
-		if (!log) return msg.send(msg.language.get('MODLOG_CASE_ERROR'));
+		if (!log) { return msg.send(msg.language.get('MODLOG_CASE_ERROR')); }
 		return msg.send([
 			`${msg.language.get('USER')}      : ${log.user.tag} (${log.user.id})`,
 			`${msg.language.get('MODERATOR')}  : ${log.moderator.tag} (${log.moderator.id})`,

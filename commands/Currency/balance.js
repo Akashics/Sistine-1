@@ -26,12 +26,12 @@ module.exports = class extends Command {
 
 	async validate(resolver, user) {
 		const result = await resolver.user(user);
-		if (!result) throw 'The parameter <User> expects either a User ID or a User Object.';
+		if (!result) { throw 'The parameter <User> expects either a User ID or a User Object.'; }
 		return result;
 	}
 
 	async init() {
-		if (!this.client.settings.users) await this.client.settings.add('users', this.validate, this.schema);
+		if (!this.client.settings.users) { await this.client.settings.add('users', this.validate, this.schema); }
 	}
 
 	async run(msg, [mentioned]) {

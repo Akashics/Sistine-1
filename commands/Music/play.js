@@ -17,9 +17,9 @@ module.exports = class extends Command {
 		if (musicInterface.queue.length === 0) {
 			return msg.send(`Add some songs to the queue first with ${msg.guild.settings.prefix}add`);
 		}
-		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) await this.client.commands.get('join').run(msg);
+		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) { await this.client.commands.get('join').run(msg); }
 		if (musicInterface.status === 'paused') { await this.client.commands.get('resume').run(msg); }
-		if (musicInterface.status === 'playing') { return msg.send('Already Playing'); }
+		if (musicInterface.status === 'playing') { return msg.send(`I am already playing something. Try adding a song with ${msg.guild.settings.prefix}add`); }
 		musicInterface.status = 'playing';
 		musicInterface.channel = msg.channel;
 		return this.play(musicInterface, msg);
@@ -29,7 +29,7 @@ module.exports = class extends Command {
 		if (musicInterface.status !== 'playing') return null;
 
 		const song = musicInterface.queue[0];
-		if (musicInterface.voiceChannel.members.size === 1) return msg.send('._. Everyone left, Music has stopped playing.').then(() => musicInterface.destroy());
+		if (musicInterface.voiceChannel.members.size === 1) { return msg.send('._. Everyone left, Music has stopped playing.').then(() => musicInterface.destroy()); }
 		if (!song) {
 			if (musicInterface.autoplay) {
 				return this.autoPlayer(musicInterface).then(() => this.play(musicInterface, msg));

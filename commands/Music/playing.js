@@ -14,7 +14,7 @@ module.exports = class extends Command {
 	async run(msg) {
 		/* eslint-disable no-throw-literal, max-len */
 		const { dispatcher, queue, status } = msg.guild.music;
-		if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status);
+		if (status !== 'playing') { throw msg.language.get('MUSIC_NOTPLAYING', status); }
 		const song = queue[0];
 		const info = await getInfo(song.url).catch((err) => { throw err; });
 		if (!info.author) info.author = {};

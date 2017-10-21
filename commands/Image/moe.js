@@ -1,26 +1,13 @@
 const { Command } = require('klasa');
 const axios = require('axios');
-const { weebKey } = require('../../keys.json');
-
-const AuthStr = `Bearer ${weebKey}`;
 
 module.exports = class extends Command {
 
 	/* eslint-disable max-len */
 	constructor(...args) {
 		super(...args, {
-			name: 'moe',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Allows you to cuddle with another member.',
-			usage: '[ImageType:string]',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			description: 'View random anime images.',
+			usage: '[ImageType:string]'
 		});
 		this.types = ['awoo', 'bang', 'blush', 'clagwimoth', 'cry', 'dance', 'insult', 'jojo', 'lewd', 'lick', 'megumin', 'neko', 'nom', 'owo', 'pout', 'rem', 'shrug', 'sleepy', 'smile', 'teehee', 'smug', 'stare', 'thumbsup', 'triggered', 'wag', 'waifu_insult', 'wasted'];
 	}
@@ -36,7 +23,7 @@ module.exports = class extends Command {
 				.setFooter(`Example CMD: ${msg.guild.settings.prefix}moe dance`);
 			return msg.sendEmbed(images);
 		}
-
+		const AuthStr = `Bearer ${this.client.keys.weebKey}`;
 		const imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${image}`, { headers: { Authorization: AuthStr } });
 		images
 			.setColor(msg.member.highestRole.color || 0)

@@ -17,7 +17,7 @@ module.exports = class MusicInterface extends Discord.Collection {
      * @returns {MusicManager}
      */
 	create(guild) {
-		if (guild.constructor.name !== 'Guild') throw 'The parameter \'Guild\' must be a guild instance.';
+		if (guild.constructor.name !== 'Guild') { throw 'The parameter \'Guild\' must be a guild instance.'; }
 		const manager = new MusicManager(guild);
 		super.set(guild.id, manager);
 		return manager;

@@ -1,5 +1,5 @@
 const { Event } = require('klasa');
-const { dBots, dBotsOrg, updateStatus, dev } = require('../util/Util');
+const { dBots, dBotsOrg, updateStatus } = require('../util/Util');
 
 module.exports = class extends Event {
 
@@ -7,20 +7,13 @@ module.exports = class extends Event {
 		super(...args, { name: 'guildDelete', enabled: true });
 	}
 
-	async run(guild) {
-		if (this.client.banlist[guild.id]) {
-			return;
-		}
-		this.client.datadog.increment('client.guildLeaves');
+	run(guild) {
+		if (this.client.banlist[guild.id]) { return; }
+		this.client.datadog.increment('client.totalGuildLeaves');
 
-		if (!dev) {
-			const guildCount = await this.client.shard.fetchClientValues('guilds.size');
-			const finalCount = guildCount.reduce((prev, val) => prev + val, 0);
-
-			dBots(this.client, finalCount);
-			dBotsOrg(this.client, finalCount);
-			updateStatus(this.client, finalCount);
-		}
+		dBots(this.client);
+		dBotsOrg(this.client);
+		updateStatus(this.client);
 	}
 
 };

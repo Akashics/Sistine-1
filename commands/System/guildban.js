@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { writeJSONAtomic } = require('fs-nextra');
-const { supportServers } = require('../../keys.json');
+const { supportServers } = require('../../keys/keys.json');
 
 module.exports = class extends Command {
 
@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			permLevel: 10,
 			description: 'Ban a Guild from Bot Usage.',
 			usage: '<GuildIdentifier:guild|GuildID:str> <BannableReason:string> [...]',
-			usageDelim: ' '
+			usageDelim: ' ',
+			enabled: false
 		});
 	}
 

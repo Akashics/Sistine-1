@@ -1,12 +1,9 @@
 const { Client, PermissionLevels } = require('klasa');
 const Music = require('./util/lib/Music');
-const keys = require('./keys.json');
-const dashboardKeys = require('./dashboard.json');
-const bans = require('./banlist.json');
+const keys = require('./keys/keys.json');
+const dashboardKeys = require('./keys/dashboard.json');
 const { StatsD } = require('node-dogstatsd');
-const Raven = require('raven');
-
-const dogstatsd = new StatsD();
+require('./jamesbond');
 
 class SistineClient extends Client {
 
@@ -15,16 +12,23 @@ class SistineClient extends Client {
 		Object.defineProperty(this, 'keys', { value: keys });
 		Object.defineProperty(this, 'dashKeys', { value: dashboardKeys });
 
-		this.datadog = dogstatsd;
+		// Stats
+		this.datadog = new StatsD();
+		this.raven = require('raven');
+		// Music 
 		this.queue = new Music();
-		this.banlist = bans;
-		this.raven = Raven;
+		// Block, Blacklist, Whitelist
+		this.whitelist = require('./keys/whitelist.json');
+		this.blocklist = require('./keys/blocklist.json');
+		this.blacklist = require('./keys/blacklist.json');
+		// Dashboard
 		this.site = null;
+		// Permission Levels
 		this.sistinePermissionLevels = new PermissionLevels()
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.settings.DJRole && msg.member.roles.has(msg.guild.settings.DJRole))
 			.addLevel(2, false, (client, msg) => msg.guild && msg.guild.settings.ModRole && msg.member.roles.has(msg.guild.settings.ModRole))
-			.addLevel(7, false, (client, msg) => msg.guild && msg.member === msg.guild.owner)
+			.addLevel(3, false, (client, msg) => msg.guild && msg.member === msg.guild.owner)
 			.addLevel(9, true, (client, msg) => msg.author === client.owner)
 			.addLevel(10, false, (client, msg) => msg.author === client.owner);
 	}
@@ -35,10 +39,10 @@ const Sistine = new SistineClient({
 	clientOptions: { fetchAllMembers: true },
 	prefix: 's>',
 	cmdEditing: true,
-	cmdLogging: true,
+	cmdLogging: false,
 	typing: false,
 	permissionLevels: this.sistinePermissionLevels,
-	readyMessage: (client) => `Dev Mode: ${keys.dev ? 'On' : 'Off'} - ${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`
+	readyMessage: (client) => `${keys.dev ? '!== DEV MODE ONLINE ==! - ' : ''}${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`
 });
 
 Sistine.login(keys.dev ? keys.betaBotToken : keys.botToken);

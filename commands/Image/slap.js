@@ -1,29 +1,18 @@
 const { Command } = require('klasa');
 const axios = require('axios');
-const { weebKey } = require('../../keys.json');
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'slap',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
 			description: 'Allows you to slap another member.',
-			usage: '<SomeoneToSlap:member>',
-			usageDelim: undefined,
-			extendedHelp: 'No Extended Help.'
+			usage: '<SomeoneToSlap:member>'
 		});
 	}
 
 	async run(msg, [...args]) {
 		const image = new this.client.methods.Embed();
-		const AuthStr = `Bearer ${weebKey}`;
+		const AuthStr = `Bearer ${this.client.keys.weebKey}`;
 
 		let self = false;
 		const imageRequest = await axios.get('https://staging.weeb.sh/images/random?type=slap', { headers: { Authorization: AuthStr } });

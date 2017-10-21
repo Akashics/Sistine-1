@@ -26,9 +26,9 @@ module.exports = class extends Command {
 	async run(msg, [vol]) {
 		/* eslint-disable no-throw-literal */
 		const { dispatcher, status } = msg.guild.music;
-		if (status !== 'playing') throw msg.language.get('MUSIC_NOTPLAYING', status);
+		if (status !== 'playing') { throw msg.language.get('MUSIC_NOTPLAYING', status); }
 
-		if (!vol) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`);
+		if (!vol) { return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`); }
 		if (/^[+]+$/.test(vol)) {
 			if (Math.round(dispatcher.volume * 50) >= 100) return msg.send(`📢 Volume: ${Math.round(dispatcher.volume * 50)}%`);
 			dispatcher.setVolume(Math.min(((dispatcher.volume * 50) + (2 * (vol.split('+').length - 1))) / 50, 2));
@@ -36,7 +36,7 @@ module.exports = class extends Command {
 		}
 
 		if (/^[-]+$/.test(vol)) {
-			if (Math.round(dispatcher.volume * 50) <= 0) return msg.send(`🔇 Volume: ${Math.round(dispatcher.volume * 50)}%`);
+			if (Math.round(dispatcher.volume * 50) <= 0) { return msg.send(`🔇 Volume: ${Math.round(dispatcher.volume * 50)}%`); }
 			dispatcher.setVolume(Math.max(((dispatcher.volume * 50) - (2 * (vol.split('-').length - 1))) / 50, 0));
 			return msg.send(`${dispatcher.volume === 0 ? '🔇' : '🔉'} Volume: ${Math.round(dispatcher.volume * 50)}%`);
 		}

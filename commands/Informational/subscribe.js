@@ -14,10 +14,10 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		if (msg.guild.id !== '324051061033926666') return;
-		const role = announcement(msg);
+		const role = await announcement(msg);
+		if (msg.member.roles.has(role)) return msg.send(msg.language.get('ALREADY_SUBSCRIBE', true, msg.guild.name));
 		await msg.member.addRole(role);
-		msg.send(msg.language.get('COMMAND_SUBSCRIBE_SUCCESS', role.name));
+		return msg.send(msg.language.get('COMMAND_SUBSCRIBE_SUCCESS', role.name));
 	}
 
 };

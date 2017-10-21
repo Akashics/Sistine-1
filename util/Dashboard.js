@@ -20,14 +20,13 @@ const { Strategy } = require('passport-discord');
 const md = require('marked');
 
 // Get Dashboard settings file
-const settings = require('../dashboard.json');
+const settings = require('../keys/dashboard.json');
 
 
 class Dashboard {
 
 	/* eslint-disable consistent-return */
 	static async startDashboard(client) {
-		if (client.shard.id !== 0) return;
 		const dataDir = path.resolve(`${process.cwd()}${path.sep}assets/dashboard`);
 		const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 
@@ -82,13 +81,13 @@ class Dashboard {
   endpoints to give specific permissions. 
   */
 		function checkAuth(req, res, next) {
-			if (req.isAuthenticated()) return next();
+			if (req.isAuthenticated()) { return next(); }
 			req.session.backURL = req.url;
 			res.redirect('/login');
 		}
 
 		function checkAdmin(req, res, next) {
-			if (req.isAuthenticated() && req.user.id === client.appInfo.owner.id) return next();
+			if (req.isAuthenticated() && req.user.id === client.appInfo.owner.id) { return next(); }
 			req.session.backURL = req.originalURL;
 			res.redirect('/');
 		}
@@ -171,7 +170,7 @@ class Dashboard {
 		app.get('/dashboard', checkAuth, (req, res) => {
 			const perms = Discord.EvaluatedPermissions;
 			res.render(path.resolve(`${templateDir}${path.sep}dashboard.ejs`), {
-				perms: perms,
+				perms,
 				bot: client,
 				user: req.user,
 				auth: true
@@ -179,23 +178,23 @@ class Dashboard {
 		});
 
 		app.get('/members/:guildID', checkAuth, async (req, res) => {
-			const guild = client.guilds.get(req.params.guildID);
-			if (!guild) return res.status(404);
+			const guildObj = client.guilds.get(req.params.guildID);
+			if (!guildObj) { return res.status(404); }
 			if (req.param.fetch) {
-				await guild.fetchMembers();
+				await guildObj.fetchMembers();
 			}
 			res.render(path.resolve(`${templateDir}${path.sep}members.ejs`), {
 				bot: client,
 				user: req.user,
 				auth: true,
-				guild: guild,
-				members: guild.members.array()
+				guild: guildObj,
+				members: guildObj.members.array()
 			});
 		});
 
 		app.post('/manage/:guildID', checkAuth, (req, res) => {
 			const guild = client.guilds.get(req.params.guildID);
-			if (!guild) return res.status(404);
+			if (!guild) { return res.status(404); }
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
 			if (req.user.id === client.appInfo.owner.id) {
 				console.log(`Admin bypass (${req.user.id}) for managing server: ${req.params.guildID}`);

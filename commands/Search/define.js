@@ -1,6 +1,5 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
-const keys = require('../../keys.json');
 
 module.exports = class extends Command {
 
@@ -21,9 +20,9 @@ module.exports = class extends Command {
 					limit: 1,
 					includeRelated: false,
 					useCanonical: false,
-					api_key: keys.wordNik
+					api_key: this.client.keys.wordNik
 				});
-			if (!body.length) return msg.say('Could not find any results.');
+			if (!body.length) { return msg.send('Could not find any results.'); }
 			const defineEmbed = new this.client.methods.Embed()
 				.setColor(0x9797FF)
 				.setTitle(body[0].word)
