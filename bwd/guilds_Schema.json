@@ -3,7 +3,7 @@
     "prefix": {
         "type": "string",
         "array": false,
-        "default": "lili",
+        "default": "s>",
         "min": null,
         "max": null,
         "sql": "TEXT NOT NULL DEFAULT 's>'",
