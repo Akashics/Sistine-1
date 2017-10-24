@@ -17,6 +17,7 @@ module.exports = class extends Command {
 		const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
 		const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]');
 		return msg.sendCode('asciidoc', [
+			'= BOT STATS =',
 			`• Servers      :: ${this.client.guilds.size.toLocaleString()}`,
 			`• Channels     :: ${this.client.channels.size.toLocaleString()}`,
 			`• Users        :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
