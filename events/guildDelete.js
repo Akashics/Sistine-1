@@ -7,9 +7,8 @@ module.exports = class extends Event {
 		super(...args, { name: 'guildDelete', enabled: true });
 	}
 
-	run(guild) {
-		if (this.client.banlist[guild.id]) { return; }
-		this.client.datadog.increment('client.totalGuildLeaves');
+	run() {
+		this.client.stats.increment('client.totalGuildLeaves');
 
 		dBots(this.client);
 		dBotsOrg(this.client);

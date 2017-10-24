@@ -28,18 +28,18 @@ module.exports = class extends Event {
 			}
 
 			const fullGuild = await guild.members.fetch();
-			const bots = fullGuild.members.filter(mem => mem.user.bot).size;
-			if (fullGuild.memberCount > 25 && ((bots / fullGuild.memberCount * 100) > 30)) {
+			const botsCount = fullGuild.filter(mem => mem.user.bot).size;
+			if (fullGuild.memberCount > 25 && ((botsCount / fullGuild.memberCount * 100) > 30)) {
 				guild.leave();
-				this.client.emit('warn', `⚠ Bot Collection Guild: ${guild.name}[${guild.id}] joined with ${(bots / guild.memberCount * 100).toFixed(2)}% of bots.`);
+				this.client.emit('warn', `⚠ Bot Collection Guild: ${guild.name}[${guild.id}] joined with ${(botsCount / guild.memberCount * 100).toFixed(2)}% of bots.`);
 				return;
 			}
-			this.client.emit('log', `No Problems found for: ${guild.name}[${guild.id}]`);
+			this.client.emit('log', `Guild Addition: No Problems found for: ${guild.name}[${guild.id}]`);
 		} else {
 			this.client.emit('log', `Whitelisted Guild Joined: ${guild.name}[${guild.id}]`);
 		}
 
-		this.client.datadog.increment('client.totalGuildJoins');
+		this.client.stats.increment('client.totalGuildJoins');
 
 		dBots(this.client);
 		dBotsOrg(this.client);

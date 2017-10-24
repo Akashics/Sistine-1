@@ -4,11 +4,7 @@ const snekfetch = require('snekfetch');
 module.exports = class extends Command {
 
 	constructor(...args) {
-		super(...args, {
-			runIn: ['text'],
-			description: 'Responds with a random dad joke.'
-		});
-		this.requireMusic = false;
+		super(...args, { description: 'Responds with a random dad joke.' });
 	}
 
 	async run(msg) {

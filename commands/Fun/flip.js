@@ -5,11 +5,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			runIn: ['text'],
-			aliases: ['flip'],
+			aliases: ['coin', 'coinflip'],
 			description: 'Flip a coin. Heads or Tails.'
 		});
-		this.requireMusic = false;
 	}
 
 	async run(msg) {

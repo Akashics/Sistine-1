@@ -4,7 +4,8 @@ module.exports = class extends Event {
 
 	async run(msg) {
 		if (this.client.ready) {
-			this.client.datadog.increment('client.messages');
+			this.client.stats.increment('client.messages');
+			if (this.client.blocklist.includes(msg.author.id)) return;
 			this.client.monitors.run(msg);
 		}
 	}

@@ -1,8 +1,10 @@
 {
-    "clientID": "353929487018229762",
-    "clientSecret": "i9NOLVBukVRb9QBv8ouds3PCGm2UKtgV",
-    "callbackURL": "https://dashboard.sistine.ml/callback",
-    "domainName": "https://dashboard.sistine.ml",
+    "sisclientID": "353929487018229762",
+    "sisclientSecret": "i9NOLVBukVRb9QBv8ouds3PCGm2UKtgV",
+    "clientID": "361677180411052032",
+    "clientSecret": "OEl8Kab5C9OpsdcjiyVTjmOXMy1uTWjH",
+    "callbackURL": "http://localhost/callback",
+    "domainName": "http://localhost",
     "dashboardPort": "80",
     "sessionSecret": "JamesBondWasFaked"
 }
