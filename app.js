@@ -2,7 +2,8 @@ const { Client, PermissionLevels } = require('klasa');
 const Music = require('./util/lib/Music');
 const keys = require('./keys/keys.json');
 const dashboardKeys = require('./keys/dashboard.json');
-const { StatsD } = require('node-dogstatsd');
+const StatsD = require('hot-shots');
+const datadog = new StatsD();
 require('./jamesbond');
 
 class SistineClient extends Client {
@@ -12,12 +13,9 @@ class SistineClient extends Client {
 		Object.defineProperty(this, 'keys', { value: keys });
 		Object.defineProperty(this, 'dashKeys', { value: dashboardKeys });
 
-		// Stats
-		this.datadog = new StatsD();
+		this.stats = datadog;
 		this.raven = require('raven');
-		// Music 
 		this.queue = new Music();
-		// Block, Blacklist, Whitelist
 		this.whitelist = require('./keys/whitelist.json');
 		this.blocklist = require('./keys/blocklist.json');
 		this.blacklist = require('./keys/blacklist.json');
@@ -46,3 +44,8 @@ const Sistine = new SistineClient({
 });
 
 Sistine.login(keys.dev ? keys.betaBotToken : keys.botToken);
+
+
+datadog.socket.on('error', (error) => {
+	console.error('Error in socket: ', error);
+});

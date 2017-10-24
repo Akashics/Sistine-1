@@ -11,11 +11,15 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [...args]) {
-		if (msg.deletable) {
-			msg.delete();
+	async run(msg, [string]) {
+		if (msg.content.endsWith('-s')) {
+			try {
+				msg.delete();
+			} catch (error) {
+				this.client.emit('error', error);
+			}
 		}
-		return msg.send(args);
+		return msg.send(string);
 	}
 
 };

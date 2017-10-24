@@ -1,19 +1,19 @@
 const { Event } = require('klasa');
-const { sendStats, updateStatus } = require('../util/Util');
+const { updateStatus } = require('../util/Util');
 const { startDashboard } = require('../util/Dashboard');
 
 module.exports = class extends Event {
 
 	async run() {
-		this.client.appInfo = await this.client.fetchApplication();
+		const that = this;
 		startDashboard(this.client);
 
-		setInterval(async () => {
-			this.client.appInfo = await this.client.fetchApplication();
-		}, 60000);
-		const clientObj = this.client;
 		setInterval(() => {
-			sendStats(clientObj);
+			that.client.stats.gauge('client.guilds', that.client.guilds.size);
+			that.client.stats.gauge('client.users', that.client.users.size);
+			that.client.stats.gauge('client.channels', that.client.channels.size);
+			that.client.stats.gauge('client.ping', that.client.ping);
+			that.client.stats.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
 		}, 180000);
 
 		this.client.raven.config(this.client.keys.raven).install();

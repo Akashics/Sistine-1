@@ -20,7 +20,6 @@ require('libsodium-wrappers');
 require('marked');
 require('moment');
 require('moment-duration-format');
-require('node-dogstatsd');
 require('node-opus');
 require('passport');
 require('passport-discord');

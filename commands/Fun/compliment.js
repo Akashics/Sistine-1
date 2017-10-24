@@ -7,12 +7,12 @@ module.exports = class extends Command {
 		super(...args, {
 			runIn: ['text'],
 			description: 'Compliments a user.',
-			usage: '<UserToCompliment:member>'
+			usage: '[UserToCompliment:user]'
 		});
 	}
 
-	async run(msg, [...args]) {
-		return msg.send(`${args[0].user.username} – ${compliments[Math.floor(Math.random() * compliments.length)]}`);
+	async run(msg, [member = msg.author]) {
+		return msg.send(`${member.toString()} – ${compliments[Math.floor(Math.random() * compliments.length)]}`);
 	}
 
 };
