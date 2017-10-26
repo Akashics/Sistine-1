@@ -9,6 +9,7 @@ module.exports = class extends Command {
 			aliases: ['wtp', 'whosethatpokemon'],
 			description: 'Guess that Pokemon!'
 		});
+		this.cost = 2;
 	}
 
 	async run(msg) {

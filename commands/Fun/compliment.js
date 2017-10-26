@@ -9,6 +9,7 @@ module.exports = class extends Command {
 			description: 'Compliments a user.',
 			usage: '[UserToCompliment:user]'
 		});
+		this.cost = 2;
 	}
 
 	async run(msg, [member = msg.author]) {

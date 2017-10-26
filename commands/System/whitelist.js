@@ -8,7 +8,7 @@ module.exports = class extends Command {
 			cooldown: 2,
 			permLevel: 10,
 			description: 'Whitelists a guild, preventing guild checks.',
-			usage: '<AddorRemove:string> <GuildIdentifier:guild|GuildID:str>',
+			usage: '<add|remove> <GuildIdentifier:guild|GuildID:str>',
 			usageDelim: ' '
 		});
 	}

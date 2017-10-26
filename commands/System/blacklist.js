@@ -8,7 +8,7 @@ module.exports = class extends Command {
 			cooldown: 2,
 			permLevel: 10,
 			description: 'Blacklist a guild, preventing guild creation.',
-			usage: '<addorremove:str> <GuildIdentifier:guild|GuildID:str>',
+			usage: '<add|remove> <GuildIdentifier:guild|GuildID:str>',
 			usageDelim: ' '
 		});
 	}

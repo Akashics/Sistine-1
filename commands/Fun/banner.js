@@ -8,6 +8,7 @@ module.exports = class extends Command {
 			description: 'Creates an ASCII banner from the string you supply.',
 			usage: '<BannerText:str>'
 		});
+		this.cost = 1;
 	}
 
 	async run(msg, [banner]) {

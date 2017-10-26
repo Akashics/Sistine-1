@@ -20,6 +20,12 @@ module.exports = class extends Command {
 				default: 0,
 				array: false,
 				min: 0
+			},
+			daily: {
+				type: "Integer",
+				default: 1504120109,
+				array: false,
+				min: 1504120109
 			}
 		};
 	}
@@ -35,7 +41,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [mentioned]) {
-		if (mentioned && msg.author.hasAtleastPermissionLevel(7)) {
+		if (mentioned && msg.hasAtLeastPermissionLevel(7)) {
 			const { balance } = mentioned.user.conf;
 			return msg.send(`${mentioned.user.tag} currently has ${balance || 0} credits.`);
 		}
