@@ -26,7 +26,14 @@ module.exports = class extends Command {
 				default: 1504120109,
 				array: false,
 				min: 1504120109
+			},
+			level: {
+				type: "Integer",
+				default: 1,
+				array: false,
+				min: 1
 			}
+
 		};
 	}
 

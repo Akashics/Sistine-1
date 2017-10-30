@@ -1,0 +1,48 @@
+<%- include('blocks/header', {bot:bot, user: user, path: path, auth: auth}) %>
+
+  <% const help = {};
+bot.commands.forEach((command) => {
+  const cat = command.category;
+  if (!help.hasOwnProperty(cat)) help[cat] = [];
+  help[cat].push(command);
+});
+%>
+    <div class="container SistineBestContent">
+      <% for (const category in help) { %>
+        <br>
+        <h2>
+          <%= category %> Commands </h2>
+        <br>
+        <div class="card-columns" data-background-color="color"> </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Command</th>
+                <th>Description</th>
+                <th>Required Permission</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const command of help[category]) { %>
+                <tr>
+                  <td>
+                    <%= command.name %>
+                      <i>
+                        <%= `${command.aliases.join(', ')}` %>
+                      </i>
+                  </td>
+                  <td>
+                    <%= command.description %>
+                  </td>
+                  <td>
+                    <%= command.permLevel %>
+                  </td>
+                </tr>
+                <% } %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+    <% include ./blocks/footer %>

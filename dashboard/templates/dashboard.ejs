@@ -1,11 +1,6 @@
-<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+<%- include('blocks/header', {bot, user, path}) %>
 <div class="container">
-  <div class="jumbotron">
-    <div>
-      <h1>Dashboard</h1>
-      <h5>From this page you can select a guild you have MANAGE_GUILD permissions on<br>and either manage the guild via the bot, or invite the bot.</h5>
-    </div>
-  </div>
+<h1 class="display-3">Dashboard</h1>
 <ul class="list-unstyled">
   <% user.guilds.forEach(guild => { 
     const permsOnGuild = new perms(guild.permissions);
@@ -34,13 +29,13 @@
         let href, text;
         let enabled;
         if(bot.guilds.get(guild.id)) {
-          href = "/manage/" + guild.id;
+          href = `/dashboard/${guild.id}/manage`;
           text = "Manage";
           enabled = true;
         } else {
-          href = `https://discordapp.com/oauth2/authorize?client_id=${bot.appInfo.id}&scope=bot&guild_id=${guild.id}&response_type=code&redirect_uri=${encodeURIComponent(bot.dashKeys.callbackURL)}`;
+          href = `https://discordapp.com/oauth2/authorize?client_id=${bot.application.id}&scope=bot&guild_id=${guild.id}&response_type=code&redirect_uri=${encodeURIComponent(bot.dashKeys.callbackURL)}`;
           text = "Invite Bot";
-          enabled = bot.appInfo.botPublic;
+          enabled = bot.application.botPublic;
         }
         %> 
         <a class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>"><%= text %> <i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></a>

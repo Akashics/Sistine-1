@@ -16,11 +16,11 @@ module.exports = class extends Command {
 	async run(msg, [user]) {
 		const { blocklist } = this.client;
 		if (blocklist.includes(user.id)) {
-			return msg.send(`<:tickNo:315009174163685377> \`${user.tag}[${user.id}]\` is already blocklisted.`);
+			return msg.send(`<:tickNo:373304949234204682> \`${user.tag}[${user.id}]\` is already blocklisted.`);
 		}
 		await this.client.blocklist.push(user.id);
 		await writeJSONAtomic('./keys/blocklist.json', this.client.blocklist);
-		return msg.send(`<:tickYes:315009125694177281> \`${user.tag}[${user.id}]\` was added to the blocklist.`);
+		return msg.send(`<:tickYes:373305832793833483> \`${user.tag}[${user.id}]\` was added to the blocklist.`);
 	}
 
 };

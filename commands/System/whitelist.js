@@ -18,18 +18,18 @@ module.exports = class extends Command {
 		switch (addremove) {
 			case 'add':
 				if (whitelist.includes(guild.id)) {
-					return msg.send(`<:tickNo:315009174163685377> \`${guild}[${guild.id}\` is already whitelisted.`);
+					return msg.send(`<:tickNo:373304949234204682> \`${guild}[${guild.id}\` is already whitelisted.`);
 				}
 				await this.client.whitelist.push(guild.id);
 				await writeJSONAtomic('./keys/whitelist.json', this.client.whitelist);
-				return msg.send(`<:tickYes:315009125694177281> \`${guild}[${guild.id}]\` was added to the whitelist.`);
+				return msg.send(`<:tickYes:373305832793833483> \`${guild}[${guild.id}]\` was added to the whitelist.`);
 			case 'remove':
 				if (!whitelist.includes(guild.id)) {
-					return msg.send(`<:tickNo:315009174163685377> \`${guild}[${guild.id}]\` is not whitelisted.`);
+					return msg.send(`<:tickNo:373304949234204682> \`${guild}[${guild.id}]\` is not whitelisted.`);
 				}
 				await whitelist.splice(whitelist.indexOf(guild.id));
 				await writeJSONAtomic('./keys/whitelist.json', this.client.whitelist);
-				return msg.send(`<:tickYes:315009125694177281> \`${guild}[${guild.id}]\` was removed from the whitelist.`);
+				return msg.send(`<:tickYes:373305832793833483> \`${guild}[${guild.id}]\` was removed from the whitelist.`);
 		}
 		return msg.send('There were no valid options. Please try again.');
 	}

@@ -1,0 +1,171 @@
+.bg-primary {
+  background-color: #185875 !important;
+}
+body {
+  background-color: #0C1821;
+}
+
+.jumbotron {
+  background-color: darkslategray;
+}
+.navbar .navbar-transparent {
+  box-shadow: 1px;
+}
+.profilebotimage{
+  -webkit-animation-name: Floatingx;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-name: Floating;
+  -moz-animation-duration: 4s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: ease-in-out;
+}
+@-webkit-keyframes Floatingx{
+  from {-webkit-transform:translate(0, 0px);}
+  65% {-webkit-transform:translate(0, 15px);}
+  to {-webkit-transform: translate(0, -0px);    }    
+}
+  
+@-moz-keyframes Floating{
+  from {-moz-transform:translate(0, 0px);}
+  65% {-moz-transform:translate(0, 15px);}
+  to {-moz-transform: translate(0, -0px);}    
+}
+
+.container th h1 {
+  font-weight: bold;
+  font-size: 1em;
+text-align: left;
+color: #185875;
+}
+
+.container {
+  margin-top: auto;
+}
+
+@font-face {
+font-family: UniSans;
+src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
+}
+
+@-webkit-keyframes sliderAni {
+  0% {
+      background-position: 0% 50%
+  }
+  50% {
+      background-position: 100% 50%
+  }
+  100% {
+      background-position: 00% 50%
+  }
+}
+
+@-moz-keyframes sliderAni {
+  0% {
+      background-position: 0% 50%
+  }
+  50% {
+      background-position: 100% 50%
+  }
+  100% {
+      background-position: 00% 50%
+  }
+}
+
+@-o-keyframes sliderAni {
+  0% {
+      background-position: 0% 50%
+  }
+  50% {
+      background-position: 100% 50%
+  }
+  100% {
+      background-position: 00% 50%
+  }
+}
+
+@keyframes sliderAni {
+  0% {
+      background-position: 0% 50%
+  }
+  50% {
+      background-position: 100% 50%
+  }
+  100% {
+      background-position: 00% 50%
+  }
+}
+.color-strip {
+  color: #fff;
+  width: 100%;
+  background: linear-gradient(90deg, #72478e, #3c2249, #8954bf, #7442a4, #c470ff);
+  background-size: 1000% 1000%;
+  -webkit-animation: sliderAni 10s ease infinite;
+  -moz-animation: sliderAni 10s ease infinite;
+  -o-animation: sliderAni 10s ease infinite;
+  animation: sliderAni 10s ease infinite;
+}
+
+.page-header .container {
+  text-align: left;
+}
+
+.form-control {
+  background-color: white;
+}
+
+body.modal-open div.modal-backdrop {
+  margin-top: 60px;
+  z-index: 0; 
+}
+
+.modal-header, .modal-body {
+  color: black;
+}
+
+.modal-content {
+  margin-top: 80px
+}
+
+.roleBox {
+  border-radius: 3px;
+  padding: 0px 3px;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.status {
+  box-sizing: border-box;
+  border-width: 2px;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  float: left;
+  vertical-align: middle;
+  margin: 5px;
+}
+
+.online {
+  background-color: #42b581;
+  border-color: #69c49a;
+}
+
+.idle {
+  background-color: #faa61a;
+  border-color: #fbb848;
+}
+
+.dnd {
+  background-color: #f04747;
+  border-color: #f36c6c;
+}
+
+.offline {
+  background-color: #747f8d;
+  border-color: #9099a4;
+}
+
+.footer {
+  padding-right: 10%;
+}

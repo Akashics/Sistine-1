@@ -14,7 +14,7 @@ module.exports = class extends Command {
 		if (user.bot || msg.author.bot) return msg.send('Bots cannot send/recieve points, Sorry.');
 		const payer = msg.author.id;
 		const payee = user.id;
-		const pointsReward = 50;
+		const pointsReward = 100;
 
 		try {
 			// payee: The user getting paid
@@ -25,19 +25,19 @@ module.exports = class extends Command {
 
 			if (Date.now() > getPayer.daily) {
 				if (payer === payee) {
-					const message = await msg.channel.send(`<:tickYes:315009125694177281> You have claimed your daily ${pointsReward} points, Ain't that dandy?`);
+					const message = await msg.channel.send(`<:tickYes:373305832793833483> You have claimed your daily ${pointsReward} points, Ain't that dandy?`);
 					await this.client.settings.users.updateOne(payer, 'daily', message.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
 					await this.client.settings.users.updateOne(payer, 'balance', this.client.settings.users.getEntry(payer).balance + pointsReward, msg.guild);
 					return null;
 				} else {
-					const message = await msg.send(`<:tickYes:315009125694177281> You have donated your daily ${pointsReward} points, Ain't that dandy?`);
+					const message = await msg.send(`<:tickYes:373305832793833483> You have donated your daily ${pointsReward} points, Ain't that dandy?`);
 					await this.client.settings.users.updateOne(payer, 'daily', message.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
 					await this.client.settings.users.updateOne(payee, 'balance', this.client.settings.users.getEntry(payee).balance + pointsReward, msg.guild);
 					return null;
 				}
 			} else {
 				const fromNow = moment(getPayer.daily).fromNow(true);
-				return msg.send(`<:tickNo:315009174163685377> You cannot claim your daily reward yet, please try again in ${fromNow}.`);
+				return msg.send(`<:tickNo:373304949234204682> You cannot claim your daily reward yet, please try again in ${fromNow}.`);
 			}
 		} catch (error) {
 			throw error;
