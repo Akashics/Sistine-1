@@ -9,6 +9,7 @@ module.exports = class extends Command {
 			aliases: ['wy-rather', 'wyr'],
 			description: 'Responds with a random would you rather question.'
 		});
+		this.cost = 2;
 	}
 
 	async run(msg) {

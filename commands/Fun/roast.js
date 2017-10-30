@@ -10,6 +10,7 @@ module.exports = class extends Command {
 			description: 'Roasts a user.',
 			usage: '[UserToRoast:member]'
 		});
+		this.cost = 1;
 	}
 
 	async run(msg, [memberMention]) {

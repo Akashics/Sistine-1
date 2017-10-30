@@ -5,6 +5,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, { description: 'Responds with a random dad joke.' });
+		this.cost = 1;
 	}
 
 	async run(msg) {

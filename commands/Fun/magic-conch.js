@@ -11,6 +11,7 @@ module.exports = class extends Command {
 			usage: '<Question:String>'
 		});
 		this.answers = ['Maybe someday', 'Nothing', 'Neither', 'I don\'t think so', 'Yes', 'Try asking again later'];
+		this.cost = 1;
 	}
 
 	async run(msg) {

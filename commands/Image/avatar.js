@@ -6,11 +6,11 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['avtr'],
 			description: 'Fetches a mentioned user\'s avatar.',
-			usage: '<GuildMember:member>'
+			usage: '[GuildMember:user]'
 		});
 	}
 
-	async run(msg, [args]) {
+	async run(msg, [args = msg.author]) {
 		if (!args.user.avatar) { return msg.send(msg.language.get('NO_AVATAR')); }
 		const avatar = args.user.displayAvatarURL({
 			format: args.user.avatar.startsWith('a_') ? 'gif' : 'png',

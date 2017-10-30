@@ -15,10 +15,11 @@ require('moment-duration-format');
 // passport-discord is a plugin for passport that handles Discord's specific implementation.
 const passport = require('passport');
 const session = require('express-session');
+const LevelStore = require('level-session-store')(session);
 const { Strategy } = require('passport-discord');
 // Used to parse Markdown from things like ExtendedHelp
 const md = require('marked');
-
+const helmet = require('helmet');
 // Get Dashboard settings file
 const settings = require('../keys/dashboard.json');
 
@@ -27,7 +28,11 @@ class Dashboard {
 
 	/* eslint-disable consistent-return */
 	static async startDashboard(client) {
-		const dataDir = path.resolve(`${process.cwd()}${path.sep}assets/dashboard`);
+		String.prototype.toProperCase = function prop() {
+			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+		};
+
+		const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
 		const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 
 		app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`)));
@@ -53,6 +58,7 @@ class Dashboard {
 		// Session data, used for temporary storage of your visitor's session information.
 		// the `secret` is in fact a "salt" for the data, and should not be shared publicly.
 		app.use(session({
+			store: new LevelStore('./data/dashboard-session/'),
 			secret: settings.sessionSecret,
 			resave: false,
 			saveUninitialized: false
@@ -61,6 +67,7 @@ class Dashboard {
 		// Initializes passport and session.
 		app.use(passport.initialize());
 		app.use(passport.session());
+		app.use(helmet());
 
 		// The domain name used in various endpoints to link between pages.
 		app.locals.domain = settings.domainName;
@@ -86,43 +93,23 @@ class Dashboard {
 			res.redirect('/login');
 		}
 
-		function checkAdmin(req, res, next) {
-			if (req.isAuthenticated() && req.user.id === client.appInfo.owner.id) { return next(); }
-			req.session.backURL = req.originalURL;
-			res.redirect('/');
-		}
+		// This function simplifies the rendering of the page, since every page must be rendered
+		// with the passing of these 4 variables, and from a base path. 
+		// Objectassign(object, newobject) simply merges 2 objects together, in case you didn't know!
+		const renderTemplate = (res, req, template, data = {}) => {
+			const baseData = {
+				bot: client,
+				path: req.path,
+				auth: !!req.isAuthenticated(),
+				user: req.isAuthenticated() ? req.user : null
+			};
+			res.render(path.resolve(`${templateDir}${path.sep}${template}`), Object.assign(baseData, data));
+		};
 
 		// Index page. If the user is authenticated, it shows their info
 		// at the top right of the screen.
 		app.get('/', (req, res) => {
-			res.render(path.resolve(`${templateDir}${path.sep}index.ejs`), {
-				bot: client,
-				auth: !!req.isAuthenticated(),
-				user: req.isAuthenticated() ? req.user : null
-			});
-		});
-
-		app.get('/stats', (req, res) => {
-			const duration = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
-			const members = client.guilds.reduce((part, con) => part + con.memberCount, 0);
-			const textChannels = client.channels.filter(con => con.type === 'text').size;
-			const voiceChannels = client.channels.filter(con => con.type === 'voice').size;
-			const guilds = client.guilds.size;
-			res.render(path.resolve(`${templateDir}${path.sep}stats.ejs`), {
-				bot: client,
-				auth: !!req.isAuthenticated(),
-				user: req.isAuthenticated() ? req.user : null,
-				stats: {
-					servers: guilds,
-					members: members,
-					text: textChannels,
-					voice: voiceChannels,
-					uptime: duration,
-					memoryUsage: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
-					dVersion: Discord.version,
-					nVersion: process.version
-				}
-			});
+			renderTemplate(res, req, 'index.ejs');
 		});
 
 		// The login page saves the page the person was on in the session,
@@ -143,130 +130,174 @@ class Dashboard {
 		passport.authenticate('discord'));
 
 		app.get('/callback', passport.authenticate('discord', { failureRedirect: '/autherror' }), (req, res) => {
+			if (req.user.id === client.config.ownerID) {
+				req.session.isAdmin = true;
+			} else {
+				req.session.isAdmin = false;
+			}
 			if (req.session.backURL) {
-				res.redirect(req.session.backURL);
+				const backUrl = req.session.backURL;
 				req.session.backURL = null;
+				res.redirect(backUrl);
 			} else {
 				res.redirect('/');
 			}
 		});
 
 		app.get('/autherror', (req, res) => {
-			res.render(path.resolve(`${templateDir}${path.sep}autherror.ejs`), {
-				bot: client,
-				auth: !!req.isAuthenticated(),
-				user: req.isAuthenticated() ? req.user : null
+			renderTemplate(res, req, 'autherror.ejs');
+		});
+
+		app.get('/logout', (req, res) => {
+			req.session.destroy(() => {
+				req.logout();
+				res.redirect('/');
+				// Inside a callback… bulletproof!
 			});
 		});
 
-		app.get('/admin', checkAdmin, (req, res) => {
-			res.render(path.resolve(`${templateDir}${path.sep}admin.ejs`), {
-				bot: client,
-				user: req.user,
-				auth: true
-			});
+		// The Admin dashboard is similar to the one above, with the exception that
+		// it shows all current guilds the bot is on, not *just* the ones the user has
+		// access to. Obviously, this is reserved to the bot's owner for security reasons.
+		app.get('/admin', checkAuth, (req, res) => {
+			if (!req.session.isAdmin) return res.redirect('/');
+			renderTemplate(res, req, 'admin.ejs');
 		});
 
 		app.get('/dashboard', checkAuth, (req, res) => {
 			const perms = Discord.EvaluatedPermissions;
-			res.render(path.resolve(`${templateDir}${path.sep}dashboard.ejs`), {
-				perms,
-				bot: client,
-				user: req.user,
-				auth: true
-			});
+			renderTemplate(res, req, 'dashboard.ejs', { perms });
 		});
 
-		app.get('/members/:guildID', checkAuth, async (req, res) => {
-			const guildObj = client.guilds.get(req.params.guildID);
-			if (!guildObj) { return res.status(404); }
-			if (req.param.fetch) {
-				await guildObj.fetchMembers();
-			}
-			res.render(path.resolve(`${templateDir}${path.sep}members.ejs`), {
-				bot: client,
-				user: req.user,
-				auth: true,
-				guild: guildObj,
-				members: guildObj.members.array()
-			});
+		// Simple redirect to the "Settings" page (aka "manage")
+		app.get('/dashboard/:guildID', checkAuth, (req, res) => {
+			res.redirect(`/dashboard/${req.params.guildID}/manage`);
 		});
 
-		app.post('/manage/:guildID', checkAuth, (req, res) => {
+		app.get('/dashboard/:guildID/members', checkAuth, async (req, res) => {
 			const guild = client.guilds.get(req.params.guildID);
-			if (!guild) { return res.status(404); }
-			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
-			if (req.user.id === client.appInfo.owner.id) {
-				console.log(`Admin bypass (${req.user.id}) for managing server: ${req.params.guildID}`);
-			} else if (!isManaged) {
-				res.redirect('/');
+			if (!guild) return res.status(404);
+			renderTemplate(res, req, 'guild/members.ejs', {
+				guild: guild,
+				members: guild.members.array()
+			});
+		});
+
+		app.get('/dashboard/:guildID/members/list', checkAuth, async (req, res) => {
+			const guild = client.guilds.get(req.params.guildID);
+			if (!guild) return res.status(404);
+			if (req.query.fetch) {
+				await guild.fetchMembers();
 			}
-			const gsettings = client.settings.guilds.fetchEntry(guild.id);
-			for (const key in gsettings) {
+			const totals = guild.members.size;
+			const start = parseInt(req.query.start, 10) || 0;
+			const limit = parseInt(req.query.limit, 10) || 50;
+			let { members } = guild;
+
+			if (req.query.filter && req.query.filter !== 'null') {
+				// if (!req.query.filtervalue) return res.status(400);
+				members = members.filter(meme => {
+					meme = req.query.filterUser ? meme.user : meme;
+					return meme.displayName.toLowerCase().includes(req.query.filter.toLowerCase());
+				});
+			}
+
+			if (req.query.sortby) {
+				members = members.sort((a, b) => a[req.query.sortby] > b[req.query.sortby]);
+			}
+			const memberArray = members.array().slice(start, start + limit);
+
+			const returnObject = [];
+			for (let i = 0; i < memberArray.length; i++) {
+				const meme = memberArray[i];
+				returnObject.push({
+					id: meme.id,
+					status: meme.user.presence.status,
+					bot: meme.user.bot,
+					username: meme.user.username,
+					displayName: meme.displayName,
+					tag: meme.user.tag,
+					discriminator: meme.user.discriminator,
+					joinedAt: meme.joinedTimestamp,
+					createdAt: meme.user.createdTimestamp,
+					highestRole: { hexColor: meme.highestRole.hexColor },
+					memberFor: moment.duration(Date.now() - meme.joinedAt).format(' D [days], H [hrs], m [mins], s [secs]'),
+					roles: meme.roles.map(rollingDownTheHill => ({
+						name: rollingDownTheHill.name,
+						id: rollingDownTheHill.id,
+						hexColor: rollingDownTheHill.hexColor
+					}))
+				});
+			}
+			res.json({
+				total: totals,
+				page: (start / limit) + 1,
+				pageof: Math.ceil(members.size / limit),
+				members: returnObject
+			});
+		});
+
+		app.get('/dashboard/:guildID/manage', checkAuth, (req, res) => {
+			const guild = client.guilds.get(req.params.guildID);
+			if (!guild) return res.status(404);
+			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
+			if (!isManaged && !req.session.isAdmin) res.redirect('/');
+			renderTemplate(res, req, 'guild/manage.ejs', { guild });
+		});
+
+		app.post('/dashboard/:guildID/manage', checkAuth, (req, res) => {
+			const guild = client.guilds.get(req.params.guildID);
+			if (!guild) return res.status(404);
+			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
+			if (!isManaged && !req.session.isAdmin) res.redirect('/');
+			const gsettings = client.settings.guilds.getEntry(guild.id);
+			for (const key in settings) {
 				gsettings[key] = req.body[key];
 			}
-			client.settings.guilds.updateOne(guild.id, gsettings);
-			res.redirect(`/manage/${req.params.guildID}`);
+			client.settings.set(guild.id, settings);
+			res.redirect(`/dashboard/${req.params.guildID}/manage`);
 		});
 
-		app.get('/manage/:guildID', checkAuth, (req, res) => {
+		app.get('/dashboard/:guildID/manage', checkAuth, (req, res) => {
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
-			if (req.user.id === client.appInfo.owner.id) {
-				console.log(`Admin bypass (${req.user.id}) for managing server: ${req.params.guildID}`);
-			} else if (!isManaged) {
-				res.redirect('/');
-			}
-			res.render(path.resolve(`${templateDir}${path.sep}manage.ejs`), {
-				bot: client,
-				guild: guild,
-				user: req.user,
-				auth: true
-			});
+			if (!isManaged && !req.session.isAdmin) res.redirect('/');
+			renderTemplate(res, req, 'guild/manage.ejs', { guild });
 		});
 
-		app.get('/leave/:guildID', checkAuth, async (req, res) => {
+		app.get('/dashboard/:guildID/leave', checkAuth, async (req, res) => {
+			client.stats.increment('client.httpreq');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
-			if (req.user.id === client.appInfo.owner.id) {
-				console.log(`Admin bypass (${req.user.id}) for managing server: ${req.params.guildID}`);
-			} else if (!isManaged) {
-				res.redirect('/');
-			}
+			if (!isManaged && !req.session.isAdmin) res.redirect('/');
 			await guild.leave();
-			if (req.user.id === client.appInfo.owner.id) {
+			if (req.user.id === client.config.ownerID) {
 				return res.redirect('/admin');
 			}
 			res.redirect('/dashboard');
 		});
 
-		app.get('/reset/:guildID', checkAuth, async (req, res) => {
+		app.get('/dashboard/:guildID/reset', checkAuth, async (req, res) => {
+			client.stats.increment('client.httpreq');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
-			if (req.user.id === client.appInfo.owner.id) {
-				console.log(`Admin bypass (${req.user.id}) for managing server: ${req.params.guildID}`);
-			} else if (!isManaged) {
-				res.redirect('/');
-			}
-			// client.settings.set(guild.id, client.config.defaultSettings);
-			res.redirect(`/manage/${req.params.guildID}`);
+			if (!isManaged && !req.session.isAdmin) res.redirect('/');
+			client.settings.set(guild.id, client.settings.get('default'));
+			res.redirect(`/dashboard/${req.params.guildID}`);
 		});
+
 
 		app.get('/commands', (req, res) => {
-			res.render(path.resolve(`${templateDir}${path.sep}commands.ejs`), {
-				bot: client,
-				auth: !!req.isAuthenticated(),
-				user: req.isAuthenticated() ? req.user : null,
-				md: md
-			});
+			renderTemplate(res, req, 'commands.ejs', { md });
 		});
 
-		app.get('/logout', (req, res) => {
-			req.logout();
-			res.redirect('/');
+		// Bot statistics. Notice that most of the rendering of data is done through this code, 
+		// not in the template, to simplify the page code. Most of it **could** be done on the page.
+		app.get('/stats', (req, res) => {
+			res.redirect('https://p.datadoghq.com/sb/82a5d5fef-1a21d0b3a5');
 		});
 
 		client.site = app.listen(settings.dashboardPort, () => {

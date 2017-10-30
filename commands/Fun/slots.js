@@ -8,6 +8,7 @@ module.exports = class extends Command {
 			runIn: ['text'],
 			description: 'Try your chances on the slots!'
 		});
+		this.cost = 1;
 	}
 
 	async run(msg) {
