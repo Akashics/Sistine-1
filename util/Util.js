@@ -79,7 +79,7 @@ class Util {
 			.set('Authorization', `Bearer ${client.keys.weebKey}`)
 			.catch(error => client.emit('error', error));
 
-		return new this.client.methods.Embed()
+		return new client.methods.Embed()
 			.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
 			.setImage(body.url)
 			.setDescription(action)
