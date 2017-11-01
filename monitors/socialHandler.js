@@ -24,7 +24,6 @@ module.exports = class extends Monitor {
 		const curLevel = Math.floor(0.2 * Math.sqrt(score.balance + points));
 		if (score.level < curLevel) {
 			score.level = curLevel;
-			message.reply(`You've leveled up to level **${score.level}**!`);
 			await users.updateOne(message.author.id, 'level', score.level, message.guild);
 		}
 		// DEBUG ONLY: console.log(`${message.author.tag}`, score);

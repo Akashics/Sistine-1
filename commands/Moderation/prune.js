@@ -12,7 +12,6 @@ module.exports = class extends Command {
 			usage: '[limit:integer] [link|invite|bots|you|me|upload|user:user]',
 			usageDelim: ' '
 		});
-		this.requireMusic = false;
 	}
 
 	async run(msg, [limit = 50, filter = null]) {
@@ -23,8 +22,8 @@ module.exports = class extends Command {
 			messages = messages.filter(this.getFilter(msg, type, user));
 		}
 		messages = messages.array().slice(0, limit);
-		await msg.channel.bulkDelete(messages);
-		return msg.send(`Successfully deleted ${messages.length} messages from ${limit}.`);
+		await msg.channel.bulkDelete(messages, true);
+		return msg.send(`Successfully deleted ${messages.length}/${limit} messages from ${filter ? filter : 'all'}.`);
 	}
 
 	getFilter(msg, filter, user) {

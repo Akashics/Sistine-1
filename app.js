@@ -47,5 +47,9 @@ Sistine.login(keys.dev ? keys.betaBotToken : keys.botToken);
 
 
 datadog.socket.on('error', (error) => {
-	console.error('Error in socket: ', error);
+	this.client.console.error(`Error in Socket: ${error}`);
+});
+
+process.on('unhandledRejection', error => {
+	this.client.console.error(`Uncaught Promise Error:\n ${error}`);
 });

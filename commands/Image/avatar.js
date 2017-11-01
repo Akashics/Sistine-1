@@ -10,10 +10,10 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [args = msg.author]) {
-		if (!args.user.avatar) { return msg.send(msg.language.get('NO_AVATAR')); }
-		const avatar = args.user.displayAvatarURL({
-			format: args.user.avatar.startsWith('a_') ? 'gif' : 'png',
+	async run(msg, [mentioned = msg.author]) {
+		if (!mentioned.avatar) { return msg.send(msg.language.get('NO_AVATAR')); }
+		const avatar = mentioned.displayAvatarURL({
+			format: mentioned.avatar.startsWith('a_') ? 'gif' : 'png',
 			size: 2048
 		});
 		return msg.send(avatar);
