@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const ModLog = require('../../util/modlog');
 
-module.exports = class extends Command {
+module.exports = class Kick extends Command {
 
 	constructor(...args) {
 		super(...args, {

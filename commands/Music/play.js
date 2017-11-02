@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 
-module.exports = class extends Command {
+module.exports = class Play extends Command {
 
 	constructor(...args) {
 		super(...args, {

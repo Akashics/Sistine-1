@@ -2,7 +2,7 @@ const { Command } = require('klasa');
 const { splitText, showSeconds } = require('../../util/Util');
 const getInfo = require('util').promisify(require('ytdl-core').getInfo);
 
-module.exports = class extends Command {
+module.exports = class Playing extends Command {
 
 	constructor(...args) {
 		super(...args, {

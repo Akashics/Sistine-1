@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
 
-module.exports = class extends Command {
+module.exports = class Joke extends Command {
 
 	constructor(...args) {
 		super(...args, { description: 'Responds with a random dad joke.' });

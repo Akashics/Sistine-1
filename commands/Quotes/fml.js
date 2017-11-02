@@ -2,22 +2,10 @@ const { Command } = require('klasa');
 const request = require('axios');
 const HTMLParser = require('fast-html-parser');
 
-module.exports = class extends Command {
+module.exports = class FML extends Command {
 
 	constructor(...args) {
-		super(...args, {
-			name: 'fml',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Gets a random FML story.',
-			usage: '',
-			extendedHelp: 'No Extended Help.'
-		});
+		super(...args, { description: 'Gets a random FML story.' });
 	}
 
 	async run(msg) {

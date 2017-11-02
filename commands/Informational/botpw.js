@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
 
-module.exports = class extends Command {
+module.exports = class BotPW extends Command {
 
 	constructor(...args) {
 		super(...args, {

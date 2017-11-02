@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const axios = require('axios');
 
-module.exports = class extends Command {
+module.exports = class Quote extends Command {
 
 	constructor(...args) {
 		super(...args, { description: 'Fetches a famous quote and posts it.' });

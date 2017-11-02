@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const { showSeconds } = require('../../util/Util');
 
-module.exports = class extends Command {
+module.exports = class Time extends Command {
 
 	constructor(...args) {
 		super(...args, {

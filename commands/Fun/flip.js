@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const flip = require('flipacoin');
 
-module.exports = class extends Command {
+module.exports = class Flip extends Command {
 
 	constructor(...args) {
 		super(...args, {

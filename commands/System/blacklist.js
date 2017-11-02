@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const { writeJSONAtomic } = require('fs-nextra');
 
-module.exports = class extends Command {
+module.exports = class Blacklist extends Command {
 
 	constructor(...args) {
 		super(...args, {

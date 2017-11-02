@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const axios = require('axios');
 
-module.exports = class extends Command {
+module.exports = class Trump extends Command {
 
 	constructor(...args) {
 		super(...args, { description: 'Fetch one of Trumps famous quotes!' });

@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const roasts = require('../../util/roast');
 
-module.exports = class extends Command {
+module.exports = class Roast extends Command {
 
 	constructor(...args) {
 		super(...args, {

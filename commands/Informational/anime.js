@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const anilist = require('../../util/anilist');
 
-module.exports = class extends Command {
+module.exports = class Anime extends Command {
 
 	constructor(...args) {
 		super(...args, {

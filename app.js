@@ -45,7 +45,6 @@ const Sistine = new SistineClient({
 
 Sistine.login(keys.dev ? keys.betaBotToken : keys.botToken);
 
-
 datadog.socket.on('error', (error) => {
 	this.client.console.error(`Error in Socket: ${error}`);
 });

@@ -5,7 +5,7 @@ const { resolve, join } = require('path');
 
 Canvas.registerFont(resolve(join(__dirname, '../assets/fonts/Discord.ttf')), 'Discord');
 
-module.exports = class extends Event {
+module.exports = class guildMemberAdd extends Event {
 
 	constructor(...args) {
 		super(...args, { name: 'guildMemberAdd', enabled: true });

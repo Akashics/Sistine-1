@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const axios = require('axios');
 
-module.exports = class extends Command {
+module.exports = class MoeImage extends Command {
 
 	/* eslint-disable max-len */
 	constructor(...args) {
@@ -12,10 +12,9 @@ module.exports = class extends Command {
 		this.types = ['awoo', 'bang', 'blush', 'clagwimoth', 'cry', 'dance', 'insult', 'jojo', 'lewd', 'lick', 'megumin', 'neko', 'nom', 'owo', 'pout', 'rem', 'shrug', 'sleepy', 'smile', 'teehee', 'smug', 'stare', 'thumbsup', 'triggered', 'wag', 'waifu_insult', 'wasted'];
 	}
 
-	async run(msg, [...args]) {
+	async run(msg, [type]) {
 		const images = new this.client.methods.Embed();
-		const image = args[0];
-		if (!this.types.includes(image)) {
+		if (!this.types.includes(type)) {
 			images
 				.setColor(msg.member.highestRole.color || 0)
 				.setTitle(':book:  **Moe Command - Valid Image Types**')
@@ -24,7 +23,7 @@ module.exports = class extends Command {
 			return msg.sendEmbed(images);
 		}
 		const AuthStr = `Bearer ${this.client.keys.weebKey}`;
-		const imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${image}`, { headers: { Authorization: AuthStr } });
+		const imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${type}`, { headers: { Authorization: AuthStr } });
 		images
 			.setColor(msg.member.highestRole.color || 0)
 			.setImage(imageRequest.data.url)

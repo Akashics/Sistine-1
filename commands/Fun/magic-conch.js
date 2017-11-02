@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const { stripIndents } = require('common-tags');
 
-module.exports = class extends Command {
+module.exports = class MagicConch extends Command {
 
 	constructor(...args) {
 		super(...args, {

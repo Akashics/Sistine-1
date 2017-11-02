@@ -1,7 +1,7 @@
 const { Finalizer } = require('klasa');
 const now = require('performance-now');
 
-module.exports = class extends Finalizer {
+module.exports = class CMDStats extends Finalizer {
 
 	constructor(...args) {
 		super(...args, {

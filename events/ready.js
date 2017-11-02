@@ -2,7 +2,7 @@ const { Event } = require('klasa');
 const { updateStatus } = require('../util/Util');
 const { startDashboard } = require('../util/Dashboard');
 
-module.exports = class extends Event {
+module.exports = class Ready extends Event {
 
 	async run() {
 		const that = this;

@@ -1,10 +1,10 @@
 const { Command } = require('klasa');
 
-module.exports = class extends Command {
+module.exports = class Balance extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['bal'],
+			aliases: ['bal', 'credits'],
 			description: 'Check your credit balance.',
 			usage: '[GuildMember:member]'
 		});

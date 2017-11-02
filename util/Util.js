@@ -74,8 +74,8 @@ class Util {
 			});
 	}
 
-	static weebImage(msg, client, user, self, action) {
-		const { body } = snekfetch.get(`https://staging.weeb.sh/images/random?type=${msg.cmd.name}`)
+	static async weebImage(msg, client, user, action) {
+		const { body } = await snekfetch.get(`https://staging.weeb.sh/images/random?type=${msg.cmd.name}`)
 			.set('Authorization', `Bearer ${client.keys.weebKey}`)
 			.catch(error => client.emit('error', error));
 

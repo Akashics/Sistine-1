@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
-const axios = require('axios');
+const { weebImage } = require('../../util/Util');
 
-module.exports = class extends Command {
+module.exports = class Cuddle extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -11,19 +11,10 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [mention = msg.author]) {
-		let userIsSelf = false;
-		const { data } = await axios.get('https://staging.weeb.sh/images/random?type=cuddle', { headers: { Authorization: `Bearer ${this.client.keys.weebKey}` } });
-
-		if (msg.author === mention) {
-			userIsSelf = true;
-		}
-		const image = new this.client.methods.Embed()
-			.setColor(msg.member.highestRole.color || 0)
-			.setImage(data.url)
-			.setDescription(userIsSelf ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle') : msg.language.get('USER_REACTION', msg.author.toString(), mention.toString(), 'cuddled'))
-			.setFooter(msg.language.get('WEEB_SERVICES'));
-		return msg.sendEmbed(image);
+	async run(msg, [mentioned = msg.author]) {
+		const action = mentioned === msg.author ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle') : msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'cuddled');
+		const embed = await weebImage(msg, this.client, mentioned, action);
+		return msg.sendEmbed(embed);
 	}
 
 };

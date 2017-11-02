@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const compliments = require('../../util/compliment');
 
-module.exports = class extends Command {
+module.exports = class compliment extends Command {
 
 	constructor(...args) {
 		super(...args, {

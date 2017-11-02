@@ -2,7 +2,7 @@ const { Command, util } = require('klasa');
 const hastebin = require('hastebin-gen');
 const { exec } = require('child_process');
 
-module.exports = class extends Command {
+module.exports = class Exec extends Command {
 
 	constructor(...args) {
 		super(...args, {

@@ -1,6 +1,6 @@
 const { Monitor } = require('klasa');
 const timeout = new Set();
-module.exports = class extends Monitor {
+module.exports = class socialMonitor extends Monitor {
 
 	giveRandomPoints(min, max) {
 		min = Math.ceil(min);
@@ -15,7 +15,7 @@ module.exports = class extends Monitor {
 		const { users } = this.client.settings;
 		const score = await users.fetchEntry(message.author.id);
 		timeout.add(message.author.id);
-		const points = this.giveRandomPoints(5, 13);
+		const points = this.giveRandomPoints(1, 3);
 		setTimeout(async () => {
 			timeout.delete(message.author.id);
 			await users.updateOne(message.author.id, 'balance', score.balance + points, message.guild);

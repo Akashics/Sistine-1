@@ -1,7 +1,7 @@
 const { Event } = require('klasa');
 const { dBots, dBotsOrg, updateStatus } = require('../util/Util');
 
-module.exports = class extends Event {
+module.exports = class guildDelete extends Event {
 
 	constructor(...args) {
 		super(...args, { name: 'guildDelete', enabled: true });

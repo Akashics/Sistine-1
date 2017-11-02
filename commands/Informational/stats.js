@@ -3,7 +3,7 @@ const moment = require('moment');
 require('moment-duration-format');
 const os = require('os');
 
-module.exports = class extends Command {
+module.exports = class Stats extends Command {
 
 	constructor(...args) {
 		super(...args, {

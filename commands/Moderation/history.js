@@ -1,6 +1,6 @@
 const { Command, util } = require('klasa');
 
-module.exports = class extends Command {
+module.exports = class History extends Command {
 
 	constructor(...args) {
 		super(...args, {

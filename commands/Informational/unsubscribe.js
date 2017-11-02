@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const { announcement } = require('../../util/Util');
 
-module.exports = class extends Command {
+module.exports = class Unsubscribe extends Command {
 
 	constructor(...args) {
 		super(...args, {

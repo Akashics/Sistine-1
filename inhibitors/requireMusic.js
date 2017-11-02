@@ -1,6 +1,6 @@
 const { Inhibitor } = require('klasa');
 
-module.exports = class extends Inhibitor {
+module.exports = class REQMusic extends Inhibitor {
 
 	constructor(...args) {
 		super(...args, { spamProtection: true });

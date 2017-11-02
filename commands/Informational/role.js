@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const moment = require('moment');
 
-module.exports = class extends Command {
+module.exports = class Role extends Command {
 
 	constructor(...args) {
 		super(...args, {

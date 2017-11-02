@@ -1,6 +1,6 @@
 const { Event } = require('klasa');
 
-module.exports = class extends Event {
+module.exports = class Message extends Event {
 
 	async run(msg) {
 		if (this.client.ready) {

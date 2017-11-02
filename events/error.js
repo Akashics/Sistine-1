@@ -1,6 +1,6 @@
 const { Event } = require('klasa');
 
-module.exports = class extends Event {
+module.exports = class Error extends Event {
 
 	constructor(client, dir, file) {
 		super(client, dir, file, { enabled: 'error' in client.config.consoleEvents ? !!client.config.consoleEvents.error : true });

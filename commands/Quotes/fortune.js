@@ -1,22 +1,10 @@
 const { Command } = require('klasa');
 const axios = require('axios');
 
-module.exports = class extends Command {
+module.exports = class Fortune extends Command {
 
 	constructor(...args) {
-		super(...args, {
-			name: 'fortune',
-			enabled: true,
-			runIn: ['text'],
-			cooldown: 0,
-			aliases: [],
-			permLevel: 0,
-			botPerms: ['SEND_MESSAGES'],
-			requiredSettings: [],
-			description: 'Gets your fortune cookie.',
-			usage: '',
-			extendedHelp: 'No Extended Help.'
-		});
+		super(...args, { description: 'Gets your fortune cookie.' });
 	}
 
 	async run(msg) {

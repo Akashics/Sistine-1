@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const figletAsync = require('util').promisify(require('figlet'));
 
-module.exports = class extends Command {
+module.exports = class asciiBanner extends Command {
 
 	constructor(...args) {
 		super(...args, {

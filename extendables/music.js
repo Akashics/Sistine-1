@@ -1,6 +1,6 @@
 const { Extendable } = require('klasa');
 
-module.exports = class extends Extendable {
+module.exports = class MusicExtend extends Extendable {
 
 	constructor(...args) {
 		super(...args, ['Guild']);

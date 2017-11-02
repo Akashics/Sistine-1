@@ -4,7 +4,7 @@ const snekfetch = require('snekfetch');
 const fetchURL = (url, client) => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${client.keys.googleSearch}`)
 	.then(result => result.body);
 
-module.exports = class extends Command {
+module.exports = class Add extends Command {
 
 	constructor(...args) {
 		super(...args, {

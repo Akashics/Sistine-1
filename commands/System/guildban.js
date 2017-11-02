@@ -2,7 +2,7 @@ const { Command } = require('klasa');
 const { writeJSONAtomic } = require('fs-nextra');
 const { supportServers } = require('../../keys/keys.json');
 
-module.exports = class extends Command {
+module.exports = class GuildBan extends Command {
 
 	constructor(...args) {
 		super(...args, {
