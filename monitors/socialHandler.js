@@ -13,7 +13,7 @@ module.exports = class socialMonitor extends Monitor {
 		const timedOut = timeout.has(message.author.id);
 		if (timedOut) return;
 		const { users } = this.client.settings;
-		const score = await users.fetchEntry(message.author.id);
+		const score = await users.getEntry(message.author.id);
 		timeout.add(message.author.id);
 		const points = this.giveRandomPoints(1, 3);
 		setTimeout(async () => {

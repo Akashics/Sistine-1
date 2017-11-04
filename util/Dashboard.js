@@ -58,7 +58,7 @@ class Dashboard {
 		// Session data, used for temporary storage of your visitor's session information.
 		// the `secret` is in fact a "salt" for the data, and should not be shared publicly.
 		app.use(session({
-			store: new LevelStore('./data/dashboard-session/'),
+			store: new LevelStore('./bwd/dashboard-session/'),
 			secret: settings.sessionSecret,
 			resave: false,
 			saveUninitialized: false
@@ -72,7 +72,7 @@ class Dashboard {
 		// The domain name used in various endpoints to link between pages.
 		app.locals.domain = settings.domainName;
 
-		// The EJS templating engine gives us more power 
+		// The EJS templating engine gives us more power
 		app.engine('html', require('ejs').renderFile);
 		app.set('view engine', 'html');
 
@@ -82,10 +82,10 @@ class Dashboard {
 		app.use(bodyParser.json());
 		app.use(bodyParser.urlencoded({ extended: true }));
 
-		/* 
+		/*
   Authentication Checks. checkAuth verifies regular authentication,
   whereas checkAdmin verifies the bot owner. Those are used in url
-  endpoints to give specific permissions. 
+  endpoints to give specific permissions.
   */
 		function checkAuth(req, res, next) {
 			if (req.isAuthenticated()) { return next(); }
@@ -94,7 +94,7 @@ class Dashboard {
 		}
 
 		// This function simplifies the rendering of the page, since every page must be rendered
-		// with the passing of these 4 variables, and from a base path. 
+		// with the passing of these 4 variables, and from a base path.
 		// Objectassign(object, newobject) simply merges 2 objects together, in case you didn't know!
 		const renderTemplate = (res, req, template, data = {}) => {
 			const baseData = {
@@ -294,7 +294,7 @@ class Dashboard {
 			renderTemplate(res, req, 'commands.ejs', { md });
 		});
 
-		// Bot statistics. Notice that most of the rendering of data is done through this code, 
+		// Bot statistics. Notice that most of the rendering of data is done through this code,
 		// not in the template, to simplify the page code. Most of it **could** be done on the page.
 		app.get('/stats', (req, res) => {
 			res.redirect('https://p.datadoghq.com/sb/82a5d5fef-1a21d0b3a5');
