@@ -1,0 +1,27 @@
+2017-11-02T17:17:33.617503793 0.084941s notice: Recursively removing directory /home/jordan/Sistine/rethinkdb_data/tmp
+2017-11-02T17:17:33.624272659 0.091709s notice: Initializing directory /home/jordan/Sistine/rethinkdb_data
+2017-11-02T17:17:33.624732510 0.092169s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/jordan/Sistine/rethinkdb_data' did not already exist or is empty.)
+2017-11-02T17:17:33.624894419 0.092331s notice: Running rethinkdb 2.3.6~0xenial (GCC 5.3.1)...
+2017-11-02T17:17:33.629274890 0.096715s notice: Running on Linux 4.4.0-96-generic x86_64
+2017-11-02T17:17:33.629511667 0.096948s notice: Loading data from directory /home/jordan/Sistine/rethinkdb_data
+2017-11-02T17:17:33.661383212 0.128820s info: Automatically using cache size of 918 MB
+2017-11-02T17:17:33.662730262 0.130167s notice: Listening for intracluster connections on port 29015
+2017-11-02T17:17:33.668362257 0.135798s notice: Listening for client driver connections on port 28015
+2017-11-02T17:17:33.669131518 0.136568s notice: Listening for administrative HTTP connections on port 8080
+2017-11-02T17:17:33.669140014 0.136576s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-02T17:17:33.669146659 0.136582s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-02T17:17:33.669149880 0.136586s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-02T17:17:33.669154955 0.136591s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-11-02T17:17:33.669160996 0.136597s notice: Server ready, "Akashic_3n9" 5283cb93-d70d-4733-a690-56d697a6aa9c
+2017-11-04T08:53:01.734549543 0.330986s notice: Running rethinkdb 2.3.6~0xenial (GCC 5.3.1)...
+2017-11-04T08:53:01.820146968 0.416582s notice: Running on Linux 4.4.0-98-generic x86_64
+2017-11-04T08:53:01.820953757 0.417385s notice: Loading data from directory /home/jordan/Sistine/rethinkdb_data
+2017-11-04T08:53:01.876490231 0.472922s info: Automatically using cache size of 1168 MB
+2017-11-04T08:53:01.882548253 0.478980s notice: Listening for intracluster connections on port 29015
+2017-11-04T08:53:01.933384542 0.529817s notice: Listening for client driver connections on port 28015
+2017-11-04T08:53:01.933905877 0.530337s notice: Listening for administrative HTTP connections on port 8080
+2017-11-04T08:53:01.933910778 0.530342s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-04T08:53:01.933915861 0.530347s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-04T08:53:01.933918676 0.530350s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-04T08:53:01.933921931 0.530353s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-11-04T08:53:01.933924807 0.530356s notice: Server ready, "Akashic_3n9" 5283cb93-d70d-4733-a690-56d697a6aa9c

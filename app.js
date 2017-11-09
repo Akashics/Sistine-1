@@ -38,7 +38,8 @@ const Sistine = new SistineClient({
 	cmdLogging: true,
 	typing: false,
 	permissionLevels: this.sistinePermissionLevels,
-	readyMessage: (client) => `${keys.dev ? '!== DEV MODE ONLINE ==! - ' : ''}${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`
+	readyMessage: (client) => `${keys.dev ? '!== DEV MODE ONLINE ==! - ' : ''}${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`,
+	provider: 'rethinkdb'
 });
 
 Sistine.login(keys.dev ? keys.betaBotToken : keys.botToken);
