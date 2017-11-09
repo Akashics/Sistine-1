@@ -14,8 +14,6 @@ module.exports = class Reason extends Command {
 			usage: '<case:integer> <reason:string> [...]',
 			usageDelim: ' '
 		});
-
-		this.provider = null;
 	}
 
 	async run(msg, [selected, ...reason]) {
@@ -69,7 +67,7 @@ module.exports = class Reason extends Command {
 	}
 
 	init() {
-		this.provider = this.client.providers.get('json');
+		// this.provider = this.client.providers.get('json');
 	}
 
 };

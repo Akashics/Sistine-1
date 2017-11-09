@@ -11,8 +11,6 @@ module.exports = class CaseInfo extends Command {
 			description: 'Check a case.',
 			usage: '<case:integer>'
 		});
-
-		this.provider = null;
 	}
 
 	async run(msg, [selected]) {
@@ -27,7 +25,7 @@ module.exports = class CaseInfo extends Command {
 	}
 
 	init() {
-		this.provider = this.client.providers.get('json');
+		// this.provider = this.client.providers.get('json');
 	}
 
 };

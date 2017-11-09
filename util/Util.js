@@ -68,20 +68,20 @@ class Util {
 	}
 
 	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.guilds.size} — sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } })
+		client.user.setPresence({ activity: { name: `${client.guilds.size} guilds — sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});
 	}
 
 	static async weebImage(msg, client, user, action) {
-		const { body } = await snekfetch.get(`https://staging.weeb.sh/images/random?type=${msg.cmd.name}`)
+		const imageRequest = await snekfetch.get(`https://staging.weeb.sh/images/random?type=${msg.cmd.name}`)
 			.set('Authorization', `Bearer ${client.keys.weebKey}`)
 			.catch(error => client.emit('error', error));
 
 		return new client.methods.Embed()
-			.setColor(msg.guild.member(msg.author.id).highestRole.color || 0)
-			.setImage(body.url)
+			.setColor('PURPLE')
+			.setImage(imageRequest.body.url)
 			.setDescription(action)
 			.setFooter(msg.language.get('WEEB_SERVICES'));
 	}

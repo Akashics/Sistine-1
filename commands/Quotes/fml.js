@@ -17,7 +17,7 @@ module.exports = class FML extends Command {
 		const embed = new this.client.methods.Embed()
 			.setTitle(`Requested by ${msg.author.tag}`)
 			.setAuthor('FML Stories')
-			.setColor(msg.member.highestRole.color || 0)
+			.setColor('PURPLE')
 			.setTimestamp()
 			.setDescription(`_${article.childNodes[0].text}\n\n_`)
 			.addField('I agree, your life sucks', updoot.childNodes[0].text, true)

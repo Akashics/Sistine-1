@@ -128,7 +128,7 @@ module.exports = class extends Language {
 			NO_AVATAR: 'This user has no avatar.',
 			USER_REACTION_SOLO: (user, thing) => `**${user} wants to ${thing}.**`,
 			USER_REACTION: (author, user, thing) => `**${author} has ${thing} you ${user}!**`,
-			WEEB_SERVICES: 'Images provided by weeb.sh',
+			WEEB_SERVICES: 'Sistine - https://sistine.ml | Images provided by Weeb.SH',
 			MUSIC_URL_NOTFOUND: 'We couldn\'t find a video with that link.',
 			MUSIC_ADDED_QUEUE: song => `🎵 Added **${song.title}** to the queue 🎶`,
 			MUSIC_PLAY: song => `🎧 Playing: **${song.title}** as requested by: **${song.requester}**`,

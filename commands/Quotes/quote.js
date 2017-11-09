@@ -11,7 +11,7 @@ module.exports = class Quote extends Command {
 		const req = await axios.get('https://talaikis.com/api/quotes/random/');
 		const embed = new this.client.methods.Embed()
 			.setTitle('Random Quote')
-			.setColor(msg.member.highestRole.color || 0)
+			.setColor('PURPLE')
 			.setTimestamp()
 			.setDescription(`_Requested by ${msg.author.tag}_`)
 			.setThumbnail('http://www.freeiconspng.com/uploads/quotes-png-11.png')

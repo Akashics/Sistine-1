@@ -11,7 +11,7 @@ module.exports = class Trump extends Command {
 		const req = await axios.get('https://api.whatdoestrumpthink.com/api/v1/quotes/random');
 		const embed = new this.client.methods.Embed()
 			.setTitle('Random Trump Quote')
-			.setColor(msg.member.highestRole.color || 0)
+			.setColor('PURPLE')
 			.setTimestamp()
 			.setDescription(`_Requested by ${msg.author.tag}_`)
 			.setThumbnail('https://www.bloomberg.com/graphics/2017-comey-vs-trump/img/trump.png')

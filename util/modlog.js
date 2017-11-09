@@ -84,7 +84,7 @@ module.exports = class ModLog {
 	}
 
 	get provider() {
-		return this.client.providers.get('json');
+		return this.client.providers.get('rethinkdb');
 	}
 
 	static colour(type) {
