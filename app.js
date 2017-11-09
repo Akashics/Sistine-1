@@ -19,9 +19,7 @@ class SistineClient extends Client {
 		this.whitelist = require('./keys/whitelist.json');
 		this.blocklist = require('./keys/blocklist.json');
 		this.blacklist = require('./keys/blacklist.json');
-		// Dashboard
 		this.site = null;
-		// Permission Levels
 		this.sistinePermissionLevels = new PermissionLevels()
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.settings.DJRole && msg.member.roles.has(msg.guild.settings.DJRole))
@@ -37,7 +35,7 @@ const Sistine = new SistineClient({
 	clientOptions: { fetchAllMembers: true },
 	prefix: 's>',
 	cmdEditing: true,
-	cmdLogging: false,
+	cmdLogging: true,
 	typing: false,
 	permissionLevels: this.sistinePermissionLevels,
 	readyMessage: (client) => `${keys.dev ? '!== DEV MODE ONLINE ==! - ' : ''}${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`
@@ -46,9 +44,9 @@ const Sistine = new SistineClient({
 Sistine.login(keys.dev ? keys.betaBotToken : keys.botToken);
 
 datadog.socket.on('error', (error) => {
-	console.error(`Error in Socket: ${error}`);
+	Sistine.emit('error', `Error in Socket:\n ${error}`);
 });
 
 process.on('unhandledRejection', error => {
-	console.error(`Uncaught Promise Error:\n ${error}`);
+	Sistine.emit('error', `Uncaught Promise Error:\n ${error}`);
 });

@@ -82,7 +82,7 @@ module.exports = class InterfaceMusic {
 		this.pushPlayed(this.queue[0].url);
 
 		const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
-			.on('error', (err) => { this.client.emit('log', err, 'error'); throw `Video: ${this.queue[0].url}`; });
+			.on('error', (err) => { this.client.emit('log', err, 'error'); throw `Video Errored: ${this.queue[0].url} - G: ${this.guild.id}`; });
 
 		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
 		return this.dispatcher;
@@ -94,6 +94,7 @@ module.exports = class InterfaceMusic {
 	}
 
 	pause() {
+		if (!this.dispatcher) throw ':/ A error occured where a dispatcher wasn\'t called. You might want to contact support.';
 		this.dispatcher.pause();
 		this.status = 'paused';
 		return this;

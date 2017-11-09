@@ -10,8 +10,7 @@ module.exports = class Error extends Event {
 
 	run(err) {
 		this.client.console.error(' ');
-		this.client.console.error(`<!> New Error: ${this.errFile} <!>`);
-		this.client.console.error(`${err}`);
+		this.client.console.error(`New Error: ${this.errFile} || ${err}`);
 	}
 
 };

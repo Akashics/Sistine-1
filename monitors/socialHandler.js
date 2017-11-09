@@ -26,7 +26,6 @@ module.exports = class socialMonitor extends Monitor {
 			score.level = curLevel;
 			await users.updateOne(message.author.id, 'level', score.level, message.guild);
 		}
-		// DEBUG ONLY: console.log(`${message.author.tag}`, score);
 	}
 	async run(msg) {
 		await this.givePoints(msg);
