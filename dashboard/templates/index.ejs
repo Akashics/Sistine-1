@@ -1,12 +1,13 @@
 <%- include('blocks/header', {bot: bot, user: user, path: path, auth: auth}) %>
     <div class="container">
       <div class="content brand" style="text-align: center;">
-        <img class="profilebotimage" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 512})%>" width="256px" height="256px" style="margin-top:80px;border-radius:50%; border:6px solid #ffffff;">
+        <img class="profilebotimage" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 512}) %>" style="width:256px, height:256px, margin-top:80px;border-radius:50%; border:6px solid #ffffff;">
         <h1 class="h1-seo" style="margin-top: 15px">
           <%= bot.user.username %>
         </h1>
         <h4>
-          Simple Moderation, Fun, Music, and Quality Commands all in one bot.<br>Join Akashic's Records and partay.<br><br>Add <%= bot.user.username %> to Your Guild Today</h4>
+          Simple Moderation, Fun, Music, and Quality Commands all in one bot.<br>Join Akashic's Records and partay.<br><br>Add <%= bot.user.username %> to Your Guild Today.
+        </h4>
       </div>
     </div>
   </div>
