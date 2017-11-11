@@ -251,19 +251,11 @@ class Dashboard {
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
 			if (!isManaged && !req.session.isAdmin) res.redirect('/');
 			const gsettings = client.settings.guilds.getEntry(guild.id);
-			for (const key in settings) {
+			for (const key in gsettings) {
 				gsettings[key] = req.body[key];
 			}
-			client.settings.set(guild.id, settings);
+			client.settings.guilds.updateArray(guild.id, gsettings);
 			res.redirect(`/dashboard/${req.params.guildID}/manage`);
-		});
-
-		app.get('/dashboard/:guildID/manage', checkAuth, (req, res) => {
-			const guild = client.guilds.get(req.params.guildID);
-			if (!guild) return res.status(404);
-			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
-			if (!isManaged && !req.session.isAdmin) res.redirect('/');
-			renderTemplate(res, req, 'guild/manage.ejs', { guild });
 		});
 
 		app.get('/dashboard/:guildID/leave', checkAuth, async (req, res) => {
