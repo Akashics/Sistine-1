@@ -1,7 +1,8 @@
 <%- include('blocks/header', {bot:bot, user: user, path: path, auth: auth}) %>
 
   <% const help = {};
-bot.commands.forEach((command) => {
+  
+ bot.commands.filter((cmd) => cmd.permLevel === 3).forEach((command) => {
   const cat = command.category;
   if (!help.hasOwnProperty(cat)) help[cat] = [];
   help[cat].push(command);
@@ -29,7 +30,7 @@ bot.commands.forEach((command) => {
                   <td>
                     <%= command.name %>
                       <i>
-                        <%= `${command.aliases.join(', ')}` %>
+                        <%= `${command.aliases : `(${command.aliases.join(', ')})` ? ''}` %>
                       </i>
                   </td>
                   <td>
