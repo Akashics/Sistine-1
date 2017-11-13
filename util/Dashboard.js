@@ -1,26 +1,18 @@
 const url = require('url');
 const path = require('path');
-
-// Used for Permission Resolving...
 const Discord = require('discord.js');
-
-// Express Session
+const compression = require('compression');
 const express = require('express');
 const app = express();
 const moment = require('moment');
 require('moment-duration-format');
-
-// Express Plugins
-// Specifically, passport helps with oauth2 in general.
-// passport-discord is a plugin for passport that handles Discord's specific implementation.
 const passport = require('passport');
 const session = require('express-session');
 const LevelStore = require('level-session-store')(session);
 const { Strategy } = require('passport-discord');
-// Used to parse Markdown from things like ExtendedHelp
 const md = require('marked');
 const helmet = require('helmet');
-// Get Dashboard settings file
+const bodyParser = require('body-parser');
 const settings = require('../keys/dashboard.json');
 
 
@@ -78,8 +70,8 @@ class Dashboard {
 
 		// body-parser reads incoming JSON or FORM data and simplifies their
 		// use in code.
-		var bodyParser = require('body-parser');
-		app.use(bodyParser.json());
+		// app.use(bodyParser.json());
+		app.use(compression());
 		app.use(bodyParser.urlencoded({ extended: true }));
 
 		/*
@@ -165,7 +157,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard', checkAuth, (req, res) => {
-			const perms = Discord.EvaluatedPermissions;
+			const perms = Discord.Permissions;
 			renderTemplate(res, req, 'dashboard.ejs', { perms });
 		});
 
@@ -184,6 +176,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/members/list', checkAuth, async (req, res) => {
+			client.stats.increment('client.httpreq');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			if (req.query.fetch) {
@@ -238,6 +231,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/manage', checkAuth, (req, res) => {
+			client.stats.increment('client.httpreq');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
@@ -246,15 +240,12 @@ class Dashboard {
 		});
 
 		app.post('/dashboard/:guildID/manage', checkAuth, (req, res) => {
+			client.stats.increment('client.httpreq');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
 			if (!isManaged && !req.session.isAdmin) res.redirect('/');
-			const gsettings = client.settings.guilds.getEntry(guild.id);
-			for (const key in gsettings) {
-				gsettings[key] = req.body[key];
-			}
-			client.settings.guilds.updateArray(guild.id, gsettings);
+			client.settings.guilds.updateMany(guild.id, req.body);
 			res.redirect(`/dashboard/${req.params.guildID}/manage`);
 		});
 
@@ -281,6 +272,14 @@ class Dashboard {
 			res.redirect(`/dashboard/${req.params.guildID}`);
 		});
 
+		app.get('/dashboard/:guildID/stats', checkAuth, (req, res) => {
+			const guild = client.guilds.get(req.params.guildID);
+			if (!guild) return res.status(404);
+			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
+			if (!isManaged && !req.session.isAdmin) res.redirect('/');
+			renderTemplate(res, req, 'guild/stats.ejs', { guild });
+		});
+
 
 		app.get('/commands', (req, res) => {
 			renderTemplate(res, req, 'commands.ejs', { md });
@@ -293,7 +292,7 @@ class Dashboard {
 		});
 
 		client.site = app.listen(settings.dashboardPort, () => {
-			client.emit('log', `Dashboard started on ${settings.dashboardPort}`);
+			client.emit('log', `Loaded dashboard on port ${settings.dashboardPort}.`);
 		});
 	}
 

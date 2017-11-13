@@ -17,7 +17,7 @@ module.exports = class Resume extends Command {
 		const { music } = msg.guild;
 		if (music.status === 'playing') throw msg.language.get('MUSIC_NOTPAUSED');
 
-		music.pause();
+		music.resume();
 		return msg.send(msg.language.get('MUSIC_RESUMED', msg.author.tag));
 	}
 

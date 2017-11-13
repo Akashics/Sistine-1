@@ -9,6 +9,7 @@ module.exports = class socialMonitor extends Monitor {
 	}
 
 	async givePoints(message) { // eslint-disable-line no-unused-vars
+		if (this.client.blocklist.includes(message.author.id)) return;
 		if (message.channel.type !== 'text' || message.author.bot || !message.guild) return;
 		const timedOut = timeout.has(message.author.id);
 		if (timedOut) return;

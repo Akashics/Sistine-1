@@ -8,7 +8,7 @@ module.exports = class Rate extends Command {
 			description: 'Rates your Waifu!',
 			usage: '<Query:Str>'
 		});
-		this.cost = 1;
+		this.cost = 25;
 	}
 
 	async run(msg, [user]) {

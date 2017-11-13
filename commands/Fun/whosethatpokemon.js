@@ -5,11 +5,10 @@ module.exports = class WTP extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			runIn: ['text'],
-			aliases: ['wtp', 'whosethatpokemon'],
+			aliases: ['wtp'],
 			description: 'Guess that Pokemon!'
 		});
-		this.cost = 2;
+		this.cost = 25;
 	}
 
 	async run(msg) {

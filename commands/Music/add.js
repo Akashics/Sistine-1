@@ -12,6 +12,7 @@ module.exports = class Add extends Command {
 			usage: '<url:string>',
 			description: 'Adds a song the the queue.'
 		});
+		this.cost = 1;
 		this.regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/\S*(?:(?:\/e(?:mbed)?)?\/|watch\/?\?(?:\S*?&?v=))|youtu\.be\/)([\w-]{11})(?:[^\w-]|$)/;
 	}
 

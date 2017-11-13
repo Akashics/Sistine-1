@@ -2,10 +2,10 @@
 <div class="container">
 <h1 class="display-3">Dashboard</h1>
 <ul class="list-unstyled">
-  <% user.guilds.forEach(guild => { 
+  <% user.guilds.forEach(guild => {
     const permsOnGuild = new perms(guild.permissions);
     if(!permsOnGuild.has("MANAGE_GUILD")) return;
-  %>
+  %> 
 
   <li class="media" style="padding: 10px;">
     <% if (guild.icon) { %>

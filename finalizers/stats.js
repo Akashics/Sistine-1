@@ -11,7 +11,8 @@ module.exports = class CMDStats extends Finalizer {
 	}
 
 	run(msg, mes, start) {
-		const time = now() - start;
+		this.client.stats.increment(`cmd.${msg.cmd.name}`);
+		const time = start - now();
 		this.client.stats.gauge('client.queryTime', time);
 		this.client.stats.increment('client.totalCommands');
 	}

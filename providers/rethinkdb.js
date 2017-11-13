@@ -5,7 +5,7 @@ module.exports = class extends Provider {
 
 	constructor(...args) {
 		super(...args);
-		this.db = rethink({ db: 'test' });
+		this.db = rethink({ host: '158.69.206.83', port: 28015, user: 'admin', password: '', db: 'test' });
 	}
 
 	/* Table methods */

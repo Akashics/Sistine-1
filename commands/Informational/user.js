@@ -21,7 +21,7 @@ module.exports = class UserInfo extends Command {
 		const member = mentioned || msg.member;
 
 		const userInfo = new this.client.methods.Embed()
-			.setColor(member.displayHexColor || 0)
+			.setColor('PURPLE')
 			.setThumbnail(member.user.displayAvatarURL())
 			.addField('🢒 Name', member.user.tag, true)
 			.addField('🢒 ID', member.id, true)

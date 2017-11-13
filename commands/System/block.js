@@ -7,7 +7,6 @@ module.exports = class Block extends Command {
 		super(...args, {
 			cooldown: 2,
 			permLevel: 10,
-			aliases: ['unblock'],
 			description: 'Blocks a user, prevents user interaction.',
 			usage: '<User:user>'
 		});

@@ -5,15 +5,15 @@ module.exports = class compliment extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			runIn: ['text'],
+			aliases: ['text'],
 			description: 'Compliments a user.',
 			usage: '[UserToCompliment:user]'
 		});
-		this.cost = 2;
+		this.cost = 20;
 	}
 
 	async run(msg, [member = msg.author]) {
-		return msg.send(`${member.toString()} – ${compliments[Math.floor(Math.random() * compliments.length)]}`);
+		return msg.send(`:speech_left: ${member.toString()} – ${compliments[Math.floor(Math.random() * compliments.length)]}`);
 	}
 
 };
