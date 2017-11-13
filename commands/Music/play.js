@@ -29,7 +29,6 @@ module.exports = class Play extends Command {
 		if (musicInterface.status !== 'playing') return null;
 
 		const song = musicInterface.queue[0];
-		if (musicInterface.voiceChannel.members.size === 1) { return msg.send('._. Everyone left, Music has stopped playing.').then(() => musicInterface.destroy()); }
 		if (!song) {
 			if (musicInterface.autoplay) {
 				return this.autoPlayer(musicInterface).then(() => this.play(musicInterface, msg));

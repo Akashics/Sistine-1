@@ -2,20 +2,19 @@
 
   <% const help = {};
   
- bot.commands.filter((cmd) => cmd.permLevel === 3).forEach((command) => {
+ bot.commands.filter((cmd) => cmd.permLevel <= 3).forEach((command) => {
   const cat = command.category;
   if (!help.hasOwnProperty(cat)) help[cat] = [];
   help[cat].push(command);
 });
 %>
     <div class="container SistineBestContent">
+    <p class="text-danger blockquote blockquote-primary" style=" text-align: center"><i>Just because you don't see a command on this list doesn't mean it doesn't exist. - Kashall</i></p>
       <% for (const category in help) { %>
+      <br>
+        <h2> <%= category %> Commands </h2>
+        <div class="table-responsive" style="border-collapse: collapse; border-spacing: 0;">
         <br>
-        <h2>
-          <%= category %> Commands </h2>
-        <br>
-        <div class="card-columns" data-background-color="color"> </div>
-        <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
@@ -30,14 +29,30 @@
                   <td>
                     <%= command.name %>
                       <i>
-                        <%= `${command.aliases : `(${command.aliases.join(', ')})` ? ''}` %>
+                        <%= `${command.aliases.length > 0 ? `(${command.aliases.join(', ')})` : ''}` %>
                       </i>
                   </td>
                   <td>
                     <%= command.description %>
                   </td>
                   <td>
-                    <%= command.permLevel %>
+                  <% switch (command.permLevel) {
+                      case 0 : %>
+                       Member
+                           <% break;
+
+                      case 1 : %>
+                        Music DJ
+                            <% break;
+
+                      case 2 : %>
+                        Moderator
+                           <% break;
+                      case 3: %>
+                        Guild Owner
+                          <% break;
+
+                    } %>
                   </td>
                 </tr>
                 <% } %>

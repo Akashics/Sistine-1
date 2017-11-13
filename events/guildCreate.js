@@ -34,7 +34,7 @@ module.exports = class guildCreate extends Event {
 				this.client.emit('warn', `⚠ Bot Collection Guild: ${guild.name}[${guild.id}] joined with ${(botsCount / guild.memberCount * 100).toFixed(2)}% of bots.`);
 				return;
 			}
-			this.client.emit('log', `Guild Addition: No Problems found for: ${guild.name}[${guild.id}]`);
+			this.client.emit('log', `Guild Join: No Problems found for: ${guild.name}[${guild.id}]`);
 		} else {
 			this.client.emit('log', `Whitelisted Guild Joined: ${guild.name}[${guild.id}]`);
 		}

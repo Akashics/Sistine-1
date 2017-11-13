@@ -7,7 +7,8 @@ module.exports = class guildDelete extends Event {
 		super(...args, { name: 'guildDelete', enabled: true });
 	}
 
-	run() {
+	run(guild) {
+		this.client.emit('log', `Guild Leave: ${guild.name}[${guild.id}]`);
 		this.client.stats.increment('client.totalGuildLeaves');
 
 		dBots(this.client);

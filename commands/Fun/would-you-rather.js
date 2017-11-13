@@ -9,7 +9,7 @@ module.exports = class WYR extends Command {
 			aliases: ['wy-rather', 'wyr'],
 			description: 'Responds with a random would you rather question.'
 		});
-		this.cost = 2;
+		this.cost = 25;
 	}
 
 	async run(msg) {

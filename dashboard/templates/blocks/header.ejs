@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/public/css/now-ui-kit.css" />
   <link rel="stylesheet" href="/public/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -30,20 +30,20 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="https://sistine.ml" rel="tooltip" title="Sistine, A Member-oriented Discord Bot. Add today! https://sistine.ml/invite"
-          data-placement="bottom" target="_blank">
-          <b><%= bot.user.username %></b>
+          data-placement="bottom" target="noopener">
+          <h5><b><%= bot.user.username %></b></h5>
         </a>
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./public/img/blurred-image-1.jpg">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav text-shadow">
           <li class="nav-item">
             <a class="nav-link" href="/commands"><i class="fa fa-book"></i><p> Commands</p></a></li>
           <li class="nav-item"><a class="nav-link<% if(!bot.application.botPublic) { %> disabled<% } %>" href="https://discordapp.com/oauth2/authorize?client_id=<%= bot.application.id %>&scope=bot&response_type=code&redirect_uri=<%= encodeURIComponent(bot.dashKeys.callbackURL) %>"><i class="fa fa-fw fa-plus"></i> Add to Guild</a></li>
           <li class="nav-item"><a class="nav-link" href="/stats"><i class="fa fa-bookmark-o"></i> <%= bot.guilds.size %> Guilds</a></li>
           <li class="nav-item"><a class="nav-link" href="https://discord.gg/jgPNHWy"><i class="fa fa-question"></i> Support</a></li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/Kashalls"
-              target="_blank">
+            <a class="nav-link" rel="tooltip" title="Follow Sistine's Development on Twitter" data-placement="bottom" href="https://twitter.com/Kashalls"
+              target="noopener">
               <i class="fa fa-twitter"></i>
               <p class="d-lg-none d-xl-none">Twitter</p>
             </a>
@@ -57,7 +57,7 @@
                   <%= user.username %>#<%= user.discriminator %>
                 </a>
                 <div class="nav-item dropdown-menu dropdown" aria-labelledby="navbarDropdownMenuLink">
-                  <h6 class="dropdown-header"><i class="fa fa-user" aria-hidden="true"></i> <%= user.username %></h6>
+                  <h6 class="dropdown-header" style="color: #000"><i class="fa fa-user" aria-hidden="true"></i> <%= user.username %></h6>
                   <a class="dropdown-item" href="/dashboard"><i class="fa fa-cogs" aria-hidden="true"></i> Dashboard</a>
                   <% if(user.id === bot.config.ownerID) { %>
                     <a class="dropdown-item" href="/admin"><i class="fa fa-key"></i> Admin</a>

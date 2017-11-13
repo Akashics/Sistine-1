@@ -134,7 +134,7 @@ module.exports = class extends Language {
 			MUSIC_PLAY: song => `🎧 Playing: **${song.title}** as requested by: **${song.requester}**`,
 			MUSIC_AUTOPLAY: (author, enabled) => `YouTube AutoPlay has been ${enabled ? 'enabled' : 'disabled'} by ${author.tag}.`,
 			MUSIC_USER_NOVOICE: 'You are not connected to a voice channel.',
-			MUSIC_JOINED: voiceChannel => `🔊 Successfully joined the voice channel ${voiceChannel.name}`,
+			MUSIC_JOINED: voiceChannel => `🔊 Successfully joined the voice channel: ${voiceChannel.name}`,
 			MUSIC_LEFT: voiceChannel => `🔊 Successfully left the voice channel ${voiceChannel.name}`,
 			MUSIC_NOCONNECT: '🔊 I do not have enough permissions to connect to your voice channel. I am missing the CONNECT permission.',
 			MUSIC_NOSPEAK: '🔊 I can connect... but not speak. Please turn on this permission so I can emit music.',

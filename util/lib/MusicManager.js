@@ -23,7 +23,7 @@ module.exports = class InterfaceMusic {
 	async add(user, url) {
 		const song = await getInfoAsync(url).catch((err) => {
 			this.client.emit('log', err, 'error');
-			throw `An error has occured while attempting to add this song. \`\`\`Youtube Video: ${url}\n${err}\`\`\``;
+			throw `An error has occured while attempting to add this video. \`\`\`Youtube Video: ${url}\n${err}\`\`\``;
 		});
 
 		const metadata = {
@@ -53,6 +53,9 @@ module.exports = class InterfaceMusic {
 
 	join(voiceChannel) {
 		return voiceChannel.join()
+			.then(() => {
+				this.client.emit('warn', `Music:: Opened process for ${this.guild.name}`);
+			})
 			.catch((err) => {
 				if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.'; }
 				if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) { throw 'That channel is full, I cannot join it.'; }
@@ -66,7 +69,10 @@ module.exports = class InterfaceMusic {
 		this.dispatcher = null;
 		this.status = 'idle';
 
-		await this.voiceChannel.leave();
+		await this.voiceChannel.leave()
+			.then(() => {
+				this.client.emit('warn', `Music:: Closed process for ${this.guild.name}`);
+			});
 		return this;
 	}
 
@@ -74,15 +80,17 @@ module.exports = class InterfaceMusic {
 		if (!this.voiceChannel) {
 			throw 'I am not in a voice channel.';
 		} else if (!this.connection) {
-			throw 'I could not find a connection.';
+			throw 'Sistine\'s Dispatcher was not able to find a stable connection. Discord\'s API might be having issues.';
 		} else if (!this.queue[0]) {
 			throw 'The queue is empty.';
+		} else if (this.voiceChannel.members.size <= 1) {
+			throw '._. Everyone left, Music has stopped playing.';
 		}
 
 		this.pushPlayed(this.queue[0].url);
 
 		const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
-			.on('error', (err) => { this.client.emit('log', err, 'error'); throw `Video Errored: ${this.queue[0].url} - G: ${this.guild.id}`; });
+			.on('error', (err) => { this.client.emit('error', err); throw `Video Errored: ${this.queue[0].url} - G: ${this.guild.id}`; });
 
 		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
 		return this.dispatcher;

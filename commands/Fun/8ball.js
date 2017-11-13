@@ -9,7 +9,7 @@ module.exports = class eightBall extends Command {
 			description: 'Magic 8-Ball, does exactly what the toy does.',
 			usage: '<query:str>'
 		});
-		this.cost = 1;
+		this.cost = 10;
 		this.answers = [
 			'Maybe.',
 			'Certainly not.',

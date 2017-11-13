@@ -3,7 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# Custom Hidings
 keys.json
+dashboard-session
 
 # Runtime data
 pids
@@ -49,6 +51,5 @@ jspm_packages
 .yarn-integrity
 
 .vscode/
-*.ldb
 *.ldb
 *.ldb
