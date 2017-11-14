@@ -25,6 +25,7 @@ module.exports = class InterfaceMusic {
 			this.client.emit('log', err, 'error');
 			throw `An error has occured while attempting to add this video. \`\`\`Youtube Video: ${url}\n${err}\`\`\``;
 		});
+		console.log(song);
 
 		const metadata = {
 			url: `https://youtu.be/${song.video_id}`,
@@ -87,7 +88,7 @@ module.exports = class InterfaceMusic {
 
 		this.pushPlayed(this.queue[0].url);
 
-		const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
+		const stream = await ytdl(this.queue[0].url, { filter: 'audio' })
 			.on('error', (err) => {
 				this.client.emit('error', err);
 				this.skip();
