@@ -20,7 +20,7 @@ module.exports = class Daily extends Command {
 			// payer: The user paying.
 			const getPayer = this.client.settings.users.getEntry(payee);
 
-			if (Date.now() > getPayer.daily) {
+			if (!getPayer.daily || Date.now() > getPayer.daily) {
 				if (payer === payee) {
 					const message = await msg.channel.send(`<:tickYes:373305832793833483> You have claimed your daily ${pointsReward} points, Ain't that dandy?`);
 					await this.client.settings.users.updateOne(payer, 'daily', message.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
