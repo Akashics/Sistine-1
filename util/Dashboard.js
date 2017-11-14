@@ -101,12 +101,14 @@ class Dashboard {
 		// Index page. If the user is authenticated, it shows their info
 		// at the top right of the screen.
 		app.get('/', (req, res) => {
+			client.stats.increment('express.request');
 			renderTemplate(res, req, 'index.ejs');
 		});
 
 		// The login page saves the page the person was on in the session,
 		// then throws the user to the Discord OAuth2 login page.
 		app.get('/login', (req, res, next) => {
+			client.stats.increment('express.request');
 			if (req.session.backURL) {
 				req.session.backURL = req.session.backURL;
 			} else if (req.headers.referer) {
@@ -122,6 +124,7 @@ class Dashboard {
 		passport.authenticate('discord'));
 
 		app.get('/callback', passport.authenticate('discord', { failureRedirect: '/autherror' }), (req, res) => {
+			client.stats.increment('express.request');
 			if (req.user.id === client.config.ownerID) {
 				req.session.isAdmin = true;
 			} else {
@@ -137,10 +140,12 @@ class Dashboard {
 		});
 
 		app.get('/autherror', (req, res) => {
+			client.stats.increment('express.request');
 			renderTemplate(res, req, 'autherror.ejs');
 		});
 
 		app.get('/logout', (req, res) => {
+			client.stats.increment('express.request');
 			req.session.destroy(() => {
 				req.logout();
 				res.redirect('/');
@@ -152,21 +157,25 @@ class Dashboard {
 		// it shows all current guilds the bot is on, not *just* the ones the user has
 		// access to. Obviously, this is reserved to the bot's owner for security reasons.
 		app.get('/admin', checkAuth, (req, res) => {
+			client.stats.increment('express.request');
 			if (!req.session.isAdmin) return res.redirect('/');
 			renderTemplate(res, req, 'admin.ejs');
 		});
 
 		app.get('/dashboard', checkAuth, (req, res) => {
+			client.stats.increment('express.request');
 			const perms = Discord.Permissions;
 			renderTemplate(res, req, 'dashboard.ejs', { perms });
 		});
 
 		// Simple redirect to the "Settings" page (aka "manage")
 		app.get('/dashboard/:guildID', checkAuth, (req, res) => {
+			client.stats.increment('express.request');
 			res.redirect(`/dashboard/${req.params.guildID}/manage`);
 		});
 
 		app.get('/dashboard/:guildID/members', checkAuth, async (req, res) => {
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			renderTemplate(res, req, 'guild/members.ejs', {
@@ -176,7 +185,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/members/list', checkAuth, async (req, res) => {
-			client.stats.increment('client.httpreq');
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			if (req.query.fetch) {
@@ -231,7 +240,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/manage', checkAuth, (req, res) => {
-			client.stats.increment('client.httpreq');
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
@@ -240,7 +249,7 @@ class Dashboard {
 		});
 
 		app.post('/dashboard/:guildID/manage', checkAuth, (req, res) => {
-			client.stats.increment('client.httpreq');
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
@@ -250,7 +259,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/leave', checkAuth, async (req, res) => {
-			client.stats.increment('client.httpreq');
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
@@ -263,7 +272,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/reset', checkAuth, async (req, res) => {
-			client.stats.increment('client.httpreq');
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
@@ -273,6 +282,7 @@ class Dashboard {
 		});
 
 		app.get('/dashboard/:guildID/stats', checkAuth, (req, res) => {
+			client.stats.increment('express.request');
 			const guild = client.guilds.get(req.params.guildID);
 			if (!guild) return res.status(404);
 			const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
@@ -282,12 +292,14 @@ class Dashboard {
 
 
 		app.get('/commands', (req, res) => {
+			client.stats.increment('express.request');
 			renderTemplate(res, req, 'commands.ejs', { md });
 		});
 
 		// Bot statistics. Notice that most of the rendering of data is done through this code,
 		// not in the template, to simplify the page code. Most of it **could** be done on the page.
 		app.get('/stats', (req, res) => {
+			client.stats.increment('express.request');
 			res.redirect('https://p.datadoghq.com/sb/82a5d5fef-1a21d0b3a5');
 		});
 

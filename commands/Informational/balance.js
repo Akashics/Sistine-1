@@ -10,11 +10,6 @@ module.exports = class Balance extends Command {
 		});
 		/* eslint-disable quotes */
 		this.schema = {
-			blocked: {
-				type: "Boolean",
-				default: false,
-				array: false
-			},
 			balance: {
 				type: "Integer",
 				default: 0,
@@ -32,8 +27,13 @@ module.exports = class Balance extends Command {
 				default: 1,
 				array: false,
 				min: 1
+			},
+			reputation: {
+				type: "Integer",
+				default: 0,
+				array: false,
+				min: 0
 			}
-
 		};
 	}
 
@@ -48,7 +48,7 @@ module.exports = class Balance extends Command {
 	}
 
 	async run(msg, [mentioned]) {
-		if (mentioned && msg.hasAtLeastPermissionLevel(7)) {
+		if (mentioned && msg.hasAtLeastPermissionLevel(9)) {
 			const { balance } = mentioned.user.conf;
 			return msg.send(`${mentioned.user.tag} currently has ${balance || 0} credits.`);
 		}

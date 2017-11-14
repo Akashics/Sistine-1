@@ -8,6 +8,7 @@ module.exports = class Error extends Event {
 	}
 
 	run(err) {
+		this.client.stats.increment('client.error');
 		this.client.console.error('');
 		this.client.console.error(`New Error in ${this.errFile} || ${err}`);
 	}

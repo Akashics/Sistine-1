@@ -20,6 +20,7 @@ class SistineClient extends Client {
 		this.blocklist = require('./keys/blocklist.json');
 		this.blacklist = require('./keys/blacklist.json');
 		this.site = null;
+		this.wait = require('util').promisify(setTimeout);
 		this.sistinePermissionLevels = new PermissionLevels()
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.settings.DJRole && msg.member.roles.has(msg.guild.settings.DJRole))

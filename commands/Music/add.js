@@ -18,7 +18,7 @@ module.exports = class Add extends Command {
 
 	async run(msg, [url]) {
 		/* eslint-disable no-throw-literal */
-		this.client.stats.increment('client.musicTracksAdded');
+		this.client.stats.increment('music.trackAdded');
 
 		const youtubeURL = await this.getURL(url, this.client);
 		if (!youtubeURL) { throw msg.language.get('MUSIC_URL_NOTFOUND'); }

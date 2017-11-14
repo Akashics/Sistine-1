@@ -1,5 +1,4 @@
 const { Finalizer } = require('klasa');
-const now = require('performance-now');
 
 module.exports = class CMDStats extends Finalizer {
 
@@ -10,12 +9,10 @@ module.exports = class CMDStats extends Finalizer {
 		});
 	}
 
-	run(msg, mes, start) {
-		console.log('Testing Finalizer');
-		this.client.stats.histogram('command.process_time', now() - start);
+	run(msg, mes, stopwatch) {
+		this.client.stats.histogram('command.process_time', stopwatch.end - stopwatch.start);
 		this.client.stats.increment(`cmd.${msg.cmd.name}`);
-		this.client.stats.increment('client.totalCommands');
-		console.log('Testing Finalizer END');
+		this.client.stats.increment('command.totalCommands');
 	}
 
 };

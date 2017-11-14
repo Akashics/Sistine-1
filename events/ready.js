@@ -9,12 +9,10 @@ module.exports = class Ready extends Event {
 		startDashboard(this.client);
 
 		setInterval(() => {
-			that.client.stats.gauge('client.guilds', that.client.guilds.size);
 			that.client.stats.gauge('client.users', that.client.users.size);
-			that.client.stats.gauge('client.channels', that.client.channels.size);
 			that.client.stats.gauge('client.ping', that.client.ping);
 			that.client.stats.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
-		}, 180000);
+		}, 30000);
 
 		this.client.raven.config(this.client.keys.raven).install();
 		updateStatus(this.client);

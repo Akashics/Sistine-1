@@ -23,7 +23,7 @@ module.exports = class MoeImage extends Command {
 			return msg.sendEmbed(images);
 		}
 		const AuthStr = `Bearer ${this.client.keys.weebKey}`;
-		const imageRequest = await axios.get(`https://staging.weeb.sh/images/random?type=${type}`, { headers: { Authorization: AuthStr } });
+		const imageRequest = await axios.get(`https://api.weeb.sh/images/random?type=${type}`, { headers: { Authorization: AuthStr } });
 		images
 			.setColor('PURPLE')
 			.setImage(imageRequest.data.url)
