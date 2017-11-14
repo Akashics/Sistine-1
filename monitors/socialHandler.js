@@ -13,10 +13,11 @@ module.exports = class socialMonitor extends Monitor {
 		if (message.channel.type !== 'text' || message.author.bot || !message.guild) return;
 		const timedOut = timeout.has(message.author.id);
 		if (timedOut) return;
+		if (!message.content.length > 10) return;
 		const { users } = this.client.settings;
 		const score = await users.getEntry(message.author.id);
 		timeout.add(message.author.id);
-		const points = this.giveRandomPoints(1, 3);
+		const points = this.giveRandomPoints(5, 16);
 		setTimeout(async () => {
 			timeout.delete(message.author.id);
 			await users.updateOne(message.author.id, 'balance', score.balance + points, message.guild);

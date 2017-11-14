@@ -23,7 +23,7 @@ module.exports = class Prune extends Command {
 		}
 		messages = messages.array().slice(0, limit);
 		await msg.channel.bulkDelete(messages, true);
-		return msg.send(`Successfully deleted ${messages.length}/${limit} messages from ${filter ? filter : 'all'}.`);
+		return msg.send(`Successfully deleted ${messages.length}/${limit} messages from the filter: \`${filter ? filter : 'all'}\`.`);
 	}
 
 	getFilter(msg, filter, user) {
