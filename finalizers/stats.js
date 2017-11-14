@@ -11,10 +11,11 @@ module.exports = class CMDStats extends Finalizer {
 	}
 
 	run(msg, mes, start) {
+		console.log('Testing Finalizer');
+		this.client.stats.histogram('command.process_time', now() - start);
 		this.client.stats.increment(`cmd.${msg.cmd.name}`);
-		const time = start - now();
-		this.client.stats.gauge('client.queryTime', time);
 		this.client.stats.increment('client.totalCommands');
+		console.log('Testing Finalizer END');
 	}
 
 };

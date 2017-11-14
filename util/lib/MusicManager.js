@@ -69,10 +69,8 @@ module.exports = class InterfaceMusic {
 		this.dispatcher = null;
 		this.status = 'idle';
 
-		await this.voiceChannel.leave()
-			.then(() => {
-				this.client.emit('warn', `Music:: Closed process for ${this.guild.name}`);
-			});
+		await this.voiceChannel.leave();
+		this.client.emit('warn', `Music:: Closed process for ${this.guild.name}`);
 		return this;
 	}
 
@@ -90,7 +88,11 @@ module.exports = class InterfaceMusic {
 		this.pushPlayed(this.queue[0].url);
 
 		const stream = await ytdl(this.queue[0].url, { filter: 'audioonly' })
-			.on('error', (err) => { this.client.emit('error', err); throw `Video Errored: ${this.queue[0].url} - G: ${this.guild.id}`; });
+			.on('error', (err) => {
+				this.client.emit('error', err);
+				this.skip();
+				throw `Video Errored: ${this.queue[0].url} - G: ${this.guild.id}`;
+			});
 
 		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
 		return this.dispatcher;
