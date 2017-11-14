@@ -9,7 +9,7 @@ module.exports = class compliment extends Command {
 			description: 'Compliments a user.',
 			usage: '[UserToCompliment:user]'
 		});
-		this.cost = 20;
+		this.cost = 10;
 	}
 
 	async run(msg, [member = msg.author]) {

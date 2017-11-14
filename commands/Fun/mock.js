@@ -17,7 +17,7 @@ module.exports = class Mock extends Command {
 			description: 'Mocks a nominated message.',
 			usage: '[MessageID:msg]'
 		});
-		this.cost = 50;
+		this.cost = 25;
 	}
 
 	async run(msg, [msgid]) {

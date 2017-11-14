@@ -32,6 +32,7 @@ module.exports = class guildMemberAdd extends Event {
 	}
 
 	async run(member) {
+		this.client.stats.increment('client.memberJoins');
 		if (!member.guild.settings.logChannel) { return; }
 		const welcomemsg =
 				[

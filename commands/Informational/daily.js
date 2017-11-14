@@ -14,12 +14,9 @@ module.exports = class Daily extends Command {
 		if (user.bot || msg.author.bot) return msg.send('Bots cannot send/recieve points, Sorry.');
 		const payer = msg.author.id;
 		const payee = user.id;
-		const pointsReward = 100;
+		const pointsReward = 200;
 
 		try {
-			// payee: The user getting paid
-			const getPayee = this.client.settings.users.getEntry(payer);
-
 			// payer: The user paying.
 			const getPayer = this.client.settings.users.getEntry(payee);
 

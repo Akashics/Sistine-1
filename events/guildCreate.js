@@ -39,7 +39,8 @@ module.exports = class guildCreate extends Event {
 			this.client.emit('log', `Whitelisted Guild Joined: ${guild.name}[${guild.id}]`);
 		}
 
-		this.client.stats.increment('client.totalGuildJoins');
+		this.client.stats.increment('client.guildJoins');
+		this.client.stats.gauge('client.guilds', this.client.guilds.size);
 
 		dBots(this.client);
 		dBotsOrg(this.client);

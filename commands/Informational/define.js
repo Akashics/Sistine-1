@@ -11,8 +11,7 @@ module.exports = class DefineWord extends Command {
 		});
 	}
 	/* eslint-disable camelcase */
-	async run(msg, args) {
-		const { query } = args[0];
+	async run(msg, [query]) {
 		try {
 			const { body } = await snekfetch
 				.get(`http://api.wordnik.com:80/v4/word.json/${query}/definitions`)
@@ -25,7 +24,7 @@ module.exports = class DefineWord extends Command {
 			if (!body.length) { return msg.send('Could not find any results.'); }
 			const defineEmbed = new this.client.methods.Embed()
 				.setColor(0x9797FF)
-				.setTitle(body[0].word)
+				.setTitle(`"${body[0].word.toProperCase()}"`)
 				.setDescription(body[0].text);
 			return msg.sendEmbed(defineEmbed);
 		} catch (err) {
