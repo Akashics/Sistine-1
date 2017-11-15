@@ -54,7 +54,7 @@ module.exports = class guildMemberAdd extends Event {
 		const embedMessage = new this.client.methods.Embed()
 			.setColor(0x66CC00)
 			.setDescription(welcomemsg[randomNumber])
-			.setThumbnail(member.user.displayAvatarURL)
+			.setThumbnail(member.user.displayAvatarURL())
 			.setTimestamp()
 			.setFooter(this.client.user.username, this.client.user.avatarURL());
 
