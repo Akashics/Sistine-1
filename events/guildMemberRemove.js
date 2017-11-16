@@ -44,7 +44,7 @@ module.exports = class guildMemberAdd extends Event {
 		];
 		var randomNumber = Math.floor(Math.random() * byebyemsg.length);
 		const embed = new this.client.methods.Embed()
-			.setColor(0xE0082d)
+			.setColor('PURPLE')
 			.setDescription(byebyemsg[randomNumber])
 			.setThumbnail(member.user.displayAvatarURL())
 			.setTimestamp()

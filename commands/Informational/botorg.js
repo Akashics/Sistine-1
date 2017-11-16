@@ -14,7 +14,7 @@ module.exports = class BotOrg extends Command {
 		try {
 			const { body } = await snekfetch.get(`https://discordbots.org/api/bots/${bot.id}`);
 			const build = new this.client.methods.Embed()
-				.setColor(0x9797FF)
+				.setColor('PURPLE')
 				.setAuthor('discordbots.org', 'https://discordbots.org/')
 				.setTitle(body.certifiedBot ? `<:certifiedbot:373310120886796289> ${body.username}#${body.discriminator}` : `${body.username}#${body.discriminator}`)
 				.setURL(`https://discordbots.org/bots/${bot.id}`)

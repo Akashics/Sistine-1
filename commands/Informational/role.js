@@ -44,7 +44,7 @@ module.exports = class Role extends Command {
 	async run(msg, [role]) {
 		const allPermissions = Object.entries(role.permissions.serialize()).filter(([allowed]) => allowed).map(([perm]) => this.perms[perm]).join(', ');
 		const roleInfo = new this.client.methods.Embed()
-			.setColor(role.hexColor || '#FFF')
+			.setColor(!role.hexColor === '0xFFFFFF' || !role.hexColor === '#FFF' ? role.hexColor : '#PURPLE')
 			.addField('🢒 Name', role.name, true)
 			.addField('🢒 ID', role.id, true)
 			.addField('🢒 Color', role.hexColor || 'None', true)

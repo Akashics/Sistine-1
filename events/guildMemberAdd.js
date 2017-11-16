@@ -34,6 +34,10 @@ module.exports = class guildMemberAdd extends Event {
 	async run(member) {
 		this.client.stats.increment('client.memberJoins');
 		if (!member.guild.settings.logChannel) { return; }
+		const logChannelID = member.guild.settings.logChannel;
+		if (!logChannelID) { return; }
+		if (!logLevel || logLevel === 0) { return; }
+		const logLevel = member.guild.settings.playerLogLevel;
 		const welcomemsg =
 				[
 					`**${member.user.tag}**, if our dog doesn't like you, we won't either !`,
@@ -52,16 +56,13 @@ module.exports = class guildMemberAdd extends Event {
 				];
 		const randomNumber = Math.floor(Math.random() * welcomemsg.length);
 		const embedMessage = new this.client.methods.Embed()
-			.setColor(0x66CC00)
+			.setColor('PURPLE')
 			.setDescription(welcomemsg[randomNumber])
 			.setThumbnail(member.user.displayAvatarURL())
 			.setTimestamp()
 			.setFooter(this.client.user.username, this.client.user.avatarURL());
 
 		// trying to send the log detail to log channel
-		const logChannelID = member.guild.settings.logChannel;
-		if (!logChannelID) { return; }
-		const logLevel = member.guild.settings.playerLogLevel;
 		try {
 			switch (logLevel) {
 				case 1:
