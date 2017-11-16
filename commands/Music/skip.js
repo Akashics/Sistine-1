@@ -5,7 +5,6 @@ module.exports = class Skip extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-			aliases: ['vol'],
 
 			usage: '[-force]',
 			description: 'Skip the current song.'
@@ -28,7 +27,7 @@ module.exports = class Skip extends Command {
 			}
 		}
 
-		await msg.send(`⏭ Skipped ${music.queue[0].title}`);
+		await msg.send(`⏭ Skipped ${music.queue[0].title || 'Title Error'}`);
 		music.skip(true);
 		return null;
 	}
