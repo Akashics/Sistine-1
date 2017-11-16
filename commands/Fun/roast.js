@@ -7,13 +7,13 @@ module.exports = class Roast extends Command {
 		super(...args, {
 			aliases: ['burn'],
 			description: 'Roasts a user.',
-			usage: '[UserToRoast:member]'
+			usage: '[UserToRoast:user]'
 		});
 		this.cost = 20;
 	}
 
-	async run(msg, [member = msg.member]) {
-		return msg.send(`:fire: ${member.user.username} – ${roasts[Math.floor(Math.random() * roasts.length)]}`);
+	async run(msg, [member = msg.author]) {
+		return msg.send(`:fire: ${member.username} – ${roasts[Math.floor(Math.random() * roasts.length)]}`);
 	}
 
 };

@@ -24,7 +24,7 @@ module.exports = class WTP extends Command {
 		const id = `${'000'.slice(results.body.id.toString().length)}${results.body.id}`;
 		const embed = new this.client.methods.Embed()
 			.setTitle(msg.language.get('WTP_EMBED_TITLE'))
-			.setColor(0xED1C24)
+			.setColor('PURPLE')
 			.setImage(`https://www.serebii.net/sunmoon/pokemon/${id}.png`);
 		await msg.sendEmbed(embed);
 		const msgs = await msg.channel.awaitMessages(res => res.author.id === msg.author.id, {
