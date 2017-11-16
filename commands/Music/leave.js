@@ -5,10 +5,8 @@ module.exports = class Leave extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-
 			description: 'Leaves the voice channel.'
 		});
-
 		this.requireMusic = true;
 	}
 

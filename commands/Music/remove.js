@@ -22,7 +22,11 @@ module.exports = class Remove extends Command {
 		if (music.queue.length < number) throw msg.language.get('MUSIC_OUTRANGE', music.queue.length);
 
 		const song = music.queue[number];
-		if (!song.requester) throw 'There was an error fetching the requester.';
+		if (await song.requester === 'Youtube Autoplay') {
+			music.queue.splice(number, 1);
+			return msg.send(msg.language.get('MUSIC_REMOVEDSONG', song));
+		}
+		if (await !song.requester) throw 'There was an error fetching the requester.';
 		if (song.requester.id !== msg.author.id) {
 			const hasPermission = await msg.hasAtLeastPermissionLevel(1);
 			if (hasPermission === false) { throw 'You can\'t execute this command with the force flag. You must be at least a DJ Member.'; }

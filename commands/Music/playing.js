@@ -19,7 +19,7 @@ module.exports = class Playing extends Command {
 		const info = await getInfo(song.url).catch((err) => { throw err; });
 		if (!info.author) info.author = {};
 		const playing = new this.client.methods.Embed()
-			.setColor(12916736)
+			.setColor('PURPLE')
 			.setTitle(info.title)
 			.setURL(`https://youtu.be/${info.vid}`)
 			.setAuthor(info.author.name || 'Unknown', info.author.avatar || null, info.author.channel_url || null)

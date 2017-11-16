@@ -130,7 +130,7 @@ module.exports = class extends Language {
 			USER_REACTION: (author, user, thing) => `**${author} has ${thing} you ${user}!**`,
 			WEEB_SERVICES: 'Sistine - https://sistine.ml | Images provided by Weeb.SH',
 			MUSIC_URL_NOTFOUND: 'We couldn\'t find a video with that link.',
-			MUSIC_ADDED_QUEUE: song => `🎵 Added **${song.title}** to the queue 🎶`,
+			MUSIC_ADDED_QUEUE: song => `🎵 \`${song.title}\` was added to the queue 🎶`,
 			MUSIC_PLAY: song => `🎧 Playing: **${song.title}** as requested by: **${song.requester}**`,
 			MUSIC_AUTOPLAY: (author, enabled) => `YouTube AutoPlay has been ${enabled ? 'enabled' : 'disabled'} by ${author.tag}.`,
 			MUSIC_USER_NOVOICE: 'You are not connected to a voice channel.',
