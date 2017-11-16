@@ -26,7 +26,7 @@ module.exports = class ServerInfo extends Command {
 
 	async run(msg) {
 		const serverInfo = new this.client.methods.Embed()
-			.setColor(0x00AE86)
+			.setColor('PURPLE')
 			.setThumbnail(msg.guild.iconURL())
 			.addField('🢒 Name', msg.guild.name, true)
 			.addField('🢒 ID', msg.guild.id, true)

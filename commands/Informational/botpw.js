@@ -20,7 +20,7 @@ module.exports = class BotPW extends Command {
 				.get(`https://bots.discord.pw/api/bots/${bot.id}/stats`)
 				.set({ Authorization: this.client.keys.dBotsPW });
 			const build = new this.client.methods.Embed()
-				.setColor(0x9797FF)
+				.setColor('PURPLE')
 				.setAuthor('bots.discord.pw', 'https://i.imgur.com/lrKYBQi.jpg')
 				.setTitle(`${bot.username}#${bot.discriminator}`)
 				.setURL(`https://bots.discord.pw/bots/${bot.id}`)

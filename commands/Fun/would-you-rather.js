@@ -19,7 +19,7 @@ module.exports = class WYR extends Command {
 			const embed = new this.client.methods.Embed()
 				.setTitle(`${body.title}...`)
 				.setURL(body.link)
-				.setColor(0x9797FF)
+				.setColor('PURPLE')
 				.setDescription(`${body.choicea} OR ${body.choiceb}?`);
 			return msg.sendEmbed(embed);
 		} catch (err) {

@@ -23,7 +23,7 @@ module.exports = class DefineWord extends Command {
 				});
 			if (!body.length) { return msg.send('Could not find any results.'); }
 			const defineEmbed = new this.client.methods.Embed()
-				.setColor(0x9797FF)
+				.setColor('PURPLE')
 				.setTitle(`"${body[0].word.toProperCase()}"`)
 				.setDescription(body[0].text);
 			return msg.sendEmbed(defineEmbed);
