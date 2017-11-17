@@ -36,8 +36,8 @@ module.exports = class guildMemberAdd extends Event {
 		if (!member.guild.settings.logChannel) { return; }
 		const logChannelID = member.guild.settings.logChannel;
 		if (!logChannelID) { return; }
-		if (!logLevel || logLevel === 0) { return; }
 		const logLevel = member.guild.settings.playerLogLevel;
+		if (!logLevel || logLevel === 0) { return; }
 		const welcomemsg =
 				[
 					`**${member.user.tag}**, if our dog doesn't like you, we won't either !`,
