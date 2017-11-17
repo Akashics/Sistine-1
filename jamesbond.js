@@ -12,7 +12,6 @@ require('express');
 require('express-passport');
 require('express-session');
 require('fast-html-parser');
-require('ffmpeg-binaries');
 require('figlet');
 require('flipacoin');
 require('fs-nextra');
