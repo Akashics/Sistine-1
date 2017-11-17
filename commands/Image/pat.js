@@ -11,7 +11,12 @@ module.exports = class PatImage extends Command {
 	}
 
 	async run(msg, [mentioned = msg.author]) {
-		const action = mentioned === msg.author ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'head-pat') : msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'patted');
+		var action;
+		if (mentioned === msg.author) {
+			action = msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'head-pat');
+		} else {
+			action = msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'patted');
+		}
 		const embed = await weebImage(msg, this.client, mentioned, action);
 		return msg.sendEmbed(embed);
 	}

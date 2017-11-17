@@ -82,8 +82,6 @@ module.exports = class InterfaceMusic {
 			throw 'Sistine\'s Dispatcher was not able to find a stable connection. Discord\'s API might be having issues.';
 		} else if (!this.queue[0]) {
 			throw 'The queue is empty.';
-		} else if (this.voiceChannel.members.size <= 1) {
-			throw '._. Everyone left, Music has stopped playing.';
 		}
 
 		this.pushPlayed(this.queue[0].url);

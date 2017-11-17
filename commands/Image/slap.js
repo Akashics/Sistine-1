@@ -11,7 +11,12 @@ module.exports = class SlapImage extends Command {
 	}
 
 	async run(msg, [mentioned = msg.author]) {
-		const action = mentioned === msg.author ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'be slapped. uwu') : msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'slapped');
+		var action;
+		if (mentioned === msg.author) {
+			action = msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'be slapped. uwu');
+		} else {
+			action = msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'slapped');
+		}
 		const embed = await weebImage(msg, this.client, mentioned, action);
 		return msg.sendEmbed(embed);
 	}
