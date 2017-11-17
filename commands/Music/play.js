@@ -19,7 +19,7 @@ module.exports = class Play extends Command {
 		}
 		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) { await this.client.commands.get('join').run(msg); }
 		if (musicInterface.status === 'paused') { await this.client.commands.get('resume').run(msg); }
-		if (musicInterface.status === 'playing') { return msg.send(`I am already playing something. Try adding a song with ${msg.guild.settings.prefix}add`); }
+		if (musicInterface.status === 'playing') { return msg.send(`Someone is already playing a song. Try adding a song with \` ${msg.guild.settings.prefix}add \`.`); }
 		musicInterface.status = 'playing';
 		musicInterface.channel = msg.channel;
 		return this.play(musicInterface, msg);
@@ -33,7 +33,7 @@ module.exports = class Play extends Command {
 			if (musicInterface.autoplay) {
 				return this.autoPlayer(musicInterface).then(() => this.play(musicInterface, msg));
 			}
-			return musicInterface.channel.send('💿 Queue has been emptied, add more music and play again!').then(() => musicInterface.destroy());
+			return musicInterface.channel.send(':musical_note: Queue has ran out of songs, add more music and play again!').then(() => musicInterface.destroy());
 		}
 		if (song.length_seconds < 5600) return musicInterface.channel.send('💢 You cannot play songs over 1.5 hours long!').then(() => musicInterface.destroy());
 		await musicInterface.channel.send(msg.language.get('MUSIC_PLAY', song));

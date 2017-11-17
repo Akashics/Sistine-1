@@ -12,9 +12,7 @@ module.exports = class Leave extends Command {
 
 	async run(msg) {
 		const { music } = msg.guild;
-		await music.leave();
-
-		return msg.send(msg.language.get('MUSIC_LEFT', msg.member.voiceChannel));
+		return music.leave();
 	}
 
 };

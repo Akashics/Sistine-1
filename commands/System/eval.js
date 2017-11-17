@@ -30,7 +30,7 @@ module.exports = class EvalCommand extends Command {
 				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${evaled.constructor.name || typeof evaled}\`
 \`Input:\`
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
-\`Output:\` **Evaled code was over 2000 letters Here yo go **${haste}`).catch(console.error);
+\`Output:\` **Evaled code was over 2000 letters. It has been put into a hastebin. **${haste}`).catch(console.error);
 			} else {
 				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${evaled.constructor.name || typeof evaled}\`
 \`Input:\`
@@ -59,7 +59,7 @@ ${this.client.methods.util.codeBlock('js', err)}`).catch(console.error);
 			if (!input) rej('Input argument is required.');
 			post('https://hastebin.com/documents').send(input).then(body => {
 				res(`https://hastebin.com/${body.body.key}${extension ? `.${extension}` : ''}`);
-			}).catch(e => rej(e));
+			}).catch((error) => rej(error));
 		});
 	}
 

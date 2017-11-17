@@ -12,7 +12,12 @@ module.exports = class Cuddle extends Command {
 	}
 
 	async run(msg, [mentioned = msg.author]) {
-		const action = mentioned === msg.author ? msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle') : msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'cuddled');
+		var action;
+		if (mentioned === msg.author) {
+			action = msg.language.get('USER_REACTION_SOLO', msg.author.toString(), 'cuddle');
+		} else {
+			action = msg.language.get('USER_REACTION', msg.author.toString(), mentioned.toString(), 'cuddled');
+		}
 		const embed = await weebImage(msg, this.client, mentioned, action);
 		return msg.sendEmbed(embed);
 	}
