@@ -25,7 +25,7 @@ module.exports = class InterfaceMusic {
 			this.client.emit('log', err, 'error');
 			throw `An error has occured while attempting to add this video. \`\`\`Youtube Video: ${url}\n${err}\`\`\``;
 		});
-		if (!song.id) throw 'There was an error in adding this song, because its ID did not register correctly.';
+		if (!song.video_id) throw 'There was an error in adding this song, because its ID did not register correctly.';
 
 		const metadata = {
 			url: `https://youtu.be/${song.video_id}`,
