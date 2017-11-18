@@ -33,6 +33,7 @@ module.exports = class Skip extends Command {
 	}
 
 	handleSkips(musicInterface, user, msg) {
+		if (!musicInterface.queue) return 'There is nothing in the queue, try adding something and then playing it.';
 		if (!musicInterface.queue[0].skips) {
 			musicInterface.queue[0].skips = new Set();
 		}
