@@ -40,7 +40,8 @@ const Sistine = new SistineClient({
 	typing: false,
 	permissionLevels: this.sistinePermissionLevels,
 	readyMessage: (client) => `${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`,
-	provider: { engine: 'rethinkdb' }
+	provider: { engine: 'rethinkdb' },
+	console: { useColor: true }
 });
 
 Sistine.login(keys.botToken);

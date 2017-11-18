@@ -1,4 +1,5 @@
 const ytdl = require('ytdl-core');
+const prism = require('prism-media');
 const getInfoAsync = require('util').promisify(ytdl.getInfo);
 
 /* eslint-disable no-throw-literal */
@@ -23,7 +24,7 @@ module.exports = class InterfaceMusic {
 	async add(user, url) {
 		const song = await getInfoAsync(url).catch((err) => {
 			this.client.emit('log', err, 'error');
-			throw `An error has occured while attempting to add this video. \`\`\`Youtube Video: ${url}\n${err}\`\`\``;
+			throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
 		});
 		if (!song.video_id) throw 'There was an error in adding this song, because its ID did not register correctly.';
 
@@ -32,21 +33,18 @@ module.exports = class InterfaceMusic {
 			title: song.title,
 			requester: user,
 			loudness: song.loudness,
-			seconds: parseInt(song.length_seconds)
+			seconds: parseInt(song.length_seconds),
+			opus: Boolean(song.formats.find(format => format.type === 'audio/webm; codecs="opus"'))
 		};
 
 		this.queue.push(metadata);
-
 		this.next = this.getLink(song.related_videos);
-
 		return metadata;
 	}
 
 	getLink(playlist) {
 		for (const song of playlist) {
-			if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) {
-				continue;
-			}
+			if (!song.id || this.recentlyPlayed.includes(`https://youtu.be/${song.id}`)) continue;
 			return `https://youtu.be/${song.id}`;
 		}
 		return null;
@@ -54,9 +52,6 @@ module.exports = class InterfaceMusic {
 
 	join(voiceChannel) {
 		return voiceChannel.join()
-			.then(() => {
-				this.client.emit('warn', `Music:: Opened process for ${this.guild.name}`);
-			})
 			.catch((err) => {
 				if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.'; }
 				if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) { throw 'That channel is full, I cannot join it.'; }
@@ -71,29 +66,30 @@ module.exports = class InterfaceMusic {
 		this.status = 'idle';
 
 		await this.voiceChannel.leave();
-		this.client.emit('warn', `Music:: Closed process for ${this.guild.name}`);
 		return this;
 	}
 
 	async play() {
-		if (!this.voiceChannel) {
-			throw 'I am not in a voice channel.';
-		} else if (!this.connection) {
-			throw 'Sistine\'s Dispatcher was not able to find a stable connection. Discord\'s API might be having issues.';
-		} else if (!this.queue[0]) {
-			throw 'The queue is empty.';
+		if (!this.voiceChannel) throw 'I am not in a voice channel.';
+		else if (!this.connection) throw 'I could not find a connection.';
+		else if (this.queue.length === 0) throw 'The queue is empty.';
+
+		const song = this.queue[0];
+		this.pushPlayed(song.url);
+
+		if (song.opus) {
+			const stream = ytdl(song.url, { filter: format => format.type === `audio/webm; codecs="opus"` })
+				.pipe(new prism.WebmOpusDemuxer())
+				.on('error', err => this.client.emit('log', err, 'error'));
+
+			this.dispatcher = this.connection.playOpusStream(stream, { passes: 5 });
+		} else {
+			const stream = ytdl(song.url, { filter: 'audioonly' })
+				.on('error', err => this.client.emit('log', err, 'error'));
+
+			this.dispatcher = this.connection.playStream(stream, { passes: 5 });
 		}
 
-		this.pushPlayed(this.queue[0].url);
-
-		const stream = await ytdl(this.queue[0].url, { filter: 'audio' })
-			.on('error', (err) => {
-				this.client.emit('error', err);
-				this.skip();
-				throw `Video Errored: ${this.queue[0].url} - G: ${this.guild.id}`;
-			});
-
-		this.dispatcher = this.connection.playStream(stream, { passes: 5 });
 		return this.dispatcher;
 	}
 
@@ -103,7 +99,6 @@ module.exports = class InterfaceMusic {
 	}
 
 	pause() {
-		if (!this.dispatcher) throw ':/ A error occured where a dispatcher wasn\'t called. You might want to contact support.';
 		this.dispatcher.pause();
 		this.status = 'paused';
 		return this;

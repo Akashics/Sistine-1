@@ -68,7 +68,7 @@ class Util {
 	}
 
 	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.guilds.size} guilds — sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 1 } })
+		client.user.setPresence({ activity: { name: `${client.guilds.size} guilds — sistine.ml`, url: 'https://twitch.tv/akashicsrecords', type: 3 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});
