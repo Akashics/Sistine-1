@@ -27,12 +27,12 @@ module.exports = class EvalCommand extends Command {
 			const cleanEval = this.client.methods.util.clean(ogeval);
 			if (ogeval.length > 1950) {
 				const haste = await this.haste(cleanEval, 'js').catch(console.error);
-				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${evaled.constructor.name || typeof evaled}\`
+				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled}\`
 \`Input:\`
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
 \`Output:\` **Evaled code was over 2000 letters. It has been put into a hastebin. **${haste}`).catch(console.error);
 			} else {
-				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${evaled.constructor.name || typeof evaled}\`
+				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled}\`
 \`Input:\`
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
 \`Output:\`
