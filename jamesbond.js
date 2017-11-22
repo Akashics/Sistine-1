@@ -28,7 +28,6 @@ require('moment-duration-format');
 require('node-opus');
 require('passport');
 require('passport-discord');
-require('performance-now');
 require('raven');
 require('ref');
 require('rethinkdbdash');
