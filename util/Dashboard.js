@@ -50,7 +50,7 @@ class Dashboard {
 		// Session data, used for temporary storage of your visitor's session information.
 		// the `secret` is in fact a "salt" for the data, and should not be shared publicly.
 		app.use(session({
-			store: new LevelStore('./bwd/dashboard-session/'),
+			store: new LevelStore('./dashboard-session'),
 			secret: settings.sessionSecret,
 			resave: false,
 			saveUninitialized: false
