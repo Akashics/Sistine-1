@@ -17,16 +17,16 @@ module.exports = class BotOrg extends Command {
 				.setColor('PURPLE')
 				.setAuthor('discordbots.org', 'https://discordbots.org/')
 				.setTitle(body.certifiedBot ? `<:certifiedbot:373310120886796289> ${body.username}#${body.discriminator}` : `${body.username}#${body.discriminator}`)
-				.setURL(`https://discordbots.org/bots/${bot.id}`)
+				.setURL(`https://discordbots.org/bot/${bot.id}`)
 				.setThumbnail(`https://cdn.discordapp.com/avatars/${body.id}/${body.avatar}.png?size=256`)
 				.setDescription(body.shortdesc)
 				.addField('➔ Prefix', body.prefix, true)
 				.addField('➔ Library', body.lib, true)
 				.addField('➔ Certified', body.certifiedBot ? 'Yes' : 'No :/', true)
-				.addField('➔ Server Count', body.server_count, true)
+				.addField('➔ Server Count', body.server_count ? body.server_count : 'No API Info', true)
 				.addField('➔ Invite', `[Invited Link](${body.invite})`, true)
 				.addField('➔ Website', `[Webby Site](${body.website})` || 'No Website', true)
-				.addField('➔ Updoots', body.points, true)
+				.addField('➔ Upvotes', body.points, true)
 				.addField('➔ Owner', this.client.users.filter(user => body.owners.includes(user.id)).map(user => user.tag), true);
 			return msg.sendEmbed(build);
 		} catch (err) {

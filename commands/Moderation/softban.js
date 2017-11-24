@@ -17,18 +17,18 @@ module.exports = class Softban extends Command {
 	}
 
 	async run(msg, [user, ...reason]) {
-		const reasonFull = reason.length > 0 ? reason.join(' ') : null;
+		const reasonFull = reason.length > 0 ? reason.join(' ') : 'No Reason.';
 
 		const member = await msg.guild.members.fetch(user).catch(() => null);
 
 		if (!member || !member.bannable) {
-			return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
+			return msg.send(msg.language.get('SBAN_FAIL'));
 		}
 
 		await msg.guild.ban(user, { reason, days: 1 });
 		await msg.guild.unban(user, msg.language.get('SOFTBAN_PROCESS'));
 
-		if (msg.guild.settings.logChannel) {
+		if (msg.guild.settings.logging.logChannel) {
 			new ModLog(msg.guild)
 				.setType('softban')
 				.setModerator(msg.author)
@@ -37,7 +37,7 @@ module.exports = class Softban extends Command {
 				.send();
 		}
 
-		return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'softbanned', user.tag, reasonFull));
+		return msg.send(msg.language.get('SBAN_SUCCESS', user.tag, reasonFull));
 	}
 
 };

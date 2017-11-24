@@ -15,19 +15,19 @@ module.exports = class IsNowIllegal extends Command {
 	}
 
 	async run(msg, [thing]) {
-		if (inUse.get('true')) throw 'Trump is currently making something illegal, please wait.';
+		if (inUse.get('true')) throw msg.language.get('trumpInUse');
 		inUse.set('true', { user: msg.author.id });
 		const wordMatch = /^[a-zA-Z\s]{1,10}$/.exec(thing);
 		if (thing.length < 1 || thing.length > 10) {
 			inUse.delete('true');
-			throw 'Cannot be longer than 10 characters or shorter than 1 character.';
+			throw msg.language.get('trumpSyntax');
 		}
 		if (!wordMatch) {
 			inUse.delete('true');
-			throw 'oops! Non-standard unicode characters are now illegal.';
+			throw msg.language.get('trumpIllegalCharacter', msg.author.username);
 		}
 		try {
-			const message = await msg.channel.send(`Convincing Trump that \`${thing.toProperCase}\` should be illegal...`);
+			const message = await msg.channel.send(msg.language.get('trumpConvincing', thing.toProperCase));
 			await post('https://is-now-illegal.firebaseio.com/queue/tasks.json').send({ task: 'gif', word: thing.toUpperCase() });
 			await this.client.wait(5000);
 			const result = await get(`https://is-now-illegal.firebaseio.com/gifs/${thing.toUpperCase()}.json`);

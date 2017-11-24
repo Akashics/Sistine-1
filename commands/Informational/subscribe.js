@@ -5,10 +5,7 @@ module.exports = class Subscribe extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'subscribe',
-			permLevel: 0,
 			runIn: ['text'],
-
 			description: 'Subscribe to this servers\' announcements.'
 		});
 	}

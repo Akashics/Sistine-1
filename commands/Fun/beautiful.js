@@ -29,7 +29,7 @@ module.exports = class beautifulFrame extends Command {
 	}
 
 	async run(msg, [user = msg.author]) {
-		const message = await msg.channel.send('Admiring the painting...');
+		const message = await msg.channel.send(msg.language.get('BEAUTIFUL'));
 		const result = await getBeautiful(user.displayAvatarURL({ format: 'png' }));
 		await msg.channel.send({ files: [{ attachment: result, name: `${user.username}.jpg` }] });
 		return message.delete();

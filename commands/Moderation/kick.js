@@ -16,15 +16,15 @@ module.exports = class Kick extends Command {
 	}
 
 	async run(msg, [member, ...reason]) {
-		const reasonFull = reason.length > 0 ? reason.join(' ') : null;
+		const reasonFull = reason.length > 0 ? reason.join(' ') : 'No Reason';
 
-		if (!member || !member.bannable) {
-			return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
+		if (!member || !member.kickable) {
+			return msg.send(msg.language.get('KICK_FAIL'));
 		}
 
 		await member.kick(reason);
 
-		if (msg.guild.settings.logChannel) {
+		if (msg.guild.settings.logging.logChannel) {
 			new ModLog(msg.guild)
 				.setType('kick')
 				.setModerator(msg.author)
@@ -33,7 +33,7 @@ module.exports = class Kick extends Command {
 				.send();
 		}
 
-		return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'kicked', member.user.tag, reasonFull));
+		return msg.send(msg.language.get('KICK_SUCCESS', member.user.tag, reasonFull));
 	}
 
 };

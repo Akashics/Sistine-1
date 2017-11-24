@@ -25,7 +25,7 @@ module.exports = class CaseInfo extends Command {
 	}
 
 	init() {
-		// this.provider = this.client.providers.get('json');
+		this.provider = this.client.providers.get('json');
 	}
 
 };

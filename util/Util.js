@@ -59,7 +59,7 @@ class Util {
 	}
 
 	static announcement(msg) {
-		const announcementID = msg.guild.settings.subscriberRole;
+		const announcementID = msg.guild.settings.roles.subscriberRole;
 		if (announcementID === null) { throw msg.language.get('COMMAND_SUBSCRIBE_NO_ROLE'); }
 		const role = msg.guild.roles.get(announcementID);
 		if (!role) throw msg.language.get('COMMAND_SUBSCRIBE_NO_ROLE');
@@ -84,6 +84,15 @@ class Util {
 			.setImage(imageRequest.body.url)
 			.setDescription(action)
 			.setFooter(msg.language.get('WEEB_SERVICES'));
+	}
+
+	static async haste(input, extension) {
+		return new Promise((res, rej) => {
+			if (!input) rej('Input argument is required.');
+			snekfetch.post('https://hastebin.com/documents').send(input).then(body => {
+				res(`https://hastebin.com/${body.body.key}${extension ? `.${extension}` : ''}`);
+			}).catch((error) => rej(error));
+		});
 	}
 
 }

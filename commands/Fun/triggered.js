@@ -14,10 +14,10 @@ module.exports = class Crush extends Command {
 		});
 		this.cost = 25;
 	}
-
+	/* eslint-disable new-cap */
 	async run(msg, [user = msg.author]) {
-		const message = await msg.channel.send(`Triggering... \`${user.tag}\``);
-		const attachment = await this.getTriggered(user.displayAvatarURL({ format: 'png' }).replace(/\.(gif|jpg|png|jpeg)\?size=2048/g, '.png?size=512'));
+		const message = await msg.channel.send(msg.language.get('triggering', user.tag));
+		const attachment = await this.getTriggered(user.displayAvatarURL({ format: 'png', size: 512 }));
 		await msg.channel.send({ files: [{ attachment, name: 'triggered.gif' }] });
 		return message.delete();
 	}
