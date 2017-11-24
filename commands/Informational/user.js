@@ -17,8 +17,8 @@ module.exports = class UserInfo extends Command {
 		};
 	}
 
-	async run(msg, [mentioned]) {
-		const member = mentioned || msg.member;
+	async run(msg, [member = msg.member]) {
+		const leadboardPosition = this.client.providers.get('collection').getAll('users').sort((a, b) => b.balance - a.balance).keyArray().indexOf(member.user.id);
 
 		const userInfo = new this.client.methods.Embed()
 			.setColor('PURPLE')
@@ -31,7 +31,8 @@ module.exports = class UserInfo extends Command {
 			.addField('🢒 Playing', member.user.presence.activity ? member.user.presence.activity.name : 'N/A', true)
 			.addField('🢒 Highest Role', member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None', true)
 			.addField('🢒 Hoist Role', member.hoistRole ? member.hoistRole.name : 'None', true)
-			.addField('🢒 Credits', member.user.conf.balance || 0, true);
+			.addField('🢒 Credits', member.user.conf.balance || 0, true)
+			.addField('🢒 Leaderboard Ranking', leadboardPosition + 1, true);
 		return msg.sendEmbed(userInfo);
 	}
 

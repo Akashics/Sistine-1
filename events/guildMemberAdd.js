@@ -33,11 +33,10 @@ module.exports = class guildMemberAdd extends Event {
 
 	async run(member) {
 		this.client.stats.increment('client.memberJoins');
-		if (!member.guild.settings.logChannel) { return; }
-		const logChannelID = member.guild.settings.logChannel;
+		if (!member.guild.settings.logging.memberChannel || member.guild.settings.logging.playerLogLevel === 0) { return; }
+		const logChannelID = member.guild.settings.logging.memberChannel;
 		if (!logChannelID) { return; }
-		const logLevel = member.guild.settings.playerLogLevel;
-		if (!logLevel || logLevel === 0) { return; }
+		const logLevel = member.guild.settings.logging.playerLogLevel;
 		const welcomemsg =
 				[
 					`**${member.user.tag}**, if our dog doesn't like you, we won't either !`,
@@ -54,31 +53,24 @@ module.exports = class guildMemberAdd extends Event {
 					`**${member.user.tag}**, Forget the DOGS ... **BEWARE OF KIDS** :stuck_out_tongue_winking_eye:`,
 					`**${member.user.tag}**, **SIT LONG**, **TALK MUCH**, **LAUGH OFTEN**`
 				];
-		const randomNumber = Math.floor(Math.random() * welcomemsg.length);
-		const embedMessage = new this.client.methods.Embed()
-			.setColor('PURPLE')
-			.setDescription(welcomemsg[randomNumber])
-			.setThumbnail(member.user.displayAvatarURL())
-			.setTimestamp()
-			.setFooter(this.client.user.username, this.client.user.avatarURL());
 
-		// trying to send the log detail to log channel
-		try {
-			switch (logLevel) {
-				case 1:
-					member.guild.channels.get(logChannelID).send(welcomemsg[randomNumber]);
-					break;
-				case 2:
-					member.guild.channels.get(logChannelID).send({ embed: embedMessage });
-					break;
-				case 3:
-					member.guild.channels.get(logChannelID).send({ files: [{ attachment: await this.makeWelcomeImg(member.user, member.guild.name), name: `Welcome_${member.user.tag}.png` }] });
-					break;
-				default:
-					break;
-			}
-		} catch (error) {
-			this.client.console.error(error);
+		switch (logLevel) {
+			case 1:
+				member.guild.channels.get(logChannelID).send(welcomemsg[Math.floor(Math.random() * welcomemsg.length)]);
+				break;
+			case 2:
+				member.guild.channels.get(logChannelID).send({ embed: new this.client.methods.Embed()
+					.setColor('PURPLE')
+					.setDescription(welcomemsg[Math.floor(Math.random() * welcomemsg.length)])
+					.setThumbnail(member.user.displayAvatarURL())
+					.setTimestamp()
+					.setFooter(this.client.user.username, this.client.user.avatarURL()) });
+				break;
+			case 3:
+				member.guild.channels.get(logChannelID).send({ files: [{ attachment: await this.makeWelcomeImg(member.user, member.guild.name), name: `Welcome_${member.user.tag}.png` }] });
+				break;
+			default:
+				break;
 		}
 	}
 

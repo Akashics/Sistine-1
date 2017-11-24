@@ -23,7 +23,7 @@ module.exports = class Reason extends Command {
 		const log = modlogs[selected];
 		if (!log) { return msg.send(msg.language.get('MODLOG_CASE_ERROR')); }
 
-		const channel = msg.guild.channels.get(msg.guild.settings.logChannel);
+		const channel = msg.guild.channels.get(msg.guild.settings.logging.logChannel);
 		if (!channel) { return msg.send(msg.language.get('MODLOG_NOT_FOUND')); }
 
 		const messages = await channel.messages.fetchMessages({ limit: 100 });
@@ -67,7 +67,7 @@ module.exports = class Reason extends Command {
 	}
 
 	init() {
-		// this.provider = this.client.providers.get('json');
+		this.provider = this.client.providers.get('json');
 	}
 
 };

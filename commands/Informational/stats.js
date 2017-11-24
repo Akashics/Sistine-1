@@ -17,21 +17,25 @@ module.exports = class Stats extends Command {
 		const duration = moment.duration(this.client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
 		const hostTime = moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]');
 		return msg.sendCode('asciidoc', [
-			'= BOT STATS =',
-			`• Servers      :: ${this.client.guilds.size.toLocaleString()}`,
-			`• Channels     :: ${this.client.channels.size.toLocaleString()}`,
-			`• Users        :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
-			`• Klasa        :: v${klasaVersion}`,
-			'• Discord.js   :: v12.1.0-dev',
-			`• Node.js      :: ${process.version}`,
+			'= [ Sistine Stats ] =',
+			`↪ Guilds        :: ${this.client.guilds.size.toLocaleString()} guilds`,
+			`↪ Channels      :: ${this.client.channels.size.toLocaleString()} available channels`,
+			`↪ Users         :: ${this.client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()} users combined`,
+			`↪ Custom Emojis :: ${this.client.emojis.size} emojis`,
 			'',
-			'= HOST USAGE =',
-			`• CPU Load Avg :: ${Math.round(os.loadavg()[0] * 10000) / 100}%`,
-			`• RAM +Node    :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
-			`• RAM Usage    :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
-			`• Uptime       :: ${duration}`,
-			`• Host Uptime  :: ${hostTime}`,
-			'• DataDogStats :: https://p.datadoghq.com/sb/82a5d5fef-91a38ff37c'
+			'= [ Process Stats ] =',
+			`↪ Klasa         :: v${klasaVersion}`,
+			'↪ Discord.js    :: v12.1.0-dev',
+			`↪ Node.js       :: ${process.version}`,
+			`↪ Session Time  :: ${duration}`,
+			'',
+			'= [ Host Stats ] =',
+			`↪ Operating Sys :: ${os.type().replace('_', ' ')} v${os.release()}`,
+			`↪ CPU Load Avg  :: ${Math.round(os.loadavg()[0] * 10000) / 100}%`,
+			`↪ RAM +Node     :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
+			`↪ RAM Usage     :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
+			`↪ Host Uptime   :: ${hostTime}`,
+			'↪ DataDogStats  :: https://p.datadoghq.com/sb/82a5d5fef-91a38ff37c'
 		]);
 	}
 

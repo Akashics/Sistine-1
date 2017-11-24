@@ -1,31 +1,35 @@
+const Discord = require('discord.js');
+const moment = require('moment');
+require('moment-duration-format');
+
 const url = require('url');
 const path = require('path');
-const Discord = require('discord.js');
+
 const compression = require('compression');
 const express = require('express');
 const app = express();
-const moment = require('moment');
-require('moment-duration-format');
+
 const passport = require('passport');
 const session = require('express-session');
-const LevelStore = require('level-session-store')(session);
+const RDBStore = require('express-session-rethinkdb')(session);
 const { Strategy } = require('passport-discord');
 const md = require('marked');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const settings = require('../keys/dashboard.json');
+const cookie = require('cookie-parser');
+
+const { dashboard, rethinkdb } = require('../keys/keys.json');
+const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
+const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 
 
 class Dashboard {
 
-	/* eslint-disable consistent-return */
+	/* eslint-disable consistent-return, new-cap */
 	static async startDashboard(client) {
 		String.prototype.toProperCase = function prop() {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 		};
-
-		const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
-		const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 
 		app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`)));
 
@@ -36,10 +40,11 @@ class Dashboard {
 			done(null, obj);
 		});
 
+		// See: https://discordapp.com/developers/docs/topics/oauth2
 		passport.use(new Strategy({
-			clientID: settings.clientID,
-			clientSecret: settings.clientSecret,
-			callbackURL: settings.callbackURL,
+			clientID: client.user.id,
+			clientSecret: dashboard.clientSecret,
+			callbackURL: dashboard.callbackURL,
 			scope: ['identify', 'guilds']
 		},
 		(accessToken, refreshToken, profile, done) => {
@@ -49,10 +54,31 @@ class Dashboard {
 
 		// Session data, used for temporary storage of your visitor's session information.
 		// the `secret` is in fact a "salt" for the data, and should not be shared publicly.
+		var rdbStore = new RDBStore({
+			connectOptions: {
+				servers: [
+					{ host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password }
+				],
+				db: rethinkdb.database,
+				discovery: false,
+				pool: true,
+				buffer: 50,
+				max: 1000,
+				timeout: 20,
+				timeoutError: 1000
+			},
+			table: 'session',
+			sessionTimeout: 86400000,
+			flushInterval: 60000,
+			debug: false
+		});
+
 		app.use(session({
-			store: new LevelStore('./bwd/dashboard-session/'),
-			secret: settings.sessionSecret,
+			key: 'sid',
+			store: rdbStore,
+			secret: dashboard.sessionSecret,
 			resave: false,
+			cookie: { maxAge: 860000 },
 			saveUninitialized: false
 		}));
 
@@ -61,33 +87,36 @@ class Dashboard {
 		app.use(passport.session());
 		app.use(helmet());
 
+		// body-parser reads incoming JSON or FORM data and simplifies their
+		// use in code.
+		// app.use(bodyParser.json());
+		app.use(compression());
+		app.use(cookie());
+		app.use(bodyParser.urlencoded({ extended: true }));
+
 		// The domain name used in various endpoints to link between pages.
-		app.locals.domain = settings.domainName;
+		app.locals.domain = dashboard.domainName;
 
 		// The EJS templating engine gives us more power
 		app.engine('html', require('ejs').renderFile);
 		app.set('view engine', 'html');
 
-		// body-parser reads incoming JSON or FORM data and simplifies their
-		// use in code.
-		// app.use(bodyParser.json());
-		app.use(compression());
-		app.use(bodyParser.urlencoded({ extended: true }));
-
 		/*
-  Authentication Checks. checkAuth verifies regular authentication,
-  whereas checkAdmin verifies the bot owner. Those are used in url
-  endpoints to give specific permissions.
-  */
+ 			Authentication Checks. checkAuth verifies regular authentication,
+  			whereas checkAdmin verifies the bot owner. Those are used in url
+  			endpoints to give specific permissions.
+  		*/
 		function checkAuth(req, res, next) {
 			if (req.isAuthenticated()) { return next(); }
 			req.session.backURL = req.url;
 			res.redirect('/login');
 		}
 
-		// This function simplifies the rendering of the page, since every page must be rendered
-		// with the passing of these 4 variables, and from a base path.
-		// Objectassign(object, newobject) simply merges 2 objects together, in case you didn't know!
+		/*
+		 	This function simplifies the rendering of the page, since every page must be rendered
+		 	with the passing of these 4 variables, and from a base path.
+			Objectassign(object, newobject) simply merges 2 objects together, in case you didn't know!
+		*/
 		const renderTemplate = (res, req, template, data = {}) => {
 			const baseData = {
 				bot: client,
@@ -303,8 +332,8 @@ class Dashboard {
 			res.redirect('https://p.datadoghq.com/sb/82a5d5fef-1a21d0b3a5');
 		});
 
-		client.site = app.listen(settings.dashboardPort, () => {
-			client.emit('log', `Loaded dashboard on port ${settings.dashboardPort}.`);
+		app.listen(dashboard.port, () => {
+			client.emit('log', `Loaded dashboard on port ${dashboard.port}.`);
 		});
 	}
 

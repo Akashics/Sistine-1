@@ -14,7 +14,7 @@ module.exports = class Lockdown extends Command {
 	}
 
 	async run(msg, [channel]) {
-		const locked = await this.handleLockdown(channel, channel.type === 'text' ? 'SEND_MESSAGES' : 'CONNECT');
+		const locked = await this.handleLockdown(msg, channel, channel.type === 'text' ? 'SEND_MESSAGES' : 'CONNECT');
 
 		if (msg.channel.permissionsFor(msg.guild.me).has('SEND_MESSAGES') === false) {
 			return true;
@@ -22,10 +22,10 @@ module.exports = class Lockdown extends Command {
 		return msg.send(msg.language.get('LOCKDOWN', locked, channel));
 	}
 
-	handleLockdown(channel, permission) {
+	handleLockdown(msg, channel, permission) {
 		const permOverwrite = channel.permissionOverwrites.get(channel.guild.defaultRole.id);
 		const locked = permOverwrite ? permOverwrite.denied.has(permission) : false;
-		return channel.overwritePermissions(channel.guild.defaultRole, { [permission]: locked }, locked ? 'Lockdown released.' : 'Lockdown to prevent spam.')
+		return channel.overwritePermissions(channel.guild.defaultRole, { [permission]: locked }, locked ? msg.language.get('RELEASELOCK') : msg.language.get('UNRELEASELOCK'))
 			.then(() => !locked);
 	}
 

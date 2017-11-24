@@ -17,14 +17,14 @@ module.exports = class Mock extends Command {
 			description: 'Mocks a nominated message.',
 			usage: '[MessageID:msg]'
 		});
-		this.cost = 25;
+		this.cost = 15;
 	}
 
 	async run(msg, [msgid]) {
 		const grabMock = msgid || await msg.channel.messages.fetch({ limit: 1, before: msg.id });
 		const mock = grabMock.size === 1 ? grabMock.first() : grabMock;
 		const author = await msg.guild.members.fetch(mock.author);
-		if (author.bot) throw '❌ You cannot mock bots.';
+		if (author.user.bot) throw '❌ You cannot mock bots.';
 		await msg.channel.send(alternateCase(mock.cleanContent), { files: [{ attachment: './assets/images/spongebob.png', name: 'mock.png' }] });
 	}
 

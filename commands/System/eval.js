@@ -1,7 +1,7 @@
 const { Command, Stopwatch } = require('klasa');
 const { inspect } = require('util');
-const discord = require("discord.js"); //eslint-disable-line
 const { post } = require('snekfetch');
+const discord = require('discord.js');
 
 module.exports = class EvalCommand extends Command {
 
@@ -13,6 +13,7 @@ module.exports = class EvalCommand extends Command {
 			usage: '<expression:str>'
 		});
 	}
+
 
 	async run(msg, [...code]) {
         const client = msg.client; // eslint-disable-line
@@ -27,31 +28,48 @@ module.exports = class EvalCommand extends Command {
 			const cleanEval = this.client.methods.util.clean(ogeval);
 			if (ogeval.length > 1950) {
 				const haste = await this.haste(cleanEval, 'js').catch(console.error);
-				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${evaled.constructor.name || typeof evaled}\`
-\`Input:\`
+				msg.send(`**Took:** \` ${start.stop()} \`, **Typeof:** \` ${this.getComplexType(evaled).type} \`
+\` Input: \`
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
-\`Output:\` **Evaled code was over 2000 letters. It has been put into a hastebin. **${haste}`).catch(console.error);
+\` Output: \` **Evaled code was over 2000 letters Here ye go.** ${haste}`).catch(console.error);
 			} else {
-				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${evaled.constructor.name || typeof evaled}\`
-\`Input:\`
+				msg.send(`**Took:** \` ${start.stop()} \`, **Typeof:** \` ${this.getComplexType(evaled).type} \`
+\` Input: \`
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
-\`Output:\`
+\` Output: \`
 ${this.client.methods.util.codeBlock('js', cleanEval)}
 `).catch(console.error);
 			}
 		} catch (err) {
 			msg.send(`
-**Took:** \`${start.stop()}\`
-\`Input:\`
+**Took:** \` ${start.stop()} \`
+\` Input: \`
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
-\`Error:\`
+\` Error: \`
 ${this.client.methods.util.codeBlock('js', err)}`).catch(console.error);
 			if (err.stack) this.client.emit('error', err.stack);
 		}
 	}
 
 	async init() {
-		this.depth = 0;
+		this.depth = 1;
+	}
+
+	getType(value) {
+		if (value === null) return String(value);
+		return typeof value;
+	}
+
+	getComplexType(value) {
+		const basicType = this.getType(value);
+		if (basicType === 'object' || basicType === 'function') return { basicType, type: this.getClass(value) };
+		return { basicType, type: basicType };
+	}
+
+	getClass(value) {
+		return value && value.constructor && value.constructor.name ?
+			value.constructor.name :
+			{}.toString.call(value).match(/\[object (\w+)\]/)[1];
 	}
 
 	haste(input, extension) {

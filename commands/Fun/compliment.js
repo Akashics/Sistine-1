@@ -5,7 +5,7 @@ module.exports = class compliment extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['text'],
+			aliases: ['praise'],
 			description: 'Compliments a user.',
 			usage: '[UserToCompliment:user]'
 		});

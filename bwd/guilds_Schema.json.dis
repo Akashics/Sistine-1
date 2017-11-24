@@ -1,14 +1,5 @@
 {
     "type":"Folder",
-    "prefix":{
-       "type":"String",
-       "default":[
-          "s>",
-          "S>"
-       ],
-       "array":true,
-       "sql":"TEXT NOT NULL DEFAULT '[\"s>\",\"S>\"]'"
-    },
     "disabledCommands":{
        "type":"command",
        "array":true,
@@ -76,6 +67,15 @@
           "sql":"INTEGER DEFAULT 0",
           "configurable":true
        }
+    },
+    "prefix":{
+       "type":"string",
+       "array":false,
+       "default":"s>",
+       "min":null,
+       "max":null,
+       "sql":"TEXT NOT NULL DEFAULT 's>'",
+       "configurable":true
     },
     "roles":{
        "type":"Folder",

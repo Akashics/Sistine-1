@@ -30,7 +30,6 @@ require('passport');
 require('passport-discord');
 require('raven');
 require('ref');
-require('rethinkdbdash');
 require('snekfetch');
 require('ytdl-core');
 require('zlib');

@@ -17,14 +17,4 @@ module.exports = class Ready extends Event {
 		this.client.raven.config(this.client.keys.raven).install();
 		updateStatus(this.client);
 	}
-
-	async init() {
-		if (!this.client.settings.guilds.schema.logChannel) {
-			await this.client.settings.guilds.schema.addKey('logChannel', { type: 'TextChannel', default: null });
-		}
-		if (!this.client.settings.guilds.schema.playerLogLevel) {
-			await this.client.settings.guilds.schema.addKey('playerLogLevel', { type: 'Integer', default: 0, min: 0, max: 3 });
-		}
-	}
-
 };

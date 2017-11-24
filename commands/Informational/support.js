@@ -7,7 +7,7 @@ module.exports = class Support extends Command {
 	}
 
 	async run(msg) {
-		return msg.send('You can join our Discord Guild here: https://discord.gg/jgPNHWy \n You can view some of the commands here: https://sistine.ml/');
+		return msg.send('You can join our Discord Guild here: https://discord.gg/jgPNHWy \nYou can view some of the commands here: https://sistine.ml/');
 	}
 
 };

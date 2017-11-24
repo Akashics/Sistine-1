@@ -16,17 +16,15 @@ module.exports = class Ban extends Command {
 	}
 
 	async run(msg, [user, ...reason]) {
-		const reasonFull = reason.length > 0 ? reason.join(' ') : null;
+		const reasonFull = reason.length > 0 ? reason.join(' ') : 'No Reason.';
 
 		const member = await msg.guild.members.fetch(user).catch(() => null);
 
-		if (!member || !member.bannable) {
-			return msg.send(msg.language.get('PUNISH_USER_ERROR', this.name));
-		}
+		if (!member || !member.bannable) { return msg.send(msg.language.get('BAN_FAIL')); }
 
 		await msg.guild.ban(user, { reason });
 
-		if (msg.guild.settings.logChannel) {
+		if (msg.guild.settings.logging.logChannel) {
 			new ModLog(msg.guild)
 				.setType('ban')
 				.setModerator(msg.author)
@@ -34,8 +32,7 @@ module.exports = class Ban extends Command {
 				.setReason(reasonFull)
 				.send();
 		}
-
-		return msg.send(msg.language.get('SUCCESSFUL_PUNISH', 'banned', user.tag, reasonFull));
+		return msg.send(msg.language.get('BAN_SUCCESS', user.tag, reasonFull));
 	}
 
 };

@@ -32,7 +32,10 @@ module.exports = class guildMemberAdd extends Event {
 
 	async run(member) {
 		this.client.stats.increment('client.memberLeaves');
-		if (!member.guild.settings.logChannel) { return; }
+		if (!member.guild.settings.logging.memberChannel || member.guild.settings.logging.playerLogLevel === 0) { return; }
+		const logChannelID = member.guild.settings.logging.memberChannel;
+		if (!logChannelID) { return; }
+		const logLevel = member.guild.settings.logging.playerLogLevel;
 		const byebyemsg = [
 			`**${member.user.tag}** is gone, Cries !!!`,
 			`**${member.user.tag}** ran away seeing a :snake: :stuck_out_tongue_winking_eye:`,
@@ -51,9 +54,9 @@ module.exports = class guildMemberAdd extends Event {
 			.setFooter(this.client.user.username, this.client.user.avatarURL());
 
 		// trying to send the log detail to log channel
-		const logChannelID = member.guild.settings.logChannel;
+		const logChannelID = member.guild.settings.logging.logChannel;
 		if (!logChannelID) { return; }
-		const logLevel = member.guild.settings.playerLogLevel;
+		const logLevel = member.guild.settings.logging.playerLogLevel;
 		try {
 			switch (logLevel) {
 				case 1:
