@@ -28,23 +28,13 @@ module.exports = class EvalCommand extends Command {
 			const cleanEval = this.client.methods.util.clean(ogeval);
 			if (ogeval.length > 1950) {
 				const haste = await this.haste(cleanEval, 'js').catch(console.error);
-<<<<<<< HEAD
 				msg.send(`**Took:** \` ${start.stop()} \`, **Typeof:** \` ${this.getComplexType(evaled).type} \`
 \` Input: \`
-=======
-				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled}\`
-\`Input:\`
->>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
 \` Output: \` **Evaled code was over 2000 letters Here ye go.** ${haste}`).catch(console.error);
 			} else {
-<<<<<<< HEAD
 				msg.send(`**Took:** \` ${start.stop()} \`, **Typeof:** \` ${this.getComplexType(evaled).type} \`
 \` Input: \`
-=======
-				msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled}\`
-\`Input:\`
->>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 ${this.client.methods.util.codeBlock('js', code.join(' '))}
 \` Output: \`
 ${this.client.methods.util.codeBlock('js', cleanEval)}
