@@ -6,7 +6,11 @@ module.exports = class Rethinkdb extends Provider {
 
 	constructor(...args) {
 		super(...args);
+<<<<<<< HEAD
 		this.db = rethink(this.client.config.provider.rethinkdb || { host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database });
+=======
+		this.db = rethink(this.client.config.provider.rethinkdb || { host: '158.69.206.83', port: 28015, user: 'admin', password: 'Manta2121', db: 'test' });
+>>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 	}
 
 	/* Table methods */
@@ -186,6 +190,7 @@ module.exports = class Rethinkdb extends Provider {
 		 */
 	incrementValue(table, id, key, amount) {
 		return this.mathValue(table, id, key, 'add', amount);
+<<<<<<< HEAD
 	}
 
 	/**
@@ -197,12 +202,28 @@ module.exports = class Rethinkdb extends Provider {
 		 */
 	decrementValue(table, id, key, amount) {
 		return this.mathValue(table, id, key, 'sub', amount);
+=======
+>>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 	}
 
 	/**
 		 * @param {string} table The name of the table to update the data from
 		 * @param {string} id The id of the row to update
 		 * @param {string} key The key to update
+<<<<<<< HEAD
+=======
+		 * @param {number} [amount] The value to decrease
+		 * @returns {Promise<number>}
+		 */
+	decrementValue(table, id, key, amount) {
+		return this.mathValue(table, id, key, 'sub', amount);
+	}
+
+	/**
+		 * @param {string} table The name of the table to update the data from
+		 * @param {string} id The id of the row to update
+		 * @param {string} key The key to update
+>>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 		 * @param {'add'|'sub'|'mul'|'div'|'mod'} type The math operation to perform.
 		 * @param {number} [amount=1] The value to decrease
 		 * @returns {Promise<number>}
@@ -333,3 +354,7 @@ function resolvePromise(value) {
 	return value;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
