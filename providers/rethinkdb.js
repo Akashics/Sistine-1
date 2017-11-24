@@ -6,11 +6,7 @@ module.exports = class Rethinkdb extends Provider {
 
 	constructor(...args) {
 		super(...args);
-<<<<<<< HEAD
 		this.db = rethink(this.client.config.provider.rethinkdb || { host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database });
-=======
-		this.db = rethink(this.client.config.provider.rethinkdb || { host: '158.69.206.83', port: 28015, user: 'admin', password: 'Manta2121', db: 'test' });
->>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 	}
 
 	/* Table methods */

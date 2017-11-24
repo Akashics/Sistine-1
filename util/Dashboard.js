@@ -74,14 +74,9 @@ class Dashboard {
 		});
 
 		app.use(session({
-<<<<<<< HEAD
 			key: 'sid',
 			store: rdbStore,
 			secret: dashboard.sessionSecret,
-=======
-			store: new LevelStore('./dashboard-session'),
-			secret: settings.sessionSecret,
->>>>>>> 74e8922bc26a6dcf2a1fa5e728de410befc7f596
 			resave: false,
 			cookie: { maxAge: 860000 },
 			saveUninitialized: false
