@@ -7,7 +7,7 @@
   </div>
   <div class="col">
     <%- include('../blocks/guild-nav.ejs', {active: "manage", guild}) %>
-    <p class="text-danger blockquote blockquote-primary" style=" text-align: center"><i>Becareful what you insert on this panel. <br>This is in experimental stages and can break your guild settings!</i></p>
+    <p class="text-danger blockquote blockquote-primary" style=" text-align: center"><i>WARNING: THIS PANEL IS UNTESTED.<br>ENTERING A DIFFERENT SETTING FOR LOGGING AND ROLES WILL BREAK IT.</i></p>
     <form method="post">
       <ul class="list-group list-group-flush">
       <% const settings = bot.settings.guilds.getEntry(guild.id);
