@@ -31,6 +31,19 @@ class Util {
 			});
 	}
 
+	static terminalINK(client) {
+		snekfetch
+			.post(`https://ls.terminal.ink/api/v1/bots/${client.user.id}`)
+			.set({ Authorization: client.keys.terminalINK })
+			.send({ server_count: client.guilds.size })
+			.then(() => {
+				client.console.log('[TerminalINK] Successfully posted to ls.terminal.ink.');
+			})
+			.catch((err) => {
+				client.console.error(`[TerminalINK] Failed to post to ls.terminal.ink. ${err}`);
+			});
+	}
+
 	static list(arr, conj = 'and') {
 		const { length } = arr;
 		return `${arr.slice(0, -1).join(', ')}${length > 1 ? `${length > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
