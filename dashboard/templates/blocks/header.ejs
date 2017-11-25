@@ -38,7 +38,7 @@
         <ul class="navbar-nav text-shadow">
           <li class="nav-item">
             <a class="nav-link" href="/commands"><i class="fa fa-book"></i><p> Commands</p></a></li>
-          <li class="nav-item"><a class="nav-link<% if(!bot.application.botPublic) { %> disabled<% } %>" href="https://discordapp.com/oauth2/authorize?client_id=<%= bot.application.id %>&scope=bot&response_type=code&redirect_uri=<%= encodeURIComponent(bot.dashKeys.callbackURL) %>"><i class="fa fa-fw fa-plus"></i> Add to Guild</a></li>
+          <li class="nav-item"><a class="nav-link<% if(!bot.application.botPublic) { %> disabled<% } %>" href="https://discordapp.com/oauth2/authorize?client_id=<%= bot.application.id %>&scope=bot&response_type=code&redirect_uri=<%= encodeURIComponent(bot.keys.dashboard.callbackURL) %>"><i class="fa fa-fw fa-plus"></i> Add to Guild</a></li>
           <li class="nav-item"><a class="nav-link" href="/stats"><i class="fa fa-bookmark-o"></i> <%= bot.guilds.size %> Guilds</a></li>
           <li class="nav-item"><a class="nav-link" href="https://discord.gg/jgPNHWy"><i class="fa fa-question"></i> Support</a></li>
           <li class="nav-item">
