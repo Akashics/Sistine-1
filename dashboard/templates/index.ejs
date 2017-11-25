@@ -1,7 +1,7 @@
 <%- include('blocks/header', {bot: bot, user: user, path: path, auth: auth}) %>
     <div class="container">
       <div class="content brand" style="text-align: center;">
-        <img class="botProfilePicture" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>">
+        <img class="botProfilePicture" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>" alt="<%= bot.user.username %>'s Avatar">
         <h1 class="h1-seo" style="margin-top: 15px">
           <%= bot.user.username %>
         </h1>

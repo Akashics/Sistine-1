@@ -8,11 +8,13 @@
   <meta name="author" content="Jordan Jones">
   <meta property="og:url" content="https://sistine.ml/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sistine, one of many Discord Bots, but only one that provides Simple, Fun, and Quality commands all in one bot.">
-  <meta property="og:description" content="Sistine is member-oriented Discord Bot that provides fun and safe commands to use in a public and/or private community. She is built with the Komada library, based on Discord.JS.">
+  <meta property="og:title" content="<%= bot.user.tag %> - One of many, one of a kind.">
+  <meta property="og:description" content="Sistine, one of many Discord Bots, but only one that provides Simple, Fun, and Quality commands all in one bot.">
   <meta property="og:image" content="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>">
   <meta property="og:image:secure_url" content="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='icon' href='<%= bot.user.displayAvatarURL() %>'>
+  <title><%= bot.user.tag %></title>
   <link rel="stylesheet" href="/public/css/now-ui-kit.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <link rel="stylesheet" href="/public/css/dashboard.css" />
@@ -29,8 +31,6 @@
   <script src="/public/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
   <script src="/public/js/core/popper.min.js" type="text/javascript"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  <link rel='icon' href='<%= bot.user.displayAvatarURL() %>'>
-  <title><%= bot.user.tag %></title>
 </head>
 
 <body class="SistineBestBot">
