@@ -9,9 +9,9 @@ module.exports = class IsNowIllegal extends Command {
 			aliases: ['sign'],
 			description: 'US President Trump makes something illegal.',
 			usage: '<Thing:string>',
-			cooldown: 10
+			cooldown: 15
 		});
-		this.cost = 25;
+		this.cost = 15;
 	}
 
 	async run(msg, [thing]) {
@@ -27,11 +27,11 @@ module.exports = class IsNowIllegal extends Command {
 			throw msg.language.get('trumpIllegalCharacter', msg.author.username);
 		}
 		try {
-			const message = await msg.channel.send(msg.language.get('trumpConvincing', thing.toProperCase));
+			const message = await msg.channel.send(msg.language.get('trumpConvincing', thing.toProperCase()));
 			await post('https://is-now-illegal.firebaseio.com/queue/tasks.json').send({ task: 'gif', word: thing.toUpperCase() });
-			await this.client.wait(5000);
-			const result = await get(`https://is-now-illegal.firebaseio.com/gifs/${thing.toUpperCase()}.json`);
-			await message.channel.send({ files: [result.body.url] });
+			await this.client.wait(10000);
+			const { url } = await get(`https://is-now-illegal.firebaseio.com/gifs/${thing.toUpperCase()}.json`);
+			await message.channel.send({ files: [url] });
 			inUse.delete('true');
 			return message.delete();
 		} catch (error) {
