@@ -19,7 +19,7 @@ module.exports = class MoeImage extends Command {
 				.setColor('PURPLE')
 				.setTitle(':book:  **Moe Command - Valid Image Types**')
 				.setDescription('awoo, bang, blush, clagwimoth, cry, dance, insult, jojo, lewd, lick, megumin, neko, nom, owo, pout, rem, shrug, sleepy, smile, teehee, smug, stare, thumbsup, triggered, wag, waifu_insult, wasted, greet')
-				.setFooter(`Example CMD: ${msg.guild.settings.prefix}moe dance`);
+				.setFooter(`Example CMD: ${msg.guild.settings.prefix[0]}moe dance`);
 			return msg.sendEmbed(images);
 		}
 		const AuthStr = `Bearer ${this.client.keys.weebKey}`;

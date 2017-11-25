@@ -31,7 +31,7 @@ module.exports = class InterfaceMusic {
 		const metadata = {
 			url: `https://youtu.be/${song.video_id}`,
 			title: song.title,
-			requester: user,
+			requester: user.tag,
 			loudness: song.loudness,
 			seconds: parseInt(song.length_seconds),
 			opus: Boolean(song.formats.find(format => format.type === 'audio/webm; codecs="opus"'))

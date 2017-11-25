@@ -42,7 +42,7 @@ class Dashboard {
 
 		// See: https://discordapp.com/developers/docs/topics/oauth2
 		passport.use(new Strategy({
-			clientID: client.user.id,
+			clientID: '353929487018229762',
 			clientSecret: dashboard.clientSecret,
 			callbackURL: dashboard.callbackURL,
 			scope: ['identify', 'guilds']
@@ -54,7 +54,7 @@ class Dashboard {
 
 		// Session data, used for temporary storage of your visitor's session information.
 		// the `secret` is in fact a "salt" for the data, and should not be shared publicly.
-		var rdbStore = new RDBStore({
+		const rdbStore = new RDBStore({
 			connectOptions: {
 				servers: [
 					{ host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password }
@@ -74,7 +74,6 @@ class Dashboard {
 		});
 
 		app.use(session({
-			key: 'sid',
 			store: rdbStore,
 			secret: dashboard.sessionSecret,
 			resave: false,
