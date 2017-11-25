@@ -19,7 +19,7 @@ module.exports = class Play extends Command {
 		}
 		if (!musicInterface.dispatcher || !musicInterface.voiceChannel) { await this.client.commands.get('join').run(msg); }
 		if (musicInterface.status === 'paused') { await this.client.commands.get('resume').run(msg); }
-		if (musicInterface.status === 'playing') { return msg.send(`Someone is already playing a song. Try adding a song with \` ${msg.guild.settings.prefix}add \`.`); }
+		if (musicInterface.status === 'playing') { return msg.send(`Someone is already playing a song. Try adding a song with \` ${msg.guild.settings.prefix[0]}add \`.`); }
 		musicInterface.status = 'playing';
 		musicInterface.channel = msg.channel;
 		return this.play(musicInterface, msg);
@@ -47,7 +47,7 @@ module.exports = class Play extends Command {
 						this.play(musicInterface, msg);
 					})
 					.on('error', (err) => {
-						musicInterface.channel.send(msg.language.get('MUSIC_ERR', song));
+						musicInterface.channel.send(msg.language.get('MUSIC_ERR', err));
 						musicInterface.client.emit('log', err, 'error');
 						musicInterface.skip();
 						this.play(musicInterface, msg);
