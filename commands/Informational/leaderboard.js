@@ -12,19 +12,13 @@ module.exports = class Leaderboards extends Command {
 
 	async run(msg, [index]) {
 		const leadboardPosition = await this.client.providers.get('collection').getAll('users').sort((a, b) => b.balance - a.balance);
-
 		const leaderboard = [];
-
-		// const list = this.client.providers.get('collection').getAll('users').filter(pop => pop.points > 2);
-
-		// page doing
 		let page = index ? index : 1;
 		const totalPages = Math.round(leadboardPosition.size / 10);
 		page -= 1;
 		if (page > totalPages && !totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 		if (totalPages && page + 1 > totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-		// top-10 thing
 		leadboardPosition.map(p => ({ points: p.balance, user: p.id }))
 			.slice(page * 10, (page + 1) * 10)
 			.map((settingObject, i) => {
@@ -35,7 +29,7 @@ module.exports = class Leaderboards extends Command {
 
 		leaderboard.push(`${pos !== -1 ? pos + 1 : '???'} ❯ ${msg.author.tag}${' '.repeat(30 - msg.author.tag.length)}::  ${this.client.settings.users.getEntry(msg.author.id).balance.toLocaleString()}`);
 		leaderboard.push('--------------------------------------------------');
-		return msg.channel.send(`${this.client.user.username}'s Global Balance Leaderboard\n\n${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} | ${this.client.providers.get('collection').getAll('users').size} Total Users`, { code: 'asciidoc' });
+		return msg.channel.send(`= [ ${this.client.user.username}'s Global Balance Leaderboard ] =\n\n${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} | ${this.client.providers.get('collection').getAll('users').size} Total Users`, { code: 'asciidoc' });
 	}
 
 };

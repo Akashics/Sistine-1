@@ -26,7 +26,7 @@ module.exports = class Skip extends Command {
 				if (response) { return msg.send(response); }
 			}
 		}
-
+		if (music.queue.length <= 0) return msg.sennd('You cannot skip songs that are not in the queue.');
 		await msg.send(`⏭ Skipped ${music.queue[0].title || 'Title Error'}`);
 		music.skip(true);
 		return null;

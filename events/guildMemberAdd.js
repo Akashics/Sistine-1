@@ -15,7 +15,7 @@ module.exports = class guildMemberAdd extends Event {
 			const { body } = await snek.get(png);
 			const pName = person.tag;
 			const WelName = 'WELCOME';
-			const enjoyStay = `Enjoy your stay in ${guildname}`;
+			const enjoyStay = `Enjoy your stay in ${guildname}!`;
 			return new Canvas(1024, 450)
 				.addImage(body, 384, 20, 256, 256, { type: 'round', radius: 128 })
 				.restore()
@@ -33,10 +33,8 @@ module.exports = class guildMemberAdd extends Event {
 
 	async run(member) {
 		this.client.stats.increment('client.memberJoins');
-		if (!member.guild.settings.logging.memberChannel || member.guild.settings.logging.playerLogLevel === 0) { return; }
-		const logChannelID = member.guild.settings.logging.memberChannel;
-		if (!logChannelID) { return; }
-		const logLevel = member.guild.settings.logging.playerLogLevel;
+		const { memberChannel, playerLogLevel, joinMessages } = member.guild.settings.logging;
+		if (!memberChannel || playerLogLevel <= 0 || !joinMessages) { return; }
 		const welcomemsg =
 				[
 					`**${member.user.tag}**, if our dog doesn't like you, we won't either !`,
@@ -54,20 +52,22 @@ module.exports = class guildMemberAdd extends Event {
 					`**${member.user.tag}**, **SIT LONG**, **TALK MUCH**, **LAUGH OFTEN**`
 				];
 
-		switch (logLevel) {
+		switch (playerLogLevel) {
 			case 1:
-				member.guild.channels.get(logChannelID).send(welcomemsg[Math.floor(Math.random() * welcomemsg.length)]);
+				member.guild.channels.get(memberChannel).send(welcomemsg[Math.floor(Math.random() * welcomemsg.length)]);
 				break;
 			case 2:
-				member.guild.channels.get(logChannelID).send({ embed: new this.client.methods.Embed()
-					.setColor('PURPLE')
-					.setDescription(welcomemsg[Math.floor(Math.random() * welcomemsg.length)])
-					.setThumbnail(member.user.displayAvatarURL())
-					.setTimestamp()
-					.setFooter(this.client.user.username, this.client.user.avatarURL()) });
+				member.guild.channels.get(memberChannel).send({
+					embed: new this.client.methods.Embed()
+						.setColor('PURPLE')
+						.setDescription(welcomemsg[Math.floor(Math.random() * welcomemsg.length)])
+						.setThumbnail(member.user.displayAvatarURL())
+						.setTimestamp()
+						.setFooter(this.client.user.username, this.client.user.avatarURL())
+				});
 				break;
 			case 3:
-				member.guild.channels.get(logChannelID).send({ files: [{ attachment: await this.makeWelcomeImg(member.user, member.guild.name), name: `Welcome_${member.user.tag}.png` }] });
+				member.guild.channels.get(memberChannel).send({ files: [{ attachment: await this.makeWelcomeImg(member.user, member.guild.name), name: `Welcome_${member.user.tag}.png` }] });
 				break;
 			default:
 				break;
