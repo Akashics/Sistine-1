@@ -10,9 +10,6 @@ class Util {
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: client.keys.dBotsPW })
 			.send({ server_count: client.guilds.size })
-			.then(() => {
-				client.console.log('[DBOTS] Successfully posted to Discord Bots.');
-			})
 			.catch((err) => {
 				client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
 			});
@@ -23,9 +20,6 @@ class Util {
 			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: client.keys.dBotsORG })
 			.send({ server_count: client.guilds.size })
-			.then(() => {
-				client.console.log('[DBOTSORG] Successfully posted to Discord Bots Org.');
-			})
 			.catch((err) => {
 				client.console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
@@ -36,9 +30,6 @@ class Util {
 			.post(`https://ls.terminal.ink/api/v1/bots/${client.user.id}`)
 			.set({ Authorization: client.keys.terminalINK })
 			.send({ server_count: client.guilds.size })
-			.then(() => {
-				client.console.log('[TerminalINK] Successfully posted to ls.terminal.ink.');
-			})
 			.catch((err) => {
 				client.console.error(`[TerminalINK] Failed to post to ls.terminal.ink. ${err}`);
 			});
