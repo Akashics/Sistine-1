@@ -20,6 +20,7 @@ const bodyParser = require('body-parser');
 const { dashboard, rethinkdb } = require('../keys/keys.json');
 const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
 const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
+const scopes = ['identify', 'guilds'];
 
 
 class Dashboard {
@@ -44,7 +45,7 @@ class Dashboard {
 			clientID: client.user.id,
 			clientSecret: dashboard.clientSecret,
 			callbackURL: dashboard.callbackURL,
-			scope: ['identify', 'guilds']
+			scope: scopes
 		},
 		(accessToken, refreshToken, profile, done) => {
 			process.nextTick(() => done(null, profile));
@@ -146,11 +147,11 @@ class Dashboard {
 			}
 			next();
 		},
-		passport.authenticate('discord'));
+		passport.authenticate('discord', { scope: scopes }));
 
 		app.get('/callback', passport.authenticate('discord', { failureRedirect: '/autherror' }), (req, res) => {
 			client.stats.increment('express.request');
-			if (req.user.id === client.config.ownerID) {
+			if (req.user.id === client.owner.id) {
 				req.session.isAdmin = true;
 			} else {
 				req.session.isAdmin = false;
