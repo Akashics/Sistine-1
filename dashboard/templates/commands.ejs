@@ -9,7 +9,7 @@
 });
 %>
     <div class="container SistineBestContent">
-    <p class="text-danger blockquote blockquote-primary" style=" text-align: center"><i>Just because you don't see a command on this list doesn't mean it doesn't exist. - Kashall</i></p>
+    <p class="text-info blockquote blockquote-primary" style=" text-align: center"><i>Commands that are listed here, either require Member, Moderator, or Guild Owner permission levels.</i></p>
       <% for (const category in help) { %>
       <br>
         <h2> <%= category %> Commands </h2>
@@ -21,6 +21,9 @@
                 <th>Command</th>
                 <th>Description</th>
                 <th>Required Permission</th>
+                <% if (category === 'Fun')  { %>
+                  <th>Command Cost</th>
+                        <% } %>
               </tr>
             </thead>
             <tbody>
@@ -54,6 +57,9 @@
 
                     } %>
                   </td>
+                                 <% if (category === 'Fun')  { %>
+                                   <td><%= command.cost %>¥</td>
+                        <% } %>
                 </tr>
                 <% } %>
             </tbody>

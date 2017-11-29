@@ -84,8 +84,8 @@ module.exports = class extends Language {
 				'We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.',
 				'If you\'re interested in us, check us out at https://klasa.js.org'
 			],
-			COMMAND_HELP_DM: ':blossom: All available commands to are being sent to your DMs.\nCommands are also available on my dashboard <https://sistine.ml/>',
-			COMMAND_HELP_NODM: '❌ Your have DMs disabled, I couldn\'t send you the commands in DMs.\nYou can check <https://sistine.ml/> for commands if you\'d like',
+			COMMAND_HELP_DM: ':watermelon: Commands have been DM\'ed to you.\n   Commands are also available on my dashboard <https://sistine.ml/commands/>',
+			COMMAND_HELP_NODM: '❌ Your have DMs disabled, I couldn\'t send you the commands in DMs.\nYou can check <https://sistine.ml/commands/> for commands if you\'d like',
 			COMMAND_ENABLE: (type, name) => `+ Successfully enabled ${type}: ${name}`,
 			COMMAND_DISABLE: (type, name) => `+ Successfully disabled ${type}: ${name}`,
 			COMMAND_DISABLE_WARN: 'You probably don\'t want to disable that, since you wouldn\'t be able to run any command to enable it again',
@@ -103,6 +103,7 @@ module.exports = class extends Language {
 			COMMAND_UNSUBSCRIBE_SUCCESS: (role) => `Successfully removed the role: **${role}***`,
 			COMMAND_SUBSCRIBE_NO_CHANNEL: 'This server does not have a configured announcement channel.',
 			COMMAND_ANNOUNCEMENT: (role) => `**New announcement for** ${role}:`,
+			COMMAND_FUN_COMIC: 'Here\'s a comic from Explosm. C:',
 			SYSTEM_HIGHEST_ROLE: 'This role\'s hierarchy position is higher or equal than me, I am not able to grant it to anyone.',
 			SYSTEM_CHANNEL_NOT_POSTABLE: 'I am not allowed to send messages to this channel.',
 			BAN_SUCCESS: (user, reason) => `__${user}__ was successfully banned for __${reason}__.`,

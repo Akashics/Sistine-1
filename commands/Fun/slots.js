@@ -8,6 +8,7 @@ module.exports = class Roast extends Command {
 			runIn: ['text'],
 			description: 'Try your chances on the slots!'
 		});
+		this.cost = 2;
 	}
 
 	async run(msg) {
