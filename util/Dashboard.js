@@ -16,7 +16,6 @@ const { Strategy } = require('passport-discord');
 const md = require('marked');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const cookie = require('cookie-parser');
 
 const { dashboard, rethinkdb } = require('../keys/keys.json');
 const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
@@ -42,7 +41,7 @@ class Dashboard {
 
 		// See: https://discordapp.com/developers/docs/topics/oauth2
 		passport.use(new Strategy({
-			clientID: '353929487018229762',
+			clientID: client.user.id,
 			clientSecret: dashboard.clientSecret,
 			callbackURL: dashboard.callbackURL,
 			scope: ['identify', 'guilds']
@@ -77,7 +76,6 @@ class Dashboard {
 			store: rdbStore,
 			secret: dashboard.sessionSecret,
 			resave: false,
-			cookie: { maxAge: 860000 },
 			saveUninitialized: false
 		}));
 
@@ -90,7 +88,6 @@ class Dashboard {
 		// use in code.
 		// app.use(bodyParser.json());
 		app.use(compression());
-		app.use(cookie());
 		app.use(bodyParser.urlencoded({ extended: true }));
 
 		// The domain name used in various endpoints to link between pages.

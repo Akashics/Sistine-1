@@ -114,7 +114,16 @@ src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
   -o-animation: sliderAni 10s ease infinite;
   animation: sliderAni 10s ease infinite;
 }
-
+.sidebar-collapse .navbar-collapse::before {
+  color: #fff !important;
+  width: 100%;
+  background: linear-gradient(90deg, #72478e, #3c2249, #8954bf, #7442a4, #c470ff);
+  background-size: 1000% 1000%;
+  -webkit-animation: sliderAni 10s ease infinite;
+  -moz-animation: sliderAni 10s ease infinite;
+  -o-animation: sliderAni 10s ease infinite;
+  animation: sliderAni 10s ease infinite;
+}
 .page-header .container {
   text-align: left;
 }

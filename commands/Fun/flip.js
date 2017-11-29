@@ -8,6 +8,7 @@ module.exports = class Flip extends Command {
 			aliases: ['coin', 'coinflip'],
 			description: 'Flip a coin. Heads or Tails.'
 		});
+		this.cost = 1;
 	}
 
 	async run(msg) {
