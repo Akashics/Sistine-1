@@ -1,0 +1,33 @@
+{
+    "rethinkdb": {
+        "host": "158.69.206.83",
+        "port": 28015,
+        "database": "test",
+        "username": "admin",
+        "password": "Manta2121"
+    },
+    "dashboard": {
+        "clientSecret": "i9NOLVBukVRb9QBv8ouds3PCGm2UKtgV",
+        "callbackURL": "https://sistine.ml/callback",
+        "domainName": "https://sistine.ml",
+        "port": "80",
+        "sessionSecret": "wFtSP,k]l*mO4].Jh-qdjuL6;mS>H~[)dbJ&hhcB]%'WMEp3_@2;'/M3#v0ES7*"
+    },
+    "botToken": "MzUzOTI5NDg3MDE4MjI5NzYy.DJUGUQ.B15N3Og98IM7XkRWU83CwcZ3Eeo",
+    "supportServers": [
+        338550025238085639,
+        324051061033926666
+    ],
+    "anilistClient": "kashall-9uvwy",
+    "anilistSecret": "aWlfqEODahllDsjpFati",
+    "googleSearch": "AIzaSyBG9bzgvqRY2nHzoB6gOAy8PW2Sx2uw8M4",
+    "dBotsORG": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1MzkyOTQ4NzAxODIyOTc2MiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTA1NjY5NzUzfQ.jHBBpOVg_xi4vpbDcUhjssRkPFd39xr9wfVHtXJbv_I",
+    "dBotsPW": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyMDEwNzc3Mzk1ODk5OTI0NDgiLCJyYW5kIjo0MjUsImlhdCI6MTUwNDgzMzAzOH0.S-HFeIs5BcTKnpFgm3ovFIQdThiEIYCMHHIiyqWXTKw",
+    "imgurClient": "e3979bc36d96106",
+    "imgurSecret": "ef26b0ff6b37aec274cdd18b41a7712b76c036e3",
+    "raven": "https://fb2437ab30474a2fbefeeb9287a3a784:690d95e644ab45ebbc21921c5fce694b@sentry.io/214591",
+    "terminalINK": "38b6de8208916194667284ce3dfab611258f2aeb5a427f550f384b13107b7bf4aafbf055b2ae641008cb8a3a41e99f149addd83c5f5c556361f09ee1db98a879",
+    "googleAPIKey": "AIzaSyDSrM7kwtrR-4Cg1YOj4D18gLQoTKrYhH8",
+    "weebKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJya1BPMkRYdloiLCJ0b2tlbklkIjoiSGt4SzN3bVBiIiwiaWF0IjoxNTAxOTQ5MDQ3fQ.Q32-uKz5P5gVwpGhrn0uOliRvvqXLUClve5sE550DeXApMKW4JtZl-rBQVGiiOX2ZWdvy-by2YLa0_hIpQlUScjq2RriJccX1mUNDXs5f7ALvzkPyM6GWHo18hkiLaMpoAP6sPyibcRs13AxGH8md9O5CjcDw3BXJik57llUsUsNnFA_p3HaSNBK7IR0yakvEnjLkCc6ucdEXfKnHJtJitOFTv5eOBWQOJyeA926NTkx23VgKUI1L9I5z4BGfWLhT5c3qZiGdfxcEIQtYCPiD6wOIs1lr3fs0aQNrVearXie8NFWPwuK-gO1I3gJrAZQvF-CMUO3fOp2ztCaUcks9w",
+    "wordNik": "f3bc7ef3f69158cf60004064b6001236251cb788caad0a6bc"
+}
