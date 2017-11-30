@@ -3,10 +3,6 @@ logs
 *.log
 npm-debug.log*
 
-# Custom Hidings
-keys.json
-dashboard-session
-
 # Runtime data
 pids
 *.pid
