@@ -1,8 +1,13 @@
 .bg-primary {
   background-color: #185875 !important;
 }
+
 body {
   background-color: #0C1821;
+}
+
+.wrapper {
+  margin-top: 1%;
 }
 
 .jumbotron {
