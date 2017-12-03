@@ -1,12 +1,12 @@
 <%- include('blocks/header', {bot: bot, user: user, path: path, auth: auth}) %>
     <div class="container">
       <div class="content brand" style="text-align: center;">
-        <img class="botProfilePicture" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>" alt="<%= bot.user.username %>'s Avatar">
+        <img class="botProfilePicture" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 512}) %>" alt="<%= bot.user.username %>'s Avatar">
         <h1 class="h1-seo" style="margin-top: 15px">
           <%= bot.user.username %>
         </h1>
         <h3 style="margin-top: 15px">
-          Prefix: <i>s></i>
+          Prefixes: <i>s> S></i>
         </h3>
         <h4> Simple Moderation, Fun, Music, and Quality Commands all in one bot.<br>Join Akashic's Records and partay.<br><br>Add <%= bot.user.username %> to Your Guild Today.
         </h4>
