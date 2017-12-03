@@ -19,6 +19,7 @@
             <thead>
               <tr>
                 <th>Command</th>
+                <th>Usage</th>
                 <th>Description</th>
                 <th>Required Permission</th>
                 <% if (category === 'Fun')  { %>
@@ -34,6 +35,9 @@
                       <i>
                         <%= `${command.aliases.length > 0 ? `(${command.aliases.join(', ')})` : ''}` %>
                       </i>
+                  </td>
+                  <td>
+                    <%= `${command.usageString.length > 1 ? command.usageString : 'No Usage Necessary'} %>
                   </td>
                   <td>
                     <%= command.description %>
