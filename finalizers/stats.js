@@ -11,7 +11,7 @@ module.exports = class CMDStats extends Finalizer {
 
 	run(msg, mes, stopwatch) {
 		this.client.stats.histogram('command.process_time', stopwatch.end - stopwatch.start);
-		this.client.stats.increment(`cmd.${msg.cmd.name}`);
+		this.client.stats.increment(`cmd.${msg.command.name}`);
 		this.client.stats.increment('command.totalCommands');
 	}
 
