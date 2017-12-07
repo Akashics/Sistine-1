@@ -6,7 +6,7 @@ body {
   background-color: #0C1821;
 }
 
-footer {
+.footer {
   position: fixed;
   left: 0;
   bottom: 0;
