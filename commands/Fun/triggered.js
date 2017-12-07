@@ -8,6 +8,7 @@ module.exports = class Crush extends Command {
 
 	constructor(...args) {
 		super(...args, {
+			aliases: ['trigger'],
 			description: 'How to easily trigger someone...',
 			usage: '[UserMentionOrID:user]',
 			cooldown: 10

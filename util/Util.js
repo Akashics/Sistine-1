@@ -81,7 +81,7 @@ class Util {
 	static async weebImage(msg, client, user, action) {
 		const imageRequest = await snekfetch.get(`https://api.weeb.sh/images/random?type=${msg.cmd.name}`)
 			.set('Authorization', `Bearer ${client.keys.weebKey}`)
-			.catch(error => client.emit('error', error));
+			.catch(error => client.emit('error', `WEEBIMAGE: ${error}`));
 
 		return new client.methods.Embed()
 			.setColor('PURPLE')

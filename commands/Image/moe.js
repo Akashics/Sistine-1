@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const axios = require('axios');
+const snek = require('snekfetch');
 
 module.exports = class MoeImage extends Command {
 
@@ -7,26 +7,25 @@ module.exports = class MoeImage extends Command {
 	constructor(...args) {
 		super(...args, {
 			description: 'View random anime images.',
+			aliases: ['weebsh'],
 			usage: '[ImageType:string]'
 		});
-		this.types = ['awoo', 'bang', 'blush', 'clagwimoth', 'cry', 'dance', 'insult', 'jojo', 'lewd', 'lick', 'megumin', 'neko', 'nom', 'owo', 'pout', 'rem', 'shrug', 'sleepy', 'smile', 'teehee', 'smug', 'stare', 'thumbsup', 'triggered', 'wag', 'waifu_insult', 'wasted', 'greet'];
+		this.types = ['awoo', 'bang', 'blush', 'clagwimoth', 'cry', 'dance', 'insult', 'jojo', 'lewd', 'lick', 'megumin', 'neko', 'nom', 'owo', 'pout', 'punch', 'rem', 'shrug', 'sleepy', 'smile', 'teehee', 'smug', 'stare', 'thumbsup', 'triggered', 'wag', 'waifu_insult', 'wasted', 'greet'];
 	}
 
 	async run(msg, [type]) {
 		const images = new this.client.methods.Embed();
+		type = type.toLowerCase();
 		if (!this.types.includes(type)) {
-			images
-				.setColor('PURPLE')
-				.setTitle(':book:  **Moe Command - Valid Image Types**')
-				.setDescription('awoo, bang, blush, clagwimoth, cry, dance, insult, jojo, lewd, lick, megumin, neko, nom, owo, pout, rem, shrug, sleepy, smile, teehee, smug, stare, thumbsup, triggered, wag, waifu_insult, wasted, greet')
-				.setFooter(`Example CMD: ${msg.guild.settings.prefix[0]}moe dance`);
-			return msg.sendEmbed(images);
+			return msg.send(`WeebSH - Valid Image Types\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n${this.types.join(', ')}`);
 		}
-		const AuthStr = `Bearer ${this.client.keys.weebKey}`;
-		const imageRequest = await axios.get(`https://api.weeb.sh/images/random?type=${type}`, { headers: { Authorization: AuthStr } });
+
+		const imageRequest = await snek.get(`https://api.weeb.sh/images/random?type=${type}`)
+			.set('Authorization', `Bearer ${this.client.keys.weebKey}`)
+			.catch(error => this.client.emit('error', `WEEBIMAGE: ${error}`));
 		images
 			.setColor('PURPLE')
-			.setImage(imageRequest.data.url)
+			.setImage(imageRequest.body.url)
 			.setFooter(msg.language.get('WEEB_SERVICES'));
 		return msg.sendEmbed(images);
 	}

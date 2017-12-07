@@ -1,25 +1,21 @@
 const { Command } = require('klasa');
 
-module.exports = class Echo extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
+			permLevel: 6,
 			runIn: ['text'],
-			permLevel: 10,
-			description: 'Says what you want to say. Deletes message if permission is available.',
-			usage: '<WhatToSay:string>'
+
+			description: 'Send a message to a channel throught the bot.',
+			usage: '[channel:channel] <message:string> [...]',
+			usageDelim: ' '
 		});
 	}
 
-	async run(msg, [string]) {
-		if (msg.content.endsWith('-s')) {
-			try {
-				msg.delete();
-			} catch (error) {
-				this.client.emit('error', error);
-			}
-		}
-		return msg.send(string);
+	async run(msg, [channel = msg.channel, ...message]) {
+		if (channel.postable === false) throw 'The selected channel is not postable.';
+		return channel.send(`${msg.author.tag} ➤ ${message.join(' ')}`);
 	}
 
 };
