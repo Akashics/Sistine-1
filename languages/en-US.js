@@ -39,7 +39,7 @@ module.exports = class extends Language {
 			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error) => `${tag} | **${error}** | You have **30** seconds to respond to this prompt with a valid argument. Type **"ABORT"** to abort this prompt.`,
 			MONITOR_COMMAND_HANDLER_ABORTED: 'Aborted',
 			INHIBITOR_COOLDOWN: remaining => `You have just used this command. You can use this command again in ${remaining} seconds.`,
-			INHIBITOR_DISABLED: 'This command is currently disabled',
+			INHIBITOR_DISABLED: 'This command is currently disabled.',
 			INHIBITOR_MISSING_BOT_PERMS: missing => `Insufficient permissions, missing: **${missing}**`,
 			INHIBITOR_PERMISSIONS: 'You do not have permission to use this command',
 			INHIBITOR_REQUIRED_SETTINGS: settings => `The guild is missing the **${settings.join(', ')}** guild setting${settings.length > 1 ? 's' : ''} and thus the command cannot run.`,
@@ -178,7 +178,7 @@ module.exports = class extends Language {
 			trumpIllegalCharacter: user => `Well great, now non-standard unicode characters are illegal. Thanks ${user}.`,
 			trumpConvincing: thing => `_Convincing Trump that __${thing}__ should be illegal..._`,
 			rateMyself: ':thinking: Really, I would always rate myself a 100/100.',
-			rateWaifu: (user, rating) => `:thinking: I would rate ${user} a ${rating}/100.`,
+			rateWaifu: (user, rating) => `:thinking: I would rate **${user}** a __${rating}/100.__`,
 			triggering: tag => `_Triggering ${tag}..._`
 		};
 	}
