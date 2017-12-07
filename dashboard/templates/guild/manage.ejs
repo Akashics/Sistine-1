@@ -7,12 +7,13 @@
   </div>
   <div class="col">
     <%- include('../blocks/guild-nav.ejs', {active: "manage", guild}) %>
-    <p class="text-danger blockquote blockquote-primary" style=" text-align: center"><i>WARNING: THIS PANEL IS UNTESTED.<br>ENTERING A DIFFERENT SETTING FOR LOGGING AND ROLES WILL BREAK IT.</i></p>
+    <p class="text-danger blockquote blockquote-primary" style=" text-align: center"><i>WARNING: THIS PANEL IS STILL BEING DEVELOPEDs.<br>ENTERING A DIFFERENT SETTING FOR LOGGING AND ROLES WILL BREAK IT.</i></p>
     <form method="post">
       <ul class="list-group list-group-flush">
       <% const settings = bot.settings.guilds.getEntry(guild.id);
           const defaults = bot.settings.guilds.defaults;
-          for (const key in settings) { %>
+          for (const key in settings) { 
+            if (key === 'default') return; %>
         <li class="list-group-item" style="padding: 0;">
           <label class="sr-only" for="<%= key %>">
             <%= key %>
