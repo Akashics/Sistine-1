@@ -6,6 +6,12 @@ body {
   background-color: #0C1821;
 }
 
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
 .wrapper {
   margin-top: 1%;
 }
