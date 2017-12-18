@@ -1,7 +1,3 @@
-.bg-primary {
-  background-color: #185875 !important;
-}
-
 body {
   background-color: #0C1821;
 }
@@ -11,6 +7,18 @@ body {
   bottom: 0;
   width: 100%;
 }
+
+.btn {
+  color: #FFF !important;
+  font-size: 20px !important;
+  border: 1px solid #000 !important;
+}
+
+.btn:hover {
+  background-color: #000 !important; /* Green */
+  color: white !important;
+}
+
 .wrapper {
   padding-top: 100px;
 }
@@ -18,46 +26,28 @@ body {
 .jumbotron {
   background-color: darkslategray;
 }
+
 .navbar .navbar-transparent {
   box-shadow: 1px;
 }
-.botProfilePicture{
+
+.profile-bot {
   box-shadow: 2px 6px 28px #000000;
   box-sizing: border-box;
   border: 5px white solid;
   width: 256px;
   height: 256px;
-  margin-top: 80px;
+  margin: -30px;
   border-radius: 50%;
   overflow: hidden;
-  -moz-box-shadow: 2px 6px 28px #000000;
-  -webkit-box-shadow: 2px 6px 28px #000000;
-  -webkit-animation-name: Floatingx;
-  -webkit-animation-duration: 4s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: ease-in-out;
-  -moz-animation-name: Floating;
-  -moz-animation-duration: 4s;
-  -moz-animation-iteration-count: infinite;
-  -moz-animation-timing-function: ease-in-out;
-}
-@-webkit-keyframes Floatingx{
-  from {-webkit-transform:translate(0, 0px);}
-  65% {-webkit-transform:translate(0, 15px);}
-  to {-webkit-transform: translate(0, -0px);    }    
-}
-  
-@-moz-keyframes Floating{
-  from {-moz-transform:translate(0, 0px);}
-  65% {-moz-transform:translate(0, 15px);}
-  to {-moz-transform: translate(0, -0px);}    
+  background-image: url('/public/i/sistine.jpg');
 }
 
 .container th h1 {
   font-weight: bold;
   font-size: 1em;
-text-align: left;
-color: #185875;
+  text-align: left;
+  color: #185875;
 }
 
 .container {
@@ -65,57 +55,58 @@ color: #185875;
 }
 
 @font-face {
-font-family: UniSans;
-src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
+  font-family: UniSans;
+  src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
 }
 
 @-webkit-keyframes sliderAni {
   0% {
-      background-position: 0% 50%
+    background-position: 0% 50%
   }
   50% {
-      background-position: 100% 50%
+    background-position: 100% 50%
   }
   100% {
-      background-position: 00% 50%
+    background-position: 00% 50%
   }
 }
 
 @-moz-keyframes sliderAni {
   0% {
-      background-position: 0% 50%
+    background-position: 0% 50%
   }
   50% {
-      background-position: 100% 50%
+    background-position: 100% 50%
   }
   100% {
-      background-position: 00% 50%
+    background-position: 00% 50%
   }
 }
 
 @-o-keyframes sliderAni {
   0% {
-      background-position: 0% 50%
+    background-position: 0% 50%
   }
   50% {
-      background-position: 100% 50%
+    background-position: 100% 50%
   }
   100% {
-      background-position: 00% 50%
+    background-position: 00% 50%
   }
 }
 
 @keyframes sliderAni {
   0% {
-      background-position: 0% 50%
+    background-position: 0% 50%
   }
   50% {
-      background-position: 100% 50%
+    background-position: 100% 50%
   }
   100% {
-      background-position: 00% 50%
+    background-position: 00% 50%
   }
 }
+
 .color-strip {
   color: #fff;
   width: 100%;
@@ -126,6 +117,7 @@ src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
   -o-animation: sliderAni 10s ease infinite;
   animation: sliderAni 10s ease infinite;
 }
+
 .sidebar-collapse .navbar-collapse::before {
   color: #fff !important;
   width: 100%;
@@ -136,6 +128,7 @@ src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
   -o-animation: sliderAni 10s ease infinite;
   animation: sliderAni 10s ease infinite;
 }
+
 .page-header .container {
   text-align: left;
 }
@@ -146,7 +139,7 @@ src: url("../fonts/uni-sans.heavy-italic-caps.otf") format("opentype");
 
 body.modal-open div.modal-backdrop {
   margin-top: 60px;
-  z-index: 0; 
+  z-index: 0;
 }
 
 .modal-header, .modal-body {
@@ -197,6 +190,9 @@ body.modal-open div.modal-backdrop {
 
 .footer {
   padding-right: 10%;
+  bottom:0;
+  width:100%;
+  height:60px;
 }
 
 .text-shadow {

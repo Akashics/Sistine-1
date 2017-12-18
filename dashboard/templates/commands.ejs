@@ -1,15 +1,13 @@
-<%- include('blocks/header', {bot:bot, user: user, path: path, auth: auth}) %>
+<%- include('blocks/header', commands) %>
 
   <% const help = {};
-  
- bot.commands.filter((cmd) => cmd.permLevel <= 3).forEach((command) => {
+ commands.forEach((command) => {
   const cat = command.category;
   if (!help.hasOwnProperty(cat)) help[cat] = [];
   help[cat].push(command);
 });
 %>
     <div class="container SistineBestContent">
-    <p class="text-info blockquote blockquote-primary" style=" text-align: center"><i>Commands that are listed here, either require Member, Moderator, or Guild Owner permission levels.</i></p>
       <% for (const category in help) { %>
       <br>
         <h2> <%= category %> Commands </h2>
@@ -21,10 +19,7 @@
                 <th>Command</th>
                 <th>Usage</th>
                 <th>Description</th>
-                <th>Required Permission</th>
-                <% if (category === 'Fun')  { %>
-                  <th>Command Cost</th>
-                        <% } %>
+                <th>Command Cost</th>
               </tr>
             </thead>
             <tbody>
@@ -33,37 +28,16 @@
                   <td>
                     <%= command.name %>
                       <i>
-                        <%= `${command.aliases.length > 0 ? `(${command.aliases.join(', ')})` : ''}` %>
+                        <%= `${command.aliases.length > 1 ? `(${command.aliases.join(', ')})` : ''}` %>
                       </i>
                   </td>
                   <td>
-                    <%= `${command.usageString.length > 1 ? command.usageString : 'No Usage Necessary'} `%>
+                    <%= `${command.usageString.length > 1 ? command.usageString : 'No Arguments.'} `%>
                   </td>
                   <td>
                     <%= command.description %>
                   </td>
-                  <td>
-                  <% switch (command.permLevel) {
-                      case 0 : %>
-                       Member
-                           <% break;
-
-                      case 1 : %>
-                        Music DJ
-                            <% break;
-
-                      case 2 : %>
-                        Moderator
-                           <% break;
-                      case 3: %>
-                        Guild Owner
-                          <% break;
-
-                    } %>
-                  </td>
-                                 <% if (category === 'Fun')  { %>
-                                   <td><%= command.cost %>¥</td>
-                        <% } %>
+                  <td><%= command.cost > 1 ? command.cost + '¥' : 'Free' %></td>
                 </tr>
                 <% } %>
             </tbody>
