@@ -1,14 +1,15 @@
-<%- include('blocks/header', {bot: bot, user: user, path: path, auth: auth}) %>
-    <div class="container">
-      <div class="content brand" style="text-align: center;">
-        <img class="botProfilePicture" src="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 512}) %>" alt="<%= bot.user.username %>'s Avatar">
-        <h1 class="h1-seo" style="margin-top: 15px">
-          <%= bot.user.username %>
-        </h1>
-        <h4>
-            Sistine is one of many Discord Bots, but she is the only one that provides <u>Simple</u>, <u>Fun</u>, and <u>Quality</u> commands all in one bot.
-        </h4>
-      </div>
+<%- include('blocks/header') %>
+  <div class="container text-center" style="overflow:hidden;position:relative;">
+    <div class="mt-5 mb-5">
+      <img class="profile-bot" src="https://cdn.discordapp.com/avatars/353929487018229762/e47c260b60d120f3c6f9c1d13a1e598b.png?size=512" alt="Sistine's Avatar">
+    </div>
+      <h1 class="jumbotron-heading">Sistine <small style="font-size:10px"><b>Beta</b></small></h1>
+      <p class="lead text-muted">シスチンファイバー</p>
+      <p>
+        <a data-target="_blank" data-href="/invite" class="btn btn-raised btn-secondary">Invite</a>
+        <a data-href="https://www.paypal.me/AltarisNine" class="btn btn-raised btn-secondary">Donate</a>
+      </p>
+    </div>
     </div>
   <% include ./blocks/footer %>
   </div>

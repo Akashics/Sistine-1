@@ -8,13 +8,13 @@
   <meta name="author" content="Jordan Jones">
   <meta property="og:url" content="https://sistine.ml/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="<%= bot.user.tag %> - One of many, one of a kind.">
+  <meta property="og:title" content="Sistine - One of many, one of a kind.">
   <meta property="og:description" content="Sistine, one of many Discord Bots, but only one that provides Simple, Fun, and Quality commands all in one bot.">
-  <meta property="og:image" content="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>">
-  <meta property="og:image:secure_url" content="<%= bot.user.displayAvatarURL({ "format": 'png', "size": 256}) %>">
+  <meta property="og:image" content="https://cdn.discordapp.com/avatars/353929487018229762/e47c260b60d120f3c6f9c1d13a1e598b.png?size=512">
+  <meta property="og:image:secure_url" content="https://cdn.discordapp.com/avatars/353929487018229762/e47c260b60d120f3c6f9c1d13a1e598b.png?size=512">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel='icon' href='<%= bot.user.displayAvatarURL() %>'>
-  <title><%= bot.user.tag %></title>
+  <link rel='icon' href='./public/i/sistine.jpg'>
+  <title>Sistine</title>
   <link rel="stylesheet" href="/public/css/now-ui-kit.css?v=1.1.0" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <link rel="stylesheet" href="/public/css/dashboard.css" />
@@ -33,10 +33,7 @@
   <nav class="color-strip navbar navbar-expand-lg navbar-toggleable-md navbar-inverse bg-primary fixed-top text-shadow">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://sistine.ml" rel="tooltip" title="Sistine, A Member-oriented Discord Bot. Add today! https://sistine.ml/invite"
-          data-placement="bottom" target="noopener">
-          <h5><b><%= bot.user.username %></b></h5>
-        </a>
+          <h5><b>SISTINE</b></h5>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
                     <span class="navbar-toggler-bar bar2"></span>
@@ -47,34 +44,21 @@
         <ul class="navbar-nav text-shadow">
           <li class="nav-item">
             <a class="nav-link" href="/commands"><i class="fa fa-book"></i><p> Commands</p></a></li>
-          <li class="nav-item"><a class="nav-link<% if(!bot.application.botPublic) { %> disabled<% } %>" href="https://discordapp.com/oauth2/authorize?client_id=<%= bot.application.id %>&scope=bot&response_type=code&redirect_uri=<%= encodeURIComponent(bot.keys.dashboard.callbackURL) %>"><i class="fa fa-fw fa-plus"></i> Add to your Guild</a></li>
-          <li class="nav-item"><a class="nav-link" href="/stats"><i class="fa fa-bookmark-o"></i> <%= bot.guilds.size %> Guilds</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://discord.gg/jgPNHWy"><i class="fa fa-question"></i> Support</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://discordapp.com/oauth2/authorize?client_id=353929487018229762&scope=bot"><i class="fa fa-fw fa-plus"></i> Add to your Guild</a></li>
+          <li class="nav-item"><a class="nav-link" href="/stats"><i class="fa fa-bookmark-o"></i> Sistine Stats</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://discord.gg/jgPNHWy"><i class="fa fa-question"></i> Support Guild</a></li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="Follow Sistine's Development on Twitter" data-placement="bottom" href="https://twitter.com/Kashalls"
+            <a class="nav-link" rel="tooltip" title="Follow Development on Twitter" data-placement="bottom" href="https://twitter.com/Kashalls"
               target="noopener">
               <i class="fa fa-twitter"></i><p class="d-lg-none d-xl-none">Twitter</p>
             </a>
           </li>
-          <% if(auth) { %>
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png?size=32" width="28" height="28" class="d-inline-block align-middle rounded-circle" alt=""> 
-                  <%= user.username %>#<%= user.discriminator %>
-                </a>
-                <div class="nav-item dropdown-menu dropdown" aria-labelledby="navbarDropdownMenuLink">
-                  <h6 class="dropdown-header" style="color: #000"><i class="fa fa-user" aria-hidden="true"></i> <%= user.username %></h6>
-                  <a class="dropdown-item" href="/dashboard"><i class="fa fa-cogs" aria-hidden="true"></i> Dashboard</a>
-                  <% if(user.id === bot.config.ownerID) { %>
-                    <a class="dropdown-item" href="/admin"><i class="fa fa-key"></i> Admin</a>
-                  <% } %>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
-                </div>
-              </li>
-            <% } else { %>
-              <li class="nav-item"><a href="/login" class="nav-link"><i class="fa fa-key" aria-hidden="true"></i> Login</a></li>
-            <% } %>
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="Help Support Sistine on Patreon" data-placement="bottom" href="https://www.patreon.com/Kashall"
+              target="noopener">
+              <i class="fa fa-paypal"></i><p class="d-lg-none d-xl-none">Patreon</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

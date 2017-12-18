@@ -1,0 +1,27 @@
+{
+  "name": "sistine-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard used for Sistine",
+  "main": "Dashboard.js",
+  "scripts": {
+    "test": "node Dashboard.js"
+  },
+  "author": "Kashall#1307",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "discord.js": "^11.2.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "express-session-rethinkdb": "^0.4.1",
+    "helmet": "^3.9.0",
+    "marked": "^0.3.7",
+    "moment": "^2.20.0",
+    "moment-duration-format": "^1.3.0",
+    "passport": "^0.4.0",
+    "passport-discord": "^0.1.3",
+    "ws": "^3.3.3"
+  }
+}
