@@ -21,14 +21,14 @@ module.exports = class Blacklist extends Command {
 					return msg.send(msg.language.get('COMMAND_GUILDLIST_ALREADY', guild, 'blacklisted'));
 				}
 				await this.client.blacklist.push(guild.id);
-				await writeJSONAtomic('./keys/blacklist.json', this.client.blacklist);
+				await writeJSONAtomic('./lists/blacklist.json', this.client.blacklist);
 				return msg.send(msg.language.get('COMMAND_GUILDLIST_ADDED', guild, 'blacklist'));
 			case 'remove':
 				if (!blacklist.includes(guild.id)) {
 					return msg.send(msg.language.get('COMMAND_GUILDLIST_NOT', guild, 'blacklisted'));
 				}
 				await blacklist.splice(blacklist.indexOf(guild.id));
-				await writeJSONAtomic('./keys/blacklist.json', this.client.blacklist);
+				await writeJSONAtomic('./list/blacklist.json', this.client.blacklist);
 				return msg.send(msg.language.get('COMMAND_GUILDLIST_REMOVED', guild, 'blacklist'));
 		}
 		return msg.send('There were no valid options. Please try again.');

@@ -4,18 +4,27 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			permLevel: 6,
-			runIn: ['text'],
+			aliases: ['talk'],
+			permLevel: 10,
 
-			description: 'Send a message to a channel throught the bot.',
-			usage: '[channel:channel] <message:string> [...]',
-			usageDelim: ' '
+			usage: '[channel:channel] [message:string] [...]',
+			usageDelim: ' ',
+			description: 'Make sistine talk in another channel.'
 		});
 	}
 
-	async run(msg, [channel = msg.channel, ...message]) {
-		if (channel.postable === false) throw 'The selected channel is not postable.';
-		return channel.send(`${msg.author.tag} ➤ ${message.join(' ')}`);
+	async run(msg, [channel = msg.channel, ...content]) {
+		if (msg.deletable) msg.delete().catch(() => null);
+
+		const attachment = msg.attachments.size > 0 ? msg.attachments.first().url : null;
+		content = content.length ? content.join(' ') : '';
+
+		if (content.length === 0 && !attachment) throw 'I have no content nor attachment to send, please write something.';
+
+		const options = {};
+		if (attachment) options.files = [{ attachment }];
+
+		return channel.send(content, options);
 	}
 
 };

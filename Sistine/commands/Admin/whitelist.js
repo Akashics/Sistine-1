@@ -21,14 +21,14 @@ module.exports = class Whitelist extends Command {
 					return msg.send(msg.language.get('COMMAND_GUILDLIST_ALREADY', guild, 'whitelisted'));
 				}
 				await this.client.whitelist.push(guild.id);
-				await writeJSONAtomic('./keys/whitelist.json', this.client.whitelist);
+				await writeJSONAtomic('./lists/whitelist.json', this.client.whitelist);
 				return msg.send(msg.language.get('COMMAND_GUILDLIST_ADDED', guild, 'whitelist'));
 			case 'remove':
 				if (!whitelist.includes(guild.id)) {
 					return msg.send(msg.language.get('COMMAND_GUILDLIST_NOT', guild, 'whitelisted'));
 				}
 				await whitelist.splice(whitelist.indexOf(guild.id));
-				await writeJSONAtomic('./keys/whitelist.json', this.client.whitelist);
+				await writeJSONAtomic('./lists/whitelist.json', this.client.whitelist);
 				return msg.send(msg.language.get('COMMAND_GUILDLIST_REMOVED', guild, 'whitelist'));
 		}
 		return msg.send('There were no valid options. Please try again.');

@@ -33,7 +33,7 @@ module.exports = class WTP extends Command {
 		});
 		if (!msgs.size) { return msg.send(msg.language.get('COMMAND_WTP_OUT_TIME', name)); }
 		if (msgs.first().content.toLowerCase() !== name) { return msg.send(msg.language.get('COMMAND_WTP_INCORRECT', name)); }
-		return msg.send(msg.language.get('COMMAND_WTP_CORRECT', msg.author.tag));
+		return msg.send(msg.language.get('COMMAND_WTP_CORRECT', msg.author.tag, name));
 	}
 
 };

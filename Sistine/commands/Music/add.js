@@ -1,14 +1,17 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
 
-const fetchURL = (url, client) => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${client.keys.googleSearch}`)
+const { youtubeAPI } = require('../../config.json');
+
+const fetchURL = url => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${youtubeAPI}`)
 	.then(result => result.body);
 
-module.exports = class Add extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
+
 			usage: '<url:string>',
 			description: 'Adds a song the the queue.'
 		});
@@ -16,22 +19,19 @@ module.exports = class Add extends Command {
 	}
 
 	async run(msg, [url]) {
-		/* eslint-disable no-throw-literal */
-		this.client.stats.increment('client.trackAdded');
-
-		const youtubeURL = await this.getURL(url, this.client);
-		if (!youtubeURL || youtubeURL.includes('undefined')) { throw msg.language.get('MUSIC_URL_NOTFOUND'); }
+		const youtubeURL = await this.getURL(url);
+		if (!youtubeURL || youtubeURL.includes('undefined')) throw '<:eww:393547594690986018> No available videos were found at that URL.';
 
 		const { music } = msg.guild;
 		const song = await music.add(msg.author, youtubeURL);
 
-		return msg.send(msg.language.get('MUSIC_ADDED_QUEUE', song));
+		return msg.send(`:headphones: Added **${song.title}** to the queue by **${msg.author.tag}**.`);
 	}
 
-	async getURL(url, client) {
+	async getURL(url) {
 		const id = this.regExp.exec(url);
-		if (id) { return `https://youtu.be/${id[1]}`; }
-		const data = await fetchURL(encodeURIComponent(url), client);
+		if (id) return `https://youtu.be/${id[1]}`;
+		const data = await fetchURL(encodeURIComponent(url));
 		const video = data.items.find(item => item.id.kind !== 'youtube#channel');
 
 		return video ? `https://youtu.be/${video.id.videoId}` : null;

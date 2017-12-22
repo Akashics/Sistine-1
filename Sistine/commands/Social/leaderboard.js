@@ -7,16 +7,16 @@ module.exports = class Leaderboards extends Command {
 			aliases: ['lb'],
 			description: 'Check the current credit leaderboard!',
 			usage: '[index:integer]',
-			enabled: false
+			enabled: true
 		});
 	}
 
 	async run(msg, [index]) {
-		const data = await this.client.providers.get('rethinkdb').getAll('clientStorage').then(res => res.sort((a, b) => b.balance - a.balance));
+		const data = await this.client.providers.get('rethinkdb').getAll('users').then(res => res.sort((a, b) => b.balance - a.balance));
 		const leadboardPosition = data.filter(account => this.client.users.get(account.id));
 
 		const leaderboard = [];
-		const totalPages = Math.round(leadboardPosition.size / 10);
+		const totalPages = Math.round(leadboardPosition.length / 10);
 
 		var page = index ? index : 1;
 		page -= 1;
@@ -34,7 +34,7 @@ module.exports = class Leaderboards extends Command {
 
 		leaderboard.push(`${pos !== -1 ? pos + 1 : '???'} ❯ ${msg.author.tag.padEnd(30, ' ')}::  ${this.client.gateways.users.getEntry(msg.author.id).balance.toLocaleString()}`);
 		leaderboard.push('--------------------------------------------------');
-		return msg.channel.send(`= ${this.client.user.username}'s Global Leaderboard =\n\n${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} | ${this.client.providers.get('rethinkdb').getAll('clientStorage').size} Total Users`, { code: 'asciidoc' });
+		return msg.channel.send(`= ${this.client.user.username}'s Global Leaderboard =\n\n${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} | ${leadboardPosition.length} Total Users`, { code: 'asciidoc' });
 	}
 
 };

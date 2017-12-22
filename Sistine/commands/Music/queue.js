@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
-const { showSeconds } = require('../../util/Util');
+const { showSeconds } = require('../../lib/util');
 
-module.exports = class PlayQueue extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,12 +16,12 @@ module.exports = class PlayQueue extends Command {
 		const output = [];
 		for (let i = 0; i < Math.min(queue.length, 10); i++) {
 			output[i] = [
-				`[__\`${String(i + 1).padStart(2, 0)}\`__] *${queue[i].title.replace(/\*/g, '\\*')}* requested by **${queue[i].requester.tag || queue[i].requester}**`,
+				`[__${String(i + 1).padStart(2, 0)}__] *${queue[i].title.replace(/\*/g, '\\*')}* requested by **${queue[i].requester.tag || queue[i].requester}**.`,
 				`   └── <${queue[i].url}> (${showSeconds(queue[i].seconds * 1000)})`
 			].join('\n');
 		}
-		if (queue.length > 10) { output.push(`\nShowing 10 songs of ${queue.length}`); }
-		if (autoplay) { output.push(`\n**AutoPlay**: <${next}>`); }
+		if (queue.length > 10) output.push(`\nShowing 10 songs of **${queue.length}**`);
+		else if (autoplay) output.push(`\n**Next AutoPlay**: <${next}>`);
 
 		return msg.send(output.join('\n'));
 	}
