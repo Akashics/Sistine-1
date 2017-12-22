@@ -40,6 +40,10 @@ app.get('/', (req, res) => {
 	renderTemplate(res, req, 'index.ejs');
 });
 
+app.get('/woah', (req, res) => {
+        renderTemplate(res, req, 'woah.ejs');
+});
+
 app.get('/commands', (req, res) => {
 	const thing = require('./commands.json');
 	const commands = Object.values(thing)
