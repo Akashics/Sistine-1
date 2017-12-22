@@ -18,7 +18,7 @@ module.exports = class Block extends Command {
 			return msg.send(msg.language.get('COMMAND_GUILDLIST_ALREADY', user, 'blocked'));
 		}
 		await this.client.blocklist.push(user.id);
-		await writeJSONAtomic('./keys/blocklist.json', this.client.blocklist);
+		await writeJSONAtomic('./lists/blocklist.json', this.client.blocklist);
 		return msg.send(msg.language.get('COMMAND_GUILDLIST_ADDED', user, 'blocklist'));
 	}
 

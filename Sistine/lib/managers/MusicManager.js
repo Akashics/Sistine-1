@@ -1,37 +1,33 @@
 const ytdl = require('ytdl-core');
 const prism = require('prism-media');
 const getInfoAsync = require('util').promisify(ytdl.getInfo);
-/* eslint-disable no-throw-literal */
 
 module.exports = class InterfaceMusic {
 
 	constructor(guild) {
 		Object.defineProperty(this, 'client', { value: guild.client });
 		Object.defineProperty(this, 'guild', { value: guild });
+
 		this.recentlyPlayed = new Array(10);
 		this.queue = [];
 		this.channel = null;
-
 		this.dispatcher = null;
-
 		this.autoplay = false;
 		this.next = null;
-
 		this.status = 'idle';
 	}
 
 	async add(user, url) {
-		if (!url) throw 'Error ';
 		const song = await getInfoAsync(url).catch((err) => {
 			this.client.emit('log', err, 'error');
-			throw `Something happened with YouTube URL: ${url}\n${'```'}${err}${'```'}`;
+			throw `Whoops! You discovered an unwanted feature! Error: ${err}.`;
 		});
-		if (!song.video_id) throw 'There was an error in adding this song, because its ID did not register correctly.';
+		if (!song.video_id) throw 'Youtube responded with an message I could not understand, sorry :/';
 
 		const metadata = {
 			url: `https://youtu.be/${song.video_id}`,
 			title: song.title,
-			requester: user.tag,
+			requester: user.tag ? user.tag : user,
 			loudness: song.loudness,
 			seconds: parseInt(song.length_seconds),
 			opus: Boolean(song.formats.find(format => format.type === 'audio/webm; codecs="opus"'))
@@ -77,17 +73,18 @@ module.exports = class InterfaceMusic {
 		const song = this.queue[0];
 		this.pushPlayed(song.url);
 
+		const streamOptions = { passes: 5, volume: 0.50 };
 		if (song.opus) {
 			const stream = ytdl(song.url, { filter: format => format.type === `audio/webm; codecs="opus"` })
 				.pipe(new prism.WebmOpusDemuxer())
 				.on('error', err => this.client.emit('log', err, 'error'));
 
-			this.dispatcher = this.connection.playOpusStream(stream, { passes: 5 });
+			this.dispatcher = this.connection.playOpusStream(stream, streamOptions);
 		} else {
 			const stream = ytdl(song.url, { filter: 'audioonly' })
 				.on('error', err => this.client.emit('log', err, 'error'));
 
-			this.dispatcher = this.connection.playStream(stream, { passes: 5 });
+			this.dispatcher = this.connection.playStream(stream, streamOptions);
 		}
 
 		return this.dispatcher;

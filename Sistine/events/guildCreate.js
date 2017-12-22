@@ -1,5 +1,5 @@
 const { Event } = require('klasa');
-const { dBots, dBotsOrg, terminalINK, updateStatus } = require('../util/Util');
+const { dBots, dBotsOrg, terminalINK, updateStatus } = require('../lib/Util');
 
 module.exports = class guildCreate extends Event {
 

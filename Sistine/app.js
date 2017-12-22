@@ -1,25 +1,23 @@
 const { Client, PermissionLevels } = require('klasa');
-const Music = require('./util/lib/Music');
-const keys = require('./keys/keys.json');
+const Music = require('./lib/managers/Music');
+const { botToken } = require('./config.json');
 const StatsD = require('hot-shots');
-require('./jamesbond');
 
 class SistineClient extends Client {
 
 	constructor(options) {
 		super(Object.assign(options));
-		Object.defineProperty(this, 'keys', { value: keys });
 
 		this.stats = new StatsD();
-		this.raven = require('raven');
 		this.queue = new Music();
+		this.raven = require('raven');
 
-		this.whitelist = require('./keys/whitelist.json');
-		this.blocklist = require('./keys/blocklist.json');
-		this.blacklist = require('./keys/blacklist.json');
+		this.whitelist = require('./lists/whitelist.json');
+		this.blocklist = require('./lists/blocklist.json');
+		this.blacklist = require('./lists/blacklist.json');
 
 		this.wait = require('util').promisify(setTimeout);
-		this.sistinePermissionLevels = new PermissionLevels()
+		this.permlevel = new PermissionLevels()
 			.addLevel(0, false, () => true)
 			.addLevel(1, false, (client, msg) => msg.guild && msg.guild.configs.roles.musicdj && msg.member.roles.has(msg.guild.configs.roles.musicdj))
 			.addLevel(2, false, (client, msg) => msg.guild && msg.guild.configs.roles.moderator && msg.member.roles.has(msg.guild.configs.roles.moderator))
@@ -31,21 +29,20 @@ class SistineClient extends Client {
 }
 
 const Sistine = new SistineClient({
-	clientOptions: { fetchAllMembers: true },
-	prefix: ['s>', 'S>'],
+	clientOptions: {
+		fetchAllMembers: true,
+		disableEveryone: true
+	},
+	cmdDeleting: true,
 	cmdEditing: true,
-	cmdLogging: true,
 	typing: false,
-	permissionLevels: this.sistinePermissionLevels,
+	cmdLogging: true,
+	language: 'en-US',
+	prefix: 's>',
+	permissionLevels: this.permlevel,
 	readyMessage: (client) => `Shard ${client.shard.id}: ${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`,
 	provider: { engine: 'rethinkdb' },
 	console: { useColor: true }
-});
-
-Sistine.login(keys.botToken);
-
-Sistine.stats.socket.on('error', (error) => {
-	Sistine.emit('error', `Error in Socket:\n ${error}.`);
 });
 
 process.on('unhandledRejection', error => {
@@ -56,3 +53,4 @@ process.on('uncaughtException', error => {
 	Sistine.emit('error', `Uncaught Exception Error:\n ${error}.`);
 });
 
+Sistine.login(botToken);

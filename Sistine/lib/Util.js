@@ -1,6 +1,7 @@
 const moment = require('moment');
 require('moment-duration-format');
 const snekfetch = require('snekfetch');
+const { dBotsPW, dBotsORG, terminalINK, weebKey } = require('../config.json');
 
 class Util {
 
@@ -8,8 +9,8 @@ class Util {
 	static dBots(client) {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-			.set({ Authorization: client.keys.dBotsPW })
-			.send({ server_count: client.guilds.size })
+			.set({ Authorization: dBotsPW })
+			.send({ server_count: client.guilds.size, shard_id: client.shard.id, shard_count: client.shard.count })
 			.catch((err) => {
 				client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
 			});
@@ -18,8 +19,8 @@ class Util {
 	static dBotsOrg(client) {
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-			.set({ Authorization: client.keys.dBotsORG })
-			.send({ server_count: client.guilds.size })
+			.set({ Authorization: dBotsORG })
+			.send({ server_count: client.guilds.size, shard_id: client.shard.id, shard_count: client.shard.count })
 			.catch((err) => {
 				client.console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
@@ -28,7 +29,7 @@ class Util {
 	static terminalINK(client) {
 		snekfetch
 			.post(`https://ls.terminal.ink/api/v1/bots/${client.user.id}`)
-			.set({ Authorization: client.keys.terminalINK })
+			.set({ Authorization: terminalINK })
 			.send({ server_count: client.guilds.size })
 			.catch((err) => {
 				client.console.error(`[TerminalINK] Failed to post to ls.terminal.ink. ${err}`);
@@ -60,7 +61,7 @@ class Util {
 	}
 
 	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.shard ? client.shard.id + 1 : '1'}—${client.guilds.size} guilds ᐀ sistine.ml`, url: 'https://twitch.tv/kashalles', type: 3 } })
+		client.user.setPresence({ activity: { name: `${client.guilds.size} guilds [${client.shard ? client.shard.id + 1 : '1'}] sistine.ml`, type: 2 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});
@@ -68,7 +69,7 @@ class Util {
 
 	static async weebImage(msg, client, action) {
 		const imageRequest = await snekfetch.get(`https://api.weeb.sh/images/random?type=${msg.command.name}`)
-			.set('Authorization', `Bearer ${client.keys.weebKey}`)
+			.set('Authorization', `Bearer ${weebKey}`)
 			.catch(error => client.emit('error', `WEEBIMAGE: ${error}`));
 
 		return new client.methods.Embed()

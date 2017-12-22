@@ -18,7 +18,7 @@ module.exports = class Unblock extends Command {
 			return msg.send(msg.language.get('COMMAND_GUILDLIST_NOT', user, 'blocked'));
 		}
 		await blocklist.splice(blocklist.indexOf(user.id));
-		await writeJSONAtomic('./keys/blocklist.json', this.client.blocklist);
+		await writeJSONAtomic('./lists/blocklist.json', this.client.blocklist);
 		return msg.send(msg.language.get('COMMAND_GUILDLIST_REMOVED', user, 'blocklist'));
 	}
 

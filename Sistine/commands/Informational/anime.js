@@ -1,13 +1,12 @@
 const { Command } = require('klasa');
-const anilist = require('../../util/anilist');
+const anilist = require('../../lib/anilist');
 
 module.exports = class Anime extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			description: 'Get information on a provided anime name.',
-			usage: '<Anime:string>',
-			enabled: false
+			usage: '<Anime:string>'
 		});
 	}
 
@@ -16,7 +15,7 @@ module.exports = class Anime extends Command {
 		const queryRequest = await anilist.search(msg, title, 'ANIME');
 		const entries = queryRequest.data.Page.media;
 		if (!entries.length > 0) return msg.send(msg.language.get('COMMAND_ANILIST_NORESULTS', title));
-		return msg.sendEmbed(await anilist.buildResponse(msg, entries, 'ANIME'));
+		return msg.sendEmbed(await anilist.buildResponse(msg, entries, 'Anime'));
 	}
 
 };

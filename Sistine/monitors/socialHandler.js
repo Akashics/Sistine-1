@@ -21,7 +21,7 @@ module.exports = class socialMonitor extends Monitor {
 			timeout.delete(message.author.id);
 			await users.update(message.author.id, 'balance', score.balance + points, message.guild);
 			console.log('Updated!');
-		}, 45000);
+		}, 65000);
 
 		const curLevel = Math.floor(0.2 * Math.sqrt(score.balance + points));
 		if (score.level < curLevel) {

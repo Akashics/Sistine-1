@@ -3,7 +3,7 @@ const { Canvas } = require('canvas-constructor');
 const fsn = require('fs-nextra');
 const { join } = require('path');
 const imasnek = require('snekfetch');
-const backgrounds = require('../../util/profileBackgrounds.json');
+const backgrounds = require('../../lib/profileBackgrounds.json');
 
 Canvas.registerFont(join(__dirname, '../../assets/fonts/Corbert-Condensed.otf'), 'Corbert');
 Canvas.registerFont(join(__dirname, '../../assets/fonts/Discord.ttf'), 'Discord');
@@ -59,7 +59,7 @@ module.exports = class Profile extends Command {
 		const banner = await fsn.readFile(backgrounds[background].location);
 		const guildCard = await fsn.readFile('./assets/images/profile-card.png');
 		const userAvatar = await imasnek.get(user.displayAvatarURL({ format: 'png', size: 256 }));
-		const leadboardPosition = await this.client.providers.get('rethinkdb').getAll('clientStorage').then(res => res.sort((a, b) => b.balance - a.balance).indexOf(user.id));
+		const leadboardPosition = await this.client.providers.get('rethinkdb').getAll('users').then(res => res.sort((a, b) => b.balance - a.balance).indexOf(user.id));
 
 		const profileCard = new Canvas(380, 450)
 			.addImage(banner, 0, 0, 380, 200)
@@ -84,14 +84,14 @@ module.exports = class Profile extends Command {
 	}
 
 
-	/* async validate(userResolvable) {
+	async validate(userResolvable) {
 		const result = await this.resolver.user(userResolvable);
 		if (result) return result;
 		throw 'The parameter <User> expects either a User ID or a User Object.';
 	}
 
 	async init() {
-		if (!this.client.gateways.users) { await this.client.gateways.add('clientStorage', this.validate, this.schema); }
-	} */
+		if (!this.client.gateways.users) { await this.client.gateways.add('users', this.validate, this.schema); }
+	}
 
 };

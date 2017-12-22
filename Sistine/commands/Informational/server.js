@@ -31,7 +31,7 @@ module.exports = class ServerInfo extends Command {
 			.addField('🢒 Name', msg.guild.name, true)
 			.addField('🢒 ID', msg.guild.id, true)
 			.addField('🢒 Creation Date', moment(msg.guild.createdAt).format('MMMM Do YYYY'), true)
-			.addField('🢒 Region', msg.guild.region.toProperCase(), true)
+			.addField('🢒 Region', msg.guild.region.toUpperCase(), true)
 			.addField('🢒 Explicit Filter', this.filterLevels[msg.guild.explicitContentFilter], true)
 			.addField('🢒 Verification Level', this.verificationLevels[msg.guild.verificationLevel], true)
 			.addField('🢒 Owner', msg.guild.owner ? msg.guild.owner.user.tag : 'None', true)
