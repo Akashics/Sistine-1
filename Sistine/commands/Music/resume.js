@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 
-module.exports = class Resume extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -13,12 +13,11 @@ module.exports = class Resume extends Command {
 	}
 
 	async run(msg) {
-		/* eslint-disable no-throw-literal */
 		const { music } = msg.guild;
-		if (music.status === 'playing') throw msg.language.get('MUSIC_NOTPAUSED');
+		if (music.status === 'playing') throw ':headphones: Music is already being played. :thinking:';
 
 		music.resume();
-		return msg.send(msg.language.get('MUSIC_RESUMED', msg.author.tag));
+		return msg.send(`▶ Music was resumed by **${msg.author.tag}**.`);
 	}
 
 };

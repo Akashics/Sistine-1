@@ -26,7 +26,7 @@ module.exports = class Autoplay extends Command {
 
 		music.autoplay = enabled;
 
-		return msg.send(msg.language.get('MUSIC_AUTOPLAY', msg.author, enabled));
+		return msg.send(`:headphones: **YouTube AutoPlay** has been ${enabled ? 'enabled' : 'disabled'} by **${msg.author.tag}**.`);
 	}
 
 };

@@ -401,7 +401,7 @@ module.exports = class enUSLang extends Language {
 			TIME_REMAIN: 'Time Remaining',
 
 			// Fun Commands
-			COMMAND_8BALL: (author, input) => `🎱 Question by ${author}: **${input}**\n\`${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}\``,
+			COMMAND_8BALL: (author, input) => `**__8BALL__**\nQuestion: _${input}_\nReply: _${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}_`,
 			COMMAND_8BALL_NOT_QUESTION: 'That does not seem to be a question.',
 
 			COMMAND_BEAUTIFUL: user => `_Admiring the painting of ${user}..._ `,
@@ -430,9 +430,9 @@ module.exports = class enUSLang extends Language {
 			COMMAND_TRIGGERING: tag => `_Triggering ${tag}..._`,
 
 			COMMAND_WTP_EMBED_TITLE: '<:pikablob:356256509929324545> You have 15 seconds. Guess this Pokemon.',
-			COMMAND_WTP_OUT_TIME: name => `You ran out of time, the answer was ${name}.`,
-			COMMAND_WTP_INCORRECT: name => `That is incorrect. Its name is ${name}.`,
-			COMMAND_WTP_CORRECT: author => `You are correct ${author}. One point has been added to your account.`,
+			COMMAND_WTP_OUT_TIME: name => `You ran out of time, the answer was **${name}**.`,
+			COMMAND_WTP_INCORRECT: name => `That is incorrect. Its name is **${name}**.`,
+			COMMAND_WTP_CORRECT: (author, name) => `**${author}** was correct. The pokemon's name was **${name}**.`,
 
 			COMMAND_WYR_ERROR: 'An issue has appeared with `Would You Rather`, please try again in a little bit.',
 
@@ -454,11 +454,11 @@ module.exports = class enUSLang extends Language {
 			COMMAND_PAT: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
 			COMMAND_PAT_SOLO: user => `**${user.username}** wants to pat somebody.`,
 
-			COMMAND_POKE: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
-			COMMAND_POKE_SOLO: user => `**${user.username}** wants to pat somebody.`,
+			COMMAND_POKE: (user, author) => `**${user.username}**, you were poked by **${author.username}**.`,
+			COMMAND_POKE_SOLO: user => `**${user.username}** wants to poke somebody.`,
 
-			COMMAND_SLAP: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
-			COMMAND_SLAP_SOLO: user => `**${user.username}** wants to pat somebody.`,
+			COMMAND_SLAP: (user, author) => `**${user.username}**, you were slapped by **${author.username}**.`,
+			COMMAND_SLAP_SOLO: user => `**${user.username}** wants to slap somebody.`,
 
 			// Informational Commands
 
@@ -519,7 +519,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_REPUTATION_FROMNOW: giver => `<:tickNo:373304949234204682> You cannot give another reputation point, please try again in ${moment(giver.reputationTimer).fromNow(true)}.`,
 			// System Commands
 			COMMAND_FEEDBACK: feedback => `<:tickNo:373304949234204682> Feedback must fit within Discord message regulations, so your message cannot ${feedback.length > 3 ? 'be less than 3 characters.' : 'be more than 700 characters.'}`,
-			COMMAND_FEEDBACK_SEND: 'Your feedback has been sent with via messenger piegeon. You may recieve a reply.',
+			COMMAND_FEEDBACK_SEND: 'Your feedback has been sent with our most elite messenger piegeon. You may recieve a reply depending on what you sent.',
 
 			COMMAND_GUILDLIST_ALREADY: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] is already ${type}.`,
 			COMMAND_GUILDLIST_NOT: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] is not ${type}.`,

@@ -1,22 +1,20 @@
 const { Command } = require('klasa');
-const { showSeconds } = require('../../util/Util');
+const { showSeconds } = require('../../lib/util');
 
-module.exports = class Time extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-
 			description: 'Check how much time is left for the song to end.'
 		});
 	}
 
 	async run(msg) {
-		/* eslint-disable no-throw-literal */
 		const { status, dispatcher, queue } = msg.guild.music;
 
-		if (status !== 'playing') { throw msg.language.get('MUSIC_NOTPLAYING', status); }
-		return msg.send(`🕰 ${msg.language.get('TIME_REMAIN')}: ${showSeconds((queue[0].seconds * 1000) - dispatcher.time)}`);
+		if (status !== 'playing') throw `There is no song playing right now. :thinking:\n**Current status:** \`${status}\``;
+		return msg.send(`🕰 **Time remaining:** ${showSeconds((queue[0].seconds * 1000) - dispatcher.time)}`);
 	}
 
 };

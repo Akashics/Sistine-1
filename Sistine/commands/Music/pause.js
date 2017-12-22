@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 
-module.exports = class Pause extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -13,12 +13,11 @@ module.exports = class Pause extends Command {
 	}
 
 	async run(msg) {
-		/* eslint-disable no-throw-literal */
-
 		const { music } = msg.guild;
-		if (music.status === 'paused') { throw msg.language.get('MUSIC_ALREADYPAUSED'); }
+		if (music.status === 'paused') throw '<:eww:393547594690986018> Someone already paused the music. :thinking:';
+
 		music.pause();
-		return msg.send(msg.language.get('MUSIC_PAUSED', msg.author.tag));
+		return msg.send(`:pause_button: Music was paused by **${msg.author.tag}**.`);
 	}
 
 };

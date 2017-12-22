@@ -18,7 +18,7 @@ module.exports = class UserInfo extends Command {
 	}
 
 	async run(msg, [member = msg.member]) {
-		const leadboardPosition = this.client.providers.get('collection').getAll('clientStorage').sort((a, b) => b.balance - a.balance).keyArray().indexOf(member.user.id);
+		const leadboardPosition = this.client.providers.get('collection').getAll('users').sort((a, b) => b.balance - a.balance).keyArray().indexOf(member.user.id);
 
 		const userInfo = new this.client.methods.Embed()
 			.setColor('PURPLE')
