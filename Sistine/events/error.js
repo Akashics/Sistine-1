@@ -4,7 +4,7 @@ module.exports = class Error extends Event {
 
 	constructor(client, dir, file) {
 		super(client, dir, file, { enabled: client.options.consoleEvents.error });
-		this.errFile = file;
+		this.errFile = `${dir}\\${file}`;
 	}
 
 	run(err) {

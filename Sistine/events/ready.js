@@ -1,19 +1,20 @@
 const { Event } = require('klasa');
-const { updateStatus } = require('../util/Util');
+const { updateStatus } = require('../lib/Util');
+const { raven } = require('../config.json');
 
 module.exports = class Ready extends Event {
 
 	async run() {
-		const that = this;
+		const Sistine = this.client;
 
 		setInterval(() => {
-			that.client.stats.gauge('client.users', that.client.users.size);
-			that.client.stats.gauge('client.ping', that.client.ping);
-			that.client.stats.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
+			Sistine.stats.gauge('client.users', Sistine.users.size);
+			Sistine.stats.gauge('client.ping', Sistine.ping);
+			Sistine.stats.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
 		}, 30000);
 
-		this.client.raven.config(this.client.keys.raven).install();
-		updateStatus(this.client);
+		Sistine.raven.config(raven).install();
+		updateStatus(Sistine);
 	}
 
 };

@@ -1,18 +1,22 @@
 const { Command } = require('klasa');
 
-module.exports = class Leave extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
+
 			description: 'Leaves the voice channel.'
 		});
+
 		this.requireMusic = true;
 	}
 
 	async run(msg) {
 		const { music } = msg.guild;
-		return music.leave();
+		await music.leave();
+
+		return msg.send(`:headphones: Successfully left the voice channel **${msg.member.voiceChannel}**.`);
 	}
 
 };

@@ -1,6 +1,7 @@
 require('bufferutil');
 require('canvas');
 require('canvas-constructor');
+require('dateformat');
 require('discord.js');
 require('erlpack');
 require('fast-html-parser');
@@ -12,7 +13,9 @@ require('klasa');
 require('moment');
 require('moment-duration-format');
 require('node-opus');
+require('overwatch-js');
+require('prism-media');
 require('raven');
 require('snekfetch');
+require('uws');
 require('ytdl-core');
-require('zlib');

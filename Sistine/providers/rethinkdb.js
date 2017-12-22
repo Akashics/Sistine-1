@@ -1,12 +1,14 @@
 const { Provider } = require('klasa');
 const rethink = require('rethinkdbdash');
-const { rethinkdb } = require('../keys/keys.json');
+const { rethinkdb } = require('../config.json');
 
 module.exports = class Rethinkdb extends Provider {
 
 	constructor(...args) {
 		super(...args);
-		this.db = rethink(this.client.options.provider.rethinkdb || { host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database, silent: false, pool: true, timeout: 30 });
+		this.db = rethink(this.client.options.provider.rethinkdb || { 
+			host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database, silent: false, pool: true, timeout: 30
+		});
 	}
 
 	/* Table methods */

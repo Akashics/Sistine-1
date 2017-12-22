@@ -1,4 +1,4 @@
-const config = require('../keys/keys.json');
+const config = require('../../config.json');
 
 const { WebhookClient } = require('discord.js');
 const hooker = new WebhookClient(config.webhook.id, config.webhook.token);

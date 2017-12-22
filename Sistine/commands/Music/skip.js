@@ -1,12 +1,13 @@
 const { Command } = require('klasa');
 
-module.exports = class Skip extends Command {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
+			aliases: ['vol'],
 
-			usage: '[-force]',
+			usage: '[-force|-f]',
 			description: 'Skip the current song.'
 		});
 
@@ -14,37 +15,33 @@ module.exports = class Skip extends Command {
 	}
 
 	async run(msg, [force]) {
-		/* eslint-disable no-throw-literal */
 		const { music } = msg.guild;
 
-		if (music.voiceChannel.members.size > 4) {
+		if (music.voiceChannel.members.size > 5) {
 			if (force) {
-				const hasPermission = await msg.hasAtleastPermissionLevel(1);
-				if (hasPermission === false) { throw 'You can\'t execute this command with the force flag. You must be at least a Moderator Member.'; }
+				const hasPermission = await msg.hasAtLeastPermissionLevel(1);
+				if (hasPermission === false) throw ':headphones: Forcing a song skip requires a DJ permissions. Make sure you have that role or there are less than 5 people total in the channel.';
 			} else {
-				const response = this.handleSkips(music, msg.author.id, msg);
-				if (response) { return msg.send(response); }
+				const response = this.handleSkips(music, msg.author.id);
+				if (response) return msg.send(response);
 			}
 		}
-		if (music.queue.length <= 0) return msg.send('You cannot skip songs that are not in the queue.');
-		await msg.send(`⏭ Skipped ${music.queue[0].title || 'Title Error'}`);
+
+		await msg.send(`⏭ **${music.queue[0].title}** was skipped by **${msg.author.tag}.`);
 		music.skip(true);
 		return null;
 	}
 
-	handleSkips(musicInterface, user, msg) {
-		if (!musicInterface.queue) return 'There is nothing in the queue, try adding something and then playing it.';
-		if (!musicInterface.queue[0].skips) {
-			musicInterface.queue[0].skips = new Set();
-		}
-		if (musicInterface.queue[0].skips.has(user)) { return msg.language.get('MUSIC_ALREADYVOTED'); }
+	handleSkips(musicInterface, user) {
+		if (!musicInterface.queue[0].skips) musicInterface.queue[0].skips = new Set();
+		if (musicInterface.queue[0].skips.has(user)) return 'You have already voted to skip this song.';
 		musicInterface.queue[0].skips.add(user);
 		const members = musicInterface.voiceChannel.members.size - 1;
 		return this.shouldInhibit(members, musicInterface.queue[0].skips.size);
 	}
 
 	shouldInhibit(total, size) {
-		if (total <= 3) { return true; }
+		if (total <= 3) return true;
 		return size >= total * 0.4 ? false : `🔸 | Votes: ${size} of ${Math.ceil(total * 0.4)}`;
 	}
 

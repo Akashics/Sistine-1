@@ -54,7 +54,7 @@ class anilist {
 		return result.body;
 	}
 
-	static async buildResponse(msg, data, characters, type) {
+	static async buildResponse(msg, data, type) {
 		const query = data[0];
 		let description = query.description.replace(/<br>/g, '');
 		description = description.replace(/\n|\\n/g, ' ');
@@ -67,7 +67,7 @@ class anilist {
 		}
 		let characterString = query.characters.edges.map(mainC => `[${mainC.node.name.first}${mainC.node.name.last ? ` ${mainC.node.name.last}` : ''}](https://anilist.co/character/${mainC.node.id})`);
 		characterString = characterString.join(', ');
-		const titleString = query.title_english !== query.title_romaji ? `${query.title_romaji} [${query.title_english}]` : query.title_romaji;
+		const titleString = query.title.english !== query.title.romaji ? `${query.title.romaji} [${query.title.english}]` : query.title.romaji;
 		return {
 			title: titleString,
 			description,
