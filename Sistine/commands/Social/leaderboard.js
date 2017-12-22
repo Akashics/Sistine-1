@@ -6,8 +6,7 @@ module.exports = class Leaderboards extends Command {
 		super(...args, {
 			aliases: ['lb'],
 			description: 'Check the current credit leaderboard!',
-			usage: '[index:integer]',
-			enabled: true
+			usage: '[index:integer]'
 		});
 	}
 

@@ -7,12 +7,10 @@ module.exports = class voiceStateUpdate extends Event {
 	}
 
 	run(oldMem, newMem) {
-		const { queue, dispatcher } = newMem.guild.music;
-		if (!queue) return;
-		if (!oldMem.guild.me.voiceChannel) return;
+		const { queue, dispatcher, status } = newMem.guild.music;
+		if (!oldMem.guild.me.voiceChannel || !status === 'playing' || !queue) return;
 		if (oldMem.voiceChannel === oldMem.guild.me.voiceChannel && newMem.voiceChannel !== newMem.guild.me.voiceChannel && newMem.guild.me.voiceChannel.members.size === 1) {
-            const voiceChannel = newMem.guild.me.voiceChannel; // eslint-disable-line
-			dispatcher.end('endAll');
+			dispatcher.end('All users left the channel.');
 			newMem.guild.music.channel.send(':musical_note: All members have left the channel, so I stopped playing music.');
 			newMem.guild.music.leave();
 		}

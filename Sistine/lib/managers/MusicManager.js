@@ -2,7 +2,7 @@ const ytdl = require('ytdl-core');
 const prism = require('prism-media');
 const getInfoAsync = require('util').promisify(ytdl.getInfo);
 
-module.exports = class InterfaceMusic {
+module.exports = class MusicManager {
 
 	constructor(guild) {
 		Object.defineProperty(this, 'client', { value: guild.client });

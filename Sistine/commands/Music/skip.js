@@ -27,7 +27,7 @@ module.exports = class extends Command {
 			}
 		}
 
-		await msg.send(`⏭ **${music.queue[0].title}** was skipped by **${msg.author.tag}.`);
+		await msg.send(`⏭ **${music.queue[0].title ? music.queue[0].title : 'Error Loading Song...'}** was skipped by **${msg.author.tag}.`);
 		music.skip(true);
 		return null;
 	}
