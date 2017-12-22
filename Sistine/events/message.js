@@ -7,7 +7,7 @@ module.exports = class Message extends Event {
 
 		if (this.client.blocklist.includes(msg.author.id)) return;
 
-		if (msg.author.id !== this.client.owner.id) return;
+//		if (msg.author.id !== this.client.owner.id) return;
 		this.client.stats.increment('client.messages');
 		this.client.monitors.run(msg);
 	}

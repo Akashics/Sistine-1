@@ -401,7 +401,7 @@ module.exports = class enUSLang extends Language {
 			TIME_REMAIN: 'Time Remaining',
 
 			// Fun Commands
-			COMMAND_8BALL: (author, input) => `ðŸŽ± Question by ${author}: **${input}**\n\`${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}\``,
+			COMMAND_8BALL: (author, input) => `í¾± Question by ${author}: **${input}**\n\`${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}\``,
 			COMMAND_8BALL_NOT_QUESTION: 'That does not seem to be a question.',
 
 			COMMAND_BEAUTIFUL: user => `_Admiring the painting of ${user}..._ `,
@@ -454,11 +454,11 @@ module.exports = class enUSLang extends Language {
 			COMMAND_PAT: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
 			COMMAND_PAT_SOLO: user => `**${user.username}** wants to pat somebody.`,
 
-			COMMAND_POKE: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
-			COMMAND_POKE_SOLO: user => `**${user.username}** wants to pat somebody.`,
+			COMMAND_POKE: (user, author) => `**${user.username}**, you were poked by **${author.username}**.`,
+			COMMAND_POKE_SOLO: user => `**${user.username}** wants to poke somebody.`,
 
-			COMMAND_SLAP: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
-			COMMAND_SLAP_SOLO: user => `**${user.username}** wants to pat somebody.`,
+			COMMAND_SLAP: (user, author) => `**${user.username}**, you were slapped by **${author.username}**.`,
+			COMMAND_SLAP_SOLO: user => `**${user.username}** wants to slap somebody.`,
 
 			// Informational Commands
 
@@ -530,3 +530,4 @@ module.exports = class enUSLang extends Language {
 	}
 
 };
+

@@ -29,7 +29,7 @@ module.exports = class InterfaceMusic {
 		if (!song.video_id) throw 'There was an error in adding this song, because its ID did not register correctly.';
 
 		const metadata = {
-			url: `https://youtu.be/${song.id}`,
+			url: `https://youtu.be/${song.video_id}`,
 			title: song.title,
 			requester: user.tag,
 			loudness: song.loudness,

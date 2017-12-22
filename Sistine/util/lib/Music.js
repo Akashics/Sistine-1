@@ -1,13 +1,10 @@
-const Discord = require('discord.js');
+const { Guild, Collection } = require('discord.js');
 const MusicManager = require('./MusicManager');
 
-/* eslint-disable no-throw-literal */
-
-module.exports = class MusicInterface extends Discord.Collection {
+module.exports = class MusicInterface extends Collection {
 
 	constructor(client) {
 		super();
-
 		Object.defineProperty(this, 'client', { value: client });
 	}
 
@@ -17,10 +14,11 @@ module.exports = class MusicInterface extends Discord.Collection {
      * @returns {MusicManager}
      */
 	create(guild) {
-		if (guild.constructor.name !== 'Guild') { throw 'The parameter \'Guild\' must be a guild instance.'; }
+		if (!(guild instanceof Guild)) throw 'The parameter \'Guild\' must be a guild instance.';
 		const manager = new MusicManager(guild);
 		super.set(guild.id, manager);
 		return manager;
 	}
 
 };
+
