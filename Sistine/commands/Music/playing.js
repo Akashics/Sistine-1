@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const { splitText, showSeconds } = require('../../lib/util');
+const { splitText, showSeconds } = require('../../lib/Util');
 const getInfo = require('util').promisify(require('ytdl-core').getInfo);
 
 module.exports = class extends Command {
