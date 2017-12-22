@@ -19,7 +19,9 @@ module.exports = class extends Command {
 		}
 		if (!musicInterface.dispatcher || !msg.guild.me.voiceChannel) await this.client.commands.get('join').run(msg);
 		if (musicInterface.status === 'paused') await this.client.commands.get('resume').run(msg);
-		if (musicInterface.status === 'playing') return msg.send(`:headphones: **${msg.guild.music.queue[0].requester}** is already playing a song, add a song with \`${msg.guild.settings.prefix}add [url]\`.`);
+		if (musicInterface.status === 'playing') {
+			return msg.send(`:headphones: **${msg.guild.music.queue[0].requester}** is already playing a song, add a song with \`${msg.guild.settings.prefix}add [url]\`.`);
+		}
 		musicInterface.status = 'playing';
 		musicInterface.channel = msg.channel;
 		return this.play(musicInterface);
