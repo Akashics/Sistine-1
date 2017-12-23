@@ -1,5 +1,6 @@
 const { Command } = require('klasa');
 const snek = require('snekfetch');
+const { weebKey } = require('../../config.json');
 
 module.exports = class MoeImage extends Command {
 
@@ -20,7 +21,7 @@ module.exports = class MoeImage extends Command {
 		}
 
 		const imageRequest = await snek.get(`https://api.weeb.sh/images/random?type=${type}`)
-			.set('Authorization', `Bearer ${this.client.keys.weebKey}`)
+			.set('Authorization', `Bearer ${weebKey}`)
 			.catch(error => this.client.emit('error', `WEEBIMAGE: ${error}`));
 		images
 			.setColor('PURPLE')
