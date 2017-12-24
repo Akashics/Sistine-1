@@ -11,19 +11,19 @@ module.exports = class guildCreate extends Event {
 		if (!this.client.whitelist.includes(guild.id)) {
 			if (this.client.blocklist.includes(guild.ownerID)) {
 				guild.leave();
-				this.client.emit('warn', `[${this.client.shard.id}] ⚠ Blocked Server Owner: ${guild.name}[${guild.id}] ${guild.owner.user.username}[${guild.owner.user.id}]`);
+				this.client.emit('warn', `Blocked Server Owner: ${guild.name}[${guild.id}] ${guild.owner.user.username}[${guild.owner.user.id}]`);
 				return;
 			}
 
 			if (this.client.blacklist.includes(guild.id)) {
 				guild.leave();
-				this.client.emit('warn', `[${this.client.shard.id}] ⚠ Blacklisted Guild: ${guild.name}[${guild.id}] ${guild.owner.user.username}[${guild.owner.user.id}]`);
+				this.client.emit('warn', `Blacklisted Guild: ${guild.name}[${guild.id}] ${guild.owner.user.username}[${guild.owner.user.id}]`);
 				return;
 			}
 
-			this.client.emit('log', `[${this.client.shard.id}] Successfully joined ${guild.name}[${guild.id}]`);
+			this.client.emit('log', `Invited to Guild: ${guild.name}[${guild.id}]`);
 		} else {
-			this.client.emit('log', `[${this.client.shard.id}] Whitelisted join: ${guild.name}[${guild.id}]`);
+			this.client.emit('log', `Whitelisted join: ${guild.name}[${guild.id}]`);
 		}
 
 		this.client.stats.increment('client.guildJoins');

@@ -4,7 +4,7 @@ module.exports = class swearFilter extends Monitor {
 
 	constructor(...args) {
 		super(...args, {
-			enabled: false,
+			enabled: true,
 			ignoreBots: true,
 			ignoreSelf: true
 		});
