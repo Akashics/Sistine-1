@@ -42,7 +42,7 @@ const Sistine = new SistineClient({
 	permissionLevels: this.permlevel,
 	readyMessage: (client) => `Shard ${client.shard.id}: ${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`,
 	provider: { engine: 'rethinkdb' },
-	console: { useColor: true }
+	console: { useColor: true, timestamps: 'MM-DD-YYYY hh:mm:ss A' }
 });
 
 process.on('unhandledRejection', error => {

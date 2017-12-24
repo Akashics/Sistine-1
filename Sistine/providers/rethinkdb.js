@@ -7,7 +7,7 @@ module.exports = class Rethinkdb extends Provider {
 	constructor(...args) {
 		super(...args);
 		this.db = rethink(this.client.options.provider.rethinkdb || { 
-			host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database, silent: false, pool: true, timeout: 30
+			host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database, silent: true, pool: true, timeout: 30
 		});
 	}
 
