@@ -16,7 +16,7 @@ const Manager = new Discord.ShardingManager('./app.js', {
 
 Manager.on('shardCreate', shard => {
 	log(`Launching: Shard ${shard.id + 1}/${Manager.totalShards}.`);
-	webhook(`\`${dateFormat(Date.now(), 'hh:MM:ss TT')}\` **Host** ${os.hostname()} Launched Shard \`${(shard.id + 1)}/${Manager.totalShards}\`.`);
+	webhook(`🗘 **Shard Rebooting:** ${(shard.id + 1)}/${Manager.totalShards} **Station:** ${os.hostname()} **Date:** ${dateFormat(Date.now(), 'MM-DD-YYYY hh:MM:ss TT')}`);
 });
 
 Manager.spawn();

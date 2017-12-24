@@ -40,7 +40,7 @@ const Sistine = new SistineClient({
 	language: 'en-US',
 	prefix: 's>',
 	permissionLevels: this.permlevel,
-	readyMessage: (client) => `Shard ${client.shard.id}: ${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users.`,
+	readyMessage: (client) => `${client.user.tag}-${client.shard.id}, Listening to ${client.guilds.size} guilds, ${client.users.size} users, ${client.channels.size} channels.`,
 	provider: { engine: 'rethinkdb' },
 	console: { useColor: true, timestamps: 'MM-DD-YYYY hh:mm:ss A' }
 });

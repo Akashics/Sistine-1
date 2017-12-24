@@ -5,7 +5,7 @@ module.exports = class eightBall extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['8', 'magic', '8ball', 'mirror'],
-
+			cooldown: 3,
 			description: 'Magic 8-Ball, does exactly what the toy does.',
 			usage: '<Question:str>'
 		});

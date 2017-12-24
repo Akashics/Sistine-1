@@ -11,10 +11,10 @@ module.exports = class cmdCost extends Inhibitor {
 	}
 
 	async run(msg, cmd) {
-		if (!cmd.cost) { return; }
+		if (!cmd.cost) return;
 		const newAmount = msg.author.conf.balance - cmd.cost;
-		if (newAmount < 0) { throw `<:tickNo:373304949234204682> Using \`${cmd.name}\` would cost you \`${cmd.cost}\` when you only have \`${msg.author.conf.balance}\` credits.`; }
-		await msg.author.conf.update(msg.author.id, 'balance', newAmount, msg.guild);
+		if (newAmount < 0) { throw `<:tickNo:373304949234204682> ${msg.author.tag}, you cannot afford to use **${cmd.name}** when you only have **${msg.author.conf.balance}** credits.`; }
+		await msg.author.conf.update('balance', newAmount, msg.guild);
 	}
 
 };

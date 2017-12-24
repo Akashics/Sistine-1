@@ -8,25 +8,24 @@ module.exports = class socialMonitor extends Monitor {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
 
-	async givePoints(message) { // eslint-disable-line no-unused-vars
-		if (message.channel.type !== 'text' || message.author.bot || !message.guild) return;
-		const timedOut = timeout.has(message.author.id);
-		if (timedOut) return;
-		if (!message.content.length > 10) return;
-		const { users } = this.client.gateways;
-		const score = await users.getEntry(message.author.id);
-		timeout.add(message.author.id);
-		const points = this.giveRandomPoints(5, 26);
+	async givePoints(msg) {
+		if (msg.channel.type !== 'text' || msg.author.bot || !msg.guild) return;
+
+		if (timeout.has(msg.author.id)) return;
+
+		const userData = msg.author.conf;
+		timeout.add(msg.author.id);
+		const points = this.giveRandomPoints(1, 26);
+
 		setTimeout(async () => {
-			timeout.delete(message.author.id);
-			await users.update(message.author.id, 'balance', score.balance + points, message.guild);
-			console.log('Updated!');
+			timeout.delete(msg.author.id);
+			await userData.update('balance', userData.balance + points, msg.guild);
 		}, 65000);
 
-		const curLevel = Math.floor(0.2 * Math.sqrt(score.balance + points));
-		if (score.level < curLevel) {
-			score.level = curLevel;
-			await users.update(message.author.id, 'level', score.level, message.guild);
+		const curLevel = Math.floor(0.2 * Math.sqrt(userData.balance + points));
+		if (userData.level < curLevel) {
+			userData.level = curLevel;
+			await userData.update('level', userData.level, msg.guild);
 		}
 	}
 	async run(msg) {
