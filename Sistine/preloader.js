@@ -3,7 +3,6 @@ require('canvas');
 require('canvas-constructor');
 require('dateformat');
 require('discord.js');
-require('erlpack');
 require('fast-html-parser');
 require('figlet');
 require('fs-nextra');
