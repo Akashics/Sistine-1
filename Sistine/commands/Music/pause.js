@@ -14,6 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const { music } = msg.guild;
+		if (music.status === 'idle') throw '<:eww:393547594690986018> There is no music loaded right now. :thinking:';
 		if (music.status === 'paused') throw '<:eww:393547594690986018> Someone already paused the music. :thinking:';
 
 		music.pause();

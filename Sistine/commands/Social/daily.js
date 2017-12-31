@@ -20,13 +20,13 @@ module.exports = class Daily extends Command {
 
 		if (Date.now() > payer.daily) {
 			if (payer === payee) {
-				await payer.update('daily', Date.now() + (24 * 60 * 60 * 1000), msg.guild);
-				await payee.update('balance', payee.balance + pointsReward, msg.guild);
-				return msg.channel.send(msg.language.get('COMMAND_DAILY_CLAIMED', msg.author.username, pointsReward));
+				const messg = await msg.channel.send(msg.language.get('COMMAND_DAILY_CLAIMED', msg.author.username, pointsReward));
+				await payer.update('daily', messg.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
+				return payee.update('balance', payee.balance + pointsReward, msg.guild);
 			} else {
-				await payer.update('daily', Date.now() + (24 * 60 * 60 * 1000), msg.guild);
-				await payee.update('balance', payee.balance + pointsReward, msg.guild);
-				return msg.send(msg.language.get('COMMAND_DAILY_DONATED', msg.author.username, user.username, pointsReward));
+				const messg = await msg.send(msg.language.get('COMMAND_DAILY_DONATED', msg.author.username, user.username, pointsReward));
+				await payer.update('daily', messg.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
+				return payee.update('balance', payee.balance + pointsReward, msg.guild);
 			}
 		} else {
 			return msg.send(msg.language.get('COMMAND_DAILY_FROMNOW', payer));
