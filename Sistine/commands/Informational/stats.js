@@ -1,5 +1,4 @@
 const { Command } = require('klasa');
-require('moment-duration-format');
 const os = require('os');
 
 module.exports = class Stats extends Command {

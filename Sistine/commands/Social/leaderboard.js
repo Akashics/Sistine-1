@@ -11,6 +11,7 @@ module.exports = class Leaderboards extends Command {
 	}
 
 	async run(msg, [index]) {
+		if (this.client.uptime < 300000) return msg.send('I just restarted, so I need some time to calculate the leaderboard.');
 		const data = await this.client.providers.get('rethinkdb').getAll('users').then(res => res.sort((a, b) => b.balance - a.balance));
 		const leadboardPosition = data.filter(account => this.client.users.get(account.id));
 

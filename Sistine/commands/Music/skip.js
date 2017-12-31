@@ -16,6 +16,8 @@ module.exports = class extends Command {
 
 	async run(msg, [force]) {
 		const { music } = msg.guild;
+		if (music.status === 'idle') throw 'You can\'t skip anything if nothing is being played';
+		if (!music.queue.length > 0 && !music.autoplay) throw 'There are no songs in the queue to skip.';
 
 		if (music.voiceChannel.members.size > 5) {
 			if (force) {

@@ -5,7 +5,7 @@ module.exports = class cmdCost extends Inhibitor {
 	constructor(...args) {
 		super(...args, {
 			name: 'cmdCost',
-			enabled: true,
+			enabled: false,
 			spamProtection: true
 		});
 	}

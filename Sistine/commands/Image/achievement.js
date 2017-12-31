@@ -12,8 +12,7 @@ module.exports = class Achievement extends Command {
 	}
 	/* eslint-disable id-length */
 	async run(msg, args) {
-		const { body } = await snekfetch
-			.get('https://www.minecraftskinstealer.com/achievement/a.php')
+		const { body } = await snekfetch.get('https://www.minecraftskinstealer.com/achievement/a.php')
 			.query({
 				i: Math.floor((Math.random() * 39) + 1),
 				h: msg.language.get('COMMAND_ACHIEVEMENT_NAME'),
