@@ -58,8 +58,8 @@ module.exports = class Profile extends Command {
 		const { balance, level, reputation } = await user.conf;
 		const guildCard = await fsn.readFile('./assets/images/profile-card.png');
 		const userAvatar = await imasnek.get(user.displayAvatarURL({ format: 'png', size: 256 }));
-		const profileCard = new Canvas(380, 450)
-			.addImage(guildCard, 0, 0, 380, 450)
+		const profileCard = new Canvas(600, 750)
+			.addImage(guildCard, 0, 0, 600, 750)
 			.save()
 			.addImage(userAvatar.body, 184, 355, 110, 110, { type: 'round', radius: 52.5 })
 			.restore()
