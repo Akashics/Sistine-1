@@ -13,8 +13,8 @@ module.exports = class Mock extends Command {
 	constructor(...msgid) {
 		super(...msgid, {
 			cooldown: 5,
-			description: 'Mocks a nominated message.',
-			usage: '[MessageID:msg]'
+			description: (msg) => msg.language.get('COMMAND_MOCK_DESCRIPTION'),
+			usage: '[MessageIdentifier:msg]'
 		});
 		this.cost = 15;
 	}

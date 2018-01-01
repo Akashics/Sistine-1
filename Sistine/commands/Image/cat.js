@@ -6,7 +6,7 @@ module.exports = class Cat extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['randomcat', 'catto'],
-			description: 'Grabs a random cat image from random.cat.'
+			description: (msg) => msg.language.get('COMMAND_CAT_DESCRIPTION')
 		});
 	}
 

@@ -6,10 +6,9 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['talk'],
 			permLevel: 10,
-
 			usage: '[channel:channel] [message:string] [...]',
 			usageDelim: ' ',
-			description: 'Make sistine talk in another channel.'
+			description: (msg) => msg.language.get('COMMAND_ECHO_DESCRIPTION')
 		});
 	}
 

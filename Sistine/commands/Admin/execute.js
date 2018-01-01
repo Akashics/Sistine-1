@@ -6,7 +6,7 @@ module.exports = class extends Command {
 		super(...args, {
 			permLevel: 10,
 			aliases: ['exec', 'ex'],
-			description: 'Run arbitrary commands.',
+			description: (msg) => msg.language.get('COMMAND_EXECUTE_DESCRIPTION'),
 			usage: '<command:string>'
 		});
 	}

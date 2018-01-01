@@ -76,15 +76,6 @@
             "max": null,
             "sql": "TEXT",
             "configurable": true
-        },
-        "playerLogLevel": {
-            "type": "integer",
-            "array": false,
-            "default": 0,
-            "min": 0,
-            "max": 3,
-            "sql": "INTEGER DEFAULT 0",
-            "configurable": true
         }
     },
     "prefix": {

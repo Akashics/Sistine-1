@@ -5,8 +5,8 @@ module.exports = class PokeImage extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Allows you to poke another member.',
-			usage: '[SomeoneToPoke:user]'
+			description: (msg) => msg.language.get('COMMAND_POKE_DESCRIPTION'),
+			usage: '[Poker:user]'
 		});
 	}
 

@@ -1,5 +1,5 @@
-const dateFormat = require('dateformat');
+const moment = require('moment');
 
 module.exports = (msg) => {
-	console.log(`${dateFormat(Date.now(), 'hh:MM:ss TT')} | ${msg}`);
+	console.log(`${moment().format('MM-DD-YYYY hh:mm:ss A')} | ${msg}`);
 };

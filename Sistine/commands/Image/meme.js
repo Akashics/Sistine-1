@@ -6,7 +6,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			cooldown: 5,
-			description: 'Wouldn\'t you like a meme?'
+			description: (msg) => msg.language.get('COMMAND_MEME_DESCRIPTION')
 		});
 	}
 

@@ -6,7 +6,7 @@ module.exports = class WTP extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['wtp'],
-			description: 'Guess that Pokemon!'
+			description: (msg) => msg.language.get('COMMAND_WTP_DESCRPTION')
 		});
 		this.cost = 25;
 	}

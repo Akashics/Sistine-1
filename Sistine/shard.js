@@ -1,7 +1,8 @@
 require('./preloader');
-// Lets go ahead and preload everythhing on shard start so thhat is available to shards.
+// Lets go ahead and preload everythhing on shard start so that it is available to shards.
+/* eslint-disable max-len */
 const Discord = require('discord.js');
-const dateFormat = require('dateformat');
+const moment = require('moment');
 const os = require('os');
 
 const webhook = require('./lib/managers/webhooks.js');
@@ -16,7 +17,7 @@ const Manager = new Discord.ShardingManager('./app.js', {
 
 Manager.on('shardCreate', shard => {
 	log(`Launching: Shard ${shard.id + 1}/${Manager.totalShards}.`);
-	webhook(`🗘 **Shard Rebooting:** ${(shard.id + 1)}/${Manager.totalShards} **Station:** ${os.hostname()} **Date:** ${dateFormat(Date.now(), 'MM-DD-YYYY hh:MM:ss TT')}`);
+	webhook(`\`\`\`asciidoc\n= [ Sharding Logger ] =\n ❯ Shard Rebooting :: ${(shard.id + 1)}/${Manager.totalShards}\n ❯ Station :: ${os.hostname()}\n ❯ Date :: ${moment().format('MM-DD-YYYY hh:mm:ss A')}\`\`\``);
 });
 
 Manager.spawn();

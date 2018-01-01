@@ -5,8 +5,8 @@ module.exports = class Rate extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['rate-waifu'],
-			description: 'Rates your Waifu!',
-			usage: '<Query:Str>',
+			description: (msg) => msg.language.get('COMMAND_RATE_DESCRIPTION'),
+			usage: '<Thing:str>',
 			cooldown: 5
 		});
 		this.cost = 15;
