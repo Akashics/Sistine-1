@@ -6,7 +6,7 @@ module.exports = class Dog extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['randomdog', 'doggo'],
-			description: 'Grabs a random dog image from random.dog.'
+			description: (msg) => msg.language.get('COMMAND_DOG_DESCRIPTION')
 		});
 	}
 

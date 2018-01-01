@@ -18,7 +18,7 @@ module.exports = class Profile extends Command {
 			usage: '[User:user]'
 		});
 
-		this.schema = {
+		/* this.schema = {
 			daily: {
 				type: 'Integer',
 				default: 1504120109,
@@ -49,42 +49,36 @@ module.exports = class Profile extends Command {
 				array: false,
 				min: 0
 			}
-		};
+		}; */
 	}
 
 	async run(msg, [user = msg.author]) {
-		if (user.bot) { return true; }
+		if (user.bot) return true;
 
-		const { balance, level, reputation, background } = await user.conf;
-		const banner = await fsn.readFile(backgrounds[background].location);
+		const { balance, level, reputation } = await user.conf;
 		const guildCard = await fsn.readFile('./assets/images/profile-card.png');
 		const userAvatar = await imasnek.get(user.displayAvatarURL({ format: 'png', size: 256 }));
-		const leadboardPosition = await this.client.providers.get('rethinkdb').getAll('users').then(res => res.sort((a, b) => b.balance - a.balance).indexOf(user.id));
-
 		const profileCard = new Canvas(380, 450)
-			.addImage(banner, 0, 0, 380, 200)
 			.addImage(guildCard, 0, 0, 380, 450)
 			.save()
-			.addImage(userAvatar.body, 139, 33.5, 110, 110, { type: 'round', radius: 52.5 })
+			.addImage(userAvatar.body, 184, 355, 110, 110, { type: 'round', radius: 52.5 })
 			.restore()
-			.setColor('#FFF')
 			.setTextFont('26px Discord')
 			.setTextAlign('center')
-			.addText(user.tag, 194, 215)
+			.addText(user.tag, 289, 550)
 			.setColor('#000')
 			.setTextFont('48px Corbert')
-			.addText(level, 48, 300)
+			.addText(level, 290, 634)
 			.setTextFont('20px Corbert')
 			.setTextAlign('left')
-			.addText(`${reputation} points`, 233, 254)
-			.addText(`${Number(balance).toLocaleString()}¥`, 198, 279)
-			.addText(leadboardPosition === -1 ? 'Unknown' : `#${leadboardPosition + 1}`, 207, 306);
+			.addText(`${reputation} points`, 497, 634)
+			.addText(`${Number(balance).toLocaleString()}¥`, 89, 634);
 
 		return msg.channel.send({ files: [{ attachment: profileCard.toBuffer(), name: `${user.tag}-profile.png` }] });
 	}
 
 
-	async validate(userResolvable) {
+	/* async validate(userResolvable) {
 		const result = await this.resolver.user(userResolvable);
 		if (result) return result;
 		throw 'The parameter <User> expects either a User ID or a User Object.';
@@ -92,6 +86,6 @@ module.exports = class Profile extends Command {
 
 	async init() {
 		if (!this.client.gateways.users) { await this.client.gateways.add('users', this.validate, this.schema); }
-	}
+	}*/
 
 };

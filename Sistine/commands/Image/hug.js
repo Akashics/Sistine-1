@@ -5,8 +5,8 @@ module.exports = class HugImage extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Want to hug another person?',
-			usage: '[SomeoneToHug:user]'
+			description: (msg) => msg.language.get('COMMAND_HUG_DESCRIPTION'),
+			usage: '[Hugger:user]'
 		});
 	}
 

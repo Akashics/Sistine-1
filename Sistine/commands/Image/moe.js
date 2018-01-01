@@ -7,7 +7,7 @@ module.exports = class MoeImage extends Command {
 	/* eslint-disable max-len */
 	constructor(...args) {
 		super(...args, {
-			description: 'View random anime images.',
+			description: (msg) => msg.language.get('COMMAND_MOE_DESCRIPTION'),
 			aliases: ['weebsh'],
 			usage: '[ImageType:string]'
 		});

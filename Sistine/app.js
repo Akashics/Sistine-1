@@ -12,10 +12,6 @@ class SistineClient extends Client {
 		this.queue = new Music();
 		this.raven = require('raven');
 
-		this.whitelist = require('./lists/whitelist.json');
-		this.blocklist = require('./lists/blocklist.json');
-		this.blacklist = require('./lists/blacklist.json');
-
 		this.wait = require('util').promisify(setTimeout);
 		this.permlevel = new PermissionLevels()
 			.addLevel(0, false, () => true)

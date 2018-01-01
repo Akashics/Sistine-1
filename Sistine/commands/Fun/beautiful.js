@@ -16,7 +16,7 @@ const getBeautiful = async (person) => {
 		.toBuffer();
 };
 
-module.exports = class beautifulFrame extends Command {
+module.exports = class Beautify extends Command {
 
 	constructor(...args) {
 		super(...args, {

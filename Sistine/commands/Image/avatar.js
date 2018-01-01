@@ -5,7 +5,7 @@ module.exports = class Avatar extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['avtr'],
-			description: 'Fetches a mentioned user\'s avatar.',
+			description: (msg) => msg.language.get('COMMAND_AVATAR_DESCRIPTION'),
 			usage: '[User:user]'
 		});
 	}

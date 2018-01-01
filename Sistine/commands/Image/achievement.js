@@ -6,8 +6,8 @@ module.exports = class Achievement extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-			description: 'Provide a string from 1 to 25 and form an Minecraft Achievement.',
-			usage: '<Text:string{1,25}>'
+			description: (msg) => msg.language.get('COMMAND_ACHIEVEMENT_DESCRIPTION'),
+			usage: '<Achievement:string{1,25}>'
 		});
 	}
 	/* eslint-disable id-length */

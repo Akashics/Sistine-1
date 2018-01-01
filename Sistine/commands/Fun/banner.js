@@ -1,12 +1,12 @@
 const { Command } = require('klasa');
 const figletAsync = require('util').promisify(require('figlet'));
 
-module.exports = class asciiBanner extends Command {
+module.exports = class Banner extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			aliases: ['ascii'],
-			description: 'Creates an ASCII banner from the string you supply.',
+			description: (msg) => msg.language.get('COMMAND_BANNER_DESCRIPTION'),
 			usage: '<BannerText:str>'
 		});
 		this.cost = 10;

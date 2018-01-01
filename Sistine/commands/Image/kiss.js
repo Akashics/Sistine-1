@@ -5,8 +5,8 @@ module.exports = class KissImage extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Allows you to kiss another user.',
-			usage: '[SomeoneToKiss:user]'
+			description: (msg) => msg.language.get('COMMAND_KISS_DESCRIPTION'),
+			usage: '[Kisser:user]'
 		});
 	}
 

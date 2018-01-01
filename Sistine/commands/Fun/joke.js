@@ -4,7 +4,10 @@ const snekfetch = require('snekfetch');
 module.exports = class Joke extends Command {
 
 	constructor(...args) {
-		super(...args, { aliases: ['dad'], description: 'Responds with a random dad joke.' });
+		super(...args, {
+			aliases: ['dad'],
+			description: (msg) => msg.language.get('COMMAND_JOKE_DESCRIPTION')
+		});
 		this.cost = 10;
 		this.emoji = [
 			'( ಠ ʖ̯ ಠ)',
@@ -30,9 +33,9 @@ module.exports = class Joke extends Command {
 			const { body } = await snekfetch
 				.get('https://icanhazdadjoke.com/')
 				.set({ Accept: 'application/json' });
-			return msg.send(`${this.emoji[Math.floor(Math.random() * this.emoji.length)]} \`${body.joke}\``);
+			return msg.send(`${this.emoji[Math.floor(Math.random() * this.emoji.length)]} _${body.joke}_`);
 		} catch (err) {
-			return msg.send(msg.language.get('ERROR_OCCURED', err.message));
+			return msg.send(msg.language.get('COMMAND_ERROR'));
 		}
 	}
 

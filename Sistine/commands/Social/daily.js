@@ -16,16 +16,16 @@ module.exports = class Daily extends Command {
 
 		const payer = users.get(msg.author.id).conf;
 		const payee = users.get(user.id).conf;
-		const pointsReward = 200;
+		const pointsReward = 250;
 
-		if (Date.now() > payer.daily) {
+		if (Date.now() > payer.dailyTimer) {
 			if (payer === payee) {
 				const messg = await msg.channel.send(msg.language.get('COMMAND_DAILY_CLAIMED', msg.author.username, pointsReward));
-				await payer.update('daily', messg.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
+				await payer.update('dailyTimer', messg.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
 				return payee.update('balance', payee.balance + pointsReward, msg.guild);
 			} else {
 				const messg = await msg.send(msg.language.get('COMMAND_DAILY_DONATED', msg.author.username, user.username, pointsReward));
-				await payer.update('daily', messg.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
+				await payer.update('dailyTimer', messg.createdTimestamp + (24 * 60 * 60 * 1000), msg.guild);
 				return payee.update('balance', payee.balance + pointsReward, msg.guild);
 			}
 		} else {

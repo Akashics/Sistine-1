@@ -9,7 +9,7 @@ module.exports = class Crush extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['trigger'],
-			description: 'How to easily trigger someone...',
+			description: (msg) => msg.language.get('COMMAND_TRIGGERING_DESCRIPTION'),
 			usage: '[UserMentionOrID:user]',
 			cooldown: 10
 		});

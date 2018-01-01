@@ -5,8 +5,8 @@ module.exports = class SlapImage extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Allows you to slap another member.',
-			usage: '[SomeoneToSlap:user]'
+			description: (msg) => msg.language.get('COMMAND_SLAP_DESCRIPTION'),
+			usage: '[Slapper:user]'
 		});
 	}
 

@@ -6,8 +6,7 @@ module.exports = class Neko extends Command {
 	constructor(...args) {
 		super(...args, {
 			cooldown: 10,
-			requiredSettings: [],
-			description: 'This command will return a Neko, a lewd Neko if used in a NSFW channel.'
+			description: (msg) => msg.language.get('COMMAND_NEKO_DESCRIPTION')
 		});
 	}
 

@@ -13,7 +13,7 @@ module.exports = class socialMonitor extends Monitor {
 
 		if (timeout.has(msg.author.id)) return;
 
-		const userData = msg.author.conf;
+		const userData = msg.author.configs;
 		timeout.add(msg.author.id);
 		const points = this.giveRandomPoints(1, 26);
 

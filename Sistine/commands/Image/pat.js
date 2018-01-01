@@ -5,8 +5,8 @@ module.exports = class PatImage extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Allows you to pat another member.',
-			usage: '[SomeoneToPat:user]'
+			description: (msg) => msg.language.get('COMMAND_PAT_DESCRIPTION'),
+			usage: '[Patter:user]'
 		});
 	}
 

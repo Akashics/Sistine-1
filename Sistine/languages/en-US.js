@@ -144,6 +144,7 @@ const ROASTS = [
 	"You're so annoying even the flies stay away from your stench.",
 	'Go away, please.',
 	"I'd give you a nasty look but you've already got one.",
+	"If you think nobody cares if you're alive, try missing a couple of car payments.",
 	'It looks like your face caught fire and someone tried to put it out with a hammer.',
 	'Your family tree must be a cactus because everyone on it is a prick.',
 	'Someday you will go far, and I hope you stay there.',
@@ -432,65 +433,91 @@ module.exports = class enUSLang extends Language {
 			DESCRIPTION: 'Description',
 			TIME_REMAIN: 'Time Remaining',
 
+			COMMAND_ERROR: 'Someone found an unwanted feature. We\'re just going to hide this and notify the deveopers.',
 			// Fun Commands
-			COMMAND_8BALL: (author, input) => `:8ball: Question by ${author}: **${input}**\n\`${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}\``,
-			COMMAND_8BALL_NOT_QUESTION: 'That does not seem to be a question.',
+			COMMAND_8BALL: (author, input) => `:8ball: ${author}: **${input}** <:arrow:397077767797211157> ${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}`,
+			COMMAND_8BALL_DESCRIPTION: 'Just a fancy fortune-telling device from the 1940 Three Stooges.',
 
-			COMMAND_BEAUTIFUL: user => `_Admiring the painting of ${user}..._ `,
+			COMMAND_BANNER_DESCRIPTION: 'Creates a Banner with ASCII Symbolls from text you supply.',
+
+			COMMAND_BEAUTIFUL: user => `_Admiring the painting of ${user}..._`,
+			COMMAND_BEAUTIFUL_DESCRIPTION: 'Admire the beauty of another user, or yourself.',
 
 			COMMAND_COMPLIMENT: user => `:speech_balloon: ${user} – ${this.COMPLIMENTS[Math.floor(Math.random() * this.COMPLIMENTS.length)]}`,
+			COMMAND_COMPLIMENT_DESCRIPTION: 'Generates a random compliment to send to a user.',
 
-			COMMAND_GAZING: user => `_Gazing at ${user}..._`,
+			COMMAND_CRUSH: user => `Continuously gazing at ${user} for no awkward reason..._`,
+			COMMAND_CRUSH_DESCRIPTION: 'Wouldn\'t Wolverine love this picture?',
 
-			COMMAND_FLIP: result => `<:coin:338772726712107008> I got ${result}s.`,
+			COMMAND_ECHO_DESCRIPTION: 'Makes Sistine speak in this/another text channel.',
 
 			COMMAND_ILLEGAL_INUSE: 'Trump is currently making something illegal, please wait...',
 			COMMAND_ILLEGAL_ERROR: 'Cannot be longer than 10 characters or shorter than 1 character.',
 			COMMAND_ILLEGAL_SYNTAX: user => `Well great, now non-standard unicode characters are illegal. Thanks ${user}.`,
 			COMMAND_ILLEGAL_CONVINCE: thing => `_Convincing Trump that __${thing}__ should be illegal..._`,
+			COMMAND_ILLEGAL_DESCRIPTION: 'Allows USA President Trump to make something illegal.',
+
+			COMMAND_JOKE_DESCRIPTION: 'Sistine loves jokes, why not have her tell you some?',
 
 			COMMAND_MOCK_ERROR: '❌ You cannot mock bots.',
+			COMMAND_MOCK_DESCRIPTION: 'Mocks the last/speificied message.',
 
 			COMMAND_RATE_MYSELF: ':thinking: Really, I would always rate myself a 100/100.',
 			COMMAND_RATE_WAIFU: (user, rating) => `:thinking: I would rate **${user}** a __${rating}/100.__`,
+			COMMAND_RATE_DESCRIPTION: 'Allows me to rate anything you ask me to.',
 
 			COMMAND_ROAST: user => `:fire: ${user} – ${this.ROASTS[Math.floor(Math.random() * this.ROASTS.length)]}`,
+			COMMAND_ROAST_DESCRIPTION: 'Generates a random roast to send to a user. May include firey mixtape.',
 
-			COMMAND_SLOTS_WIN: 'Wow! You won! Great job... er... luck!',
-			COMMAND_SLOTS_LOSE: 'Aww... You lost... Guess it\'s just bad luck, huh?',
-
-			COMMAND_TRIGGERING: tag => `_Triggering ${tag}..._`,
+			COMMAND_TRIGGERING: tag => `_Triggering ${tag} for no really good reason..._`,
+			COMMAND_TRIGGERING_DESCRIPTION: 'How easy is it to trigger someone?',
 
 			COMMAND_WTP_EMBED_TITLE: '<:pikablob:356256509929324545> You have 15 seconds. Guess this Pokemon.',
 			COMMAND_WTP_OUT_TIME: name => `You ran out of time, the answer was ${name}.`,
 			COMMAND_WTP_INCORRECT: name => `That is incorrect. Its name is ${name}.`,
 			COMMAND_WTP_CORRECT: author => `You are correct ${author}. One point has been added to your account.`,
+			COMMAND_WTP_DESCRPTION: 'Who\'s That Pokemon?',
 
 			COMMAND_WYR_ERROR: 'An issue has appeared with `Would You Rather`, please try again in a little bit.',
+			COMMAND_WYR_DESCRIPTION: 'Responds with a random would you rather question.',
 
 			// IMAGE COMMANDS
 
 			COMMAND_ACHIEVEMENT_NAME: 'Achievement Get',
+			COMMAND_ACHIEVEMENT_DESCRIPTION: 'What did you achieve today?',
 
 			COMMAND_AVATAR_ERROR: user => `An avatar could not be fetched for ${user}.`,
+			COMMAND_AVATAR_DESCRIPTION: 'Get a mentioned user avatar.',
+
+			COMMAND_CAT_DESCRIPTION: 'Here kitty kitty. Grabs an random cat image from random.cat',
+			COMMAND_DOG_DESCRIPTION: 'Come here boy! Grabs a random dog image from dog.ceo',
+			COMMAND_MEME_DESCRIPTION: 'Have you heard about these meme\'s?',
+			COMMAND_NEKO_DESCRIPTION: 'This command will return a Neko, a lewd Neko if used in a NSFW channel.',
+			COMMAND_MOE_DESCRIPTION: 'Posts random anime images based on the type selected.',
 
 			COMMAND_CUDDLE: (user, author) => `**${user.username}**, you were cuddled by **${author.username}**.`,
-			COMMAND_CUDDLE_SOLO: user => `**${user.username}** wants to cuddle with somebody.`,
+			COMMAND_CUDDLE_SOLO: user => `**${user.username}** was cuddled by Sistine.`,
+			COMMAND_CUDDLE_DESCRIPTION: 'I mean, who wouldn\'t want to cuddle with Sistine?',
 
 			COMMAND_HUG: (user, author) => `**${user.username}**, you were hugged by **${author.username}**.`,
-			COMMAND_HUG_SOLO: user => `**${user.username}** wants to hug somebody.`,
+			COMMAND_HUG_SOLO: user => `**${user.username}** was hugged by Sistine.`,
+			COMMAND_HUG_DESCRIPTION: 'Why would\'t you want to hug Sistine?',
 
 			COMMAND_KISS: (user, author) => `**${user.username}**, you were kissed by **${author.username}**.`,
-			COMMAND_KISS_SOLO: user => `**${user.username}** wants to kiss somebody.`,
+			COMMAND_KISS_SOLO: user => `**${user.username}** was kissed by Sistine.`,
+			COMMAND_KISS_DESCRIPTION: 'Not many ways to describe kissing another user.',
 
 			COMMAND_PAT: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
-			COMMAND_PAT_SOLO: user => `**${user.username}** wants to pat somebody.`,
+			COMMAND_PAT_SOLO: user => `**${user.username}** was patted by Sistine.`,
+			COMMAND_PAT_DESCRIPTION: 'Ruffeling one\'s head is often a sign of close friendship in Japanese culture.',
 
 			COMMAND_POKE: (user, author) => `**${user.username}**, you were poked by **${author.username}**.`,
-			COMMAND_POKE_SOLO: user => `**${user.username}** wants to poke somebody.`,
+			COMMAND_POKE_SOLO: user => `**${user.username}** was poked by Sistine.`,
+			COMMAND_POKE_DESCRIPTION: 'Pokeing someone, sometimes to get their intention.',
 
 			COMMAND_SLAP: (user, author) => `**${user.username}**, you were slapped by **${author.username}**.`,
-			COMMAND_SLAP_SOLO: user => `**${user.username}** wants to slap somebody.`,
+			COMMAND_SLAP_SOLO: user => `**${user.username}** was slapped by Sistine.`,
+			COMMAND_SLAP_DESCRIPTION: 'Apparently Sistine can get away with slapping users. Neat.',
 
 			// Informational Commands
 
@@ -508,27 +535,20 @@ module.exports = class enUSLang extends Language {
 			COMMAND_ROLEINFO: (role) => `= ${role.name}[${role.id}] =\n - Color :: ${role.hexColor}\n - Creation Date :: ${moment(role.createdAt).format('MMMM Do YYYY')}\n - Hoisted/Mention :: ${role.hoist ? 'Yes' : 'No'}/${role.mentionable ? 'Yes' : 'No'}\n - Permissions ::\n${Object.entries(role.permissions.serialize()).filter(([allowed]) => allowed).map(([perm]) => this.PERMS[perm]).join(', ')}`,
 			COMMAND_SERVERINFO: (msg, guild) => `= ${guild.name}[${guild.id}] =\n - Created On :: ${moment(guild.createdAt).format('MMMM Do YYYY')}\n - Region :: ${guild.region.toUpperCase()}\n - Owner :: ${msg.guild.owner ? msg.guild.owner.user.tag : 'None'}\n - Member Count :: ${guild.memberCount}\n\n - Verification Level :: ${this.HUMAN_LEVELS[guild.verificationLevel]}\n - Explicit Filter :: ${this.EXPLICITLEVELS[guild.explicitContentFilter]}`,
 
-			COMMAND_STATS: (client, process, os) => [
-				`= Sistine Stats | Shard ${client.shard.id} =`,
-				`↪ Guilds        :: ${client.guilds.size.toLocaleString()} guilds`,
-				`↪ Channels      :: ${client.channels.size.toLocaleString()} available channels`,
-				`↪ Users         :: ${client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString()} users combined`,
-				`↪ Custom Emojis :: ${client.emojis.size} emojis`,
+			COMMAND_STATS: (memUsage, uptime, users, servers, channels, klasaVersion, discordVersion, processVersion, msg) => [
+				'= STATISTICS =',
 				'',
-				'= [ Process Stats ] =',
-				`↪ Klasa         :: v4.0.0-dev`,
-				'↪ Discord.js    :: v12.1.0-dev',
-				`↪ Node.js       :: ${process.version}`,
-				`↪ Session Time  :: ${moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]')}`,
-				'',
-				'= [ Host Stats ] =',
-				`↪ Operating Sys :: ${os.type().replace('_', ' ')} v${os.release()}`,
-				`↪ CPU Load Avg  :: ${Math.round(os.loadavg()[0] * 10000) / 100}%`,
-				`↪ RAM +Node     :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
-				`↪ RAM Usage     :: ${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
-				`↪ Host Uptime   :: ${moment.duration(os.uptime() * 1000).format(' D [days], H [hrs], m [mins], s [secs]')}`,
-				'↪ DataDogStats  :: https://p.datadoghq.com/sb/82a5d5fef-91a38ff37c'
-			].join('\n'),
+				`• Mem Usage  :: ${memUsage} MB`,
+				`• Uptime     :: ${uptime}`,
+				`• Users      :: ${users}`,
+				`• Servers    :: ${servers}`,
+				`• Channels   :: ${channels}`,
+				`• Klasa      :: v${klasaVersion}`,
+				`• Discord.js :: v${discordVersion}`,
+				`• Node.js    :: ${processVersion}`,
+				this.client.options.shardCount ? `• Shard      :: ${((msg.guild ? msg.guild.shardID : msg.channel.shardID) || this.client.options.shardId) + 1} / ${this.client.options.shardCount}` : ''
+			],
+			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
 
 			COMMAND_SUPPORT: ':wave: We have a support guild for Sistine! https://discord.gg/jgPNHWy \nIf you just need help with some of the commands, <https://sistine.ml/commannds> may help!',
 
@@ -556,7 +576,11 @@ module.exports = class enUSLang extends Language {
 			COMMAND_GUILDLIST_ALREADY: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] is already ${type}.`,
 			COMMAND_GUILDLIST_NOT: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] is not ${type}.`,
 			COMMAND_GUILDLIST_ADDED: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] was added to the ${type}.`,
-			COMMAND_GUILDLIST_REMOVED: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] was removed from the ${type}.`
+			COMMAND_GUILDLIST_REMOVED: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] was removed from the ${type}.`,
+
+			// Admin Commands 
+
+			COMMAND_EXECUTE_DESCRIPTION: 'Allows you to run arbitrary commands. Developer Access-Only.'
 
 		};
 	}

@@ -7,7 +7,7 @@ module.exports = class WYR extends Command {
 		super(...args, {
 			runIn: ['text'],
 			aliases: ['wy-rather', 'wyr'],
-			description: 'Responds with a random would you rather question.'
+			description: (msg) => msg.language.get('COMMAND_WYR_DESCRIPTION')
 		});
 		this.cost = 25;
 	}
@@ -23,7 +23,7 @@ module.exports = class WYR extends Command {
 				.setDescription(`${body.choicea} OR ${body.choiceb}?`);
 			return msg.sendEmbed(embed);
 		} catch (err) {
-			return msg.send(msg.language.get('COMMAND_WYR_ERROR'));
+			return msg.send(msg.language.get('COMMAND_ERROR'));
 		}
 	}
 

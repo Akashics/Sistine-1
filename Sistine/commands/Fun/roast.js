@@ -5,8 +5,8 @@ module.exports = class Roast extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['burn'],
-			description: 'Roasts a user.',
-			usage: '[UserToRoast:user]'
+			description: (msg) => msg.language.get('COMMAND_ROAST_DESCRIPTION'),
+			usage: '[User:user]'
 		});
 		this.cost = 20;
 	}

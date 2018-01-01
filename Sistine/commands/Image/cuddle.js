@@ -5,8 +5,8 @@ module.exports = class Cuddle extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Allows you to cuddle with another user.',
-			usage: '[SomeoneToCuddle:user]'
+			description: (msg) => msg.language.get('COMMAND_CUDDLE_DESCRIPTION'),
+			usage: '[Cuddler:user]'
 		});
 	}
 

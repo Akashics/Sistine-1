@@ -7,7 +7,7 @@ module.exports = class IsNowIllegal extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['sign'],
-			description: 'US President Trump makes something illegal.',
+			description: (msg) => msg.language.get('COMMAND_ILLEGAL_DESCRIPTION'),
 			usage: '<Thing:string>',
 			cooldown: 15
 		});

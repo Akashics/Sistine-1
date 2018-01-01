@@ -25,15 +25,15 @@ module.exports = class Crush extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Wolverine has always been fond of you.',
-			usage: '[UserMentionOrID:user]',
+			description: (msg) => msg.language.get('COMMAND_CRUSH_DESCRIPTION'),
+			usage: '[User:user]',
 			cooldown: 10
 		});
 		this.cost = 10;
 	}
 
 	async run(msg, [user = msg.author]) {
-		const message = await msg.channel.send(msg.language.get('COMMAND_GAZING', user.tag));
+		const message = await msg.channel.send(msg.language.get('COMMAND_CRUSH', user.tag));
 		const result = await getCrushed(msg.author.displayAvatarURL({ format: 'png' }), user.displayAvatarURL({ format: 'png' }));
 		await msg.channel.send({ files: [{ attachment: result, name: 'crush.png' }] });
 		return message.delete();

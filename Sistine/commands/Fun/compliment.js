@@ -1,12 +1,12 @@
 const { Command } = require('klasa');
 
-module.exports = class compliment extends Command {
+module.exports = class Compliment extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			aliases: ['praise'],
-			description: 'Compliments a user.',
-			usage: '[UserToCompliment:user]'
+			description: (msg) => msg.language.get('COMMAND_COMPLIMENT_DESCRIPTION'),
+			usage: '[User:user]'
 		});
 		this.cost = 10;
 	}
