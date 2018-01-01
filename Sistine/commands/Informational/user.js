@@ -31,7 +31,7 @@ module.exports = class UserInfo extends Command {
 			.addField('🢒 Playing', member.user.presence.activity ? member.user.presence.activity.name : 'N/A', true)
 			.addField('🢒 Highest Role', member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None', true)
 			.addField('🢒 Hoist Role', member.hoistRole ? member.hoistRole.name : 'None', true)
-			.addField('🢒 Credits', member.user.conf.balance || 0, true)
+			.addField('🢒 Credits', member.user.configs.balance || 0, true)
 			.addField('🢒 Leaderboard Ranking', leadboardPosition + 1, true);
 		return msg.sendEmbed(userInfo);
 	}

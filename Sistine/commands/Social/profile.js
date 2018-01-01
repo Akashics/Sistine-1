@@ -55,7 +55,7 @@ module.exports = class Profile extends Command {
 	async run(msg, [user = msg.author]) {
 		if (user.bot) return true;
 
-		const { balance, level, reputation } = await user.conf;
+		const { balance, level, reputation } = await user.configs;
 		const guildCard = await fsn.readFile('./assets/images/profile-card.png');
 		const userAvatar = await imasnek.get(user.displayAvatarURL({ format: 'png', size: 256 }));
 		const profileCard = new Canvas(600, 750)

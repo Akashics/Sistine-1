@@ -557,7 +557,7 @@ module.exports = class enUSLang extends Language {
 			ALREADY_SUBSCRIBE: (active, guild) => `You are already ${active ? 'subscribed' : 'unsubscribed'} to ${guild}.`,
 			COMMAND_UNSUBSCRIBE_SUCCESS: (role) => `Successfully removed the role: **${role}***`,
 
-			COMMAND_USERINFO: (member, leaderboard) => `= ${member.user.tag}[${member.id}] =\n - Discord Join :: ${moment(member.user.createdAt).format('MMMM Do YYYY')}\n - Server Join :: ${moment(member.joinedTimestamp).format('MMMM Do YYYY')}\n - Status :: ${this.STATUSES[member.user.presence.status]}\n - Playing :: ${member.user.presence.activity ? member.user.presence.activity.name : 'nothing.'}\n - Highest Role :: ${member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None'}\n - Hoist Role :: ${member.hoistRole ? member.hoistRole.name : 'None'}\n\n- Credits :: ${member.user.conf.balance}\n- Leaderboard :: ${leaderboard + 1}`,
+			COMMAND_USERINFO: (member, leaderboard) => `= ${member.user.tag}[${member.id}] =\n - Discord Join :: ${moment(member.user.createdAt).format('MMMM Do YYYY')}\n - Server Join :: ${moment(member.joinedTimestamp).format('MMMM Do YYYY')}\n - Status :: ${this.STATUSES[member.user.presence.status]}\n - Playing :: ${member.user.presence.activity ? member.user.presence.activity.name : 'nothing.'}\n - Highest Role :: ${member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None'}\n - Hoist Role :: ${member.hoistRole ? member.hoistRole.name : 'None'}\n\n- Credits :: ${member.user.configs.balance}\n- Leaderboard :: ${leaderboard + 1}`,
 
 			// Social Commands
 			COMMAND_DAILY_CLAIMED: (username, points) => `:money_with_wings: | **${username}**, you have claimed your daily ${points}¥.`,
