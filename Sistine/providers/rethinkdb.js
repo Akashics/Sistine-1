@@ -1,14 +1,11 @@
 const { Provider } = require('klasa');
 const rethink = require('rethinkdbdash');
-const { rethinkdb } = require('../config.json');
 
-module.exports = class Rethinkdb extends Provider {
+module.exports = class extends Provider {
 
 	constructor(...args) {
 		super(...args);
-		this.db = rethink(this.client.options.provider.rethinkdb || { 
-			host: rethinkdb.host, port: rethinkdb.port, user: rethinkdb.user, password: rethinkdb.password, db: rethinkdb.database, silent: true, pool: true, timeout: 30
-		});
+		this.db = rethink(this.client.options.providers.rethinkdb || { db: 'test' });
 	}
 
 	/* Table methods */
@@ -90,7 +87,7 @@ module.exports = class Rethinkdb extends Provider {
 	 * @returns {Promise<boolean>}
 	 */
 	has(table, id) {
-		return this.get(table, id).then(data => !!data).catch(() => false);
+		return this.get(table, id).then(Boolean).catch(() => false);
 	}
 
 	/**
@@ -120,7 +117,7 @@ module.exports = class Rethinkdb extends Provider {
 	 * // As RethinkDB#updateValue can also work very similar to Gateway#updateMany, it also accepts an entire object with multiple values.
 	 * updateValue('339942739275677727', { prefix: 'k!', roles: { administrator: '339959033937264641' } });
 	 */
-	updateValue(table, path, newValue) {
+	async updateValue(table, path, newValue) {
 		// { channels: { modlog: '340713281972862976' } } | undefined
 		if (typeof path === 'object' && typeof newValue === 'undefined') {
 			return this.db.table(table).update(path).then(resolvePromise);
@@ -143,7 +140,7 @@ module.exports = class Rethinkdb extends Provider {
 	 * @param {string} doc The object to remove or a path to update.
 	 * @returns {Promise<Object>}
 	 */
-	removeValue(table, doc) {
+	async removeValue(table, doc) {
 		// { channels: { modlog: true } }
 		if (typeof doc === 'object') {
 			return this.db.table(table).replace(this.db.row.without(doc)).then(resolvePromise);

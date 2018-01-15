@@ -17,13 +17,14 @@ module.exports = class MusicManager {
 		this.status = 'idle';
 	}
 
-	async add(user, url) {
+	async add(user, url, lang) {
 		const song = await getInfoAsync(url).catch((err) => {
-			//if (err.includes('in your country')) throw `\`${url}\` is not available where Sistine is currently located.\nIf this is an issue, contact support and we may be able to move you to another server.`;
+			if (String(err).includes('in your country')) throw lang.get('COMMAND_ADD_FAIL_REGION', url);
+			if (String(err).includes('video is unavailable')) throw lang.get('COMMAND_ADD_FAIL_UNAVAILABLE');
 			this.client.emit('log', err, 'error');
-			throw `Whoops! You discovered an unwanted feature! Error: ${err}.`;
+			throw lang.get('COMMAND_ERROR');
 		});
-		if (!song.video_id) throw 'Youtube responded with an message I could not understand, sorry :/';
+		if (!song.video_id) throw lang.get('COMMAND_ADD_YTDL_NO_VIDEO');
 
 		const metadata = {
 			url: `https://youtu.be/${song.video_id}`,
@@ -47,11 +48,11 @@ module.exports = class MusicManager {
 		return null;
 	}
 
-	join(voiceChannel) {
+	join(voiceChannel, lang) {
 		return voiceChannel.join()
 			.catch((err) => {
-				if (String(err).includes('ECONNRESET')) { throw 'There was an issue connecting to the voice channel.'; }
-				if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) { throw 'That channel is full, I cannot join it.'; }
+				if (String(err).includes('ECONNRESET')) throw lang.get('COMMAND_JOIN_FAIL');
+				if (String(err).includes('VOICE_JOIN_CHANNEL') && String(err).includes('it is full')) throw lang.get('COMMAND_JOIN_FULL');
 				this.client.emit('log', err, 'error');
 				throw err;
 			});
@@ -109,6 +110,7 @@ module.exports = class MusicManager {
 	}
 
 	skip(force = false) {
+		if (this.queue.length < 1) throw 'Cannot skip this song. This would force playback to end. Use cmd stop first.';
 		if (force && this.dispatcher) {
 			this.dispatcher.end();
 		} else { this.queue.shift(); }

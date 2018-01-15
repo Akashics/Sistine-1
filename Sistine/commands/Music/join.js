@@ -17,7 +17,7 @@ module.exports = class extends Command {
 		this.resolvePermissions(msg, voiceChannel);
 
 		const { music } = msg.guild;
-		await music.join(voiceChannel);
+		await music.join(voiceChannel, msg.language);
 
 		return msg.send(`:headphones: Successfully joined the voice channel **${voiceChannel}**.`);
 	}

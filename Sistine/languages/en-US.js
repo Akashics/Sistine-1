@@ -433,7 +433,7 @@ module.exports = class enUSLang extends Language {
 			DESCRIPTION: 'Description',
 			TIME_REMAIN: 'Time Remaining',
 
-			COMMAND_ERROR: 'Someone found an unwanted feature. We\'re just going to hide this and notify the deveopers.',
+			COMMAND_ERROR: 'Whoop! You found an unwanted feature. I\'m just going to notify the deveopers.',
 			// Fun Commands
 			COMMAND_8BALL: (author, input) => `:8ball: ${author}: **${input}** <:arrow:397077767797211157> ${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}`,
 			COMMAND_8BALL_DESCRIPTION: 'Just a fancy fortune-telling device from the 1940 Three Stooges.',
@@ -496,27 +496,27 @@ module.exports = class enUSLang extends Language {
 			COMMAND_MOE_DESCRIPTION: 'Posts random anime images based on the type selected.',
 
 			COMMAND_CUDDLE: (user, author) => `**${user.username}**, you were cuddled by **${author.username}**.`,
-			COMMAND_CUDDLE_SOLO: user => `**${user.username}** was cuddled by Sistine.`,
+			COMMAND_CUDDLE_SOLO: user => `Just like hugging, you need someone else to hug you, **${user.username}**.`,
 			COMMAND_CUDDLE_DESCRIPTION: 'I mean, who wouldn\'t want to cuddle with Sistine?',
 
 			COMMAND_HUG: (user, author) => `**${user.username}**, you were hugged by **${author.username}**.`,
-			COMMAND_HUG_SOLO: user => `**${user.username}** was hugged by Sistine.`,
+			COMMAND_HUG_SOLO: user => `Can't really hug yourself **${user.username}**, but here.`,
 			COMMAND_HUG_DESCRIPTION: 'Why would\'t you want to hug Sistine?',
 
 			COMMAND_KISS: (user, author) => `**${user.username}**, you were kissed by **${author.username}**.`,
-			COMMAND_KISS_SOLO: user => `**${user.username}** was kissed by Sistine.`,
+			COMMAND_KISS_SOLO: user => `Kissing yourself **${user.username}**? Sorry 'bout that.`,
 			COMMAND_KISS_DESCRIPTION: 'Not many ways to describe kissing another user.',
 
 			COMMAND_PAT: (user, author) => `**${user.username}**, you were patted by **${author.username}**.`,
-			COMMAND_PAT_SOLO: user => `**${user.username}** was patted by Sistine.`,
+			COMMAND_PAT_SOLO: user => `Patting yourself **${user.username}**? Sorry 'bout that.`,
 			COMMAND_PAT_DESCRIPTION: 'Ruffeling one\'s head is often a sign of close friendship in Japanese culture.',
 
 			COMMAND_POKE: (user, author) => `**${user.username}**, you were poked by **${author.username}**.`,
-			COMMAND_POKE_SOLO: user => `**${user.username}** was poked by Sistine.`,
+			COMMAND_POKE_SOLO: user => `You poked yourself, **${user.username}**.`,
 			COMMAND_POKE_DESCRIPTION: 'Pokeing someone, sometimes to get their intention.',
 
 			COMMAND_SLAP: (user, author) => `**${user.username}**, you were slapped by **${author.username}**.`,
-			COMMAND_SLAP_SOLO: user => `**${user.username}** was slapped by Sistine.`,
+			COMMAND_SLAP_SOLO: user => `You slapped yourself, **${user.username}**. I don't think that helped.`,
 			COMMAND_SLAP_DESCRIPTION: 'Apparently Sistine can get away with slapping users. Neat.',
 
 			// Informational Commands
@@ -559,10 +559,18 @@ module.exports = class enUSLang extends Language {
 
 			COMMAND_USERINFO: (member, leaderboard) => `= ${member.user.tag}[${member.id}] =\n - Discord Join :: ${moment(member.user.createdAt).format('MMMM Do YYYY')}\n - Server Join :: ${moment(member.joinedTimestamp).format('MMMM Do YYYY')}\n - Status :: ${this.STATUSES[member.user.presence.status]}\n - Playing :: ${member.user.presence.activity ? member.user.presence.activity.name : 'nothing.'}\n - Highest Role :: ${member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None'}\n - Hoist Role :: ${member.hoistRole ? member.hoistRole.name : 'None'}\n\n- Credits :: ${member.user.configs.balance}\n- Leaderboard :: ${leaderboard + 1}`,
 
+			// Music Commands
+
+			COMMAND_ADD_FAIL_REGION: url => `\`${url}\` is not available where Sistine is currently located.\nIf this is an issue, contact support and we may be able to move you to another server.`,
+			COMMAND_ADD_FAIL_UNAVAILABLE: 'I looked far and wide, however my search resulted in not finding music of that sorts.',
+			COMMAND_ADD_YTDL_NO_VIDEO: 'I found something, but I cant quite make out what it is... Seems like Youtube is having some issues today, try again later.',
+
+			COMMAND_JOIN_FAIL: 'There seems to be an issue connecting to the voice channel.',
+			COMMAND_JOIN_FULL: 'Your current channel is full, please make room for me.',
 			// Social Commands
-			COMMAND_DAILY_CLAIMED: (username, points) => `:money_with_wings: | **${username}**, you have claimed your daily ${points}¥.`,
-			COMMAND_DAILY_DONATED: (username, sent, points) => `:money_with_wings: | **${username}**, you have donated your daily ${points}¥ to **${sent}**.`,
-			COMMAND_DAILY_FROMNOW: giver => `<:tickNo:373304949234204682> You cannot claim your daily credits yet, please try again in ${moment(giver.daily).fromNow(true)}.`,
+			COMMAND_DAILY_CLAIMED: (points, username) => `:money_with_wings: | **${username}**, you have claimed your daily ${points}¥.`,
+			COMMAND_DAILY_DONATED: (points, username, sent) => `:money_with_wings: | **${username}**, you have donated your daily ${points}¥ to **${sent}**.`,
+			COMMAND_DAILY_FROMNOW: dailyTimer => `<:tickNo:373304949234204682> You cannot claim your daily credits yet, please try again in ${dailyTimer}.`,
 
 
 			COMMAND_REPUTATION_BOT: '<:tickNo:373304949234204682> Bots cannot send/recieve points.',

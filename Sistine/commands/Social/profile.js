@@ -3,7 +3,6 @@ const { Canvas } = require('canvas-constructor');
 const fsn = require('fs-nextra');
 const { join } = require('path');
 const imasnek = require('snekfetch');
-const backgrounds = require('../../lib/profileBackgrounds.json');
 
 Canvas.registerFont(join(__dirname, '../../assets/fonts/Corbert-Condensed.otf'), 'Corbert');
 Canvas.registerFont(join(__dirname, '../../assets/fonts/Discord.ttf'), 'Discord');

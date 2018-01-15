@@ -23,7 +23,7 @@ module.exports = class extends Command {
 		if (!youtubeURL || youtubeURL.includes('undefined')) throw '<:eww:393547594690986018> No available videos were found at that URL.';
 
 		const { music } = msg.guild;
-		const song = await music.add(msg.author, youtubeURL);
+		const song = await music.add(msg.author, youtubeURL, msg.language);
 
 		return msg.send(`:headphones: Added **${song.title}** to the queue by **${msg.author.tag}**.`);
 	}

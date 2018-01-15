@@ -61,7 +61,7 @@ class Util {
 	}
 
 	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.guilds.size} guilds [${client.shard ? client.shard.id + 1 : '1'}] sistine.ml`, type: 2 } })
+		client.user.setPresence({ activity: { name: `${client.guilds.size.toLocaleString()} guilds | s>help`, type: 3 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});

@@ -13,6 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const { next, queue, autoplay } = msg.guild.music;
+		if (queue.length < 0) return msg.send('There are no songs in the queue.');
 		const output = [];
 		for (let i = 0; i < Math.min(queue.length, 10); i++) {
 			output[i] = [
