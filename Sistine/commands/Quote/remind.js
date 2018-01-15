@@ -15,7 +15,7 @@ module.exports = class extends Command {
 			data: {
 				channel: msg.channel.id,
 				user: msg.author.id,
-				text: text.join(', ')
+				text: text.join(' ')
 			}
 		});
 		return msg.send(`Ok, I created you a reminder with the id: \`${reminder.id}\``);
