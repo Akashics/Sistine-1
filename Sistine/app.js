@@ -47,7 +47,7 @@ const Sistine = new SistineClient({
 	prefix: 's>',
 	pieceDefaults: { commands: { deletable: true } },
 	readyMessage: (client) => `${client.user.tag}-${client.shard.id}, Listening to ${client.guilds.size} guilds, ${client.users.size} users, ${client.channels.size} channels.`,
-	provider: {
+	providers: {
 		default: 'rethinkdb',
 		rethink: {
 			host: rethinkdb.host,
