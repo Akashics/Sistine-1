@@ -22,7 +22,21 @@ class SistineClient extends Client {
 
 const Sistine = new SistineClient({
 	clientOptions: {
-		fetchAllMembers: true,
+		disabledEvents: [
+			'GUILD_BAN_ADD',
+			'GUILD_BAN_REMOVE',
+			'TYPING_START',
+			'TYPING_STOP',
+			'RELATIONSHIP_ADD',
+			'RELATIONSHIP_REMOVE',
+			'CHANNEL_PINS_UPDATE',
+			'PRESENCE_UPDATE',
+			'USER_UPDATE',
+			'USER_NOTE_UPDATE',
+			'MESSAGE_REACTION_ADD',
+			'MESSAGE_REACTION_REMOVE',
+			'MESSAGE_REACTION_REMOVE_ALL'
+		],
 		disableEveryone: true
 	},
 	cmdDeleting: true,
