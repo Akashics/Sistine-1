@@ -37,7 +37,7 @@
         "min": null,
         "max": null,
         "sql": "TEXT NOT NULL DEFAULT 'en-US'",
-        "configurable": true
+        "configurable": false
     },
     "logging": {
         "type": "Folder",

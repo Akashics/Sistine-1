@@ -19,7 +19,7 @@ module.exports = class MusicManager {
 
 	async add(user, url) {
 		const song = await getInfoAsync(url).catch((err) => {
-			if (err.includes('in your country')) throw `\`${url}\` is not available where Sistine is currently located.\nIf this is an issue, contact support and we may be able to move you to another server.`;
+			//if (err.includes('in your country')) throw `\`${url}\` is not available where Sistine is currently located.\nIf this is an issue, contact support and we may be able to move you to another server.`;
 			this.client.emit('log', err, 'error');
 			throw `Whoops! You discovered an unwanted feature! Error: ${err}.`;
 		});
