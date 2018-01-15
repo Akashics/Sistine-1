@@ -31,7 +31,7 @@
         }
     },
     "language": {
-        "type": "string",
+        "type": "language",
         "array": false,
         "default": "en-US",
         "min": null,

@@ -14,17 +14,12 @@ module.exports = class Reputation extends Command {
 		if (user.bot || msg.author.bot) return msg.send(msg.language.get('COMMAND_REPUTATION_BOT'));
 		if (msg.author.id === user.id) return msg.send(msg.language.get('COMMAND_REPUTATION_SELF'));
 
-		const { users } = this.client;
-
-		const giver = users.get(msg.author.id);
-		const reciever = users.get(user.id);
-
-		if (Date.now() > giver.configs.reputationTimer) {
-			const message = await msg.send(msg.language.get('COMMAND_REPUTATION_SENT', user));
-			await giver.configs.update('reputationTimer', message.createdTimestamp + (24 * 60 * 60 * 1000));
-			return reciever.configs.update('reputation', reciever.conf.reputation + 1);
+		if (Date.now() > msg.author.configs.reputationTimer) {
+			await msg.send(msg.language.get('COMMAND_REPUTATION_SENT', user));
+			await msg.author.configs.update('reputationTimer', (Date.now() / 1000) + (12 * 60 * 60), msg.guild);
+			return user.configs.update('reputation', user.configs.reputation + 1);
 		} else {
-			return msg.send(msg.language.get('COMMAND_REPUTATION_FROMNOW', giver));
+			return msg.send(msg.language.get('COMMAND_REPUTATION_FROMNOW', msg.author.configs));
 		}
 	}
 

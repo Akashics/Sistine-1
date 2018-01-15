@@ -24,17 +24,20 @@ module.exports = class Leaderboards extends Command {
 		if (page > totalPages && !totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 		if (totalPages && page + 1 > totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-		leadboardPosition.map(user => ({ points: user.balance, user: user.id }))
-			.slice(page * 10, (page + 1) * 10)
+		leaderboard.push('= = = Global Leaderboard = = =\n');
+
+		leadboardPosition.slice(page * 10, (page + 1) * 10)
+			.map(user => ({ 
+				points: user.balance, user: user.id }))
 			.map((newMap, position) => {
-				leaderboard.push(`${((page * 10) + (position + 1)).toString().padStart(2, ' ')} ❯ ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${newMap.points.toLocaleString()}`);
+				leaderboard.push(` • ${((page * 10) + (position + 1)).toString().padStart(2, ' ')} | ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${newMap.points.toLocaleString()}`);
 			});
 		leaderboard.push('');
 		const pos = leadboardPosition.indexOf(msg.author.id).toString().padStart(2, '0');
 
-		leaderboard.push(`${pos !== -1 ? pos + 1 : '???'} ❯ ${msg.author.tag.padEnd(30, ' ')}::  ${this.client.gateways.users.getEntry(msg.author.id).balance.toLocaleString()}`);
+		leaderboard.push(` • ${pos !== -1 ? pos + 1 : '???'} | ${msg.author.tag.padEnd(30, ' ')}::  ${this.client.gateways.users.getEntry(msg.author.id).balance.toLocaleString()}`);
 		leaderboard.push('--------------------------------------------------');
-		return msg.channel.send(`= ${this.client.user.username}'s Global Leaderboard =\n\n${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} | ${leadboardPosition.length} Total Users`, { code: 'asciidoc' });
+		return msg.channel.send(`${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} - ${leadboardPosition.length} Total Users`, { code: 'asciidoc' });
 	}
 
 };

@@ -15,7 +15,7 @@ module.exports = class socialMonitor extends Monitor {
 
 		const userData = msg.author.configs;
 		timeout.add(msg.author.id);
-		const points = this.giveRandomPoints(1, 26);
+		const points = this.giveRandomPoints(1, 5);
 
 		setTimeout(async () => {
 			timeout.delete(msg.author.id);
