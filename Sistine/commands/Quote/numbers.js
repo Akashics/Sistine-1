@@ -12,7 +12,6 @@ module.exports = class Fortune extends Command {
 	}
 
 	async run(msg, [type = 'year', number]) {
-		// http://numbersapi.com/918204/year?json
 		const { body } = await snek.get(`http://numbersapi.com/${number}/${type}?json`);
 		const finalmsg = new this.client.methods.Embed()
 			.setTitle('Number Facts')

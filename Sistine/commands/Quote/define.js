@@ -18,14 +18,16 @@ module.exports = class DefineWord extends Command {
 				.query({
 					limit: 1,
 					includeRelated: false,
-					useCanonical: false,
+					useCanonical: true,
 					api_key: this.client.keys.wordNik
 				});
 			if (!body.length) { return msg.send('Could not find any results.'); }
 			const defineEmbed = new this.client.methods.Embed()
 				.setColor('PURPLE')
 				.setTitle(`"${body[0].word.toLowerCase()}"`)
-				.setDescription(body[0].text);
+				.setDescription(body[0].text)
+				.addField('Type of Speech', body[0].partOfSpeech, true)
+				.addField('Dictionary', body[0].sourceDictionary, true);
 			return msg.sendEmbed(defineEmbed);
 		} catch (err) {
 			return msg.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);

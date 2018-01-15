@@ -18,22 +18,20 @@ module.exports = class Leaderboards extends Command {
 		const leaderboard = [];
 		const totalPages = Math.round(leadboardPosition.length / 10);
 
-		var page = index ? index : 1;
-		page -= 1;
+		var page = index ? index -= 1 : 0;
 
 		if (page > totalPages && !totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 		if (totalPages && page + 1 > totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-		leaderboard.push('= = = Global Leaderboard = = =\n');
+		leaderboard.push('= = = Global Leaderboard = = =\n\n');
+
+		const pos = leadboardPosition.indexOf(msg.author.id).toString().padStart(2, '0');
 
 		leadboardPosition.slice(page * 10, (page + 1) * 10)
-			.map(user => ({ 
-				points: user.balance, user: user.id }))
-			.map((newMap, position) => {
-				leaderboard.push(` • ${((page * 10) + (position + 1)).toString().padStart(2, ' ')} | ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${newMap.points.toLocaleString()}`);
-			});
-		leaderboard.push('');
-		const pos = leadboardPosition.indexOf(msg.author.id).toString().padStart(2, '0');
+			.map(user => ({ points: user.balance, user: user.id }))
+			.forEach((newMap, position) =>
+				leaderboard.push(` • ${((page * 10) + (position + 1)).toString().padStart(2, ' ')} | ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${newMap.points.toLocaleString()}`)
+			);
 
 		leaderboard.push(` • ${pos !== -1 ? pos + 1 : '???'} | ${msg.author.tag.padEnd(30, ' ')}::  ${this.client.gateways.users.getEntry(msg.author.id).balance.toLocaleString()}`);
 		leaderboard.push('--------------------------------------------------');
