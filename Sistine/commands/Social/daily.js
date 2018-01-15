@@ -13,7 +13,7 @@ module.exports = class Daily extends Command {
 	async run(msg, [user = msg.author]) {
 		if (user.bot || msg.author.bot) return msg.send(msg.language.get('COMMAND_REPUTATION_BOT'));
 
-		const payer = msg.author.configs
+		const payer = msg.author.configs;
 		const payee = user.configs;
 		const pointsReward = 250;
 
