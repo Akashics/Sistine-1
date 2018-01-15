@@ -377,7 +377,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_CONF_USER_DESCRIPTION: 'Define per-user configuration.',
 			COMMAND_CONF_USER: (key, list) => `**User Configuration${key}**\n${list}`,
 			COMMAND_SUBSCRIBE_NO_CHANNEL: 'This server does not have a configured announcement channel.',
-			COMMAND_ANNOUNCEMENT: (role) => `**New announcement for** ${role}:`,
+			COMMAND_ANNOUNCEMENT: (role) => `**Announcement** | ${role}:\n`,
 			COMMAND_FUN_COMIC: 'Here\'s a comic from Explosm. C:',
 			SYSTEM_HIGHEST_ROLE: 'This role\'s hierarchy position is higher or equal than me, I am not able to grant it to anyone.',
 			SYSTEM_CHANNEL_NOT_POSTABLE: 'I am not allowed to send messages to this channel.',
