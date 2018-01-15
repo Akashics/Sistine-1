@@ -15,7 +15,7 @@
     "fs-nextra": "0.3.2",
     "gifencoder": "^1.1.0",
     "hot-shots": "^5.0.0",
-    "klasa": "github:dirigeants/klasa#master",
+    "klasa": "github:dirigeants/klasa",
     "moment": "^2.20.1",
     "moment-duration-format": "^2.1.1",
     "node-opus": "^0.2.7",
@@ -26,10 +26,10 @@
     "rethinkdbdash": "^2.3.31",
     "snekfetch": "^3.6.1",
     "uws": "^9.14.0",
-    "ytdl-core": "^0.18.5"
+    "ytdl-core": "^0.18.7"
   },
   "devDependencies": {
-    "eslint": "^4.14.0",
+    "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-standard": "10.2.1",
     "eslint-plugin-import": "^2.8.0",

@@ -14,8 +14,8 @@ module.exports = class Daily extends Command {
 
 		const { users } = this.client;
 
-		const payer = users.get(msg.author.id).conf;
-		const payee = users.get(user.id).conf;
+		const payer = users.get(msg.author.id).configs;
+		const payee = users.get(user.id).configs;
 		const pointsReward = 250;
 
 		if (Date.now() > payer.dailyTimer) {
