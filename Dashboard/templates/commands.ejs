@@ -31,7 +31,7 @@
                   </td>
                   <td>
                       <i>
-                      <%- command.aliases.length > 1 ? `${command.aliases.join(", ")}` : "<i style="opacity: 0.5;" class="fa fa-times"></li>"%>
+                      <%- `${command.aliases.length > 1 ? command.aliases.join(", ") : "<i style="opacity: 0.5;" class="fa fa-times"></li>"}` %>
                       </i>
                   </td>
                   <td>
