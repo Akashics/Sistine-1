@@ -28,7 +28,7 @@ module.exports = class Leaderboards extends Command {
 		const pos = leadboardPosition.indexOf(msg.author.id).toString().padStart(2, '0');
 
 		leadboardPosition.slice(page * 10, (page + 1) * 10)
-			.map(user => ({ points: user.balance, user: user.id }))
+			.map(user => ({ balance: user.balance, user: user.id }))
 			.forEach((newMap, position) =>
 				leaderboard.push(` • ${((page * 10) + (position + 1)).toString().padStart(2, ' ')} | ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${newMap.points.toLocaleString()}`)
 			);
