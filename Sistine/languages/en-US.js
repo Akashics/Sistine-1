@@ -1,6 +1,8 @@
 const { Language, util } = require('klasa');
 const moment = require('moment');
 
+/* eslint-disable max-len */
+
 const EIGHT_BALL = [
 	'Maybe.',
 	'Certainly not.',
@@ -189,6 +191,21 @@ const ROASTS = [
 	'You have the right to remain silent because whatever you say will probably be stupid anyway.'
 ];
 
+const PINGS = [
+	'Ugh, again? You always ask, and I tell you that I responded in {{ms}}ms',
+	'B-baka, I responded... just in {{ms}}ms.',
+	'H-here you go, I responded in {{ms}}ms.',
+	'Here you go, not that it was worth my time. It only took me {{ms}}ms.',
+	'Is this right? I\'ve responded in {{ms}}ms.',
+	'{{user}}?, I\'ve responded in {{ms}}ms.',
+	'{{user}}! You wasted {{ms}}ms of my time, ERGH',
+	'D-did I do it right? I responded in {{ms}}ms.',
+	'I am here {{user}}, it only took me {{ms}}ms to respond!',
+	'You made me {{ms}}ms older - just from asking!',
+	'Do you know how long it took to me to read that message? You pretty much wasted {{ms}} of my day!'
+];
+
+
 const PERMS = {
 	ADMINISTRATOR: 'Administrator',
 	VIEW_AUDIT_LOG: 'View Audit Log',
@@ -236,6 +253,7 @@ module.exports = class enUSLang extends Language {
 		this.ROASTS = ROASTS;
 		this.PERMISSIONS = PERMS;
 		this.STATUSES = STATUSES;
+		this.PINGS = PINGS;
 		this.HUMAN_LEVELS = [
 			'None',
 			'Low',
@@ -281,7 +299,7 @@ module.exports = class enUSLang extends Language {
 			RESOLVER_MINMAX_MAX: (name, max, suffix) => `${name} must be less than ${max}${suffix}.`,
 			REACTIONHANDLER_PROMPT: 'Which page would you like to jump to?',
 			COMMANDMESSAGE_MISSING: 'Missing one or more required arguments after end of input.',
-			COMMANDMESSAGE_MISSING_REQUIRED: (name) => `${name} is a required argument.`,
+			COMMANDMESSAGE_MISSING_REQUIRED: (name) => `<:tickNo:373304949234204682> A \`${name}\` is required to use this command.`,
 			COMMANDMESSAGE_MISSING_OPTIONALS: (possibles) => `Missing a required option: (${possibles})`,
 			COMMANDMESSAGE_NOMATCH: (possibles) => `Your option didn't match any of the possibilities: (${possibles})`,
 			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **"ABORT"** to abort this prompt.`, // eslint-disable-line max-len
@@ -322,7 +340,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_REBOOT_DESCRIPTION: 'Reboots the bot.',
 			COMMAND_PING: 'Ping?',
 			COMMAND_PING_DESCRIPTION: 'Runs a connection test to Discord.',
-			COMMAND_PINGPONG: (diff, ping) => `Pong! (Roundtrip took: ${diff}ms. Heartbeat: ${ping}ms.)`,
+			COMMAND_PINGPONG: (diff, user) => `${this.PINGS[Math.floor(Math.random() * this.PINGS.length)].replace('{{user}}', user).replace('{{ms}}', diff)}`,
 			COMMAND_INVITE_SELFBOT: 'Why would you need an invite link for a selfbot...',
 			COMMAND_INVITE: (client) => [
 				`To add ${client.user.username} to your discord guild:`,
@@ -336,21 +354,12 @@ module.exports = class enUSLang extends Language {
 			COMMAND_INVITE_DESCRIPTION: 'Displays the join server link of the bot.',
 			COMMAND_INFO: [
 				"Sistine is built on top of a 'plug-and-play' framework named Klasa that is also built on top of the Discord.js library.",
-				'Most of the code is modularized, which allows developers to edit Klasa to suit their needs.',
+				'Most of the code is modularized, which allows me to edit Klasa to suit their needs.',
 				'',
-				'Some features of Klasa include:',
-				'• Fast Loading times with ES7 Support (Async/Await)',
-				'• Per-server configuration, that can be extended with your own code',
-				'• Customizable Command system with automated usage parsing and easy to use reloading and downloading modules',
-				'• "Monitors" which can watch messages and act on them, like a normal message event (Swear Filters, Spam Protection, etc)',
-				'• "Inhibitors" which can prevent commands from running based on a set of parameters (Permissions, Blacklists, etc)',
-				'• "Providers" which allow you to connect with an outside database of your choosing.',
-				'• "Finalizers" which run on messages after a successful command.',
-				'• "Extendables", code that acts passively. They add properties or methods to existing Discord.js classes.',
-				'• "Languages", which allow you to localize your bot.',
+				'Sistine currently offers a multitude of commands and upto 100 available commands for almost anything.',
+				'She is mainly developed by `Kashall#1307` with the occasional help from other developers.',
 				'',
-				'We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.',
-				"If you're interested in us, check us out at https://klasa.js.org"
+				'More information can be found in her lounge server: https://discord.gg/jgPNHWy'
 			],
 			COMMAND_INFO_DESCRIPTION: 'Provides some information about this bot.',
 			COMMAND_HELP_DESCRIPTION: 'Display help for a command.',
@@ -366,8 +375,8 @@ module.exports = class enUSLang extends Language {
 			COMMAND_DISABLE_WARN: 'You probably don\'t want to disable that, since you wouldn\'t be able to run any command to enable it again',
 			COMMAND_CONF_NOKEY: 'You must provide a key',
 			COMMAND_CONF_NOVALUE: 'You must provide a value',
-			COMMAND_CONF_GUARDED: (name) => `${util.toTitleCase(name)} may not be disabled.`,
-			COMMAND_CONF_UPDATED: (key, response) => `Successfully updated the key **${key}**: \`${response}\``,
+			COMMAND_CONF_GUARDED: (name) => `${util.toTitleCase(name)} can not be disabled due to security reasons.`,
+			COMMAND_CONF_UPDATED: (key, response) => `Successfully updated the key **${key}** to : \`${response}\``,
 			COMMAND_CONF_KEY_NOT_ARRAY: 'This key is not array type. Use the action \'reset\' instead.',
 			COMMAND_CONF_GET_NOEXT: (key) => `The key **${key}** does not seem to exist.`,
 			COMMAND_CONF_GET: (key, value) => `The value for the key **${key}** is: \`${value}\``,
@@ -375,7 +384,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_CONF_SERVER_DESCRIPTION: 'Define per-server configuration.',
 			COMMAND_CONF_SERVER: (key, list) => `**Server Configuration${key}**\n${list}`,
 			COMMAND_CONF_USER_DESCRIPTION: 'Define per-user configuration.',
-			COMMAND_CONF_USER: (key, list) => `**User Configuration${key}**\n${list}`,
+			COMMAND_CONF_USER: (key, list) => `**User Configuration${key}** __Currently Incomplete__\n${list}`,
 			COMMAND_SUBSCRIBE_NO_CHANNEL: 'This server does not have a configured announcement channel.',
 			COMMAND_ANNOUNCEMENT: (role) => `**Announcement** | ${role}:\n`,
 			COMMAND_FUN_COMIC: 'Here\'s a comic from Explosm. C:',
@@ -586,7 +595,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_GUILDLIST_ADDED: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] was added to the ${type}.`,
 			COMMAND_GUILDLIST_REMOVED: (guild, type) => `<:tickNo:373304949234204682> \`${guild.name}[${guild.id}] was removed from the ${type}.`,
 
-			// Admin Commands 
+			// Admin Commands
 
 			COMMAND_EXECUTE_DESCRIPTION: 'Allows you to run arbitrary commands. Developer Access-Only.'
 
