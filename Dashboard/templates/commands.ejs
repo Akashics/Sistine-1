@@ -31,11 +31,11 @@
                   </td>
                   <td>
                       <i>
-                      <%- `${command.aliases.length > 1 ? command.aliases.join(", ") : "<i style=\"opacity: 0.5;" class=\"fa fa-times\"></li>" }` %>
+                      <%- command.aliases.length > 1 ? `${command.aliases.join(", ")}` : '<i style="opacity: 0.5;" class="fa fa-times"></li>' %>
                       </i>
                   </td>
                   <td>
-                    <%- `${command.name} ${command.usageString.length > 1 ? `<code id="input">${command.usageString}</code>` : ''} `%>
+                    <%- `${command.name} ${command.usageString.length > 1 ? `<code id="input">${command.usageString}</code>` : ''} ` %>
                   </td>
                   <td>
                     <%= command.description %>
