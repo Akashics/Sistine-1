@@ -16,7 +16,8 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Command</th>
+                <th>Name</th>
+                <th>Aliases</th>
                 <th>Usage</th>
                 <th>Description</th>
                 <th>Command Cost</th>
@@ -27,17 +28,19 @@
                 <tr>
                   <td>
                     <%= command.name %>
+                  </td>
+                  <td>
                       <i>
-                        <%= `${command.aliases.length > 1 ? `(${command.aliases.join(', ')})` : ''}` %>
+                        <%= `${command.aliases.length > 1 ? `${command.aliases.join(', ')}` : '<i style="opacity: 0.5;" class="fa fa-times"></i>'}` %>
                       </i>
                   </td>
                   <td>
-                    <%= `${command.usageString.length > 1 ? command.usageString : 'No Arguments.'} `%>
+                    <%= `${command.name} ${command.usageString.length > 1 ? `<code id="input">${command.usageString}</code>` : ''} `%>
                   </td>
                   <td>
                     <%= command.description %>
                   </td>
-                  <td><%= command.cost > 1 ? command.cost + '¥' : 'Free' %></td>
+                  <td><%= command.cost >= 1 ? command.cost + '¥' : 'Free' %></td>
                 </tr>
                 <% } %>
             </tbody>
