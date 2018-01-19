@@ -1,6 +1,7 @@
 const { Client } = require('klasa');
 const Music = require('./lib/managers/Music');
 const { botToken, rethinkdb } = require('./config.json');
+const webhook = require('../lib/managers/webhooks');
 const StatsD = require('hot-shots');
 
 Client.defaultPermissionLevels
@@ -63,12 +64,8 @@ const Sistine = new SistineClient({
 	console: { useColor: true, timestamps: 'MM-DD-YYYY hh:mm:ss A' }
 });
 
-process.on('unhandledRejection', error => {
-	Sistine.emit('error', `Uncaught Promise Error:\n ${error}.`);
-});
-
-process.on('uncaughtException', error => {
-	Sistine.emit('error', `Uncaught Exception Error:\n ${error}.`);
+process.on('exit', () => {
+	webhook('[EXITING] Sistine is now exiting (might be restarting?).');
 });
 
 Sistine.login(botToken);

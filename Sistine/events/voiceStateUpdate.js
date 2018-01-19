@@ -10,9 +10,11 @@ module.exports = class voiceStateUpdate extends Event {
 		const { queue, dispatcher, status } = newMem.guild.music;
 		if (!oldMem.guild.me.voiceChannel || !status === 'playing' || !queue) return;
 		if (oldMem.voiceChannel === oldMem.guild.me.voiceChannel && newMem.voiceChannel !== newMem.guild.me.voiceChannel && newMem.guild.me.voiceChannel.members.size === 1) {
-			dispatcher.end('All users left the channel.');
-			newMem.guild.music.channel.send(':musical_note: All members have left the channel, so I stopped playing music.');
-			newMem.guild.music.leave();
+			if (dispatcher) {
+				dispatcher.end('All users left the channel.');
+				newMem.guild.music.channel.send(':musical_note: All members have left the channel, so I stopped playing music.');
+				newMem.guild.music.leave();
+			}
 		}
 	}
 

@@ -6,15 +6,16 @@ module.exports = class swearFilter extends Monitor {
 		super(...args, {
 			enabled: true,
 			ignoreBots: true,
-			ignoreSelf: true
+			ignoreSelf: true,
+			ignoreOthers: false
 		});
 	}
 
-	run(msg) {
+	async run(msg) {
 		const { settings } = msg.guild;
-		if (!settings.filtering.swearFilter || settings.filtering.swearWords.length === 0) return;
-		if (msg.deletable && (new RegExp(settings.filtering.swearWords.join('|'), 'i')).test(msg.content)) msg.delete();
-		return;
+		if (!settings.filtering.swearFilter || settings.filtering.swearWords.length === 0) return null;
+		if (msg.deletable && (new RegExp(settings.filtering.swearWords.join('|'), 'i')).test(msg.content)) await msg.delete();
+		return null;
 	}
 
 };

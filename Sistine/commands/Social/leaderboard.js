@@ -30,10 +30,10 @@ module.exports = class Leaderboards extends Command {
 		leadboardPosition.slice(page * 10, (page + 1) * 10)
 			.map(user => ({ balance: user.balance, user: user.id }))
 			.forEach((newMap, position) =>
-				leaderboard.push(` • ${((page * 10) + (position + 1)).toString().padStart(2, ' ')} | ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${newMap.points.toLocaleString()}`)
+				leaderboard.push(` • ${((page * 10) + (position + 1)).toString().padStart(2, ' ')} | ${this.client.users.get(newMap.user).tag.padEnd(30, ' ')}::  ${this.client.users.get(newMap.user).configs.balance.toLocaleString()}`)
 			);
 
-		leaderboard.push(` • ${pos !== -1 ? pos + 1 : '???'} | ${msg.author.tag.padEnd(30, ' ')}::  ${this.client.gateways.users.getEntry(msg.author.id).balance.toLocaleString()}`);
+		leaderboard.push(` • ${pos !== -1 ? pos + 1 : '???'} | ${msg.author.tag.padEnd(30, ' ')}::  ${this.client.users.get(msg.author.id).configs.balance.toLocaleString()}`);
 		leaderboard.push('--------------------------------------------------');
 		return msg.channel.send(`${leaderboard.join('\n')}\n Page ${page + 1} / ${totalPages || 1} - ${leadboardPosition.length} Total Users`, { code: 'asciidoc' });
 	}

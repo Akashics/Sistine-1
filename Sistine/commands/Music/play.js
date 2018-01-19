@@ -12,6 +12,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
+		if (!msg.guild.available) return msg.send('Your guild is not available to me due to an API outage.');
 		const musicInterface = msg.guild.music;
 
 		if (musicInterface.queue.length === 0) {

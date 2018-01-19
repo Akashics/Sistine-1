@@ -2,6 +2,15 @@ const { Monitor } = require('klasa');
 const timeout = new Set();
 module.exports = class socialMonitor extends Monitor {
 
+	constructor(...args) {
+		super(...args, {
+			enabled: true,
+			ignoreBots: true,
+			ignoreSelf: true,
+			ignoreOthers: false
+		});
+	}
+
 	giveRandomPoints(min, max) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
@@ -20,7 +29,7 @@ module.exports = class socialMonitor extends Monitor {
 		setTimeout(async () => {
 			timeout.delete(msg.author.id);
 			await userData.update('balance', userData.balance + points, msg.guild);
-		}, 65000);
+		}, 45000);
 
 		const curLevel = Math.floor(0.2 * Math.sqrt(userData.balance + points));
 		if (userData.level < curLevel) {

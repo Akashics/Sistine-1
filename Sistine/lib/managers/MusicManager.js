@@ -110,7 +110,7 @@ module.exports = class MusicManager {
 	}
 
 	skip(force = false) {
-		if (this.queue.length < 1) throw 'Cannot skip this song. This would force playback to end. Use cmd stop first.';
+		if (!this.queue || this.queue.length < 1) throw 'Cannot skip this song. This would force playback to end. Use cmd stop first.';
 		if (force && this.dispatcher) {
 			this.dispatcher.end();
 		} else { this.queue.shift(); }

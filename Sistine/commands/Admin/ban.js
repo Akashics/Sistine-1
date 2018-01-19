@@ -10,7 +10,7 @@ module.exports = class Ban extends Command {
 			botPerms: ['BAN_MEMBERS'],
 			runIn: ['text'],
 			description: 'Bans the mentioned member.',
-			usage: '<user:user> [reason:string] [...]',
+			usage: '<Member:member> [reason:string] [...]',
 			usageDelim: ' '
 		});
 	}
@@ -22,7 +22,7 @@ module.exports = class Ban extends Command {
 
 		if (!member || !member.bannable) { return msg.send(msg.language.get('BAN_FAIL')); }
 
-		await msg.guild.ban(user, { reason });
+		await member.ban({ reason });
 
 		if (msg.guild.configs.logging.logChannel) {
 			new ModLog(msg.guild)

@@ -26,7 +26,7 @@ module.exports = class Reason extends Command {
 		const channel = msg.guild.channels.get(msg.guild.configs.logging.logChannel);
 		if (!channel) { return msg.send(msg.language.get('MODLOG_NOT_FOUND')); }
 
-		const messages = await channel.messages.fetchMessages({ limit: 100 });
+		const messages = await channel.messages.fetch({ limit: 100 });
 		const message = messages.find(mes => mes.author.id === this.client.user.id &&
 			mes.embeds.length > 0 &&
 			mes.embeds[0].type === 'rich' &&
