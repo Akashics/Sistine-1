@@ -12,9 +12,9 @@ module.exports = class swearFilter extends Monitor {
 	}
 
 	async run(msg) {
-		const { settings } = msg.guild;
-		if (!settings.filtering.swearFilter || settings.filtering.swearWords.length === 0) return null;
-		if (msg.deletable && (new RegExp(settings.filtering.swearWords.join('|'), 'i')).test(msg.content)) await msg.delete();
+		const { configs } = msg.guild;
+		if (!configs.filtering.swearFilter || configs.filtering.swearWords.length === 0) return null;
+		if (msg.deletable && (new RegExp(configs.filtering.swearWords.join('|'), 'i')).test(msg.content)) await msg.delete();
 		return null;
 	}
 
