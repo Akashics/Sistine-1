@@ -18,7 +18,7 @@ module.exports = class extends Command {
 				text: text.join(' ')
 			}
 		});
-		return msg.send(`Ok, I created you a reminder with the id: \`${reminder.id}\``);
+		return msg.send(`Ok, I created reminder id ${reminder.id} for you.`);
 	}
 
 };

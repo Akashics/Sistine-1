@@ -33,6 +33,7 @@ module.exports = class IsNowIllegal extends Command {
 			await post('https://is-now-illegal.firebaseio.com/queue/tasks.json').send({ task: 'gif', word: thing.toUpperCase() });
 			await this.client.wait(6000);
 			const result = await get(`https://is-now-illegal.firebaseio.com/gifs/${thing.toUpperCase()}.json`);
+			if (!result.body.url) return msg.send('API did not send a valid request. Try again in a few moments.');
 			await msg.channel.send({ files: [result.body.url] });
 			inUse.delete('true');
 			return message.delete();

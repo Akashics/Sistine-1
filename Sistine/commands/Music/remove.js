@@ -18,7 +18,8 @@ module.exports = class extends Command {
 		number--;
 
 		const { music } = msg.guild;
-		if (music.queue.length < number) throw `:headphones: The queue only has **${music.queue.length}** songs.`;
+		if (!music.queue) throw `:headphones: There is no music in the queue from what I can see.`;
+		if (!music.queue.length < number) throw `:headphones: The queue only has **${music.queue.length}** songs.`;
 
 		const song = music.queue[number];
 		if (song.requester.id !== msg.author.id) {
@@ -27,7 +28,7 @@ module.exports = class extends Command {
 		}
 
 		music.queue.splice(number, 1);
-		return msg.send(`:wastebasket: Removed the song **${song.title}** requested by **${song.requester}**.`);
+		return msg.send(`:wastebasket: Removed the song **${song.title}** requested by **${song.requester ? song.requester : 'Unknown User'}**.`);
 	}
 
 };

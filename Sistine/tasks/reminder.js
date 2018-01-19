@@ -4,7 +4,7 @@ module.exports = class extends Task {
 
 	async run({ channel, user, text }) {
 		const _channel = this.client.channels.get(channel);
-		return _channel.send(`<@${user}>, You asked me to remind you that: \`${text}\`.`);
+		return _channel.send(`<@${user}>, You asked me to remind you to \`${text}\`.`);
 	}
 
 };

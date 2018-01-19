@@ -6,6 +6,7 @@ module.exports = class extends Monitor {
 		super(...args, {
 			ignoreBots: false,
 			ignoreSelf: false,
+			ignoreOthers: false,
 			enabled: true
 		});
 	}
