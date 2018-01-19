@@ -5,7 +5,7 @@ module.exports = class extends Event {
 
 	run(err) {
 		this.client.emit('error', `Disconnected | ${err.code}: ${err.reason}`);
-		webhook(`[DISCONNECTED] Error ${err.code}: Sistine was forcefully disconnected by external means.\nReason: ${err.reason}}`);
+		webhook(`\`\`\`tex\n$ [DISCONNECTED] Error ${err.code}: Sistine was forcefully disconnected by external means.\nReason: ${err.reason}}\`\`\``);
 	}
 
 };

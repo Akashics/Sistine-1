@@ -5,7 +5,7 @@ module.exports = class extends Event {
 
 	run(rateLimit) {
 		this.client.emit('error', `[RATELIMITED] Client has hit the limit! Timeout: ${rateLimit.timeout} Limit: ${rateLimit.limit}`);
-		webhook(`[RATELIMITED] Sistine reached a rate limit! Timeout: ${rateLimit.timeout} Limit: ${rateLimit.limit}`);
+		webhook(`\`\`\`tex\n$ [RATELIMITED] Sistine reached a rate limit! Timeout: ${rateLimit.timeout} Limit: ${rateLimit.limit}\`\`\``);
 	}
 
 };

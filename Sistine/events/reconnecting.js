@@ -5,7 +5,7 @@ module.exports = class extends Event {
 
 	run() {
 		this.client.emit('error', `Reconnecting...`);
-		webhook('[RECONNECTING] Sistine is attempting to reconnect...');
+		webhook(`\`\`\`tex\n$ [RECONNECTING] Sistine is attempting to reconnect...\`\`\``);
 	}
 
 };

@@ -5,7 +5,7 @@ module.exports = class extends Event {
 
 	run(guild) {
 		this.client.emit('error', `Guild Outage: ${guild.name}`);
-		webhook('[GUILD OUTAGE] Detected an outage after attempting to respond.');
+		webhook(`\`\`\`tex\n$ [GUILD OUTAGE] Detected an outage after attempting to respond.\`\`\``);
 	}
 
 };
