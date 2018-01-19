@@ -1,7 +1,7 @@
 const { Client } = require('klasa');
 const Music = require('./lib/managers/Music');
 const { botToken, rethinkdb } = require('./config.json');
-const webhook = require('../lib/managers/webhooks');
+const webhook = require('./lib/managers/webhooks');
 const StatsD = require('hot-shots');
 
 Client.defaultPermissionLevels
