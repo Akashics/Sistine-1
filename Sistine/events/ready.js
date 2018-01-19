@@ -17,7 +17,7 @@ module.exports = class Ready extends Event {
 
 		Sistine.raven.config(raven).install();
 		updateStatus(Sistine);
-		webhook(`[READY] Shard[${shardid}]: Sistine ready! Guilds: ${Sistine.guilds.size.toLocaleString()}, Users: ${Sistine.users.size.toLocaleString()}`);
+		webhook(`\`\`\`tex\n$ [READY] Shard[${shardid}]: Sistine ready! Guilds: ${Sistine.guilds.size.toLocaleString()}, Users: ${Sistine.users.size.toLocaleString()}\`\`\``);
 
 		if (shardid === 0) require('../lib/API')(this.client);
 	}

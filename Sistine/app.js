@@ -65,7 +65,7 @@ const Sistine = new SistineClient({
 });
 
 process.on('exit', () => {
-	webhook('[EXITING] Sistine is now exiting (might be restarting?).');
+	webhook(`\`\`\`tex\n$ [EXITING] Sistine is now exiting (might be restarting?).\`\`\``);
 });
 
 Sistine.login(botToken);

@@ -5,7 +5,7 @@ module.exports = class extends Event {
 
 	run() {
 		this.client.emit('error', `Connection resumed!`);
-		webhook('[RESUMED] Sistine has successfully reconnected to the gateway.');
+		webhook(`\`\`\`tex\n$ [RESUMED] Sistine has successfully reconnected to the gateway.\`\`\``);
 	}
 
 };
