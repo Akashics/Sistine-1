@@ -1,6 +1,6 @@
 const { Client } = require('klasa');
 const Music = require('./lib/managers/Music');
-const { botToken, rethinkdb } = require('./config.json');
+const { botToken, rethinkdb, raven } = require('./config.json');
 const webhook = require('./lib/managers/webhooks');
 const StatsD = require('hot-shots');
 
@@ -67,6 +67,7 @@ process.on('exit', () => {
 	webhook(`\`\`\`tex\n$ [EXITING] Sistine is now exiting (might be restarting?).\`\`\``);
 });
 
-Sistine.raven.context(() => {
+Sistine.raven.context(async () => {
+	await Sistine.raven.config(raven).install();
 	Sistine.login(botToken);
 });

@@ -1,6 +1,5 @@
 const { Event } = require('klasa');
 const { updateStatus } = require('../lib/Util');
-const { raven } = require('../config.json');
 const webhook = require('../lib/managers/webhooks');
 
 module.exports = class Ready extends Event {
@@ -15,9 +14,6 @@ module.exports = class Ready extends Event {
 			Sistine.stats.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
 		}, 30000);
 
-		if (raven) {
-			await Sistine.raven.config(raven).install();
-		}
 		Sistine.emit('log', `[RAVEN] Sentry.io logging is ${Sistine.raven.installed ? 'enabled' : 'disabled'}.`);
 		updateStatus(Sistine);
 		webhook(`\`\`\`tex\n$ [READY] Shard[${shardid}]: Sistine ready! Guilds: ${Sistine.guilds.size.toLocaleString()}, Users: ${Sistine.users.size.toLocaleString()}\`\`\``);
