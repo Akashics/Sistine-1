@@ -67,7 +67,8 @@ process.on('exit', () => {
 	webhook(`\`\`\`tex\n$ [EXITING] Sistine is now exiting (might be restarting?).\`\`\``);
 });
 
+Sistine.raven.config(raven).install();
+
 Sistine.raven.context(async () => {
-	await Sistine.raven.config(raven).install();
 	Sistine.login(botToken);
 });
