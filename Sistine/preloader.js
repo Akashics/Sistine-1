@@ -14,7 +14,6 @@ require('moment-duration-format');
 require('node-opus');
 require('overwatch-js');
 require('prism-media');
-require('raven');
 require('snekfetch');
 require('uws');
 require('ytdl-core');

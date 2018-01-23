@@ -81,12 +81,12 @@ module.exports = class MusicManager {
 				.pipe(new prism.WebmOpusDemuxer())
 				.on('error', err => this.client.emit('log', err, 'error'));
 
-			this.dispatcher = this.connection.playOpusStream(stream, streamOptions);
+			this.dispatcher = this.connection.play(stream, streamOptions);
 		} else {
 			const stream = ytdl(song.url, { filter: 'audioonly' })
 				.on('error', err => this.client.emit('log', err, 'error'));
 
-			this.dispatcher = this.connection.playStream(stream, streamOptions);
+			this.dispatcher = this.connection.play(stream, streamOptions);
 		}
 
 		return this.dispatcher;
@@ -110,7 +110,6 @@ module.exports = class MusicManager {
 	}
 
 	skip(force = false) {
-		if (!this.queue || this.queue.length < 1) throw 'Cannot skip this song. This would force playback to end. Use cmd stop first.';
 		if (force && this.dispatcher) {
 			this.dispatcher.end();
 		} else { this.queue.shift(); }

@@ -12,7 +12,6 @@ class SistineClient extends Client {
 
 	constructor(options) {
 		super(Object.assign(options));
-
 		this.stats = new StatsD();
 		this.queue = new Music();
 		this.raven = require('raven');
@@ -68,4 +67,6 @@ process.on('exit', () => {
 	webhook(`\`\`\`tex\n$ [EXITING] Sistine is now exiting (might be restarting?).\`\`\``);
 });
 
-Sistine.login(botToken);
+Sistine.raven.context(() => {
+	Sistine.login(botToken);
+});
