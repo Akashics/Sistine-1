@@ -15,7 +15,10 @@ module.exports = class Ready extends Event {
 			Sistine.stats.gauge('client.memory', `${process.memoryUsage().heapUsed}`);
 		}, 30000);
 
-		Sistine.raven.config(raven).install();
+		if (raven) {
+			await Sistine.raven.config(raven).install();
+		}
+		Sistine.emit('log', `[RAVEN] Sentry.io logging is ${Sistine.raven.installed ? 'enabled' : 'disabled'}.`);
 		updateStatus(Sistine);
 		webhook(`\`\`\`tex\n$ [READY] Shard[${shardid}]: Sistine ready! Guilds: ${Sistine.guilds.size.toLocaleString()}, Users: ${Sistine.users.size.toLocaleString()}\`\`\``);
 
