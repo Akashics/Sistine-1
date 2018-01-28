@@ -29,7 +29,7 @@ module.exports = class Beautify extends Command {
 	}
 
 	async run(msg, [user = msg.author]) {
-		const message = await msg.channel.send(msg.language.get('COMMAND_BEAUTIFUL', user.username));
+		const message = await msg.channel.send(`<a:loading:402288838187417601> ${msg.language.get('COMMAND_BEAUTIFUL', user.username)}`);
 		const result = await getBeautiful(user.displayAvatarURL({ format: 'png' }));
 		await msg.channel.send({ files: [{ attachment: result, name: `${user.username}.jpg` }] });
 		return message.delete();

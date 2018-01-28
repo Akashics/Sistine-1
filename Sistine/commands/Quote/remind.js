@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const { Command, Timestamp } = require('klasa');
 
 module.exports = class extends Command {
 
@@ -11,14 +11,16 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [when, ...text]) {
+		const reminderText = text.join(' ');
+		const time = Timestamp.toNow(when);
 		const reminder = await this.client.schedule.create('reminder', when, {
 			data: {
-				channel: msg.channel.id,
-				user: msg.author.id,
-				text: text.join(' ')
+				user: msg.author,
+				text: reminderText,
+				from: Date.now()
 			}
 		});
-		return msg.send(`Ok, I created reminder id ${reminder.id} for you.`);
+		return msg.send(`<:blobthumbsup:357267430105677844> I will remind you in ${time} to ${reminderText}. \`Code: ${reminder.id}\``);
 	}
 
 };

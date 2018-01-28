@@ -12,7 +12,8 @@ module.exports = class swearFilter extends Monitor {
 	}
 
 	async run(msg) {
-		if (msg.channel.type !== 'text' && !msg.guild.available) return null;
+		if (msg.channel.type !== 'text') return null;
+		if (!msg.guild.available) return null;
 		const { configs } = msg.guild;
 		if (!configs.filtering.swearFilter || configs.filtering.swearWords.length >= 0) return null;
 		if (msg.deletable && (new RegExp(configs.filtering.swearWords.join('|'), 'i')).test(msg.content)) await msg.delete();

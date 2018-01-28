@@ -15,7 +15,7 @@ module.exports = class Ready extends Event {
 		}, 30000);
 
 		Sistine.emit('log', `[RAVEN] Sentry.io logging is ${Sistine.raven.installed ? 'enabled' : 'disabled'}.`);
-		if (shardid === 0) require('../lib/API')(this.client);
+		// if (shardid === 0) require('../lib/API')(this.client);
 		webhook(`\`\`\`tex\n$ [READY] Sistine Shard ${shardid} is available to ${Sistine.guilds.size.toLocaleString()} guilds.\`\`\``);
 		updateStatus(Sistine);
 	}

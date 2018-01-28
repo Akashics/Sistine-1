@@ -8,7 +8,8 @@ require('moment-duration-format');
 /* eslint-disable max-len */
 module.exports = async (client) => {
 	app.get('/api/adminAuth', async (req, res) => {
-		return res.json({ owner: Boolean(req.user.id === client.owner.ownerID) });
+		const owner = Boolean(req.user.id === client.owner.ownerID);
+		return res.json({ owner });
 	});
 
 	app.get('/dashboard/:guildID/manage', (req, res) => {
@@ -101,7 +102,7 @@ module.exports = async (client) => {
 		if (!guild) return res.status(404);
 		const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
 		if (!isManaged && !req.session.isAdmin) res.redirect('/');
-		await guild.configs.destroy();
+		return guild.configs.destroy();
 	});
 
 	app.get('/api/commands', async (req, res) => {
