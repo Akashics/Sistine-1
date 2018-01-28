@@ -22,9 +22,9 @@ module.exports = class Leaderboards extends Command {
 		if (page > totalPages && !totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 		if (totalPages && page + 1 > totalPages) return msg.channel.send(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-		leaderboard.push('= = = Global Leaderboard = = =\n');
+		leaderboard.push('=== Sistine Point Leaderboard ===\n');
 
-		const pos = leadboardPosition.findIndex(i => i.id === msg.author.id).padStart(2, '0');
+		const pos = leadboardPosition.findIndex(i => i.id === msg.author.id);
 
 		leadboardPosition.slice(page * 10, (page + 1) * 10)
 			.map(user => ({ balance: user.balance, user: user.id }))
