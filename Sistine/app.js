@@ -45,7 +45,7 @@ const Sistine = new SistineClient({
 	cmdLogging: true,
 	language: 'en-US',
 	prefix: 's>',
-	pieceDefaults: { commands: { deletable: true } },
+	pieceDefaults: { commands: { deletable: true, cooldown: 5 } },
 	readyMessage: (client) => `${client.user.tag}-${client.shard.id}, Listening to ${client.guilds.size} guilds, ${client.users.size} users, ${client.channels.size} channels.`,
 	providers: {
 		default: 'rethinkdb',

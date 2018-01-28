@@ -1,10 +1,9 @@
 const { Task } = require('klasa');
 
-module.exports = class extends Task {
+module.exports = class Reminder extends Task {
 
-	async run({ channel, user, text }) {
-		const _channel = this.client.channels.get(channel);
-		return _channel.send(`<@${user}>, You asked me to remind you to \`${text}\`.`);
+	async run({ user, text, from }) {
+		return user.send(`<a:ditto:393547954168004608> ${user.username}, you asked me to remind you to \`${text}\` about ${from} from now.`);
 	}
 
 };

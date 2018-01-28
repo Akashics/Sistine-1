@@ -33,7 +33,7 @@ module.exports = class Crush extends Command {
 	}
 
 	async run(msg, [user = msg.author]) {
-		const message = await msg.channel.send(msg.language.get('COMMAND_CRUSH', user.tag));
+		const message = await msg.channel.send(`<a:loading:402288838187417601> ${msg.language.get('COMMAND_CRUSH', user.tag)}`);
 		const result = await getCrushed(msg.author.displayAvatarURL({ format: 'png' }), user.displayAvatarURL({ format: 'png' }));
 		await msg.channel.send({ files: [{ attachment: result, name: 'crush.png' }] });
 		return message.delete();

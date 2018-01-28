@@ -20,7 +20,7 @@ module.exports = class WYR extends Command {
 				.setTitle(`${body.title}...`)
 				.setURL(body.link)
 				.setColor('PURPLE')
-				.setDescription(`${body.choicea} OR ${body.choiceb}?`);
+				.setDescription(`A: ${body.choicea} OR B: ${body.choiceb}?`);
 			return msg.sendEmbed(embed);
 		} catch (err) {
 			return msg.send(msg.language.get('COMMAND_ERROR'));

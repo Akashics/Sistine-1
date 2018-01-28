@@ -17,7 +17,7 @@ module.exports = class Crush extends Command {
 	}
 	/* eslint-disable new-cap */
 	async run(msg, [user = msg.author]) {
-		const message = await msg.channel.send(msg.language.get('COMMAND_TRIGGERING', user.tag));
+		const message = await msg.channel.send(`<a:loading:402288838187417601> ${msg.language.get('COMMAND_TRIGGERING', user.tag)}`);
 		const attachment = await this.getTriggered(user.displayAvatarURL({ format: 'png', size: 512 }));
 		await msg.channel.send({ files: [{ attachment, name: 'triggered.gif' }] });
 		return message.delete();

@@ -8,7 +8,7 @@ module.exports = class guildCreate extends Event {
 	}
 
 	async run(guild) {
-		this.client.emit('log', `Invited to Guild: ${guild.name}[${guild.id}]`);
+		this.client.emit('log', `Sistine invited to Guild: ${guild.name}[${guild.id}]. Now at ${guild.client.guilds.size} guilds.`);
 
 		this.client.stats.increment('client.guildJoins');
 		this.client.stats.gauge('client.guilds', this.client.guilds.size);

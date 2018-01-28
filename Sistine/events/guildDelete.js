@@ -8,7 +8,7 @@ module.exports = class guildDelete extends Event {
 	}
 
 	run(guild) {
-		this.client.emit('log', `Removed from Guild: ${guild.name}[${guild.id}]`);
+		this.client.emit('log', `Sistine removed from Guild: ${guild.name}[${guild.id}]. Now at ${guild.client.guilds.size} guilds.`);
 
 		this.client.stats.increment('client.guildLeaves');
 		this.client.stats.gauge('client.guilds', this.client.guilds.size);

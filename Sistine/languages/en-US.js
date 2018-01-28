@@ -198,11 +198,14 @@ const PINGS = [
 	'Here you go, not that it was worth my time. It only took me {{ms}}ms.',
 	'Is this right? I\'ve responded in {{ms}}ms.',
 	'{{user}}?, I\'ve responded in {{ms}}ms.',
-	'{{user}}! You wasted {{ms}}ms of my time, ERGH',
+	'{{user}}! You wasted {{ms}}ms of my time, ERGH.',
 	'D-did I do it right? I responded in {{ms}}ms.',
 	'I am here {{user}}, it only took me {{ms}}ms to respond!',
 	'You made me {{ms}}ms older - just from asking!',
-	'Do you know how long it took to me to read that message? You pretty much wasted {{ms}} of my day!'
+	'You didn\'t even bother to say "Hi", yet you want to know that I can respond in {{ms}}ms?!?!',
+	'I just wanted to call to let you know that I\'ll be leaving the airport in {{ms}}ms.',
+	'If you do the math correctly, you can obviously see that I responded in {{ms}} ms.',
+	'Do you know how long it took to me to read that message? You pretty much wasted {{ms}}ms of my day!'
 ];
 
 
