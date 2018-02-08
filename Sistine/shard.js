@@ -1,6 +1,5 @@
 require('./preloader');
-// Lets go ahead and preload everythhing on shard start so that it is available to shards.
-/* eslint-disable max-len */
+
 const Discord = require('discord.js');
 const log = require('./lib/managers/logger.js');
 const config = require('./config.json');

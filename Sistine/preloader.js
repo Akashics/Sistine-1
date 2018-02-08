@@ -12,7 +12,7 @@ require('klasa');
 require('moment');
 require('moment-duration-format');
 require('node-opus');
-require('overwatch-js');
+require('os');
 require('prism-media');
 require('snekfetch');
 require('uws');

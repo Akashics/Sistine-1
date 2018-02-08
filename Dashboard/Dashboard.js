@@ -45,13 +45,14 @@ app.get('/woah', (req, res) => {
 });
 
 app.get('/commands', (req, res) => {
-	const thing = require('./commands.json');
-	const commands = Object.values(thing)
+	const { commands: body } = await snekfetch.get("https://api.sistine.ml/commands").catch(() => res.render("home"));
+
 	renderTemplate(res, req, 'commands.ejs', { commands });
 });
 
-app.get('/stats', (req, res) => {
-	res.redirect('https://p.datadoghq.com/sb/82a5d5fef-1a21d0b3a5');
+app.get("/stats", async (req, res) => {
+    const { data: body } = await snekfetch.get("https://api.sistine.ml/stats").catch(() => res.render("home"));
+    return res.render("stats", { data });
 });
 
 app.listen(dashboard.port, () => {

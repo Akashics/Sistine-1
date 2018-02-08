@@ -18,7 +18,7 @@ module.exports = class User extends Command {
 
 	async run(msg, [member = msg.member]) {
 		const userInfo = new this.client.methods.Embed()
-			.setColor(member.displayHexColor || 0xFFFFFF)
+			.setColor(member.displayHexColor ? member.displayHexColor : '0xFFFFFF')
 			.setThumbnail(member.user.displayAvatarURL())
 			.addField('❯ Name', member.user.tag, true)
 			.addField('❯ ID', member.id, true)
@@ -26,8 +26,8 @@ module.exports = class User extends Command {
 			.addField('❯ Server Join Date', this.timestamp.display(member.joinedTimestamp), true)
 			.addField('❯ Status', this.statuses[member.user.presence.status], true)
 			.addField('❯ Playing', member.user.presence.activity ? member.user.presence.activity.name : 'N/A', true)
-			.addField('❯ Highest Role', member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None', true)
-			.addField('❯ Hoist Role', member.hoistRole ? member.hoistRole.name : 'None', true);
+			.addField('❯ Highest Role', member.roles.highest !== '@everyone' ? member.roles.highest.name : 'None', true)
+			.addField('❯ Hoist Role', member.roles.hoist ? member.roles.hoist.name : 'None', true);
 
 		return msg.sendEmbed(userInfo);
 	}

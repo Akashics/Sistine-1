@@ -15,7 +15,7 @@ module.exports = class extends Command {
 		const time = Timestamp.toNow(when);
 		const reminder = await this.client.schedule.create('reminder', when, {
 			data: {
-				user: msg.author,
+				user: { id: msg.author.id, name: msg.author.username },
 				text: reminderText,
 				from: Date.now()
 			}

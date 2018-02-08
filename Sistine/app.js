@@ -1,7 +1,6 @@
 const { Client } = require('klasa');
 const Music = require('./lib/managers/Music');
 const { botToken, rethinkdb, raven } = require('./config.json');
-const webhook = require('./lib/managers/webhooks');
 const StatsD = require('hot-shots');
 
 Client.defaultPermissionLevels
@@ -12,6 +11,7 @@ class SistineClient extends Client {
 
 	constructor(options) {
 		super(Object.assign(options));
+		this.updoots = new Array[''];
 		this.stats = new StatsD();
 		this.queue = new Music();
 		this.raven = require('raven');
@@ -42,7 +42,7 @@ const Sistine = new SistineClient({
 	cmdDeleting: true,
 	cmdEditing: true,
 	typing: false,
-	cmdLogging: true,
+	cmdLogging: false,
 	language: 'en-US',
 	prefix: 's>',
 	pieceDefaults: { commands: { deletable: true, cooldown: 5 } },
@@ -61,10 +61,6 @@ const Sistine = new SistineClient({
 		}
 	},
 	console: { useColor: true, timestamps: 'MM-DD-YYYY hh:mm:ss A' }
-});
-
-process.on('exit', () => {
-	webhook(`\`\`\`tex\n$ [EXITING] Sistine is now exiting (might be restarting?).\`\`\``);
 });
 
 Sistine.raven.config(raven).install();

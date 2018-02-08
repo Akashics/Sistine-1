@@ -15,7 +15,7 @@ module.exports = class Daily extends Command {
 
 		const payer = msg.author.configs;
 		const payee = user.configs;
-		const pointsReward = 250;
+		const pointsReward = this.client.updoots.includes(msg.author.id) ? 500 : 250;
 
 		if (Date.now() <= payer.dailyTimer) return msg.send(msg.language.get('COMMAND_DAILY_FROMNOW', moment(payer.dailyTimer).fromNow(true)));
 		await msg.send(msg.language.get(`COMMAND_DAILY_${payer === payee ? 'CLAIMED' : 'DONATED'}`, pointsReward, msg.author.username, user.username));

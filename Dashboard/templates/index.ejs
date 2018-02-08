@@ -1,15 +1,66 @@
 <%- include('blocks/header') %>
   <div class="container text-center" style="overflow:hidden;position:relative;">
     <div class="mt-5 mb-5">
-      <img class="profile-bot" src="https://cdn.discordapp.com/avatars/353929487018229762/e47c260b60d120f3c6f9c1d13a1e598b.png?size=512" alt="Sistine's Avatar">
+      <img class="profile-bot" src="https://images.discordapp.net/avatars/353929487018229762/7cb6aa13d627815542413c0786eb0845.png?size=512" alt="Sistine's Avatar">
     </div>
       <h1 class="jumbotron-heading">Sistine <small style="font-size:10px"><b>Beta</b></small></h1>
       <p class="lead text-muted">シスチンファイバー</p>
-      <p>
-        <a data-target="_blank" data-href="/invite" class="btn btn-raised btn-secondary">Invite</a>
-        <a data-href="https://www.paypal.me/AltarisNine" class="btn btn-raised btn-secondary">Donate</a>
-      </p>
     </div>
-    </div>
+
+    <div class="section section-tabs" style="background-color: #212121 !important"> <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-lg-8 col-xl-6 ml-auto mr-auto">
+                            <p class="category">New Features!</p>
+                            <div class="card">
+                                <ul class="nav nav-tabs justify-content-center" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">
+                                            <i class="now-ui-icons ui-1_email-85"></i> Profile Command
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#supportguild" role="tab" aria-expanded="false">
+                                            <i class="now-ui-icons ui-1_bell-53"></i> Support Guild
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#statapi" role="tab" aria-expanded="false">
+                                            <i class="now-ui-icons travel_info"></i> Stat API
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#settings" role="tab" aria-expanded="true">
+                                            <i class="now-ui-icons ui-1_settings-gear-63"></i> Custom Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="tab-content text-center">
+                                        <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
+                                            <p>In the newest update from Sistine, you can experience a new profile card. Preloaded on it, you can enjoy seeing everything that Sistine measures in your social activity. Higher level means higher perks!</p>
+                                        </div>
+                                        <div class="tab-pane" id="supportguild" role="tabpanel" aria-expanded="false">
+                                            <p>Sistine now has a public support guild! If you don't understand a feature, its ok! Join in and let us show you how it works! </p>
+                                        </div>
+                                        <div class="tab-pane" id="statapi" role="tabpanel" aria-expanded="false">
+                                            <p>Coming very soon is an API for Sistine, you'll be able to see statistics on average of each guild of messages per second, voice channel updates, how many times sistine is mentioned or used, guild activity times and much, much more.</p>
+                                        </div>
+                                        <div class="tab-pane active" id="settings" role="tabpanel" aria-expanded="true">
+                                            <p>Sistine now allows you to customize each guild setting based on your needs! Although this command is currently setup for advanced uses, such as setting logging channels, it is pretty easy to get started. You can use 's>conf set logging.logChannel' to set the logChannel inside of the logging folder. Ask for support in our support server if need be.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-lg-8 col-xl-6 ml-auto mr-auto">
+                            <p class="category">Gain More Social Points!</p>
+                            <p style="color: white">Gain more points when using your reputation or daily command by <a href="https://discordbots.org/bot/sistine">upvoting</a> Sistine! Click the ^ to upvote! Rewards will be available after 5 minutes.</p>
+                            <img src="https://this.is-a-professional-domain.com/5eef0f.png">
+                              <a href="https://discordbots.org/bot/sistine">
+                                <img src="https://discordbots.org/api/widget/353929487018229762.svg">
+                              </a></div>
+                    </div>
+                </div></div>
   <% include ./blocks/footer %>
   </div>
