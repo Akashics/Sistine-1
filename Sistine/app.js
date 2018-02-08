@@ -11,7 +11,7 @@ class SistineClient extends Client {
 
 	constructor(options) {
 		super(Object.assign(options));
-		this.updoots = new Array[''];
+		this.updoots = [];
 		this.stats = new StatsD();
 		this.queue = new Music();
 		this.raven = require('raven');
