@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const moment = require('moment');
 require('moment-duration-format');
-
+const snekfetch = require('snekfetch');
 const url = require('url');
 const path = require('path');
 const compression = require('compression');
