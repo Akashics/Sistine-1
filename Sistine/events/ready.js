@@ -8,7 +8,7 @@ module.exports = class Ready extends Event {
 
 	async run() {
 		setInterval(async () => {
-			const updoots = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.id}/votes`).set({ Authorization: dBotsORG }).catch((err) => {
+			const updoots = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.user.id}/votes`).set({ Authorization: dBotsORG }).catch((err) => {
 				this.client.console.error(`[UPDOOTS] Failed to pull updoots. ${err}`);
 			});
 			this.client.updoots = updoots.map(user => user.id);
