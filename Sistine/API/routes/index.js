@@ -2,9 +2,7 @@
 const express = require('express');
 const routes = express.Router();
 
-routes.get('/', async (req, res) => {
-	return res.status(200).json({ status: 'OK', message: 'API Key accepted.' });
-});
+routes.get('/', async (req, res) => res.status(200).json({ status: 'OK', message: 'API Key accepted.' }));
 
 routes.get('/stats', async (req, res) => {
 	const rethink = await req.client.providers.default.db('test').table('stats').get('45cfe4d5-7901-4b3e-94ee-1c951a230f25').run();
@@ -27,12 +25,10 @@ routes.get('/commands', (req, res) => {
 			usageString: command.usage.nearlyFullUsage
 		};
 	});
-
-	return res.status(200).json(data);
+	return res.status(200).json({ data });
 });
 
-routes.get('*', (req, res) => res.status(404).json({ status: 404, message: 'Endpoint not found. Please ensure you are using the correct endpoint.' });
-);
+routes.get('*', (req, res) => res.status(404).json({ status: 404, message: 'Endpoint not found. Please ensure you are using the correct endpoint.' }));
 
 
 module.exports = routes;
