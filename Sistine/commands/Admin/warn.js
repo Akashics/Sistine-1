@@ -18,7 +18,7 @@ module.exports = class Warn extends Command {
 	async run(msg, [member, ...reason]) {
 		const reasonFull = reason.length > 0 ? reason.join(' ') : 'No Reason Specified.';
 
-		if (member.highestRole.position >= msg.member.highestRole.position) {
+		if (member.roles.highest.position >= msg.member.role.highest.position) {
 			return msg.send(msg.language.get('WARN_FAIL'));
 		}
 

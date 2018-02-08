@@ -6,13 +6,6 @@
         "username": "admin",
         "password": ""
     },
-    "dashboard": {
-        "clientSecret": "i9NOLVBukVRb9QBv8ouds3PCGm2UKtgV",
-        "callbackURL": "https://sistine.ml/callback",
-        "domainName": "https://sistine.ml",
-        "port": "80",
-        "sessionSecret": "wFtSP,k]l*mO4].Jh-qdjuL6;mS>H~[)dbJ&hhcB]%'WMEp3_@2;'/M3#v0ES7*"
-    },
     "webhook": {
         "id": "403781313452310528",
         "token": "GhBUUD5CjIJ1lLvS3EBZD0tTCoJ1p-J5xVLVd-xWctcOaboOq9tO8arnAaLBHhgSqsaG"

@@ -1,14 +1,6 @@
 <%- include('blocks/header', commands) %>
-
-  <% const help = {};
- commands.forEach((command) => {
-  const cat = command.category;
-  if (!help.hasOwnProperty(cat)) help[cat] = [];
-  help[cat].push(command);
-});
-%>
     <div class="container SistineBestContent">
-      <% for (const category in help) { %>
+      <% for (const category in commands) { %>
       <br>
         <h2> <%= category %> Commands </h2>
         <div class="table-responsive" style="border-collapse: collapse; border-spacing: 0;">
@@ -24,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <% for (const command of help[category]) { %>
+              <% for (const command of commands[category]) { %>
                 <tr>
                   <td>
                     <%- command.name %>

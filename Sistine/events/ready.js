@@ -1,23 +1,23 @@
 const { Event } = require('klasa');
 const { updateStatus } = require('../lib/Util');
 const webhook = require('../lib/managers/webhooks');
+const snekfetch = require('snekfetch');
+const { dBotsORG } = require('../config.json');
 
 module.exports = class Ready extends Event {
 
 	async run() {
-		const Sistine = this.client;
-		const shardid = Sistine.shard.id;
+		setInterval(async () => {
+			const updoots = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.id}/votes`).set({ Authorization: dBotsORG }).catch((err) => {
+				this.client.console.error(`[UPDOOTS] Failed to pull updoots. ${err}`);
+			});
+			this.client.updoots = updoots.map(user => user.id);
+		}, 300000);
 
-		setInterval(() => {
-			Sistine.stats.gauge('client.users', Sistine.users.size);
-			Sistine.stats.gauge('client.ping', Sistine.ping);
-			Sistine.stats.gauge('client.memory', process.memoryUsage().heapUsed);
-		}, 30000);
-
-		Sistine.emit('log', `[RAVEN] Sentry.io logging is ${Sistine.raven.installed ? 'enabled' : 'disabled'}.`);
-		// if (shardid === 0) require('../lib/API')(this.client);
-		webhook(`\`\`\`tex\n$ [READY] Sistine Shard ${shardid} is available to ${Sistine.guilds.size.toLocaleString()} guilds.\`\`\``);
-		updateStatus(Sistine);
+		this.client.emit('log', `[RAVEN] Sentry.io logging is ${this.client.raven.installed ? 'enabled' : 'disabled'}.`);
+		if (this.client.shard.id === 0) require('../API/API')(this.client);
+		webhook(`\`\`\`tex\n$ [READY] this.client Shard ${this.client.shard.id} is available to ${this.client.guilds.size.toLocaleString()} guilds.\`\`\``);
+		updateStatus(this.client);
 	}
 
 };

@@ -6,31 +6,34 @@ const { dBotsPW, dBotsORG, terminalINK, weebKey } = require('../config.json');
 class Util {
 
 	/* eslint-disable camelcase */
-	static dBots(client) {
+	static async dBots(client) {
+		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: dBotsPW })
-			.send({ server_count: client.guilds.size, shard_id: client.shard.id, shard_count: client.shard.count })
+			.send({ server_count, shard_id: client.shard.id, shard_count: client.shard.count })
 			.catch((err) => {
 				client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
 			});
 	}
 
-	static dBotsOrg(client) {
+	static async dBotsOrg(client) {
+		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: dBotsORG })
-			.send({ server_count: client.guilds.size, shard_id: client.shard.id, shard_count: client.shard.count })
+			.send({ server_count, shard_id: client.shard.id, shard_count: client.shard.count })
 			.catch((err) => {
 				client.console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
 	}
 
-	static terminalINK(client) {
+	static async terminalINK(client) {
+		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://ls.terminal.ink/api/v1/bots/${client.user.id}`)
 			.set({ Authorization: terminalINK })
-			.send({ server_count: client.guilds.size })
+			.send({ server_count })
 			.catch((err) => {
 				client.console.error(`[TerminalINK] Failed to post to ls.terminal.ink. ${err}`);
 			});
@@ -60,8 +63,9 @@ class Util {
 		return role;
 	}
 
-	static updateStatus(client) {
-		client.user.setPresence({ activity: { name: `${client.guilds.size.toLocaleString()} guilds | s>help`, type: 3 } })
+	static async updateStatus(client) {
+		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
+		client.user.setPresence({ activity: { name: `${server_count} guilds | s>help`, type: 3 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
 			});
