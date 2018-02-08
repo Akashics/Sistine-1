@@ -45,8 +45,8 @@ app.get('/woah', (req, res) => {
 });
 
 app.get('/commands', async (req, res) => {
-	const { body } = await snekfetch.get("https://api.sistine.ml/commands").catch(() => renderTemplate(res, req, 'index.ejs'));
-	const commands = body.stringify();
+	const { body } = await snekfetch.get("https://api.sistine.ml/commands"); //.catch(() => renderTemplate(res, req, 'index.ejs'));
+	const commands = body;
 	renderTemplate(res, req, 'commands.ejs', commands);
 });
 
