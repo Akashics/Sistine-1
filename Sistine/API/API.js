@@ -16,5 +16,5 @@ module.exports = async (client) => {
 	});
 
 	app.use('/', router);
-	app.listen(port, () => console.log(`[API] Started on port ${port}`));
+	app.listen(port, () => client.emit('log', `[API] Started on port ${port}`));
 };
