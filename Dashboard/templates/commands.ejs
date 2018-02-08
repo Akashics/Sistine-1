@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <% for (const command of commands[category]) { %>
+              <% for (const command in category) { %>
                 <tr>
                   <td>
                     <%- command.name %>
