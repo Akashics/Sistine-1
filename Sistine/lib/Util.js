@@ -64,7 +64,7 @@ class Util {
 	}
 
 	static async updateStatus(client) {
-		const server_count = await client.shard.fetchClientValued('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
+		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		client.user.setPresence({ activity: { name: `${server_count} guilds | s>help`, type: 3 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
