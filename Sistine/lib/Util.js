@@ -7,7 +7,7 @@ class Util {
 
 	/* eslint-disable camelcase */
 	static async dBots(client) {
-		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
+		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: dBotsPW })
@@ -18,7 +18,7 @@ class Util {
 	}
 
 	static async dBotsOrg(client) {
-		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
+		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
 			.set({ Authorization: dBotsORG })
@@ -29,7 +29,7 @@ class Util {
 	}
 
 	static async terminalINK(client) {
-		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
+		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://ls.terminal.ink/api/v1/bots/${client.user.id}`)
 			.set({ Authorization: terminalINK })
@@ -64,7 +64,7 @@ class Util {
 	}
 
 	static async updateStatus(client) {
-		const server_count = await client.shard.fetchClientValue('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
+		const server_count = await client.shard.fetchClientValued('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		client.user.setPresence({ activity: { name: `${server_count} guilds | s>help`, type: 3 } })
 			.catch((err) => {
 				client.emit('log', err, 'error');
