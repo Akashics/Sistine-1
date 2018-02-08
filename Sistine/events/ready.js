@@ -16,7 +16,7 @@ module.exports = class Ready extends Event {
 
 		this.client.emit('log', `[RAVEN] Sentry.io logging is ${this.client.raven.installed ? 'enabled' : 'disabled'}.`);
 		if (this.client.shard.id === 0) require('../API/API')(this.client);
-		webhook(`\`\`\`tex\n$ [READY] this.client Shard ${this.client.shard.id} is available to ${this.client.guilds.size.toLocaleString()} guilds.\`\`\``);
+		webhook(`\`\`\`tex\n$ [READY] Shard #${this.client.shard.id + 1} is available to ${this.client.guilds.size.toLocaleString()} guilds.\`\`\``);
 		updateStatus(this.client);
 	}
 
