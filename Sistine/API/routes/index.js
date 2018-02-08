@@ -31,9 +31,8 @@ routes.get('/commands', async (req, res) => {
 	return res.status(200).json({ data });
 });
 
-routes.get('*', (req, res) => {
-	return res.status(404).json({ status: 404, message: 'Endpoint not found. Please ensure you are using the correct endpoint.' });
-});
+routes.get('*', (req, res) => res.status(404).json({ status: 404, message: 'Endpoint not found. Please ensure you are using the correct endpoint.' });
+);
 
 
 module.exports = routes;
