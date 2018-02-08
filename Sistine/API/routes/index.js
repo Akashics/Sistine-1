@@ -11,10 +11,10 @@ routes.get('/stats', async (req, res) => {
 	const guilds = (await req.client.shard.fetchClientValues('guilds.size')).reduce((prev, val) => prev + val, 0);
 	const users = (await req.client.shard.fetchClientValues('users.size')).reduce((prev, val) => prev + val, 0);
 	const channels = (await req.client.shard.fetchClientValues('channels.size')).reduce((prev, val) => prev + val, 0);
-	return res.json({ stats: { guilds, users, channels, ping: req.client.ping, status: req.client.status, uptime: req.client.uptime, memory: process.memoryUsage().heapUsed / 1024 / 1024, commands: rethink.commands, messages: rethink.messages } });
+	return res.json({ guilds, users, channels, ping: req.client.ping, status: req.client.status, uptime: req.client.uptime, memory: process.memoryUsage().heapUsed / 1024 / 1024, commands: rethink.commands, messages: rethink.messages });
 });
 
-routes.get('/commands', async (req, res) => {
+routes.get('/commands', (req, res) => {
 	const data = {};
 	req.client.commands.filter((command) => command.permLevel <= 3).forEach(command => {
 		if (!data.hasOwnProperty(command.category)) data[command.category] = {};
@@ -28,7 +28,7 @@ routes.get('/commands', async (req, res) => {
 		};
 	});
 
-	return res.status(200).json({ data });
+	return res.status(200).json(data);
 });
 
 routes.get('*', (req, res) => res.status(404).json({ status: 404, message: 'Endpoint not found. Please ensure you are using the correct endpoint.' });
