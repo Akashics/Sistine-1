@@ -1,6 +1,6 @@
 const { Event } = require('klasa');
 const { updateStatus } = require('../lib/Util');
-const API = require('./api.js');
+const API = require('../api');
 const webhook = require('../lib/managers/webhooks');
 
 module.exports = class Ready extends Event {
