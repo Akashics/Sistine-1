@@ -1,6 +1,8 @@
 const { Client } = require('klasa');
+const DBL = require('dblapi.js');
+const { DashboardHook } = require('./api.js');
 const Music = require('./lib/managers/Music');
-const { botToken, rethinkdb, raven } = require('./config.json');
+const { botToken, rethinkdb, raven, dBotsORG } = require('./config.json');
 const StatsD = require('hot-shots');
 
 Client.defaultPermissionLevels
@@ -11,6 +13,7 @@ class SistineClient extends Client {
 
 	constructor(options) {
 		super(Object.assign(options));
+		this.dbl = new DBL(dBotsORG);
 		this.updoots = [];
 		this.stats = new StatsD();
 		this.queue = new Music();
@@ -46,7 +49,7 @@ const Sistine = new SistineClient({
 	language: 'en-US',
 	prefix: 's>',
 	pieceDefaults: { commands: { deletable: true, cooldown: 5 } },
-	readyMessage: (client) => `${client.user.tag}-${client.shard.id}, Listening to ${client.guilds.size} guilds, ${client.users.size} users, ${client.channels.size} channels.`,
+	readyMessage: (client) => `${client.user.tag}, Listening to ${client.guilds.size} guilds, ${client.users.size} users, ${client.channels.size} channels on shard ${client.shard.id}.`,
 	providers: {
 		default: 'rethinkdb',
 		rethink: {
@@ -66,5 +69,6 @@ const Sistine = new SistineClient({
 Sistine.raven.config(raven).install();
 
 Sistine.raven.context(async () => {
+	Sistine.dashboard = new DashboardHook(Sistine);
 	Sistine.login(botToken);
 });

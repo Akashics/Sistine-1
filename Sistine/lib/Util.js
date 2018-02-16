@@ -1,7 +1,7 @@
 const moment = require('moment');
 require('moment-duration-format');
 const snekfetch = require('snekfetch');
-const { dBotsPW, dBotsORG, terminalINK, weebKey } = require('../config.json');
+const { dBotsPW, terminalINK, weebKey } = require('../config.json');
 
 class Util {
 
@@ -14,17 +14,6 @@ class Util {
 			.send({ server_count, shard_id: client.shard.id, shard_count: client.shard.count })
 			.catch((err) => {
 				client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
-			});
-	}
-
-	static async dBotsOrg(client) {
-		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
-		snekfetch
-			.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-			.set({ Authorization: dBotsORG })
-			.send({ server_count, shard_id: client.shard.id, shard_count: client.shard.count })
-			.catch((err) => {
-				client.console.error(`[DBOTSORG] Failed to post to Discord Bots Org. ${err}`);
 			});
 	}
 

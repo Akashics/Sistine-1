@@ -26,7 +26,9 @@ module.exports = class guildMemberRemove extends Event {
 			`${user} left us just like my father.`,
 			`No one ever listens to ${user} until they made the mistake of leaving us.`,
 			`Seems ${user} wanted to remain single.`,
-			`Go after ${user}! They just robbed everyone of all their credits!`
+			`Go after ${user}! They just robbed everyone of all their credits!`,
+			`I didn't know that ${user} could fit in my trunk.`,
+			`Sorry for the awful, mean, and semi-accurate things ${user}-san said.`
 		];
 
 		member.guild.channels.get(memberChannel).send(`<:leave:397102213807210517> ${leaveStrings[Math.floor(Math.random() * leaveStrings.length)]}`);
