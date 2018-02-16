@@ -1,5 +1,6 @@
 const { Event } = require('klasa');
 const { updateStatus } = require('../lib/Util');
+const API = require('./api.js');
 const webhook = require('../lib/managers/webhooks');
 
 module.exports = class Ready extends Event {
@@ -13,7 +14,7 @@ module.exports = class Ready extends Event {
 		}, 300000);
 
 		this.client.emit('log', `[RAVEN] Sentry.io logging is ${this.client.raven.installed ? 'enabled' : 'disabled'}.`);
-		if (this.client.shard.id === 0) require('../API/API')(this.client);
+		if (this.client.shard.id === 0) { new API(this.client); }
 		webhook(`\`\`\`tex\n$ [READY] Shard #${this.client.shard.id + 1} is available to ${this.client.guilds.size.toLocaleString()} guilds.\`\`\``);
 		updateStatus(this.client);
 	}

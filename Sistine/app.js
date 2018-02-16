@@ -1,6 +1,5 @@
 const { Client } = require('klasa');
 const DBL = require('dblapi.js');
-const { DashboardHook } = require('./api.js');
 const Music = require('./lib/managers/Music');
 const { botToken, rethinkdb, raven, dBotsORG } = require('./config.json');
 const StatsD = require('hot-shots');
@@ -69,6 +68,5 @@ const Sistine = new SistineClient({
 Sistine.raven.config(raven).install();
 
 Sistine.raven.context(async () => {
-	Sistine.dashboard = new DashboardHook(Sistine);
 	Sistine.login(botToken);
 });
