@@ -19,7 +19,7 @@ module.exports = class Daily extends Command {
 
 		if (Date.now() <= payer.dailyTimer) return msg.send(msg.language.get('COMMAND_DAILY_FROMNOW', moment(payer.dailyTimer).fromNow(true)));
 		await msg.send(msg.language.get(`COMMAND_DAILY_${payer === payee ? 'CLAIMED' : 'DONATED'}`, pointsReward, msg.author.username, user.username));
-		await payer.update('dailyTimer', Date.now() + (24 * 60 * 60 * 1000), msg.guild);
+		await payer.update('dailyTimer', Date.now() + (12 * 60 * 60 * 1000), msg.guild);
 		return payee.update('balance', payee.balance + pointsReward, msg.guild);
 	}
 

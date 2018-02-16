@@ -18,7 +18,7 @@ module.exports = class Reputation extends Command {
 
 		if (Date.now() >= msg.author.configs.reputationTimer) {
 			await msg.send(msg.language.get('COMMAND_REPUTATION_SENT', user));
-			await msg.author.configs.update('reputationTimer', Date.now() + (24 * 60 * 60 * 1000), msg.guild);
+			await msg.author.configs.update('reputationTimer', Date.now() + (12 * 60 * 60 * 1000), msg.guild);
 			return user.configs.update('reputation', user.configs.reputation + repReward);
 		} else {
 			return msg.send(msg.language.get('COMMAND_REPUTATION_FROMNOW', msg.author.configs));

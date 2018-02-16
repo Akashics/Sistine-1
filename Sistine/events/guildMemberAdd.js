@@ -15,9 +15,13 @@ module.exports = class guildMemberRemove extends Event {
 
 		const joinStrings = [
 			`Y-yay! More people to deal with. Welcome ${user}!`,
+			`Shot through the heart! And ${user}'s to blame! Baby, you give love, a bad name!`,
+			`おかえりなさい ${user}-san!`,
+			`Despite the war efforts, I still think ${user}-san is fine...`,
 			`Ergh, why did ${user} show up? I already have to deal with ${member.guild.memberCount - 1} other users.`,
 			`OwO Who's this? ${user} has joined ${member.guild.name}.`,
 			`O-ohayou ${member.user.username}-san.`,
+			`Lets all chip in and buy ${user}-san a nice seafood dinner.`,
 			`Looks like ${user} landed on the wrong side of Discord.`,
 			`O-oh, welcome ${member.user.username}-san. I hope I haven't embarrased you...`,
 			`Roses are red, violets are blue, ${user} joined this server to be with you.`,
@@ -27,9 +31,11 @@ module.exports = class guildMemberRemove extends Event {
 			`${user} has joined the server, however it didn't seem very effective.`,
 			`Ha! ${user} activivated my trap card!`,
 			`Ohmaiglob, ${user} is here!`,
-			`${user} has joined the guild. Lets file that under "Never Again".`,
+			`It's alive! ${user}-san IS ALIVE!`,
 			`${user}'s Pizza. How may I help you?`,
-			`Shhh! ${user} is sleeping...`
+			`Shhh! ${user} is sleeping...`,
+			`Seems like ${user} is open all week long.`,
+			`Sweet dreams are made of cheese, who is ${user} to disagree?`
 		];
 
 		member.guild.channels.get(memberChannel).send(`<:join:397077767797211157> ${joinStrings[Math.floor(Math.random() * joinStrings.length)]}`);

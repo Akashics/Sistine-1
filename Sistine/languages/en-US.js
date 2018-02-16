@@ -508,7 +508,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_MOE_DESCRIPTION: 'Posts random anime images based on the type selected.',
 
 			COMMAND_CUDDLE: (user, author) => `**${user.username}**, you were cuddled by **${author.username}**.`,
-			COMMAND_CUDDLE_SOLO: user => `Just like hugging, you need someone else to hug you, **${user.username}**.`,
+			COMMAND_CUDDLE_SOLO: user => `Just like hugging, you need someone else to cuddle you, **${user.username}**.`,
 			COMMAND_CUDDLE_DESCRIPTION: 'I mean, who wouldn\'t want to cuddle with Sistine?',
 
 			COMMAND_HUG: (user, author) => `**${user.username}**, you were hugged by **${author.username}**.`,
@@ -525,7 +525,7 @@ module.exports = class enUSLang extends Language {
 
 			COMMAND_POKE: (user, author) => `**${user.username}**, you were poked by **${author.username}**.`,
 			COMMAND_POKE_SOLO: user => `You poked yourself, **${user.username}**.`,
-			COMMAND_POKE_DESCRIPTION: 'Pokeing someone, sometimes to get their intention.',
+			COMMAND_POKE_DESCRIPTION: 'Pokeing someone, sometimes to get their attention.',
 
 			COMMAND_SLAP: (user, author) => `**${user.username}**, you were slapped by **${author.username}**.`,
 			COMMAND_SLAP_SOLO: user => `You slapped yourself, **${user.username}**. I don't think that helped.`,

@@ -20,7 +20,7 @@ module.exports = class Profile extends Command {
 
 	async run(msg, [user = msg.author]) {
 		if (user.bot) return true;
-		const messg = await msg.send(`<a:loading:402288838187417601> _Looking up ${user.username}'s information..._`);
+		const messg = await msg.send(`<a:loading:402288838187417601> _Looking up ${user.username}'s profile..._`);
 
 		const { balance, level, reputation } = await user.configs;
 		const guildCard = await fsn.readFile('./assets/images/profile-card.png');
