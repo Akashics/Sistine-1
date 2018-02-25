@@ -11,7 +11,7 @@ class DashboardHook extends APIServer {
 
 		this.client = client;
 
-		this.router.get('stats/', async (request, response) => {
+		this.router.get('stats', async (request, response) => {
 			const rethink = await this.client.providers.default.db('test').table('stats').get('ba598836-3e7f-4d46-a8f5-98a8613fe374').run();
 			const guilds = (await this.client.shard.fetchClientValues('guilds.size')).reduce((prev, val) => prev + val, 0);
 			const users = (await this.client.shard.fetchClientValues('users.size')).reduce((prev, val) => prev + val, 0);
@@ -19,7 +19,7 @@ class DashboardHook extends APIServer {
 			return response.end(JSON.stringify({ guilds, users, channels, ping: this.client.ping, status: this.client.status, uptime: this.client.uptime, memory: process.memoryUsage().heapUsed / 1024 / 1024, commands: rethink.commands, messages: rethink.messages }));
 		});
 
-		this.router.get('commands/', (request, response) => {
+		this.router.get('commands', (request, response) => {
 			const data = {};
 			this.client.commands.filter((command) => command.permLevel <= 3).forEach(command => {
 				if (!data.hasOwnProperty(command.category)) data[command.category] = {};
