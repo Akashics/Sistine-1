@@ -16,14 +16,15 @@
               </tr>
             </thead>
             <tbody>
-              <% for (const command in commands[category]) { %>
+              <% for (const command in commands[category]) { 
+                console.log(command)%>
                 <tr>
                   <td>
                     <%- command.name %>
                   </td>
                   <td>
                       <i>
-                      <%- command.aliases.length < 1 ? '<i style="opacity: 0.5;" class="fa fa-times"></li>' : `${command.aliases.join(", ")}` %>
+                      <%- command.aliases.join(", ") %>
                       </i>
                   </td>
                   <td>
