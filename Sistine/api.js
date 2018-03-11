@@ -21,6 +21,7 @@ class DashboardHook extends APIServer {
 		});
 
 		this.router.get('commands', (request, response) => {
+			response.writeHead(200, { 'Content-Type': 'application/json' });
 			const commands = {};
 			const msg = { language: this.client.languages.default };
 			this.client.commands.filter(cmd => cmd.permLevel <= 6).forEach(cmd => {
@@ -49,7 +50,7 @@ class DashboardHook extends APIServer {
 			return response.end(JSON.stringify(commands));
 		});
 
-		this.router.get('guilds/', (request, response) => response.end(JSON.stringify(this.client.guilds.keyArray())));
+		this.router.get('guilds', (request, response) => response.end(JSON.stringify(this.client.guilds.keyArray())));
 
 		this.router.get('guilds/:guildID', (request, response, { guildID }) => {
 			const guild = this.client.guilds.get(guildID);
