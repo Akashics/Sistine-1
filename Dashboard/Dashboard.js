@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const moment = require('moment');
+const bodyParser = require('body-parser')
 require('moment-duration-format');
 const snekfetch = require('snekfetch');
 const url = require('url');
@@ -16,9 +17,8 @@ const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
 app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`)));
 
 app.use(helmet());
-
-// body-parser reads incoming JSON or FORM data and simplifies their
-// use in code.
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(compression());
 
 // The domain name used in various endpoints to link between pages.
