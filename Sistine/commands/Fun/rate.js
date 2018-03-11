@@ -9,7 +9,6 @@ module.exports = class Rate extends Command {
 			usage: '<Thing:str>',
 			cooldown: 5
 		});
-		this.cost = 15;
 	}
 
 	async run(msg, [user]) {

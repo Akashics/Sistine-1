@@ -8,7 +8,6 @@ module.exports = class WTP extends Command {
 			aliases: ['wtp'],
 			description: (msg) => msg.language.get('COMMAND_WTP_DESCRPTION')
 		});
-		this.cost = 25;
 	}
 
 	async run(msg) {
@@ -33,7 +32,7 @@ module.exports = class WTP extends Command {
 		});
 		if (!msgs.size) { return msg.send(msg.language.get('COMMAND_WTP_OUT_TIME', name)); }
 		if (msgs.first().content.toLowerCase() !== name) { return msg.send(msg.language.get('COMMAND_WTP_INCORRECT', name)); }
-		return msg.send(msg.language.get('COMMAND_WTP_CORRECT', msg.author.tag, name));
+		return msg.send(msg.language.get('COMMAND_WTP_CORRECT', name));
 	}
 
 };

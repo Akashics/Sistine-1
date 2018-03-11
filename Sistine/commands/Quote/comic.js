@@ -15,7 +15,7 @@ module.exports = class Comic extends Command {
 	async run(msg) {
 		const { body } = await get(`http://explosm.net/rcg/`);
 		const cheerioResponse = cheerio.load(body);
-		return msg.send('', { files: [`http:${cheerioResponse('#rcg-comic').first().find('img').first().attr('src').replace(/\\/g, '/')}`] });
+		return msg.channel.send({ files: [`http:${cheerioResponse('#rcg-comic').first().find('img').first().attr('src').replace(/\\/g, '/')}`] });
 	}
 
 };

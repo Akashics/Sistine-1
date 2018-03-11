@@ -12,7 +12,7 @@ module.exports = class Dog extends Command {
 
 	async run(msg) {
 		const { body: { message } } = await snek.get('https://dog.ceo/api/breeds/image/random');
-		return msg.channel.sendFile(message);
+		return msg.channel.send({ files: [message] });
 	}
 
 };

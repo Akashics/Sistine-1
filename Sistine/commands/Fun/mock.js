@@ -16,12 +16,12 @@ module.exports = class Mock extends Command {
 			description: (msg) => msg.language.get('COMMAND_MOCK_DESCRIPTION'),
 			usage: '[MessageIdentifier:msg]'
 		});
-		this.cost = 15;
 	}
 
 	async run(msg, [msgid]) {
 		const grabMock = msgid || await msg.channel.messages.fetch({ limit: 1, before: msg.id });
 		const mock = grabMock.size === 1 ? grabMock.first() : grabMock;
+		if (!mock.author || (mock.content.length < 3 && mock.content.length > 100)) return;
 		const author = await msg.guild.members.fetch(mock.author);
 		if (author.user.bot) throw msg.language.get('COMMAND_MOCK_ERROR');
 		await msg.channel.send(alternateCase(mock.cleanContent), { files: [{ attachment: './assets/images/spongebob.png', name: 'mock.png' }] });

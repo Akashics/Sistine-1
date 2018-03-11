@@ -13,14 +13,14 @@ module.exports = class extends Command {
 	async run(msg, [when, ...text]) {
 		const reminderText = text.join(' ');
 		const time = Timestamp.toNow(when);
-		const reminder = await this.client.schedule.create('reminder', when, {
+		await this.client.schedule.create('reminder', when, {
 			data: {
 				user: { id: msg.author.id, name: msg.author.username },
 				text: reminderText,
 				from: Date.now()
 			}
 		});
-		return msg.send(`<:blobthumbsup:357267430105677844> I will remind you in ${time} to ${reminderText}. \`Code: ${reminder.id}\``);
+		return msg.send(`<:blobthumbsup:357267430105677844> I will remind you in ${time} to ${reminderText}.`);
 	}
 
 };

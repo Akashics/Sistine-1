@@ -8,7 +8,6 @@ module.exports = class Engwish extends Command {
 			description: 'English to Hewwo Translation',
 			usage: '<Text:str>'
 		});
-		this.cost = 10;
 	}
 
 	translate(phrase) {
@@ -25,11 +24,11 @@ module.exports = class Engwish extends Command {
 			}
 		});
 		const x3 = [' x3', ' :3', ' owo', ' OwO', ' OWO', ' X3'];
-		return finalPhrase.join(' ').replaceAll('l', 'w').replaceAll('L', 'W').replaceAll('r', 'w').replaceAll('R', 'W') + x3.random();
+		return finalPhrase.join(' ').replace('l', 'w').replace('L', 'W').replace('r', 'w').replace('R', 'W') + x3[Math.floor(Math.random() * x3.length)];
 	}
 
 	async run(msg, [text]) {
-		return msg.send(this.translate(text));
+		return msg.send(`**${msg.author.username}:** ${this.translate(text)}`);
 	}
 
 };

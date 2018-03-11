@@ -9,12 +9,12 @@ module.exports = class Prune extends Command {
 			runIn: ['text'],
 
 			description: 'Prunes a certain amount of messages w/o filter.',
-			usage: '[limit:integer] [link|invite|bots|you|me|upload|user:user]',
+			usage: '<limit:integer> [link|invite|bots|you|me|upload|user:user]',
 			usageDelim: ' '
 		});
 	}
 
-	async run(msg, [limit = 50, filter = null]) {
+	async run(msg, [limit, filter = null]) {
 		let messages = await msg.channel.messages.fetch({ limit: 100 });
 		if (filter) {
 			const user = typeof filter !== 'string' ? filter : null;

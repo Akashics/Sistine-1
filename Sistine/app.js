@@ -5,8 +5,8 @@ const { botToken, rethinkdb, raven, dBotsORG } = require('./config.json');
 const StatsD = require('hot-shots');
 
 Client.defaultPermissionLevels
-	.addLevel(1, false, (client, msg) => msg.guild && msg.guild.configs.roles.musicdj && msg.member.roles.has(msg.guild.configs.roles.musicdj))
-	.addLevel(2, false, (client, msg) => msg.guild && msg.guild.configs.roles.moderator && msg.member.roles.has(msg.guild.configs.roles.moderator));
+	.add(1, false, (client, msg) => msg.guild && msg.guild.configs.roles.musicdj && msg.member.roles.has(msg.guild.configs.roles.musicdj))
+	.add(2, false, (client, msg) => msg.guild && msg.guild.configs.roles.moderator && msg.member.roles.has(msg.guild.configs.roles.moderator));
 
 class SistineClient extends Client {
 

@@ -9,7 +9,6 @@ module.exports = class EightBall extends Command {
 			description: (msg) => msg.language.get('COMMAND_8BALL_DESCRIPTION'),
 			usage: '<Question:str>'
 		});
-		this.cost = 10;
 	}
 
 	async run(msg, [question]) {

@@ -447,7 +447,7 @@ module.exports = class enUSLang extends Language {
 
 			COMMAND_ERROR: 'Whoop! You found an unwanted feature. I\'m just going to notify the deveopers.',
 			// Fun Commands
-			COMMAND_8BALL: (author, input) => `:8ball: ${author}: **${input}** <:arrow:397077767797211157> ${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}`,
+			COMMAND_8BALL: (author, input) => `:8ball: **${author}:** ${this.EIGHT_BALL[Math.floor(Math.random() * this.EIGHT_BALL.length)]}`,
 			COMMAND_8BALL_DESCRIPTION: 'Just a fancy fortune-telling device from the 1940 Three Stooges.',
 
 			COMMAND_BANNER_DESCRIPTION: 'Creates a Banner with ASCII Symbolls from text you supply.',
@@ -458,7 +458,7 @@ module.exports = class enUSLang extends Language {
 			COMMAND_COMPLIMENT: user => `:speech_balloon: ${user} – ${this.COMPLIMENTS[Math.floor(Math.random() * this.COMPLIMENTS.length)]}`,
 			COMMAND_COMPLIMENT_DESCRIPTION: 'Generates a random compliment to send to a user.',
 
-			COMMAND_CRUSH: user => `Continuously gazing at ${user} for no awkward reason..._`,
+			COMMAND_CRUSH: user => `_Continuously gazing at ${user} for no awkward reason..._`,
 			COMMAND_CRUSH_DESCRIPTION: 'Wouldn\'t Wolverine love this picture?',
 
 			COMMAND_ECHO_DESCRIPTION: 'Makes Sistine speak in this/another text channel.',
@@ -471,7 +471,7 @@ module.exports = class enUSLang extends Language {
 
 			COMMAND_JOKE_DESCRIPTION: 'Sistine loves jokes, why not have her tell you some?',
 
-			COMMAND_MOCK_ERROR: '❌ You cannot mock bots.',
+			COMMAND_MOCK_ERROR: '❌ To prevent spam, I cannot mock bots.',
 			COMMAND_MOCK_DESCRIPTION: 'Mocks the last/speificied message.',
 
 			COMMAND_RATE_MYSELF: ':thinking: Really, I would always rate myself a 100/100.',
@@ -484,10 +484,10 @@ module.exports = class enUSLang extends Language {
 			COMMAND_TRIGGERING: tag => `_Triggering ${tag} for no really good reason..._`,
 			COMMAND_TRIGGERING_DESCRIPTION: 'How easy is it to trigger someone?',
 
-			COMMAND_WTP_EMBED_TITLE: '<:pikablob:356256509929324545> You have 15 seconds. Guess this Pokemon.',
-			COMMAND_WTP_OUT_TIME: name => `You ran out of time, the answer was ${name}.`,
-			COMMAND_WTP_INCORRECT: name => `That is incorrect. Its name is ${name}.`,
-			COMMAND_WTP_CORRECT: author => `You are correct ${author}. One point has been added to your account.`,
+			COMMAND_WTP_EMBED_TITLE: 'You have 15 seconds. Whose This Pokemon?',
+			COMMAND_WTP_OUT_TIME: name => `You ran out of time, it was: ${name}.`,
+			COMMAND_WTP_INCORRECT: name => `Your answer was incorrect. The correct answer was: ${name}.`,
+			COMMAND_WTP_CORRECT: name => `That is correct! Its name is: ${name}`,
 			COMMAND_WTP_DESCRPTION: 'Who\'s That Pokemon?',
 
 			COMMAND_WYR_ERROR: 'An issue has appeared with `Would You Rather`, please try again in a little bit.',

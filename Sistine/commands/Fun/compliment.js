@@ -8,7 +8,6 @@ module.exports = class Compliment extends Command {
 			description: (msg) => msg.language.get('COMMAND_COMPLIMENT_DESCRIPTION'),
 			usage: '[User:user]'
 		});
-		this.cost = 10;
 	}
 
 	async run(msg, [user = msg.author]) {

@@ -11,7 +11,6 @@ module.exports = class IsNowIllegal extends Command {
 			usage: '<Thing:string>',
 			cooldown: 15
 		});
-		this.cost = 15;
 	}
 	/* eslint-disable max-len, arrow-body-style */
 	async run(msg, [thing]) {

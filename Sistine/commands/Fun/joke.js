@@ -8,7 +8,6 @@ module.exports = class Joke extends Command {
 			aliases: ['dad'],
 			description: (msg) => msg.language.get('COMMAND_JOKE_DESCRIPTION')
 		});
-		this.cost = 10;
 		this.emoji = [
 			'( ಠ ʖ̯ ಠ)',
 			'( ఠ ͟ʖ ఠ)',
