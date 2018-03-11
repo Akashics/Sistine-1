@@ -29,8 +29,8 @@ module.exports = class Announcement extends Command {
 	}
 
 	async init() {
-		if (!this.client.gateways.guilds.schema.hasKey('announcementChannel')) {
-			await this.client.gateways.guilds.schema.addKey('announcementChannel', { type: 'channel', default: null });
+		if (!this.client.gateways.guilds.schema.has('announcementChannel')) {
+			await this.client.gateways.guilds.schema.add('announcementChannel', { type: 'channel', default: null });
 		}
 	}
 
