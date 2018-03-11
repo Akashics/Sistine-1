@@ -1,4 +1,5 @@
 const { APIServer } = require('http-nextra');
+const { isFunction } = require('klasa').util;
 
 class DashboardHook extends APIServer {
 
@@ -20,19 +21,32 @@ class DashboardHook extends APIServer {
 		});
 
 		this.router.get('commands', (request, response) => {
-			const data = {};
-			this.client.commands.filter((command) => command.permLevel <= 3).forEach(command => {
-				if (!data.hasOwnProperty(command.category)) data[command.category] = {};
-				data[command.category][command.name] = {
-					name: command.name,
-					description: command.description,
-					aliases: command.aliases,
-					permLevel: command.permLevel,
-					cost: command.cost,
-					usageString: command.usage.nearlyFullUsage.replace('《', '<').replace('》', '>')
-				};
+			const commands = {};
+			const msg = { language: this.client.languages.default };
+			this.client.commands.filter(cmd => cmd.permLevel <= 6).forEach(cmd => {
+				if (!commands.hasOwnProperty(cmd.category)) commands[cmd.category] = [];
+
+				commands[cmd.category].push({
+					name: cmd.name,
+					aliases: cmd.aliases,
+					description: isFunction(cmd.description) ? cmd.description(msg) : cmd.description,
+					extendedHelp: isFunction(cmd.extendedHelp) ? cmd.extendedHelp(msg) : cmd.extendedHelp,
+					botPerms: cmd.botPerms,
+					category: cmd.catergory,
+					cooldown: {
+						usages: cmd.bucket,
+						duration: cmd.cooldown
+					},
+					deletable: cmd.deletable,
+					enabled: cmd.enabled,
+					nsfw: cmd.nsfw,
+					permLevel: cmd.permLevel,
+					requiredConfigs: cmd.requiredConfigs,
+					runIn: cmd.runIn,
+					usage: cmd.usage.nearlyFullUsage
+				});
 			});
-			return response.end(JSON.stringify(data));
+			return response.end(JSON.stringify(commands));
 		});
 
 		this.router.get('guilds/', (request, response) => response.end(JSON.stringify(this.client.guilds.keyArray())));

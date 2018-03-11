@@ -2,7 +2,7 @@
     <div class="container SistineBestContent">
       <% for (const category in commands) { %>
       <br>
-        <h2> <%= category %> Commands </h2>
+        <h3> <%= category %> Commands </h3>
         <div class="table-responsive" style="border-collapse: collapse; border-spacing: 0;">
         <br>
           <table class="table">
@@ -12,19 +12,18 @@
                 <th>Aliases</th>
                 <th>Usage</th>
                 <th>Description</th>
-                <th>Command Cost</th>
               </tr>
             </thead>
             <tbody>
-              <% for (const command in commands[category]) { 
-                console.log(command)%>
+              <% for (const command in commands[category]) { %>
+               <% console.log(util.inspect(command)) %>
                 <tr>
                   <td>
-                    <%- command.name %>
+                    <%= command.name %>
                   </td>
                   <td>
                       <i>
-                      <%- command.aliases.join(", ") %>
+                      <%- command.aliases.length > 1 ? `${command.aliases.join(", ")}` : '<i style="opacity: 0.5;" class="fa fa-times"></li>' %>
                       </i>
                   </td>
                   <td>
@@ -33,7 +32,6 @@
                   <td>
                     <%= command.description %>
                   </td>
-                  <td><%= command.cost >= 1 ? command.cost + '¥' : 'Free' %></td>
                 </tr>
                 <% } %>
             </tbody>
