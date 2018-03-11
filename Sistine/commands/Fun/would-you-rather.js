@@ -9,7 +9,6 @@ module.exports = class WYR extends Command {
 			aliases: ['wy-rather', 'wyr'],
 			description: (msg) => msg.language.get('COMMAND_WYR_DESCRIPTION')
 		});
-		this.cost = 25;
 	}
 
 	async run(msg) {

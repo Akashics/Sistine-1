@@ -8,7 +8,6 @@ module.exports = class Roast extends Command {
 			description: (msg) => msg.language.get('COMMAND_ROAST_DESCRIPTION'),
 			usage: '[User:user]'
 		});
-		this.cost = 20;
 	}
 
 	async run(msg, [user = msg.author]) {

@@ -25,7 +25,6 @@ module.exports = class Beautify extends Command {
 			usage: '[UserMention:user]',
 			cooldown: 10
 		});
-		this.cost = 25;
 	}
 
 	async run(msg, [user = msg.author]) {

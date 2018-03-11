@@ -29,7 +29,7 @@ class DashboardHook extends APIServer {
 					aliases: command.aliases,
 					permLevel: command.permLevel,
 					cost: command.cost,
-					usageString: command.usage.nearlyFullUsage
+					usageString: command.usage.nearlyFullUsage.replace('《', '<').replace('》', '>')
 				};
 			});
 			return response.end(JSON.stringify(data));

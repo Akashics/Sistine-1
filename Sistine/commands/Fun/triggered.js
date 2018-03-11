@@ -13,7 +13,6 @@ module.exports = class Crush extends Command {
 			usage: '[UserMentionOrID:user]',
 			cooldown: 10
 		});
-		this.cost = 25;
 	}
 	/* eslint-disable new-cap */
 	async run(msg, [user = msg.author]) {

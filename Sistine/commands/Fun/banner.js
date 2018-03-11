@@ -9,7 +9,6 @@ module.exports = class Banner extends Command {
 			description: (msg) => msg.language.get('COMMAND_BANNER_DESCRIPTION'),
 			usage: '<BannerText:str{1,10}>'
 		});
-		this.cost = 10;
 	}
 
 	async run(msg, [banner]) {

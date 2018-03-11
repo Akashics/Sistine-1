@@ -29,7 +29,6 @@ module.exports = class Crush extends Command {
 			usage: '[User:user]',
 			cooldown: 10
 		});
-		this.cost = 10;
 	}
 
 	async run(msg, [user = msg.author]) {

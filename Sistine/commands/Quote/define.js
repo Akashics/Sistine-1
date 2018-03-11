@@ -1,5 +1,6 @@
 const { Command } = require('klasa');
 const snekfetch = require('snekfetch');
+const { wordNik } = require('../../config.json');
 
 module.exports = class DefineWord extends Command {
 
@@ -19,7 +20,7 @@ module.exports = class DefineWord extends Command {
 					limit: 1,
 					includeRelated: false,
 					useCanonical: true,
-					api_key: this.client.keys.wordNik
+					api_key: wordNik
 				});
 			if (!body.length) { return msg.send('Could not find any results.'); }
 			const defineEmbed = new this.client.methods.Embed()
