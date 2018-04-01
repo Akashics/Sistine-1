@@ -1,1 +1,0 @@
-{"userBlacklist":{"type":"user","default":[],"min":null,"max":null,"array":true,"configurable":true,"sql":"TEXT"},"guildBlacklist":{"type":"guild","default":[],"min":null,"max":null,"array":true,"configurable":true,"sql":"TEXT"}}

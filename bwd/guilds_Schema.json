@@ -1,0 +1,129 @@
+{
+    "type": "Folder",
+    "antiinvite": {
+        "type": "boolean",
+        "array": false,
+        "default": false,
+        "min": null,
+        "max": null,
+        "sql": "TEXT DEFAULT false",
+        "configurable": true
+    },
+    "disabledCommands": {
+        "type": "command",
+        "array": true,
+        "default": [],
+        "min": null,
+        "max": null,
+        "sql": "TEXT DEFAULT '[]'",
+        "configurable": true
+    },
+    "filtering": {
+        "type": "Folder",
+        "swearFilter": {
+            "type": "boolean",
+            "array": false,
+            "default": false,
+            "min": null,
+            "max": null,
+            "sql": "TEXT DEFAULT false",
+            "configurable": true
+        },
+        "swearWords": {
+            "type": "string",
+            "array": true,
+            "default": [],
+            "min": null,
+            "max": null,
+            "sql": "TEXT",
+            "configurable": true
+        }
+    },
+    "language": {
+        "type": "language",
+        "array": false,
+        "default": "en-US",
+        "min": null,
+        "max": null,
+        "sql": "TEXT NOT NULL DEFAULT 'en-US'",
+        "configurable": false
+    },
+    "logging": {
+        "type": "Folder",
+        "joinMessages": {
+            "type": "boolean",
+            "array": false,
+            "default": false,
+            "min": null,
+            "max": null,
+            "sql": "TEXT DEFAULT false",
+            "configurable": true
+        },
+        "leaveMessages": {
+            "type": "boolean",
+            "array": false,
+            "default": false,
+            "min": null,
+            "max": null,
+            "sql": "TEXT DEFAULT false",
+            "configurable": true
+        },
+        "logChannel": {
+            "type": "textchannel",
+            "array": false,
+            "default": null,
+            "min": null,
+            "max": null,
+            "sql": "TEXT",
+            "configurable": true
+        },
+        "memberChannel": {
+            "type": "textchannel",
+            "array": false,
+            "default": null,
+            "min": null,
+            "max": null,
+            "sql": "TEXT",
+            "configurable": true
+        }
+    },
+    "prefix": {
+        "type": "string",
+        "array": false,
+        "default": "s>",
+        "min": null,
+        "max": null,
+        "sql": "TEXT DEFAULT 's>'",
+        "configurable": true
+    },
+    "roles": {
+        "type": "Folder",
+        "moderator": {
+            "type": "role",
+            "array": false,
+            "default": null,
+            "min": null,
+            "max": null,
+            "sql": "TEXT",
+            "configurable": true
+        },
+        "musicdj": {
+            "type": "role",
+            "array": false,
+            "default": null,
+            "min": null,
+            "max": null,
+            "sql": "TEXT",
+            "configurable": true
+        },
+        "subscriberRole": {
+            "type": "role",
+            "array": false,
+            "default": null,
+            "min": null,
+            "max": null,
+            "sql": "TEXT",
+            "configurable": true
+        }
+    }
+}
