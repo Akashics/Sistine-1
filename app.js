@@ -41,11 +41,10 @@ const Sistine = new SistineClient({
 	cmdDeleting: true,
 	cmdEditing: true,
 	typing: false,
-	cmdLogging: false,
+	cmdLogging: true,
 	language: 'en-US',
 	prefix: 's>',
 	pieceDefaults: { commands: { deletable: true, cooldown: 5 } },
-	readyMessage: (client) => `Logged in as ${client.user.tag}: ${client.guilds.size.toLocaleString()} guilds, ${client.channels.size.toLocaleString()} channels, ${client.users.size.toLocaleString()} users.`,
 	providers: {
 		default: 'rethinkdb',
 		rethink: {
@@ -63,6 +62,4 @@ const Sistine = new SistineClient({
 });
 
 Sistine.raven.config(raven).install();
-Sistine.raven.context(async () => {
-	Sistine.login(botToken);
-});
+Sistine.login(botToken);
