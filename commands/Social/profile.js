@@ -4,6 +4,15 @@ const fsn = require('fs-nextra');
 const { join } = require('path');
 const snek = require('snekfetch');
 
+Canvas.registerFont('./assets/fonts/Roboto-Thin.ttf', 'RobotoThin');
+Canvas.registerFont('./assets/fonts/Roboto-ThinItalic.ttf', 'RobotoThinItalic');
+Canvas.registerFont('./assets/fonts/Roboto-Light.ttf', 'RobotoLight');
+Canvas.registerFont('./assets/fonts/Roboto-Regular.ttf', 'RobotoRegular');
+Canvas.registerFont('./assets/fonts/NotoEmoji.ttf', 'RobotoRegular');
+Canvas.registerFont('./assets/fonts/NotoSans.ttf', 'RobotoRegular');
+Canvas.registerFont('./assets/fonts/Corbert-Condensed.otf'), 'Corbert');
+Canvas.registerFont('./assets/fonts/Discord.ttf', 'Discord');
+
 module.exports = class Profile extends Command {
 
 	constructor(...args) {
@@ -86,19 +95,7 @@ module.exports = class Profile extends Command {
 			.restore();
 
 		msg.channel.send({ files: [{ attachment: canvas.toBuffer(), name: `${user.tag}-profile.png` }] });
-		messg.delete().catch((error) => this.client.emit('warn', error));
-	}
-
-	init() {
-		Canvas
-			.registerFont(join(__dirname, '../../assets/fonts/Roboto-Thin.ttf'), 'RobotoThin')
-			.registerFont(join(__dirname, '../../assets/fonts/Roboto-ThinItalic.ttf'), 'RobotoThinItalic')
-			.registerFont(join(__dirname, '../../assets/fonts/Roboto-Light.ttf'), 'RobotoLight')
-			.registerFont(join(__dirname, '../../assets/fonts/Roboto-Regular.ttf'), 'RobotoRegular')
-			.registerFont(join(__dirname, '../../assets/fonts/NotoEmoji.ttf'), 'RobotoRegular')
-			.registerFont(join(__dirname, '../../assets/fonts/NotoSans.ttf'), 'RobotoRegular')
-			.registerFont(join(__dirname, '../../assets/fonts/Corbert-Condensed.otf'), 'Corbert')
-			.registerFont(join(__dirname, '../../assets/fonts/Discord.ttf'), 'Discord');
+		return messg.delete().catch((error) => this.client.emit('warn', error));
 	}
 
 };
