@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const role = announcement(msg);
-		await msg.member.addRole(role);
+		await msg.member.roles.add(role, 'Subscribed to Announcements');
 		return msg.send(msg.language.get('COMMAND_SUBSCRIBE_SUCCESS', role.name));
 	}
 
