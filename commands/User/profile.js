@@ -10,7 +10,7 @@ Canvas.registerFont('./assets/fonts/Roboto-Light.ttf', 'RobotoLight');
 Canvas.registerFont('./assets/fonts/Roboto-Regular.ttf', 'RobotoRegular');
 Canvas.registerFont('./assets/fonts/NotoEmoji.ttf', 'RobotoRegular');
 Canvas.registerFont('./assets/fonts/NotoSans.ttf', 'RobotoRegular');
-Canvas.registerFont('./assets/fonts/Corbert-Condensed.otf'), 'Corbert');
+Canvas.registerFont('./assets/fonts/Corbert-Condensed.otf', 'Corbert');
 Canvas.registerFont('./assets/fonts/Discord.ttf', 'Discord');
 
 module.exports = class Profile extends Command {

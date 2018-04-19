@@ -1,19 +1,18 @@
 const { Command } = require('klasa');
-const snek = require('snekfetch');
 
-module.exports = class Cat extends Command {
+module.exports = class Hoot extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			botPerms: ['SEND_MESSAGE'],
 			description: 'Speak in OWL.',
-			usage: '<text:string{1,500}>'
+			usage: '<text:string{1,1000}>'
 		});
 	}
 
 	async run(msg, [text]) {
 		const hooted = text.replace(/\b[^\d\W]+\b/g, 'hoot');
-		return msg.channel.send(hooted);
+		return msg.channel.send(`**${msg.author.tag}**: ${hooted}`);
 	}
 
 };

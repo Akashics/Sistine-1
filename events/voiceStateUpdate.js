@@ -11,8 +11,8 @@ module.exports = class voiceStateUpdate extends Event {
 		if (!oldMem.guild.me.voiceChannel || !status === 'playing' || !queue) return;
 		if (oldMem.voiceChannel === oldMem.guild.me.voiceChannel && newMem.voiceChannel !== newMem.guild.me.voiceChannel && newMem.guild.me.voiceChannel.members.size === 1) {
 			if (dispatcher) {
-				dispatcher.end('All users left the channel.');
-				newMem.guild.music.channel.send(':musical_note: All members have left the channel, so I stopped playing music.');
+				dispatcher.end();
+				newMem.guild.music.channel.send(':musical_note: Guess no one wanted to listen to my music...');
 				newMem.guild.music.leave();
 			}
 		}

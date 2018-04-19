@@ -18,8 +18,7 @@ module.exports = class Clyde extends Command {
 		return snekfetch.post(`https://canary.discordapp.com/api/webhooks/${webhook.id}/${webhook.token}`)
 			.send({ content })
 			.then(() => {
-				webhook.deleteWebhook(webhook.id, webhook.token);
-				if (msg.deletable) return msg.delete();
+				webhook.delete();
 			})
 			.catch((err) => {
 				console.log(err);

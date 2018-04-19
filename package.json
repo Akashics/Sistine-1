@@ -19,6 +19,7 @@
     "gifencoder": "^1.1.0",
     "hot-shots": "^5.3.0",
     "http-nextra": "github:kyranet/http-nextra",
+    "image-to-ascii": "^3.0.11",
     "klasa": "github:dirigeants/klasa",
     "moment": "^2.22.0",
     "moment-duration-format": "^2.2.2",
