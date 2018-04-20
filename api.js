@@ -43,17 +43,19 @@ class DashboardHook extends APIServer {
 			return response.end(JSON.stringify(commands));
 		});
 
-		this.router.get('thisisatest', async (request, response) => {
+		this.router.get('stats', async (request, response) => {
 			response.writeHead(200, { 'Content-Type': 'application/json' });
 
-			const { executions, messages } = this.client.configs;
 			const guilds = (await this.client.shard.fetchClientValues('guilds.size')).reduce((prev, val) => prev + val, 0);
 			const users = (await this.client.shard.fetchClientValues('users.size')).reduce((prev, val) => prev + val, 0);
-			const channels = (await this.client.shard.fetchClientValues('channels.size')).reduce((prev, val) => prev + val, 0);
+			const textChannels = (await this.client.shard.fetchClientValues('channels.size')).reduce((prev, val) => prev + val, 0);
+			const voiceChannels = (await this.client.shard.fetchClientValues('voiceConnections.size')).reduce((prev, val) => prev + val, 0);
 
+			const { executions, messages } = this.client.configs;
 			const { ping, status, uptime } = this.client;
+			const shard = this.client.shard.count;
 			const memory = process.memoryUsage().heapUsed / 1024 / 1024;
-			return response.end(JSON.stringify({ guilds, users, channels, ping, status, uptime, memory, executions, messages }));
+			return response.end(JSON.stringify({ shard, status, ping, uptime, memory, guilds, users, textChannels, voiceChannels, executions, messages, version: 'v2', nodeVersion: process.nodeVersion }));
 		});
 
 		this.router.get('guilds', (request, response) => response.end(JSON.stringify(this.client.guilds.keyArray())));
