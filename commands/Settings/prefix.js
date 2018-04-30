@@ -17,6 +17,8 @@ module.exports = class PrefixSetting extends Command {
 
 	async run(msg, [prefix]) {
 		if (prefix) {
+			const current = await msg.guild.configs.prefix;
+			if (current === prefix) return msg.channel.send('That is your current prefix already.');
 			await msg.guild.configs.update('prefix', prefix, msg.guild);
 			return msg.channel.send(`**${msg.guild.name}**'s prefix was set to \`${prefix}\` by **${msg.author.tag}.**`);
 		}

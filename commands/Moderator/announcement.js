@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const announcement = require('../../lib/announcement');
+const announcement = require('../../lib/util/announcement');
 
 module.exports = class extends Command {
 

@@ -1,28 +1,36 @@
 {
-    "rethinkdb": {
+    "mongodb": {
         "host": "localhost",
-        "port": 28015,
-        "database": "test",
-        "username": "admin",
-        "password": ""
+        "port": 27017,
+        "db": "klasa",
+        "user": "kashall",
+        "password": "Manta2121"
+    },
+    "nodes": [
+        {
+            "host": "162.213.199.180",
+            "port": 2324,
+            "region": "us",
+            "password": "n$_qQH8*yu`)<cqK"
+        }
+    ],
+    "restnode": {
+        "url": "http://162.213.199.180:2323",
+        "password": "n$_qQH8*yu`)<cqK"
     },
     "webhook": {
-        "id": "403781313452310528",
-        "token": "GhBUUD5CjIJ1lLvS3EBZD0tTCoJ1p-J5xVLVd-xWctcOaboOq9tO8arnAaLBHhgSqsaG"
+        "id": "437624972425297921",
+        "token": "o7EeTve0POaUCL2JuWuGtNJsTfzld4_hXO4avuIa3z_7ZkKI-MDRPHUAeqi0t8RTwCcK"
     },
-    "botToken": "MzYxNjc3MTgwNDExMDUyMDMy.DZR37A.IAHJkMRUUr6JzOtpfANyHswq-RM",
-    "anilistClient": "kashall-9uvwy",
-    "anilistSecret": "aWlfqEODahllDsjpFati",
-    "aCv2": "119",
-    "aSv2": "EpjYNmoCnPPPxh85jfBTnXgKCu3ZP2XEjOiL2gTA",
-    "googleSearch": "AIzaSyBj0TQ-_duXa5MdN-WiQ0yGS3JgbrkGrlI",
-    "dBotsORG": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1MzkyOTQ4NzAxODIyOTc2MiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTA1NjY5NzUzfQ.jHBBpOVg_xi4vpbDcUhjssRkPFd39xr9wfVHtXJbv_I",
-    "dBotsPW": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyMDEwNzc3Mzk1ODk5OTI0NDgiLCJyYW5kIjoyNjcsImlhdCI6MTUxNDgzMzQ4M30.eb1iFBFt7YPKDW6advw6UmglSsDLAR0fZRSxoxCFIr0",
-    "imgurClient": "e3979bc36d96106",
-    "imgurSecret": "ef26b0ff6b37aec274cdd18b41a7712b76c036e3",
-    "raven": "https://fb2437ab30474a2fbefeeb9287a3a784:690d95e644ab45ebbc21921c5fce694b@sentry.io/214591",
-    "terminalINK": "38b6de8208916194667284ce3dfab611258f2aeb5a427f550f384b13107b7bf4aafbf055b2ae641008cb8a3a41e99f149addd83c5f5c556361f09ee1db98a879",
-    "googleAPIKey": "AIzaSyDSrM7kwtrR-4Cg1YOj4D18gLQoTKrYhH8",
-    "weebKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJya1BPMkRYdloiLCJ0b2tlbklkIjoiSGt4SzN3bVBiIiwiaWF0IjoxNTAxOTQ5MDQ3fQ.Q32-uKz5P5gVwpGhrn0uOliRvvqXLUClve5sE550DeXApMKW4JtZl-rBQVGiiOX2ZWdvy-by2YLa0_hIpQlUScjq2RriJccX1mUNDXs5f7ALvzkPyM6GWHo18hkiLaMpoAP6sPyibcRs13AxGH8md9O5CjcDw3BXJik57llUsUsNnFA_p3HaSNBK7IR0yakvEnjLkCc6ucdEXfKnHJtJitOFTv5eOBWQOJyeA926NTkx23VgKUI1L9I5z4BGfWLhT5c3qZiGdfxcEIQtYCPiD6wOIs1lr3fs0aQNrVearXie8NFWPwuK-gO1I3gJrAZQvF-CMUO3fOp2ztCaUcks9w",
-    "wordNik": "f3bc7ef3f69158cf60004064b6001236251cb788caad0a6bc"
+    "token": "MjA1OTEyMjk1ODM3MTM4OTQ0.MTUyMjExMzg3MzM2NA.NCR6KyhAO2k8PDw5cg",
+    "api": {
+        "dbl": {
+            "webhookKey": "a8427f687b19f8978f0abc008f2f8e06",
+            "authKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1MzkyOTQ4NzAxODIyOTc2MiIsImJvdCI6dHJ1ZSwiaWF0IjoxNTA1NjY5NzUzfQ.jHBBpOVg_xi4vpbDcUhjssRkPFd39xr9wfVHtXJbv_I"
+        },
+        "dblpw": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyMDEwNzc3Mzk1ODk5OTI0NDgiLCJyYW5kIjoyNjcsImlhdCI6MTUxNDgzMzQ4M30.eb1iFBFt7YPKDW6advw6UmglSsDLAR0fZRSxoxCFIr0",
+        "terminalINK": "38b6de8208916194667284ce3dfab611258f2aeb5a427f550f384b13107b7bf4aafbf055b2ae641008cb8a3a41e99f149addd83c5f5c556361f09ee1db98a879",
+        "weebKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJya1BPMkRYdloiLCJ0b2tlbklkIjoiSGt4SzN3bVBiIiwiaWF0IjoxNTAxOTQ5MDQ3fQ.Q32-uKz5P5gVwpGhrn0uOliRvvqXLUClve5sE550DeXApMKW4JtZl-rBQVGiiOX2ZWdvy-by2YLa0_hIpQlUScjq2RriJccX1mUNDXs5f7ALvzkPyM6GWHo18hkiLaMpoAP6sPyibcRs13AxGH8md9O5CjcDw3BXJik57llUsUsNnFA_p3HaSNBK7IR0yakvEnjLkCc6ucdEXfKnHJtJitOFTv5eOBWQOJyeA926NTkx23VgKUI1L9I5z4BGfWLhT5c3qZiGdfxcEIQtYCPiD6wOIs1lr3fs0aQNrVearXie8NFWPwuK-gO1I3gJrAZQvF-CMUO3fOp2ztCaUcks9w",
+        "wordNik": "f3bc7ef3f69158cf60004064b6001236251cb788caad0a6bc"
+    }
 }

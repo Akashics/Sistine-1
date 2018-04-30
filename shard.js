@@ -1,12 +1,10 @@
-require('./preloader');
-
 const Discord = require('discord.js');
-const log = require('./lib/managers/logger.js');
+const log = require('./lib/util/logger');
 const config = require('./config.json');
 
 const Manager = new Discord.ShardingManager('./app.js', {
 	totalShards: 'auto',
-	token: config.botToken,
+	token: config.token,
 	respawn: true
 });
 

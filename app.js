@@ -1,7 +1,7 @@
 const { Client } = require('klasa');
-const Music = require('./lib/managers/Music');
-const { botToken, rethinkdb, raven } = require('./config.json');
-const StatsD = require('hot-shots');
+const MusicManager = require('./lib/structures/MusicManager');
+const { ClientOptions } = require('./lib/util/Constants');
+const config = require('./config.json');
 
 Client.defaultPermissionLevels
 	.add(1, (client, msg) => msg.guild && msg.guild.configs.roles.musicdj && msg.member.roles.has(msg.guild.configs.roles.musicdj))
@@ -9,57 +9,17 @@ Client.defaultPermissionLevels
 
 class SistineClient extends Client {
 
-	constructor(options) {
-		super(Object.assign(options));
-		this.stats = new StatsD();
-		this.queue = new Music();
-		this.raven = require('raven');
+	constructor() {
+		super({ ...ClientOptions });
+
+		Object.defineProperty(this, "config", { value: config });
+		this.music = new MusicManager(this);
+		this.lavalink = require('./lib/structures/LavalinkClient');
+		this.guildsWebhook = new this.methods.Webhook(config.webhook.id, config.webhook.token);
+		this.health = { commands: { count: 0, ran: {} } };
 		this.wait = require('util').promisify(setTimeout);
 	}
 
 }
+new SistineClient().login(config.token);
 
-const Sistine = new SistineClient({
-	clientOptions: {
-		disabledEvents: [
-			'GUILD_BAN_ADD',
-			'GUILD_BAN_REMOVE',
-			'TYPING_START',
-			'TYPING_STOP',
-			'RELATIONSHIP_ADD',
-			'RELATIONSHIP_REMOVE',
-			'CHANNEL_PINS_UPDATE',
-			'PRESENCE_UPDATE',
-			'USER_UPDATE',
-			'USER_NOTE_UPDATE',
-			'MESSAGE_REACTION_ADD',
-			'MESSAGE_REACTION_REMOVE',
-			'MESSAGE_REACTION_REMOVE_ALL'
-		],
-		disableEveryone: true
-	},
-	cmdDeleting: true,
-	cmdEditing: true,
-	typing: false,
-	cmdLogging: true,
-	language: 'en-US',
-	prefix: 's>',
-	pieceDefaults: { commands: { deletable: true, cooldown: 5 } },
-	providers: {
-		default: 'rethinkdb',
-		rethink: {
-			host: rethinkdb.host,
-			port: rethinkdb.port,
-			user: rethinkdb.user,
-			password: rethinkdb.password,
-			db: rethinkdb.database,
-			silent: true,
-			pool: true,
-			timeout: 30
-		}
-	},
-	console: { useColor: true, timestamps: 'MM-DD-YYYY hh:mm:ss A' }
-});
-
-Sistine.raven.config(raven).install();
-Sistine.login(botToken);

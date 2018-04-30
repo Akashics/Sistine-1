@@ -4,9 +4,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['stop'],
 			runIn: ['text'],
-			description: 'Clears the queue and leaves'
+			description: 'Prune the queue list.'
 		});
 
 		this.requireMusic = true;
@@ -18,10 +17,9 @@ module.exports = class extends Command {
 		if (music.voiceChannel.members.size > 4) {
 			if (!await msg.hasAtLeastPermissionLevel(2)) throw "You can't execute this command when there are over 4 members. You must be at least a Dj Member.";
 		}
-
-		// Destroy interface
-		await music.destroy();
-		return msg.send(`Successfully left the voice channel ${msg.guild.me.voiceChannel}`);
+		const size = music.queue.length;
+		music.prune();
+		return msg.send(`Successfully removed ${size} songs from the queue.`);
 	}
 
 };

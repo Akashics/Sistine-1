@@ -7,7 +7,7 @@ module.exports = class extends Extendable {
 	}
 
 	get extend() {
-		return this.client.music.get(this.id) || this.client.music.add(this);
+		return this.client.player.get(this.id);
 	}
 
 };

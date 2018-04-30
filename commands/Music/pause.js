@@ -5,7 +5,6 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-
 			description: 'Pauses the current song.'
 		});
 
@@ -14,11 +13,11 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const { music } = msg.guild;
-		if (music.status === 'idle') throw ':x: There is no music loaded right now. :thinking:';
-		if (music.status === 'paused') throw ':x: Someone already paused the music. :thinking:';
+		if (!music.playing) throw 'Music is not playing.';
+		if (music.paused) throw 'The stream is already paused.';
 
-		await music.pause();
-		return msg.send(`:pause_button: Music was paused by **${msg.author.tag}**.`);
+		music.pause();
+		return msg.send('Sucessfully paused music.');
 	}
 
 };

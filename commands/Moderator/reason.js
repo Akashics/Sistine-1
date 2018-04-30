@@ -1,5 +1,5 @@
 const { Command, util } = require('klasa');
-const ModLog = require('../../lib/modlog');
+const ModLog = require('../../lib/structures/modlog');
 
 module.exports = class extends Command {
 

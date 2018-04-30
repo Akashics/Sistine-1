@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const { weebImage } = require('../../lib/Util');
+const { weebImage } = require('../../lib/util/Util');
 
 module.exports = class KissImage extends Command {
 

@@ -9,7 +9,7 @@ module.exports = class CMDStats extends Finalizer {
 		});
 	}
 
-	async run(msg, mes, stopwatch) {
+	async run(msg) {
 		this.client.configs.update('executions', this.client.configs.executions + 1, msg.guild);
 	}
 

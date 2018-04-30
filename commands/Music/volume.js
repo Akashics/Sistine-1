@@ -5,15 +5,20 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-			aliases: ['vol'],
-			description: 'Displays volume warning.'
+			permLevel: 2,
+			description: 'Change the volume',
+			extendedHelp: 'No extended help available.',
+			usage: '[Volume:integer{25,150}]'
 		});
 
 		this.requireMusic = true;
 	}
 
-	async run(msg) {
-		return msg.send('In order to insure quality music, we are unable to control audio levels via a command.\nIt is recommended that you use Discord\'s User Volume to control the audio level.');
+	async run(msg, [volume]) {
+		const { music } = msg.guild;
+		if (!volume) return msg.sendMessage(`The current volume is set to \`${music.volume}\``);
+		music.player.volume(volume);
+		return msg.sendMessage(`Sucessfully set the volume to \`${volume}\``);
 	}
 
 };

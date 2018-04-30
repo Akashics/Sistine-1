@@ -20,6 +20,7 @@ module.exports = class guildMemberRemove extends Event {
 			`Awh, I-I have no words for t-this, b-but, I-I'll miss you _${user}_-san!`,
 			`Awh, _${user}_ has left... n-not that I care!`,
 			`_${user}_-san... N-no...`,
+			`_${user}_ finally left. Now we can really party!`,
 			`_${user}_, why would you leave me here alone with these guys?`,
 			`Eep! _${user}_ left?! H-hes always leaving me, that baka...`,
 			`${user} has left a note: "Out on Vacation. Be back: ???"`,

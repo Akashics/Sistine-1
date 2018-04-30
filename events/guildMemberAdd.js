@@ -17,6 +17,7 @@ module.exports = class guildMemberRemove extends Event {
 			`Y-yay! More people to deal with. Welcome ${user}!`,
 			`Shot through the heart! And ${user}'s to blame! Baby, you give love, a bad name!`,
 			`おかえりなさい ${user}-san!`,
+			`We ere expecting a real hero, not ${user}.`,
 			`Despite the war efforts, I still think ${user}-san is fine...`,
 			`Ergh, why did ${user} show up? I already have to deal with ${member.guild.memberCount - 1} other users.`,
 			`OwO Who's this? ${user} has joined ${member.guild.name}.`,
