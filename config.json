@@ -32,5 +32,13 @@
         "terminalINK": "38b6de8208916194667284ce3dfab611258f2aeb5a427f550f384b13107b7bf4aafbf055b2ae641008cb8a3a41e99f149addd83c5f5c556361f09ee1db98a879",
         "weebKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJya1BPMkRYdloiLCJ0b2tlbklkIjoiSGt4SzN3bVBiIiwiaWF0IjoxNTAxOTQ5MDQ3fQ.Q32-uKz5P5gVwpGhrn0uOliRvvqXLUClve5sE550DeXApMKW4JtZl-rBQVGiiOX2ZWdvy-by2YLa0_hIpQlUScjq2RriJccX1mUNDXs5f7ALvzkPyM6GWHo18hkiLaMpoAP6sPyibcRs13AxGH8md9O5CjcDw3BXJik57llUsUsNnFA_p3HaSNBK7IR0yakvEnjLkCc6ucdEXfKnHJtJitOFTv5eOBWQOJyeA926NTkx23VgKUI1L9I5z4BGfWLhT5c3qZiGdfxcEIQtYCPiD6wOIs1lr3fs0aQNrVearXie8NFWPwuK-gO1I3gJrAZQvF-CMUO3fOp2ztCaUcks9w",
         "wordNik": "f3bc7ef3f69158cf60004064b6001236251cb788caad0a6bc"
+    },
+    "sAPI": {
+        "privateKey": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjoiQWRtaW4iLCJOYW1lIjoiRGFzaGJvYXJkIiwiRnVuY3Rpb24iOiJQcml2YXRlIGludGVybmFsIHVzZSBrZXkiLCJPd25lciI6Ikthc2hhbGwsIFF1YW50dW1seVRhbmdsZWQiLCJDcmVhdG9yIjoiUXVhbnR1bWx5VGFuZ2xlZCJ9.o7ik80NhgwxNwCSoVI7UoiAhQ2c1ehdrjA5fbciE0rmk4FQaVTQuJR-i5WF_jpu5mlZtfhA5zy5H1Ivb-DJCOw"
+    },
+    "users": {
+        "assistantDevs": [
+            "126321762483830785"
+        ]
     }
 }
