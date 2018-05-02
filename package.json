@@ -44,7 +44,7 @@
     "eslint-plugin-standard": "^3.0.1"
   },
   "scripts": {
-    "test": "s>help"
+    "test": "eslint ."
   },
   "keywords": [
     "sistine"
