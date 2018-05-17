@@ -23,7 +23,7 @@ module.exports = class WhatDog extends Command {
 
 				return msg.send('', { embed });
 			})
-			.catch(e => msg.send(e));
+			.catch((error) => msg.send(error));
 	}
 
 };

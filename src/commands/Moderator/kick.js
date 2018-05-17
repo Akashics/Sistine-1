@@ -19,8 +19,8 @@ module.exports = class KickCommand extends Command {
 
 		if (member.roles.highest.position >= msg.member.roles.highest.position) {
 			return msg.send(`${msg.author.username}, that user out ranks you in permission levels, sorry.`);
-		} else if (!force && member.kickable === false) {
-			return msg.send(`${msg.author.username}, that user is not bannable.`);
+		} else if (!member.kickable) {
+			return msg.send(`${msg.author.username}, that user is not kickable.`);
 		}
 
 		member.send(`You've been kicked in ${msg.guild.name}${reason ? `, With reason of: ${reason}` : '.'}`).catch(() => {

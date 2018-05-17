@@ -12,10 +12,10 @@ module.exports = class extends Event {
 					if (dispatcher) {
 						try {
 							await dispatcher.end();
-							queue.tc.send('***No one left in Voice Channel, leaving...***');
+							queue.textChannel.send('***No one left in Voice Channel, leaving...***');
 							return newMem.guild.music.leave();
-						} catch (e) {
-							console.log(`| VoiceStateUpdate |\n${e}`);
+						} catch (error) {
+							console.log(`| VoiceStateUpdate |\n${error}`);
 						}
 					}
 				}

@@ -1,4 +1,5 @@
 const { Command } = require('klasa');
+const { Snowflake } = require('discord.js');
 
 module.exports = class Prune extends Command {
 
@@ -21,7 +22,7 @@ module.exports = class Prune extends Command {
 			const type = typeof filter === 'string' ? filter : 'user';
 			messages = messages.filter(this.getFilter(msg, type, user));
 		}
-		messages = messages.filter(m => Date.now() - Snowflake.deconstruct(m.id).date.getTime() < 1209600000)
+		messages = messages.filter(message => Date.now() - Snowflake.deconstruct(message.id).date.getTime() < 1209600000)
 			.array().slice(0, limit);
 		await msg.channel.bulkDelete(messages, true);
 		return msg.send(`Successfully deleted ${messages.length} messages from ${limit}.`);

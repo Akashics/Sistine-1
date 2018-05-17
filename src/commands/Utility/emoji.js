@@ -31,16 +31,16 @@ module.exports = class extends Command {
 				animated: discordEmoji.animated
 			};
 		}
-		let result = [], c = 0, p = 0, i = 0;
-		while (i < arg.length) {
-			c = arg.charCodeAt(i++);
-			if (p) {
-				result.push((0x10000 + ((p - 0xD800) << 10) + (c - 0xDC00)).toString(16)); // eslint-disable-line no-bitwise
-				p = 0;
-			} else if (c >= 0xD800 && c <= 0xDBFF) {
-				p = c;
+		let result = [], count = 0, page = 0, int = 0;
+		while (int < arg.length) {
+			count = arg.charCodeAt(int++);
+			if (page) {
+				result.push((0x10000 + ((page - 0xD800) << 10) + (count - 0xDC00)).toString(16)); // eslint-disable-line no-bitwise
+				page = 0;
+			} else if (count >= 0xD800 && count <= 0xDBFF) {
+				page = count;
 			} else {
-				result.push(c.toString(16));
+				result.push(count.toString(16));
 			}
 		}
 		result = result.join('-');

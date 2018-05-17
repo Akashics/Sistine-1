@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const { MessageEmbed } = require('discord.js');
+const { Util } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -13,7 +13,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [code]) {
-		const result = await this.client.methods.util.exec(code, { timeout: 30000 })
+		const result = await Util.exec(code, { timeout: 30000 })
 			.catch(error => ({ stdout: null, stderr: error && error.message ? error.message : error }));
 
 		const output = result.stdout ?

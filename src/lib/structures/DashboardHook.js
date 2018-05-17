@@ -2,6 +2,7 @@ const { APIServer, json, cors } = require('http-nextra');
 const snekfetch = require('snekfetch');
 const { util: { isFunction }, Duration, Timestamp } = require('klasa');
 
+/* eslint-disable camelcase */
 class DashboardHook extends APIServer {
 
 	constructor(client, options = { port: 6565 }) {
