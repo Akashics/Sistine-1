@@ -11,7 +11,7 @@ module.exports = class Birb extends Command {
 	}
 
 	async run(msg) {
-	 	const { text } = await snek.get('http://random.birb.pw/tweet.json');
+		const { text } = await snek.get('http://random.birb.pw/tweet.json');
 		const { file } = JSON.parse(text);
 		return msg.send({ files: [`http://random.birb.pw/img/${file}`] });
 	}
