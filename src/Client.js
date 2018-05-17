@@ -1,16 +1,13 @@
 const { Client, PermissionLevels } = require('klasa');
-const path = require('path');
 const { Collection, Webhook } = require('discord.js');
+const path = require('path');
 const MusicManager = require('./lib/structures/MusicManager');
 const AFK = require('./lib/structures/afk');
 const { ClientOptions } = require('./lib/util/Constants');
 const IdioticClient = require('./lib/structures/IdioticClient');
 const config = require('../config.json');
 
-const devs = [
-	'201077739589992448',
-	'126321762483830785'
-];
+const devs = ['201077739589992448', '126321762483830785'];
 
 const permissionLevels = new PermissionLevels()
 	.add(0, () => true)
@@ -40,14 +37,15 @@ class SistineClient extends Client {
 		super({ ...ClientOptions, permissionLevels });
 
 		Object.defineProperty(this, 'config', { value: config });
+
 		this.clientBaseDir = path.resolve('src');
+		this.lavalink = require('./lib/structures/LavalinkClient');
+		this.wait = require('util').promisify(setTimeout);
 		this.music = new MusicManager(this);
 		this.ramStat = new Array(60);
 		this.cmdStat = new Array(60);
-		this.lavalink = require('./lib/structures/LavalinkClient');
 		this.idioticApi = new IdioticClient(config.api.idioticapi);
 		this.webhook = new Webhook(config.webhook.id, config.webhook.token);
-		this.wait = require('util').promisify(setTimeout);
 		this.afks = new AFK(this);
 		this.executedCommands = new Collection();
 	}

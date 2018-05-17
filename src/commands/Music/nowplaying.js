@@ -1,6 +1,5 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const { showSeconds } = require('./../../lib/util/Util');
 
 module.exports = class extends Command {
 
@@ -13,23 +12,22 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const { queue, playing, player } = msg.guild.music;
-		if (!playing) throw "I'm currently not playing anything.";
+		const { music } = msg.guild;
+		if (!music.playing) return msg.sendMessage("***There's currently no music playing!***");
+		if (!music.queue.length) throw '***There are no songs in queue!***';
 
-		const song = queue[0];
-		const timeLeft = song.duration - (player.state.time - player.timestamp);
 
+		const song = music.queue[0];
 		const embed = new MessageEmbed()
-			.setColor('#ff8142')
-			.setAuthor(`${song.title} - ${song.author}`)
-			.setURL(song.url)
-			.setDescription(`
-**Duration:** ${song.friendlyDuration}
-**Current time:** ${showSeconds(song.duration - timeLeft)}
-**Time remaining:** ${showSeconds(timeLeft)}
-**Requested by:** ${song.requester.user.tag} (${song.requester.id})`)
-			.setFooter(`Requested by ${msg.author.tag}`)
-			.setTimestamp();
+			.setColor('#5bc0de')
+			.setTitle('⏯ | Now Playing - PenguBot')
+			.setTimestamp()
+			.setFooter('© PenguBot.cc')
+			.setDescription([`• **Song:** ${song.trackTitle}`,
+				`• **Author:** ${song.author}`,
+				`• **Duration:** ${song.stream === true ? 'Live Stream' : song.trackFriendlyDuration}`,
+				`• **Requested By:** ${song.requester.tag}`,
+				`• **Link:** ${song.trackURL}`]);
 		return msg.sendEmbed(embed);
 	}
 

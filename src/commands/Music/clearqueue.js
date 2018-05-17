@@ -13,13 +13,16 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const { music } = msg.guild;
-
-		if (music.voiceChannel.members.size > 4) {
-			if (!await msg.hasAtLeastPermissionLevel(2)) throw "You can't execute this command when there are over 4 members. You must be at least a Dj Member.";
-		}
 		const size = music.queue.length;
-		music.prune();
-		return msg.send(`Successfully removed ${size} songs from the queue.`);
+		if (!msg.member.voiceChannel) return msg.sendMessage("You're currently not in a voice channel.");
+		if (!music.playing) return msg.sendMessage("***There's currently no music playing!***");
+
+		if (await msg.hasAtLeastPermissionLevel(3) || music.voiceChannel.members.size <= 3) {
+			music.prune();
+			return msg.sendMessage(`***Queue cleared. The size was ${size} songs.***`);
+		} else {
+			return msg.sendMessage('***There are members in the VoiceChat right now, use skip instead!***');
+		}
 	}
 
 };

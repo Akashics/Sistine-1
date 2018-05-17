@@ -7,43 +7,34 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-			requiredPermissions: ['EMBED_LINKS'],
+            requiredPermissions: ["USE_EXTERNAL_EMOJIS", "EMBED_LINKS", "MANAGE_MESSAGES"],
 			description: 'Check the queue list.',
 			usage: '[page:integer]'
 		});
+		this.requireMusic = true;
 	}
 
-	async run(msg, [page = 1]) {
-		const { music } = msg.guild;
-		if (!music.queue.length) throw 'There are no songs in the queue.';
-		const paginated = this.paginate(music.queue, page);
-		const currentSong = music.queue[0];
-		const timeLeft = currentSong.duration - (music.player.state.time - music.player.timestamp);
-		const totalQueueLength = music.queue.reduce((prev, song) => prev + song.duration, 0);
-		msg.sendEmbed(new MessageEmbed()
-			.setColor('#ff8142')
-			.setAuthor(`Page ${paginated.page} / ${paginated.maxPage} | Music Queue`)
-			.setFooter(`Requested by ${msg.author.tag}`, msg.author.displayAvatarURL())
-			.setTimestamp()
-			.setDescription(`
-${paginated.items.map((item, index) => `${index + 1}. [${item.title.replace(/\[|\]/g, '\\$&')}](${item.url}) (${item.friendlyDuration})`).join('\n')}
+    async run(msg) {
+        const { music } = msg.guild;
+        const { queue } = music;
+        if (!music.playing) return msg.sendMessage("***There's currently no music playing!***");
 
-**Now playing:** ${`[${currentSong.title.replace(/\[|\]/g, '\\$&')}](${currentSong.url})`}
-**Progress:** ${music.paused ? 'Paused: ' : ''}${showSeconds(currentSong.duration - timeLeft)} / ${currentSong.friendlyDuration} (${showSeconds(timeLeft)} left)
-**Total queue length:** ${showSeconds(totalQueueLength)}
-`));
-	}
+        const pages = new RichDisplay(new MessageEmbed()
+            .setTitle("Use the reactions to change pages, select a page, or stop viewing the queue")
+            .setAuthor("Queue - Sistine", this.client.user.displayAvatarURL())
+            .setDescription("Scroll between pages to see the song queue.")
+            .setColor("purple")
+        );
 
-	paginate(queue, page = 1) {
-		const maxPage = Math.ceil(queue.length / 5);
-		if (page < 1) page = 1;
-		if (page > maxPage) page = maxPage;
-		const startIndex = (page - 1) * 5;
-		return {
-			page,
-			maxPage,
-			items: queue.length > 5 ? queue.slice(startIndex, startIndex + 5) : queue
-		};
+        for (let i = 0, temp = queue.length; i < temp; i += 5) {
+            const curr = queue.slice(i, i + 5);
+            pages.addPage(t => t.setDescription(curr.map(y => `\`-\` [${y.trackTitle.replace(/\*/g, "\\*")}](${y.trackURL}) (${y.friendlyDuration})`)));
+        }
+        pages.run(await msg.sendMessage("Loading Queue..."), {
+            time: 120000,
+            filter: (reaction, user) => user === msg.author
+        });
+    }};
 	}
 
 };

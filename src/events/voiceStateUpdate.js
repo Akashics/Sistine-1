@@ -1,21 +1,26 @@
 const { Event } = require('klasa');
 
-module.exports = class voiceStateUpdate extends Event {
+module.exports = class extends Event {
 
-	constructor(...args) {
-		super(...args, { name: 'voiceStateUpdate', enabled: true });
-	}
-
-	run(oldMem, newMem) {
+	async run(oldMem, newMem) {
 		const { queue, dispatcher, status } = newMem.guild.music;
-		if (!oldMem.guild.me.voiceChannel || !status === 'playing' || !queue) return;
-		if (oldMem.voiceChannel === oldMem.guild.me.voiceChannel && newMem.voiceChannel !== newMem.guild.me.voiceChannel && newMem.guild.me.voiceChannel.members.size === 1) {
-			if (dispatcher) {
-				dispatcher.end();
-				newMem.guild.music.channel.send(':musical_note: Guess no one wanted to listen to my music...');
-				newMem.guild.music.leave();
-			}
-		}
+		setTimeout(async () => {
+			if (!oldMem.guild.me.voiceChannel || !status === 'playing' || !queue) return;
+			if (this.client.config.main.patreon === true) return;
+			setTimeout(async () => {
+				if (oldMem.voiceChannel === oldMem.guild.me.voiceChannel && newMem.voiceChannel !== newMem.guild.me.voiceChannel && newMem.guild.me.voiceChannel.members.size === 1) {
+					if (dispatcher) {
+						try {
+							await dispatcher.end();
+							queue.tc.send('***No one left in Voice Channel, leaving...***');
+							return newMem.guild.music.leave();
+						} catch (e) {
+							console.log(`| VoiceStateUpdate |\n${e}`);
+						}
+					}
+				}
+			}, 3600000);
+		}, 10000);
 	}
 
 };

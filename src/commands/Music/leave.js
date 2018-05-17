@@ -4,7 +4,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['stop'],
+            aliases: ["forceleave", "leave", "stopmusic", "musicstop", "stop"],
 			runIn: ['text'],
 			description: 'Clears the queue and leaves'
 		});
