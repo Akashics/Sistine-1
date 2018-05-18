@@ -33,7 +33,7 @@ module.exports = class Ready extends Event {
 
 
 	async run() {
-        	this.client.setMaxListeners(50);
+		this.client.setMaxListeners(50);
 		this.client.lavalink = new MusicClient(this.client, this.client.config.nodes, {
 			user: this.client.user.id,
 			shards: this.client.shard ? this.client.shard.count : 1,
