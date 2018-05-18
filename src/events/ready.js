@@ -33,6 +33,7 @@ module.exports = class Ready extends Event {
 
 
 	async run() {
+        	this.client.setMaxListeners(50);
 		this.client.lavalink = new MusicClient(this.client, this.client.config.nodes, {
 			user: this.client.user.id,
 			shards: this.client.shard ? this.client.shard.count : 1,
@@ -44,7 +45,6 @@ module.exports = class Ready extends Event {
 		if (this.client.shard.id === 0) this.startAPI();
 
 		const DBLAPI = new DBL(this.client.config.api.dbl.authKey, this.client);
-
 		setInterval(() => {
 			DBLAPI.postStats(this.client.guilds.size, this.client.shard.id, this.client.shard.count);
 		}, 1800000);
