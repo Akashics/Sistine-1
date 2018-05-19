@@ -6,7 +6,7 @@
 
   <p>
    <a href="https://depfu.com/repos/Kashalls/Sistine"><img src="https://img.shields.io/depfu/Kashalls/Sistine.svg?style=for-the-badge" alt="Depfu" /></a><!--
---><a href="https://travis-ci.com/Kashalls/Sistine"><img src="https://img.shields.io/travisci/project/github/Kashalls/Sistine.svg?style=for-the-badge" alt="CircleCI"></a><!--
+--><a href="https://travis-ci.com/Kashalls/Sistine"><img src="https://img.shields.io/travis-ci/project/github/Kashalls/Sistine.svg?style=for-the-badge" alt="TravisCI"></a><!--
 --><a href="https://twitter.com/Kashalls"><img src="https://img.shields.io/twitter/follow/Kashalls.svg?style=for-the-badge&label=Follow" alt="Twitter Follow"></a>
   </p>
 
