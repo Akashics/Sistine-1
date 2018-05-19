@@ -19,7 +19,7 @@ module.exports = class ShortenCommand extends Command {
 	}
 
 	async genLink(url) {
-		const { body } = await snekie.post(`https://www.googleapis.com/urlshortener/v1/url`).send({ longUrl: url }).query({ key: this.client.config.api.google });
+		const { body } = await snekie.post(`https://www.googleapis.com/urlshortener/v1/url`).send({ longUrl: url }).query({ key: this.client.settings.apiToken.googleapi });
 		return body.id;
 	}
 

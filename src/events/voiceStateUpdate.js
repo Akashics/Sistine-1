@@ -6,7 +6,7 @@ module.exports = class extends Event {
 		const { queue, dispatcher, status } = newMem.guild.music;
 		setTimeout(async () => {
 			if (!oldMem.guild.me.voiceChannel || !status === 'playing' || !queue) return;
-			if (this.client.config.main.patreon === true) return;
+			if (this.client.settings.patreon === true) return;
 			setTimeout(async () => {
 				if (oldMem.voiceChannel === oldMem.guild.me.voiceChannel && newMem.voiceChannel !== newMem.guild.me.voiceChannel && newMem.guild.me.voiceChannel.members.size === 1) {
 					if (dispatcher) {

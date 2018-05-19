@@ -21,7 +21,7 @@ module.exports = class MoeImage extends Command {
 		}
 
 		const imageRequest = await snek.get(`https://api.weeb.sh/images/random?type=${type}`)
-			.set('Authorization', `Bearer ${this.client.config.api.weebKey}`)
+			.set('Authorization', `Bearer ${this.client.settings.apiTokens.weebservices}`)
 			.catch(error => this.client.emit('error', `WEEBIMAGE: ${error}`));
 		images
 			.setColor('PURPLE')

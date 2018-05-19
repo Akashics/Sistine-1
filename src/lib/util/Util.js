@@ -7,7 +7,7 @@ class Util {
 	static async dBots(client) {
 		snekfetch
 			.post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-			.set({ Authorization: client.config.api.dblpw })
+			.set({ Authorization: client.settings.apiTokens.discordbotsorg })
 			.send({ server_count: client.guilds.size, shard_id: client.shard.id, shard_count: client.shard.count })
 			.catch((err) => {
 				client.console.error(`[DBOTS] Failed to post to Discord Bots. ${err}`);
@@ -18,7 +18,7 @@ class Util {
 		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://ls.terminal.ink/api/v1/bots/${client.user.id}`)
-			.set({ Authorization: client.config.api.terminalINK })
+			.set({ Authorization: client.settitngs.apiTokens.discordbotscouk })
 			.send({ server_count })
 			.catch((err) => {
 				client.console.error(`[TerminalINK] Failed to post to ls.terminal.ink. ${err}`);
@@ -29,7 +29,7 @@ class Util {
 		const server_count = await client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));
 		snekfetch
 			.post(`https://discordbot.world/api/bot/${client.user.id}/stats`)
-			.set({ Authorization: client.config.api.discordbotWorld })
+			.set({ Authorization: client.settings.apiTokens.discordbotworld })
 			.send({ server_count })
 			.catch((err) => {
 				client.console.error(`[DiscordBotWorld] Failed to post stats. ${err}`);
@@ -53,7 +53,7 @@ class Util {
 
 	static async weebImage(msg, client, action) {
 		const imageRequest = await snekfetch.get(`https://api.weeb.sh/images/random?type=${msg.command.name}`)
-			.set('Authorization', `Bearer ${client.config.api.weebKey}`)
+			.set('Authorization', `Bearer ${client.settings.apiTokens.weebservices}`)
 			.catch(error => client.emit('error', `WEEBIMAGE: ${error}`));
 
 		return new client.methods.Embed()

@@ -12,7 +12,7 @@ module.exports = class Daily extends Command {
 
 	async run(msg, [user = msg.author]) {
 		if (user.bot || msg.author.bot) return msg.send(msg.language.get('COMMAND_REPUTATION_BOT'));
-		const DBLAPI = new DBL(this.client.config.api.dbl.authKey, this.client);
+		const DBLAPI = new DBL(this.client.settings.apiTokens.discordbotsorg, this.client);
 
 		const payer = msg.author.configs;
 		const payee = user.configs;

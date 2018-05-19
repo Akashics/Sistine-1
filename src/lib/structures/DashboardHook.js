@@ -155,7 +155,7 @@ class DashboardHook extends APIServer {
 		});
 
 		const clientId = this.client.user.id;
-		const { clientSecret } = this.client.config;
+		const { clientSecret } = this.client.settings.dashboard;
 
 		this.router.options('/oauth/callback', (req, res) => {
 			res.set({
@@ -217,10 +217,10 @@ class DashboardHook extends APIServer {
 
 		this.router.get('/configs/get/guilds/:guildID/:type/', async (request, response, { guildID, type }) => {
 			const Authorization = request.get('Authorization');
-			if (Authorization !== this.client.config.sAPI.privateKey) {
+			if (Authorization !== this.client.settings.dashboard.sessionSecret) {
 				return response.end('Incorrect Authorization token!');
 			}
-			if (Authorization === this.client.config.sAPI.privateKey) {
+			if (Authorization === this.client.settings.dashboard.sessionSecret) {
 				const configurations = [];
 				if (type === 'all') {
 					configurations.push(this.client.guilds.get(guildID).configs);
@@ -235,10 +235,10 @@ class DashboardHook extends APIServer {
 		this.router.put('/configs/put/guilds/:guildID/:type/', async (request, response, { guildID, type }) => {
 			const Authorization = request.get('Authorization');
 			const Data = request.get('Data');
-			if (Authorization !== this.client.config.sAPI.privateKey) {
+			if (Authorization !== this.client.settings.dashboard.sessionSecret) {
 				return response.end('Incorrect Authorization token!');
 			}
-			if (Authorization === this.client.config.sAPI.privateKey) {
+			if (Authorization === this.client.settings.dashboard.sessionSecret) {
 				try {
 					await this.client.guilds.get(guildID).configs.update(type, Data, this.client.guilds.get(guildID));
 					return response.end('Success!');
@@ -252,10 +252,10 @@ class DashboardHook extends APIServer {
 
 		this.router.put('/guilds/:guildID/leave', async (request, response, { guildID }) => {
 			const Authorization = request.get('Authorization');
-			if (Authorization !== this.client.config.sAPI.privateKey) {
+			if (Authorization !== this.client.settings.dashboard.sessionSecret) {
 				return response.end('Incorrect Authorization token!');
 			}
-			if (Authorization === this.client.config.sAPI.privateKey) {
+			if (Authorization === this.client.settings.dashboard.sessionSecret) {
 				try {
 					await this.client.guilds.get(guildID).leave();
 					return response.end('Success!');

@@ -9,18 +9,10 @@ const DBL = require('dblapi.js');
 /* eslint-disable no-new */
 module.exports = class Ready extends Event {
 
-	async dblStats() {
-		const DBLAPI = new DBL(this.client.config.api.dbl.authKey, this.client);
-
-		setInterval(() => {
-			DBLAPI.postStats(this.client.guilds.size, this.client.shard.id, this.client.shard.count);
-		}, 1800000);
-	}
-
 	async startAPI() {
 		new DashboardHooks(this.client, { port: 6565 });
 
-		const DBLAPI = new DBL(this.client.config.api.dbl.authKey, { statsInterval: 1800000, webhookPort: 6665, webhookAuth: this.client.config.api.dbl.webhookKey }, this.client);
+		const DBLAPI = new DBL(this.client.settings.apiTokens.discordbotsorg, { statsInterval: 1800000, webhookPort: 6665, webhookAuth: this.client.settings.dashboard.sessionSecret }, this.client);
 		DBLAPI.webhook.on('ready', hook => {
 			this.client.emit('log', `[DBL] Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 		});
@@ -34,17 +26,17 @@ module.exports = class Ready extends Event {
 
 	async run() {
 		this.client.setMaxListeners(50);
-		this.client.lavalink = new MusicClient(this.client, this.client.config.nodes, {
+		this.client.lavalink = new MusicClient(this.client, this.client.settings.lavalink.nodes, {
 			user: this.client.user.id,
 			shards: this.client.shard ? this.client.shard.count : 1,
-			rest: this.client.config.restnode,
+			rest: this.client.settings.lavalink.restnode,
 			player: LavalinkPlayer
 		});
 		this.client.emit('log', '[MUSIC] Manager hook has been enabled.');
 
 		if (this.client.shard.id === 0) this.startAPI();
 
-		const DBLAPI = new DBL(this.client.config.api.dbl.authKey, this.client);
+		const DBLAPI = new DBL(this.client.settings.apiTokens.discordbotsorg, this.client);
 		setInterval(() => {
 			DBLAPI.postStats(this.client.guilds.size, this.client.shard.id, this.client.shard.count);
 		}, 1800000);

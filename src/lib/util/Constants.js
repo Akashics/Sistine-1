@@ -1,6 +1,4 @@
-const { rethinkdb } = require('../../../config.json');
-
-/* eslint-disable max-len */
+const { rethinkdb } = require('../../../settings.js');
 
 module.exports.ClientOptions = {
 	disabledEvents: [
