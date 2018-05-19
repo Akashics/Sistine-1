@@ -8,7 +8,7 @@ install: npm install
 jobs:
   include:
     - stage: test
-      script: touch config.json && npm test
+      script: touch settings.js && npm test
 cache:
   directories:
     - node_modules
