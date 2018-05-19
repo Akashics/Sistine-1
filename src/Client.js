@@ -1,3 +1,5 @@
+if (process.version.slice(1).split('.')[0] < 8) throw new Error('Node 8.0.0 or higher is required. Update Node on your system.');
+
 const { Client, PermissionLevels } = require('klasa');
 const { Collection, Webhook } = require('discord.js');
 const path = require('path');
@@ -5,9 +7,7 @@ const MusicManager = require('./lib/structures/MusicManager');
 const AFK = require('./lib/structures/afk');
 const { ClientOptions } = require('./lib/util/Constants');
 const IdioticClient = require('./lib/structures/IdioticClient');
-const config = require('../config.json');
-
-const devs = ['201077739589992448', '126321762483830785'];
+const settings = require('../settings.js');
 
 const permissionLevels = new PermissionLevels()
 	.add(0, () => true)
@@ -28,15 +28,15 @@ const permissionLevels = new PermissionLevels()
 	}, { fetch: true })
 	.add(6, (client, msg) => msg.guild && msg.member && msg.member.permissions.has('MANAGE_GUILD'), { fetch: true })
 	.add(7, (client, msg) => msg.guild && msg.member && msg.member === msg.guild.owner, { fetch: true })
-	.add(9, (client, msg) => devs.includes(msg.author.id), { break: true })
-	.add(10, (client, msg) => devs.includes(msg.author.id));
+	.add(9, (client, msg) => settings.developers.includes(msg.author.id), { break: true })
+	.add(10, (client, msg) => msg.author.id === client.owner.id);
 
 class SistineClient extends Client {
 
 	constructor() {
 		super({ ...ClientOptions, permissionLevels });
 
-		Object.defineProperty(this, 'config', { value: config });
+		Object.defineProperty(this, 'settings', { value: settings });
 
 		this.clientBaseDir = path.resolve('src');
 		this.lavalink = require('./lib/structures/LavalinkClient');
@@ -44,14 +44,14 @@ class SistineClient extends Client {
 		this.music = new MusicManager(this);
 		this.ramStat = new Array(60);
 		this.cmdStat = new Array(60);
-		this.idioticApi = new IdioticClient(config.api.idioticapi);
-		this.webhook = new Webhook(config.webhook.id, config.webhook.token);
+		this.idioticApi = new IdioticClient(settings.apiTokens.idioticapi);
+		this.webhook = new Webhook(settings.webhook.id, settings.webhook.secret);
 		this.afks = new AFK(this);
 		this.executedCommands = new Collection();
 	}
 
 }
 
-SistineClient.token = config.token;
+SistineClient.token = settings.token;
 
 module.exports = SistineClient;
