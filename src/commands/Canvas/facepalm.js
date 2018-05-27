@@ -14,7 +14,7 @@ module.exports = class FacepalmCommand extends Command {
 
 	async run(msg) {
 		const image = await this.client.idioticApi.facepalm(msg.author.displayAvatarURL({ format: 'png', size: 256 }));
-		return msg.sendFile(image, 'facepalm.png');
+		return msg.channel.sendFile(image, 'facepalm.png');
 	}
 
 

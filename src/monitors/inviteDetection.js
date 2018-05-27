@@ -31,7 +31,7 @@ module.exports = class antiInviteLinkMonitor extends Monitor {
 
 		const embed = new MessageEmbed()
 			.setAuthor(msg.guild.name, msg.guild.iconURL())
-			.setColor('red')
+			.setColor('RED')
 			.setFooter(this.client.user.tag, this.client.user.displayAvatarURL())
 			.setTitle('Deleted Invite URL')
 			.addField('Invite Code', inv.code, true)

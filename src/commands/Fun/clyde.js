@@ -15,6 +15,7 @@ module.exports = class Clyde extends Command {
 		const image = await snekfetch.get('https://discordapp.com/assets/f78426a064bc9dd24847519259bc42af.png');
 		const pfp = `data:${image.headers['content-type']};base64,${image.body.toString('base64')}`;
 		const webhook = await msg.channel.createWebhook('CIyde', { avatar: pfp });
+		content = `**${msg.author.tag}:** ${content}`;
 		return snekfetch.post(`https://canary.discordapp.com/api/webhooks/${webhook.id}/${webhook.token}`)
 			.send({ content })
 			.then(() => {

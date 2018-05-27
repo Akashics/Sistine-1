@@ -1,20 +1,37 @@
 const { Command } = require('klasa');
+const { Canvas } = require('canvas-constructor');
+const snek = require('snekfetch');
+const fsn = require('fs-nextra');
 
-module.exports = class extends Command {
+const getBeautiful = async (person) => {
+	const plate = await fsn.readFile('./src/assets/images/plate_beautiful.png');
+	const png = person.replace(/\.gif.+/g, '.png');
+	const { body } = await snek.get(png);
+	return new Canvas(634, 675)
+		.setColor('#000000')
+		.addRect(0, 0, 634, 675)
+		.addImage(body, 423, 45, 168, 168)
+		.addImage(body, 426, 382, 168, 168)
+		.addImage(plate, 0, 0, 634, 675)
+		.toBuffer();
+};
+
+module.exports = class Beautify extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			runIn: ['text'],
-			requiredPermissions: ['ATTACH_FILES'],
-			description: 'Admire the beauty of a user thru the power of images',
-			usage: '[User:username]',
-			extendedHelp: 'Mention another user to admire a painting of them.'
+			aliases: ['beautify'],
+			description: (msg) => msg.language.get('COMMAND_BEAUTIFUL_DESCRIPTION'),
+			usage: '[User:user]',
+			cooldown: 10
 		});
 	}
 
 	async run(msg, [user = msg.author]) {
-		const image = await this.client.idioticApi.beautiful(user.displayAvatarURL({ format: 'png', size: 256 }));
-		return msg.sendFile(image, 'beautiful.png');
+		const message = await msg.send(msg.language.get('COMMAND_BEAUTIFUL', user.username));
+		const result = await getBeautiful(user.displayAvatarURL({ format: 'png' }));
+		await msg.send({ files: [{ attachment: result, name: `${user.username}.jpg` }] });
+		return message.delete();
 	}
 
 };

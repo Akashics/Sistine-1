@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const image = await this.client.idioticApi.wreckIt(user.displayAvatarURL({ format: 'png', size: 256 }));
-		return msg.sendFile(image, 'wreck.png');
+		return msg.channel.sendFile(image, 'wreck.png');
 	}
 
 };

@@ -183,7 +183,7 @@ class ModLog {
      * @returns {Provider}
      */
 	get provider() {
-		return this.client.providers.get('mongodb');
+		return this.client.providers.get('rethinkdb');
 	}
 	/**
      * Returns the hex color code according the the type provided

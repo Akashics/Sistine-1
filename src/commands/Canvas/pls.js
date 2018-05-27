@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user]) {
 		const image = await this.client.idioticApi.pls(user.username);
-		return msg.sendFile(image, 'pls.png');
+		return msg.channel.sendFile(image, 'pls.png');
 	}
 
 };

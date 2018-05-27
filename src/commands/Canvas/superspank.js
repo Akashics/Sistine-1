@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg, [spanked = msg.author]) {
 		const image = await this.client.idioticApi.superSpank(msg.author.displayAvatarURL({ format: 'png', size: 128 }), spanked.displayAvatarURL({ format: 'png', size: 128 }));
-		return msg.sendFile(image, 'superman-super-spank.png');
+		return msg.channel.sendFile(image, 'superman-super-spank.png');
 	}
 
 };

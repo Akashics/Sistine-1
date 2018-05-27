@@ -22,7 +22,7 @@ module.exports = class extends Command {
 			.setTitle('Use the reactions to change pages, select a page, or stop viewing the queue')
 			.setAuthor('Queue - Sistine', this.client.user.displayAvatarURL())
 			.setDescription('Scroll between pages to see the song queue.')
-			.setColor('purple')
+			.setColor('PURPLE')
 		);
 
 		for (let i = 0, temp = queue.length; i < temp; i += 5) {

@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const image = await this.client.idioticApi.steam(user.displayAvatarURL({ format: 'png', size: 512 }), user.username);
-		return msg.sendFile(image, 'steamtradecard.png');
+		return msg.channel.sendFile(image, 'steamtradecard.png');
 	}
 
 };

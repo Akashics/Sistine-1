@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user]) {
 		const image = await this.client.idioticApi.stepped(user.displayAvatarURL({ format: 'png', size: 128 }));
-		return msg.sendFile(image, 'stepped.png');
+		return msg.channel.sendFile(image, 'stepped.png');
 	}
 
 };

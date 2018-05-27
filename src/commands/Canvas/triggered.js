@@ -5,7 +5,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			runIn: ['text'],
-			requiredPermissions: ['ATTACH_FILES'],
+			botPerms: ['ATTACH_FILES'],
 			description: 'Trigger someone...',
 			usage: '[User:username]',
 			extendedHelp: 'Ever get so pissed off you explode? You got triggered.'
@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const image = await this.client.idioticApi.triggered(user.displayAvatarURL({ format: 'png', size: 512 }));
-		return msg.sendFile(image, 'triggered.gif');
+		return msg.channel.sendFile(image, 'triggered.gif');
 	}
 
 };

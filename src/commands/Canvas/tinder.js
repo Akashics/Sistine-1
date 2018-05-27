@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [match, user = msg.author]) {
 		const image = await this.client.idioticApi.tinderMatch(match.displayAvatarURL({ format: 'png', size: 256 }), user.displayAvatarURL({ format: 'png', size: 256 }));
-		return msg.sendFile(image, 'tinder.png');
+		return msg.channel.sendFile(image, 'tinder.png');
 	}
 
 };

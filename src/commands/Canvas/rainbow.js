@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const image = await this.client.idioticApi.rainbow(user.displayAvatarURL({ format: 'png', size: 2048 }));
-		return msg.sendFile(image, 'rainbow.png');
+		return msg.channel.sendFile(image, 'rainbow.png');
 	}
 
 };

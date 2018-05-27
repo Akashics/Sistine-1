@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [blamed = msg.author]) {
 		const image = await this.client.idioticApi.blame(blamed.username);
-		return msg.sendFile(image, 'blame.png');
+		return msg.channel.sendFile(image, 'blame.png');
 	}
 
 };

@@ -6,28 +6,19 @@
   "dependencies": {
     "canvas": "^2.0.0-alpha.12",
     "canvas-constructor": "github:kyranet/canvasConstructor#master",
-    "cheerio": "^1.0.0-rc.2",
+    "cli-table-redemption": "^1.0.1",
     "dblapi.js": "^2.0.1",
     "discord.js": "github:discordjs/discord.js",
     "discord.js-lavalink": "^2.0.2",
-    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "fast-html-parser": "^1.0.1",
     "figlet": "^1.2.0",
-    "flipout": "^1.0.0",
     "fs-nextra": "0.3.2",
-    "gifencoder": "^1.1.0",
     "http-nextra": "github:TridentBot/http-nextra",
-    "image-to-ascii": "^3.0.11",
     "klasa": "github:dirigeants/klasa",
-    "node-opus": "^0.2.9",
     "os-toolbox": "^0.2.9",
-    "prism-media": "github:hydrabolt/prism-media",
-    "process-as-promised": "^1.0.1",
     "rethinkdbdash": "^2.3.31",
-    "snekfetch": "^3.6.4",
-    "uws": "^9.148.0",
-    "what-dog": "^1.0.4"
+    "snekfetch": "^3.6.4"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -45,10 +36,9 @@
     "sistine"
   ],
   "author": "Kashall#1307",
-  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kashalls/Sistine.git"
+    "url": "git@github.com:Kashalls/Sistine.git"
   },
   "bugs": {
     "url": "https://github.com/Kashalls/Sistine/issues"

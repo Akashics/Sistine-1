@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [text]) {
 		const image = await this.client.idioticApi.snapchat(text);
-		return msg.sendFile(image, 'snapchat.png');
+		return msg.channel.sendFile(image, 'snapchat.png');
 	}
 
 };

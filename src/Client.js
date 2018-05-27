@@ -1,9 +1,10 @@
 if (process.version.slice(1).split('.')[0] < 8) throw new Error('Node 8.0.0 or higher is required. Update Node on your system.');
 
 const { Client, PermissionLevels } = require('klasa');
-const { Collection, Webhook } = require('discord.js');
+const { Collection, WebhookClient } = require('discord.js');
 const path = require('path');
 const MusicManager = require('./lib/structures/MusicManager');
+const RawEventStore = require('./lib/structures/RawEventStore');
 const AFK = require('./lib/structures/afk');
 const { ClientOptions } = require('./lib/util/Constants');
 const IdioticClient = require('./lib/structures/IdioticClient');
@@ -34,7 +35,7 @@ const permissionLevels = new PermissionLevels()
 class SistineClient extends Client {
 
 	constructor() {
-		super({ ...ClientOptions, permissionLevels });
+		super({ ...ClientOptions, permissionLevels, prefix: 's>', production: true });
 
 		Object.defineProperty(this, 'settings', { value: settings });
 
@@ -45,9 +46,14 @@ class SistineClient extends Client {
 		this.ramStat = new Array(60);
 		this.cmdStat = new Array(60);
 		this.idioticApi = new IdioticClient(settings.apiTokens.idioticapi);
-		this.webhook = new Webhook(settings.webhook.id, settings.webhook.secret);
+		this.botlog = new WebhookClient(settings.webhook.botlog.id, settings.webhook.botlog.secret);
+		this.joinlog = new WebhookClient(settings.webhook.joinlog.id, settings.webhook.joinlog.secret);
 		this.afks = new AFK(this);
 		this.executedCommands = new Collection();
+
+		this.rawEvents = new RawEventStore(this);
+
+		this.registerStore(this.rawEvents);
 	}
 
 }

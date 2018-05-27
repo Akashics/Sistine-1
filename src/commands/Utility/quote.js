@@ -22,7 +22,7 @@ module.exports = class QuoteCommand extends Command {
 			.setAuthor(message.author.tag, message.author.avatarURL())
 			.setDescription(message.content)
 			.setFooter(`${msg.author.tag} in #${message.channel.name}`)
-			.setColor('purple')
+			.setColor('PURPLE')
 			.setTimestamp(message.createdAt);
 		if (message.attachments && message.attachments.size > 0) embed.setImage(message.attachments.first().url);
 		return msg.sendEmbed(embed);

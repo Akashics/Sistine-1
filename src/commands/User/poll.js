@@ -13,7 +13,7 @@ module.exports = class Ping extends Command {
 
 	async run(msg, [poll]) {
 		const embed = new MessageEmbed()
-			.setColor('purple')
+			.setColor('PURPLE')
 			.setFooter(msg.author.name, msg.author.displayAvatarURL())
 			.addField(':inbox_tray: Poll', poll);
 		msg.delete();

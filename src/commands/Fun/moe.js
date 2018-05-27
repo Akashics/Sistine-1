@@ -15,18 +15,23 @@ module.exports = class MoeImage extends Command {
 	}
 
 	async run(msg, [type]) {
-		const images = new MessageEmbed();
+		const Embed = new MessageEmbed();
 		if (!type || !this.types.includes(type)) {
-			return msg.send(`WeebSH - Valid Image Types\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n${this.types.join(', ')}`);
+			Embed
+				.setColor('PURPLE')
+				.setFooter('Sistine Fibel', this.client.user.displayAvatarURL())
+				.setAuthor(msg.author.tag, msg.author.displayAvatarURL())
+				.setDescription(`\`${this.types.join('`, `')}\``)
+				.setTitle('Types of Moe Images - moe <type>');
+			return msg.sendEmbed(Embed);
 		}
-
-		const imageRequest = await snek.get(`https://api.weeb.sh/images/random?type=${type}`)
-			.set('Authorization', `Bearer ${this.client.settings.apiTokens.weebservices}`)
+		const { body } = await snek.get(`https://api.weeb.sh/images/random?type=${type}`)
+			.set('Authorization', `Wolke ${this.client.settings.apiTokens.weebservices}`)
 			.catch(error => this.client.emit('error', `WEEBIMAGE: ${error}`));
-		images
+		Embed
 			.setColor('PURPLE')
-			.setImage(imageRequest.body.url);
-		return msg.sendEmbed(images);
+			.setImage(body.url);
+		return msg.sendEmbed(Embed);
 	}
 
 };

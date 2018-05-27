@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg, [slapped = msg.author]) {
 		const image = await this.client.idioticApi.fanSlap(msg.author.displayAvatarURL({ format: 'png', size: 64 }), slapped.displayAvatarURL({ format: 'png', size: 64 }));
-		return msg.sendFile(image, 'fanslap.png');
+		return msg.channel.sendFile(image, 'fanslap.png');
 	}
 
 };

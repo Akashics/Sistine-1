@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const image = await this.client.idioticApi.respect(user.displayAvatarURL({ format: 'png', size: 128 }));
-		return msg.sendFile(image, 'respect.png');
+		return msg.channel.sendFile(image, 'respect.png');
 	}
 
 };

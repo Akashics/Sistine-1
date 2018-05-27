@@ -1,6 +1,5 @@
 const { Event } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const { dBots, terminalINK, discordbotWorld } = require('../lib/util/Util');
 
 module.exports = class guildDelete extends Event {
 
@@ -10,19 +9,15 @@ module.exports = class guildDelete extends Event {
 
 	run(guild) {
 		if (!guild || !guild.available) return;
-
 		const embed = new MessageEmbed()
-			.setAuthor(guild.owner.tag, guild.owner.displayAvatarURL())
-			.setColor('red')
-			.setFooter(this.client.user.tag, this.client.user.displayAvatarURL())
+			.setAuthor(guild.owner.user.tag, guild.owner.user.displayAvatarURL())
+			.setColor('RED')
 			.setTitle('Left Guild')
+			.setFooter(`Shard ${this.client.shard.id} is now at ${this.client.guilds.size} guilds.`)
+			.setTimestamp()
 			.setDescription(`${guild.name} (${guild.id})`)
 			.setThumbnail(guild.iconURL());
-		this.client.webhook.send({ embeds: [{ embed }] });
-
-		dBots(this.client);
-		terminalINK(this.client);
-		discordbotWorld(this.client);
+		return this.client.joinlog.send('', { embed });
 	}
 
 };

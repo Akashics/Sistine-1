@@ -12,7 +12,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		return msg.send(`**${msg.author.username}** flipped a coin.\n**${Math.random() < 0.5 ? 'Tails' : 'Heads'}**`);
+		return msg.send(`**${msg.author.username}** flipped a coin.\nIt was **${Math.random() < 0.5 ? 'Tails' : 'Heads'}**`);
 	}
 
 };

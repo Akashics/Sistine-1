@@ -10,13 +10,13 @@ module.exports = class Fortune extends Command {
 
 	async run(msg) {
 		const req = await snek.get('http://www.yerkee.com/api/fortune');
-		const finalmsg = new MessageEmbed()
+		const embed = new MessageEmbed()
 			.setTitle('Random Fortune')
 			.setColor('PURPLE')
 			.setTimestamp()
 			.setThumbnail('https://vignette4.wikia.nocookie.net/clubpenguin/images/b/bc/Emoticons_Fortune_Cookie_Card_Jitsu_Party_2013.png/revision/latest?cb=20130524131112')
 			.addField('\u200b', `${req.body.fortune}`);
-		return msg.send({ embed: finalmsg });
+		return msg.send({ embed });
 	}
 
 };

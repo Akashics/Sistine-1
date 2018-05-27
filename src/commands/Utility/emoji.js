@@ -18,7 +18,7 @@ module.exports = class extends Command {
 		const parsedEmoji = this.emoji(emoji);
 		const isValid = await this.validEmoji(parsedEmoji);
 		if (!isValid) return msg.sendMessage(`\`${emoji}\` is not a valid emoji.`);
-		return msg.sendFile(parsedEmoji.url, parsedEmoji.url, 'Here is your emoji that you requested');
+		return msg.channel.sendFile(parsedEmoji.url, parsedEmoji.url, 'Here is your emoji that you requested');
 	}
 
 	emoji(arg) {

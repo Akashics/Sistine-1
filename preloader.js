@@ -4,8 +4,5 @@ require('discord.js');
 require('fast-html-parser');
 require('figlet');
 require('fs-nextra');
-require('gifencoder');
 require('klasa');
-require('node-opus');
 require('snekfetch');
-require('uws');

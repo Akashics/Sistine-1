@@ -2,27 +2,10 @@ const { Event } = require('klasa');
 
 const MusicClient = require('../lib/structures/LavalinkClient');
 const LavalinkPlayer = require('../lib/structures/LavalinkPlayer');
-
 const DashboardHooks = require('../lib/structures/DashboardHook');
-const DBL = require('dblapi.js');
 
 /* eslint-disable no-new */
 module.exports = class Ready extends Event {
-
-	async startAPI() {
-		new DashboardHooks(this.client, { port: 6565 });
-
-		const DBLAPI = new DBL(this.client.settings.apiTokens.discordbotsorg, { statsInterval: 1800000, webhookPort: 6665, webhookAuth: this.client.settings.dashboard.sessionSecret }, this.client);
-		DBLAPI.webhook.on('ready', hook => {
-			this.client.emit('log', `[DBL] Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-		});
-
-		DBLAPI.webhook.on('vote', vote => {
-			this.client.emit('log', `User with ID ${vote.user} just voted!`);
-			this.client.console.debug(`[DBLAPI] User ${vote.user} voted:\n${vote}`);
-		});
-	}
-
 
 	async run() {
 		this.client.setMaxListeners(50);
@@ -34,12 +17,8 @@ module.exports = class Ready extends Event {
 		});
 		this.client.emit('log', '[MUSIC] Manager hook has been enabled.');
 
-		if (this.client.shard.id === 0) this.startAPI();
+		if (this.client.shard.id === 0) new DashboardHooks(this.client, { port: 6565 });
 
-		const DBLAPI = new DBL(this.client.settings.apiTokens.discordbotsorg, this.client);
-		setInterval(() => {
-			DBLAPI.postStats(this.client.guilds.size, this.client.shard.id, this.client.shard.count);
-		}, 1800000);
 
 		setInterval(async () => {
 			const serverCount = await this.client.shard.fetchClientValues('guilds.size').then(number => number.reduce((prev, val) => prev + val, 0));

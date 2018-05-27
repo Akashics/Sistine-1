@@ -6,6 +6,7 @@ module.exports = class extends Command {
 		super(...args, {
 			runIn: ['text'],
 			requiredPermissions: ['ATTACH_FILES'],
+			aliases: ['reject'],
 			description: 'Reject someone.',
 			usage: '[User:username]'
 		});
@@ -13,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const image = await this.client.idioticApi.rejected(user.displayAvatarURL({ format: 'png', size: 512 }));
-		return msg.sendFile(image, 'rejected.png');
+		return msg.channel.sendFile(image, 'rejected.png');
 	}
 
 };

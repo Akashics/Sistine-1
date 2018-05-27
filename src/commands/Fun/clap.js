@@ -11,7 +11,7 @@ module.exports = class Clap extends Command {
 	}
 
 	async run(msg, [text]) {
-		return msg.send(text.split(' ').join(':clap:'));
+		return msg.send(`:clap:${text.split(' ').join(':clap:')}:clap:`);
 	}
 
 };

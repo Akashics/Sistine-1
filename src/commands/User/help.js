@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const embed = new MessageEmbed()
-			.setColor('purple')
+			.setColor('PURPLE')
 			.setAuthor(msg.author.tag, msg.author.displayAvatarURL())
 			.setFooter(`Total of ${this.client.commands.size} commands | Check our support guild for secrets.`)
 			.addField('All My Commands', 'My commands are listed on my website here: https://sistine.ml/')

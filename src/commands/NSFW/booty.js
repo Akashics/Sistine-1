@@ -16,7 +16,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const img = Booty[Math.floor(Math.random() * Booty.length)];
-		return msg.sendFile(img, `ass-booty.${img.slice(img.lastIndexOf('.'), img.length)}`);
+		return msg.channel.sendFile(img, `ass-booty.${img.slice(img.lastIndexOf('.'), img.length)}`);
 	}
 
 };

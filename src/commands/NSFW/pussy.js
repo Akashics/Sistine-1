@@ -16,7 +16,7 @@ module.exports = class extends Command {
 
 	async run(msg) {
 		const img = Pussy[Math.floor(Math.random() * Pussy.length)];
-		return msg.sendFile(img, `pussy.${img.slice(img.lastIndexOf('.'), img.length)}`);
+		return msg.channel.sendFile(img, `pussy.${img.slice(img.lastIndexOf('.'), img.length)}`);
 	}
 
 };

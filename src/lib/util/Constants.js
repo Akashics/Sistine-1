@@ -10,6 +10,7 @@ module.exports.ClientOptions = {
 		'USER_NOTE_UPDATE',
 		'USER_SETTINGS_UPDATE',
 		'TYPING_START',
+		'VOICE_SERVER_UPDATE',
 		'RELATIONSHIP_ADD',
 		'RELATIONSHIP_REMOVE'
 	],
@@ -17,10 +18,9 @@ module.exports.ClientOptions = {
 	messageCacheMaxSize: 100,
 	messageCacheLifetime: 240,
 	messageSweepInterval: 300,
-	cmdEditing: true,
-	cmdLogging: true,
-	prefix: 's>',
-	fetchAllMembers: false,
+	commandEditing: true,
+	commandLogging: true,
+	gateways: { clientStorage: { provider: 'json' } },
 	providers: {
 		default: 'rethinkdb',
 		rethinkdb: {
@@ -35,7 +35,10 @@ module.exports.ClientOptions = {
 	},
 	regexPrefix: new RegExp(/^((?:Hey |Ok )?Sistine(?:,|!))/i),
 	console: { useColor: true, timestamps: 'MM-DD-YYYY hh:mm:ss A' },
-	pieceDefaults: { commands: { deletable: true, cooldown: 5 } }
+	pieceDefaults: {
+		commands: { deletable: true, cooldown: 3 },
+		rawEvents: { enabled: true }
+	}
 };
 
 module.exports.CatFacts = [

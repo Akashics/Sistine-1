@@ -1,8 +1,7 @@
-const { Command } = require('klasa');
+const { Command, util } = require('klasa');
 const { MessageEmbed } = require('discord.js');
 const ostb = require('os-toolbox');
 
-/* eslint-disable max-len */
 module.exports = class extends Command {
 
 	constructor(...args) {
@@ -72,25 +71,24 @@ module.exports = class extends Command {
 		const nodeme = await this.processMemoryMB();
 		const mem = await ostb.memoryUsage();
 		const me = this.client;
-		this.client.methods.util.exec('speedtest-cli --simple', (error, stdOut) => {
-			loading.delete();
-			const embed = new MessageEmbed()
-				.setColor('PURPLE')
-				.setAuthor(msg.author.tag, msg.author.displayAvatarURL())
-				.setFooter(msg.guild.name, msg.guild.iconURL())
-				.setTitle('Statistics')
-				.addField('Server Mem. Usage', `${mem}%`, true)
-				.addField('NodeJS Mem. Usage', `${nodeme.toString()} MB `, true)
-				.addField('NodeJS Version', process.version, true)
-				.addField('Shard Count', me.shard.count, true)
-				.addField('Guild Count', guilds, true)
-				.addField('Member Count', users, true)
-				.addField('Client Uptime', `${Math.floor((botPing / (1000 * 60 * 60)) % 24)} hours`, true)
-				.addField('Server Uptime', `${JSON.stringify(uptime)} hours`, true)
-				.addField(`Shard ${me.shard.id} Guild Regions`, regionInfo, true)
-				.addField('Speed Test', `\`\`\`\n${stdOut}\n\`\`\``);
-			return msg.send('', { embed });
-		});
+		const { stdout } = await util.exec('speedtest-cli --simple');
+		const embed = new MessageEmbed()
+			.setColor('PURPLE')
+			.setAuthor(msg.author.tag, msg.author.displayAvatarURL())
+			.setFooter(msg.guild.name, msg.guild.iconURL())
+			.setTitle('Statistics')
+			.addField('Server Mem. Usage', `${mem}%`, true)
+			.addField('NodeJS Mem. Usage', `${nodeme.toString()} MB `, true)
+			.addField('NodeJS Version', process.version, true)
+			.addField('Shard Count', me.shard.count, true)
+			.addField('Guild Count', guilds, true)
+			.addField('Member Count', users, true)
+			.addField('Client Uptime', `${Math.floor((botPing / (1000 * 60 * 60)) % 24)} hours`, true)
+			.addField('Server Uptime', `${JSON.stringify(uptime)} hours`, true)
+			.addField(`Shard ${me.shard.id} Guild Regions`, regionInfo, true)
+			.addField('Speed Test', `\`\`\`\n${stdout}\n\`\`\``);
+		loading.delete();
+		return msg.send('', { embed });
 	}
 
 };
