@@ -55,13 +55,13 @@
 
 ## Special Thanks
 
-- Hydrabolt for the DiscordJS library
+- Hydrabolt for the DiscordJS library. Thanks dood.
 
 - The Dirigeants Group for creating the [Klasa](https://klasa.js.org/) framework. [Invite to Discord](https://discord.gg/FpEFSyY)
 
 - York, the creator of [AnIdiotsGuide](https://anidiots.guide/) for getting me started and his teacher, Evie for getting me interested in bot development.
 
-- Everyone on [the DiscordJS server](https://discord.gg/bRCvFy9) for answering various questions that never got answered.
+- Everyone on [the DiscordJS server](https://discord.gg/bRCvFy9) for never answering questions that I asked.
 
 - Various people on Discord who gave me ideas for new functions or improvements to existing ones. I'm talking about you Jacz.
 
