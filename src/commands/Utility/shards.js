@@ -29,7 +29,7 @@ module.exports = class extends Command {
 					case 1:
 						result[1] = 'Connecting...';
 						break;
-					case 2: 
+					case 2:
 						result[1] = 'Reconnecting...';
 						break;
 					case 3:
