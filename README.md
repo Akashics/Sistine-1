@@ -1,7 +1,7 @@
 <div align="center">
 
   <p>
-  <a href="https://sistine.ml/"><img src="https://78.media.tumblr.com/06372e5ba165d22b222506f2f7e1ad94/tumblr_os49ytI9Oe1tdj66po1_1280.png" height="600" alt="Sistine"/></a>
+  <a href="https://sistine.ml/"><img src="https://78.media.tumblr.com/06372e5ba165d22b222506f2f7e1ad94/tumblr_os49ytI9Oe1tdj66po1_1280.png" height="400" alt="Sistine"/></a>
   </p>
 
   <p>
