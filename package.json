@@ -16,7 +16,7 @@
     "fs-nextra": "0.3.2",
     "http-nextra": "github:TridentBot/http-nextra",
     "klasa": "github:dirigeants/klasa",
-    "os-toolbox": "^0.2.9",
+    "os-toolbox": "^0.2.10",
     "rethinkdbdash": "^2.3.31",
     "snekfetch": "^3.6.4"
   },
