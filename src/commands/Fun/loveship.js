@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const { MessageEmbed, MessageAttachment } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 const snek = require('snekfetch');
 
 module.exports = class LoveShip extends Command {
