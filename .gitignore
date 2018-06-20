@@ -1,3 +1,11 @@
+# Ignore .env files
+.env
+config.json
+settings.js
+
+# Ignore Session Data
+session-data
+
 # Logs
 logs
 *.log
