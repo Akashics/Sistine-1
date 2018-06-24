@@ -304,11 +304,11 @@ current-processes@^0.2.1:
     async "^0.9.0"
     csv-parse "0.0.5"
 
-dblapi.js@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/dblapi.js/-/dblapi.js-2.0.1.tgz#be1ef88e7a0dd12743a04380cee95acfc0f814a9"
+dblapi.js@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/dblapi.js/-/dblapi.js-2.1.0.tgz#888ed9f7ae8ad370619d096e5a974925c8326bc9"
   dependencies:
-    snekfetch "^3.6.4"
+    snekfetch "^4.0.2"
 
 debug@2.6.9, debug@^2.1.2, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -1489,6 +1489,10 @@ slice-ansi@1.0.0:
 snekfetch@^3.6.0, snekfetch@^3.6.4:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/snekfetch/-/snekfetch-3.6.4.tgz#d13e80a616d892f3d38daae4289f4d258a645120"
+
+snekfetch@^4.0.2:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/snekfetch/-/snekfetch-4.0.4.tgz#e76a03b8476699a1f0c036d6567e386ce5fbde8e"
 
 spdx-correct@^3.0.0:
   version "3.0.0"
