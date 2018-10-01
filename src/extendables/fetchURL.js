@@ -1,16 +1,13 @@
-const { Extendable } = require('klasa');
+const { Command, Extendable } = require('klasa');
 const snekfetch = require('snekfetch');
 
 module.exports = class extends Extendable {
 
 	constructor(...args) {
-		super(...args, {
-			appliesTo: ['Command'],
-			klasa: true
-		});
+		super(...args, { appliesTo: [Command] });
 	}
 
-	extend(url, { method = 'get', headers = {}, query = {} } = {}) {
+	fetchURL(url, { method = 'get', headers = {}, query = {} } = {}) {
 		return new Promise((resolve, reject) => snekfetch[method](url).set(headers).query(query)
 			.then(res => {
 				if (res.status !== 200) return reject(res);
