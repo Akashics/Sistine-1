@@ -1,14 +1,12 @@
-const { Extendable, SchemaFolder } = require('klasa');
+const { Configuration, Extendable, SchemaFolder } = require('klasa');
 
 module.exports = class extends Extendable {
 
 	constructor(...args) {
-		super(...args, {
-			appliesTo: ['Configuration'],
-			klasa: true
-		});
+		super(...args, { appliesTo: [Configuration] });
 	}
-	extend(msg, path) {
+
+	list(msg, path) {
 		const folder = path instanceof SchemaFolder ? path : this.gateway.getPath(path, { piece: false }).path;
 		const output = [];
 		let longest = 0;

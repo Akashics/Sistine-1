@@ -1,12 +1,13 @@
 const { Extendable } = require('klasa');
+const { Guild } = require('discord.js');
 
 module.exports = class extends Extendable {
 
 	constructor(...args) {
-		super(...args, { appliesTo: ['Guild'] });
+		super(...args, { appliesTo: [Guild] });
 	}
 
-	get extend() {
+	get music() {
 		return this.client.music.get(this.id) || this.client.music.add(this);
 	}
 
